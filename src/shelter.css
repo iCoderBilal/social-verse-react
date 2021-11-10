@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body.grey-bg {
+  background: #f0f2f5 !important;
+}
+
+.slim {
+  max-width: 300px;
+  max-height: 300px;
+}
+.donor {
+  height: 90vh;
+}
+
+.filepond--credits {
+  display: none;
+}
+
+.shelter-custom0 {
+  width: 100%;
+}
+
+.postBodyEditor {
+  max-height: 50px;
+  min-height: 96px;
+}
+
+.createPost {
+  max-width: 600px;
+  max-height: 80vh;
+  min-height: 96px;
+  overflow-y: auto;
+  min-width: 500px;
+}
+
+.shelter-limit-container-width{
+  max-width:620px
+}
+
+.top-donner-container{
+  min-width: 310px;
+}
+
+.feed-post:first-of-type {
+  margin-top:0;
+}
