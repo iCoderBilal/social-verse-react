@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import FormGroup from "./components/FormGroup";
 import ProgressiveImage from "react-progressive-image";
 import axios from "axios";
-import ShelterToaster from "./services/ShelterToaster";
+import FlicToaster from "./services/FlicToaster";
 
 export class Verify extends Component {
   state = {
@@ -13,7 +13,7 @@ export class Verify extends Component {
   componentDidMount() {
     document.body.classList.remove("grey-bg");
     let fetchImage = axios.head(
-      "https://source.unsplash.com/1138x1390/?homeless,person"
+      "https://source.unsplash.com/1138x1390/?mobile,person"
     );
     const pageURL = new URL(window.location.href);
     let formData = new FormData();
@@ -37,10 +37,10 @@ export class Verify extends Component {
     verifyUsername.then((response) => {
       if (response.data.status == "success") {
         this.setState({ emailVerified: true });
-        ShelterToaster.success(response.data.message);
+        FlicToaster.success(response.data.message);
       } else {
         this.setState({ emailVerified: false });
-        ShelterToaster.error(response.data.message);
+        FlicToaster.error(response.data.message);
       }
     });
   }
@@ -48,7 +48,7 @@ export class Verify extends Component {
   getLeftSideBar = () => {
     if (this.state.originalURL == null || this.state.placeholderURL == null)
       return (
-        <div className="w-full h-full object-cover animate-pulse bg-green-200" />
+        <div className="w-full h-full object-cover animate-pulse bg-red-200" />
       );
     return (
       <ProgressiveImage
@@ -59,7 +59,7 @@ export class Verify extends Component {
           <img
             src={src}
             className="w-full h-full object-cover"
-            alt="Shelter Sidebar"
+            alt="Flic Sidebar"
           />
         )}
       </ProgressiveImage>
@@ -73,12 +73,12 @@ export class Verify extends Component {
           <p className="flex justify-center p-10 mt-24">
             <img src="loader.gif" />
           </p>
-          <h2 className="text-7xl font-thin text-green-500">Checking...</h2>
+          <h2 className="text-7xl font-thin text-red-500">Checking...</h2>
         </>
       );
     }
     return (
-      <h3 className="text-7xl font-thin text-green-500 p-10 mt-24">
+      <h3 className="text-7xl font-thin text-red-500 p-10 mt-24">
         {this.state.emailVerified ? "Email Verified" : "Failed 😔"}
       </h3>
     );
@@ -96,9 +96,9 @@ export class Verify extends Component {
             className="w-5/6 sm:w-1/2 mx-auto text-center"
           >
             <img
-              src="https://shelter-cdn.nyc3.cdn.digitaloceanspaces.com/email/shelter-logo.png"
+              src="https://shelter-cdn.nyc3.cdn.digitaloceanspaces.com/flic/assets/flic.png"
               className="h-8 block mx-auto"
-              alt="Shelter Humanity's Logo"
+              alt="Flic's Logo"
             />
             <div className="mt-10">{this.getRightSideBar()}</div>
             <div className="mt-12">
@@ -109,7 +109,7 @@ export class Verify extends Component {
                     onClick={() => {
                       this.props.history.push("/");
                     }}
-                    className="shadow-lg inline-block rounded-sm font-medium border border-solid cursor-pointer text-center transition-colors duration-200 text-base py-3 px-6 text-white bg-green-500 border-green-500 hover:bg-green-400 hover:border-green-400 w-full"
+                    className="shadow-lg inline-block rounded-sm font-medium border border-solid cursor-pointer text-center transition-colors duration-200 text-base py-3 px-6 text-white bg-red-500 border-red-500 hover:bg-red-400 hover:border-red-400 w-full"
                   >
                     Let's go back to home?
                   </button>
@@ -118,7 +118,7 @@ export class Verify extends Component {
                 <></>
               )}
               <p className="text-sm mt-6 text-center">
-                Shelter Humanity, 2021.
+                Flic, 2021.
               </p>
             </div>
           </form>

@@ -6,7 +6,8 @@ import NavBar from "./components/NavBar";
 import AuthHelper from "./services/AuthHelper";
 import UserHelper from "./services/UserHelper";
 import { Redirect, withRouter } from "react-router-dom";
-import ShelterToaster from "./services/ShelterToaster";
+import FlicToaster from "./services/FlicToaster";
+import ProfileTabs from "./components/ProfileTabs";
 
 class Profile extends Component {
   state = {
@@ -58,7 +59,7 @@ class Profile extends Component {
       .post("/profile/follow/" + this.state.user.username)
       .then((response) => {
         if (response.data.status === "success") {
-          ShelterToaster.success(response.data.message);
+          FlicToaster.success(response.data.message);
           let userNewState = this.state.user;
           userNewState.is_following = true;
           userNewState.follower_count =
@@ -67,7 +68,7 @@ class Profile extends Component {
         }
       })
       .catch(() => {
-        ShelterToaster.error("Something went wrong 😔");
+        FlicToaster.error("Something went wrong 😔");
       })
       .finally(() => {
         this.setState({ is_connection_button_loading: false });
@@ -85,7 +86,7 @@ class Profile extends Component {
       .post("/profile/unfollow/" + this.state.user.username)
       .then((response) => {
         if (response.data.status === "success") {
-          ShelterToaster.success(response.data.message);
+          FlicToaster.success(response.data.message);
           let userNewState = this.state.user;
           userNewState.is_following = false;
           userNewState.follower_count = userNewState.follower_count - 1;
@@ -93,7 +94,7 @@ class Profile extends Component {
         }
       })
       .catch(() => {
-        ShelterToaster.error("Something went wrong 😔");
+        FlicToaster.error("Something went wrong 😔");
       })
       .finally(() => {
         this.setState({ is_connection_button_loading: false });
@@ -128,7 +129,7 @@ class Profile extends Component {
                 this.state.is_connection_button_loading
                   ? "animate-pulse shadow-inner"
                   : "shadow-md"
-              } bg-green-500 uppercase text-white font-bold text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 hover:bg-green-700`}
+              } bg-red-500 uppercase text-white font-bold text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 hover:bg-red-700`}
               type="button"
               style={{ transition: "all .15s ease" }}
               disabled={this.state.is_connection_button_loading}
@@ -153,7 +154,7 @@ class Profile extends Component {
         return (
           <button
             onClick={() => this.redirectToEdit()}
-            className="bg-green-400 uppercase text-white font-bold text-xs px-4 py-2 rounded outline-none focus:outline-none shadow-md sm:mr-2 mb-1 hover:bg-green-500"
+            className="bg-red-400 uppercase text-white font-bold text-xs px-4 py-2 rounded outline-none focus:outline-none shadow-md sm:mr-2 mb-1 hover:bg-red-500"
             type="button"
             style={{ transition: "all .15s ease" }}
           >
@@ -290,20 +291,16 @@ class Profile extends Component {
                     )}
                   </div>
                   <div className="mb-2 text-gray-700 mt-10">
-                    <i className="fas fa-briefcase mr-2 text-lg text-gray-500"></i>
+                    <i className="fas fa-briefcase mr-2 text-lg text-gray-500"/>
                     {this.getProfileBio()}
                   </div>
                   <div className="mb-2 text-gray-700">
-                    <i className="fas fa-university mr-2 text-lg text-gray-500"></i>
+                    <i className="fas fa-university mr-2 text-lg text-gray-500"/>
                     {this.getProfileWebsite()}
                   </div>
                 </div>
-                <div className="mt-10 py-10 border-t border-gray-300 text-center">
-                  <div className="flex flex-wrap justify-center">
-                    <div className="w-full lg:w-9/12 px-4">
-                      <SingleUserFeed user={this.state.user}></SingleUserFeed>
-                    </div>
-                  </div>
+                <div className="mt-10 py-10 text-center">
+                  <ProfileTabs/>
                 </div>
               </div>
             </div>
@@ -316,7 +313,7 @@ class Profile extends Component {
   render() {
     return (
       <React.Fragment>
-        <NavBar></NavBar>
+        <NavBar/>
         {this.getProfile()}
       </React.Fragment>
     );

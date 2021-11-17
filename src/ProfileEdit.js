@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Skeleton from "react-loading-skeleton";
 import { withRouter } from "react-router-dom";
 import NavBar from "./components/NavBar";
-import ShelterToaster from "./services/ShelterToaster";
+import FlicToaster from "./services/FlicToaster";
 import UserHelper from "./services/UserHelper";
 
 class ProfileEdit extends Component {
@@ -36,9 +36,9 @@ class ProfileEdit extends Component {
       .post("/profile/update", formData)
       .then((response) => {
         if (response.data.status == "success") {
-          ShelterToaster.success(response.data.message);
+          FlicToaster.success(response.data.message);
         } else {
-          ShelterToaster.error(response.data.message);
+          FlicToaster.error(response.data.message);
         }
       })
       .finally(() => {
@@ -165,7 +165,7 @@ class ProfileEdit extends Component {
                   ) : (
                     <button
                       type="submit"
-                      className="text-white text-sm m-4 ml-0 w-32 bg-green-400 p-2 uppercase rounded-full hover:bg-green-500"
+                      className="text-white text-sm m-4 ml-0 w-32 bg-red-400 p-2 uppercase rounded-full hover:bg-red-500"
                     >
                       Save Profile
                     </button>

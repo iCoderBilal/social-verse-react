@@ -15,7 +15,7 @@ function InputGroup({
   ...newProps
 }) {
   const hasError = error || errorText
-  const finalClass = `${className} w-full border border-gray-300 rounded-sm px-4 py-3 outline-none transition-colors duration-150 ease-in-out focus:border-green-400 ${
+  const finalClass = `${className} w-full border border-gray-300 rounded-sm px-4 py-3 outline-none transition-colors duration-150 ease-in-out focus:border-red-400 ${
     hasError && `border-red-600`
   }`
   return (

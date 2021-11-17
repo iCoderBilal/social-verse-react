@@ -1,0 +1,18 @@
+@import "card";
+@import "variables";
+
+.feed-container {
+  max-width: 40%;
+}
+
+.flic-feed{
+
+  .flic-post-card{
+    @extend .card;
+  }
+
+  .seen-everything-card{
+    @extend .card;
+    margin-top: 1rem;
+  }
+}

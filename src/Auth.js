@@ -7,7 +7,7 @@ import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import AuthHelper from "./services/AuthHelper";
 import HorizontalLogo from "./components/HorizontalLogo";
-import ShelterToaster from "./services/ShelterToaster";
+import FlicToaster from "./services/FlicToaster";
 
 export class Auth extends Component {
   state = {
@@ -24,7 +24,7 @@ export class Auth extends Component {
     }
     document.body.classList.remove("grey-bg");
     const fetchImage = axios.head(
-      "https://source.unsplash.com/1138x1390/?homeless,person"
+      "https://source.unsplash.com/1138x1390/?mobile,person"
     );
     fetchImage.then((response) => {
       const originalURL = response.request.responseURL;
@@ -58,17 +58,17 @@ export class Auth extends Component {
       .post("/user/login", formData)
       .then((response) => {
         if (response.data.status === "success") {
-          ShelterToaster.success("Login success! :D");
+          FlicToaster.success("Login success! :D");
           AuthHelper.setUser(response.data);
           this.props.forceUpdateAppState();
           this.props.history.push("/");
           this.props.history.go();
         } else {
-          ShelterToaster.error(response.data.message);
+          FlicToaster.error(response.data.message);
         }
       })
       .catch((response) => {
-        ShelterToaster.error("We are sorry. Something went wrong.");
+        FlicToaster.error("We are sorry. Something went wrong.");
       })
       .finally(() => {
         this.enableSubmitButton();
@@ -80,13 +80,13 @@ export class Auth extends Component {
       .post("/user/create", formData)
       .then((response) => {
         if (response.data.status === "success") {
-          ShelterToaster.success(response.data.message);
+          FlicToaster.success(response.data.message);
         } else {
-          ShelterToaster.error(response.data.message);
+          FlicToaster.error(response.data.message);
         }
       })
       .catch((response) => {
-        ShelterToaster.error("We are sorry. Something went wrong.");
+        FlicToaster.error("We are sorry. Something went wrong.");
       })
       .finally(() => {
         this.enableSubmitButton();
@@ -114,7 +114,7 @@ export class Auth extends Component {
   getLeftSideBar = () => {
     if (this.state.originalURL == null || this.state.placeholderURL == null)
       return (
-        <div className="w-full h-full object-cover animate-pulse bg-green-200" />
+        <div className="w-full h-full object-cover animate-pulse bg-red-200" />
       );
     return (
       <ProgressiveImage
@@ -125,7 +125,7 @@ export class Auth extends Component {
           <img
             src={src}
             className="w-full h-full object-cover"
-            alt="Shelter Sidebar"
+            alt="Flic Sidebar"
           />
         )}
       </ProgressiveImage>
@@ -138,10 +138,10 @@ export class Auth extends Component {
         <>
           <h2 className="text-3xl text-gray-800">Login</h2>
           <p className="mt-3 text-gray-800">
-            New to Shelter?
+            New to Flic?
             <span
               onClick={() => this.showRegister()}
-              className="ml-2 text-green-500 cursor-pointer"
+              className="ml-2 text-red-500 cursor-pointer"
             >
               Sign up
             </span>
@@ -155,7 +155,7 @@ export class Auth extends Component {
           Already a member?
           <span
             onClick={() => this.showLogin()}
-            className="ml-2 text-green-500 cursor-pointer"
+            className="ml-2 text-red-500 cursor-pointer"
           >
             Login in
           </span>
@@ -169,7 +169,7 @@ export class Auth extends Component {
       return (
         <button
           type="button"
-          className="shadow-inner inline-block rounded-sm font-medium border border-solid cursor-wait text-center transition-colors duration-200 text-base py-3 px-6 text-white bg-green-500 border-green-500 hover:bg-green-400 hover:border-green-400 w-full animate-pulse opacity-80"
+          className="shadow-inner inline-block rounded-sm font-medium border border-solid cursor-wait text-center transition-colors duration-200 text-base py-3 px-6 text-white bg-red-500 border-red-500 hover:bg-red-400 hover:border-red-400 w-full animate-pulse opacity-80"
           disabled
         >
           Continue <RightArrowIcon />
@@ -178,7 +178,7 @@ export class Auth extends Component {
     return (
       <button
         type="submit"
-        className="shadow-lg inline-block rounded-sm font-medium border border-solid cursor-pointer text-center transition-colors duration-200 text-base py-3 px-6 text-white bg-green-500 border-green-500 hover:bg-green-400 hover:border-green-400 w-full"
+        className="shadow-lg inline-block rounded-sm font-medium border border-solid cursor-pointer text-center transition-colors duration-200 text-base py-3 px-6 text-white bg-red-500 border-red-500 hover:bg-red-400 hover:border-red-400 w-full"
       >
         Continue <RightArrowIcon />
       </button>
@@ -200,22 +200,22 @@ export class Auth extends Component {
             <div className="mt-10">{this.getFormHeading()}</div>
             <div className="mt-12">
               {this.state.formType === "login" ? (
-                <LoginForm></LoginForm>
+                <LoginForm/>
               ) : (
-                <RegisterForm></RegisterForm>
+                <RegisterForm/>
               )}
               <FormGroup>{this.getFormButton()}</FormGroup>
               <div className="text-right">
-                <span className="text-green-500">Forgot your password?</span>
+                <span className="text-red-500">Forgot your password?</span>
               </div>
 
               <p className="text-sm mt-6 text-left">
                 By continuing you accept our{" "}
-                <span href="#" className="text-green-500 cursor-pointer">
+                <span className="text-red-500 cursor-pointer">
                   Terms of Use
                 </span>{" "}
                 and{" "}
-                <span className="text-green-500 cursor-pointer">
+                <span className="text-red-500 cursor-pointer">
                   Privacy Policy
                 </span>
                 .

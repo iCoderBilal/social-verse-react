@@ -24,7 +24,7 @@ export class Balance extends Component {
   componentDidMount() {
     this.interval = setInterval(() => {
       this.fetchBalance();
-    }, 15000);
+    }, 60000);
   }
 
   componentWillUnmount() {

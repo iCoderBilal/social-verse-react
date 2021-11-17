@@ -32,7 +32,7 @@ export class NotFound extends Component {
   getLeftSideBar = () => {
     if (this.state.originalURL == null || this.state.placeholderURL == null)
       return (
-        <div className="w-full h-full object-cover animate-pulse bg-green-200" />
+        <div className="w-full h-full object-cover animate-pulse bg-red-200" />
       );
     return (
       <ProgressiveImage
@@ -43,7 +43,7 @@ export class NotFound extends Component {
           <img
             src={src}
             className="w-full h-full object-cover"
-            alt="Shelter Sidebar"
+            alt="Flic Sidebar"
           />
         )}
       </ProgressiveImage>
@@ -62,12 +62,12 @@ export class NotFound extends Component {
             className="w-5/6 sm:w-1/2 mx-auto text-center"
           >
             <img
-              src="https://shelter-cdn.nyc3.cdn.digitaloceanspaces.com/email/shelter-logo.png"
+              src="https://shelter-cdn.nyc3.cdn.digitaloceanspaces.com/flic/assets/flic.png"
               className="h-8 block mx-auto"
-              alt="Shelter Humanity's Logo"
+              alt="Flic Logo"
             />
             <div className="mt-10">
-              <h1 className="text-7xl font-thin text-green-500">
+              <h1 className="text-7xl font-thin text-red-500">
                 404
                 <br />
                 Not Found
@@ -80,13 +80,13 @@ export class NotFound extends Component {
                   onClick={() => {
                     this.props.history.push("/");
                   }}
-                  className="shadow-lg inline-block rounded-sm font-medium border border-solid cursor-pointer text-center transition-colors duration-200 text-base py-3 px-6 text-white bg-green-500 border-green-500 hover:bg-green-400 hover:border-green-400 w-full"
+                  className="shadow-lg inline-block rounded-sm font-medium border border-solid cursor-pointer text-center transition-colors duration-200 text-base py-3 px-6 text-white bg-red-500 border-red-500 hover:bg-red-400 hover:border-red-400 w-full"
                 >
                   Let's go back to home?
                 </button>
               </FormGroup>
               <p className="text-sm mt-6 text-center">
-                Shelter Humanity, 2021.
+                Flic, 2021.
               </p>
             </div>
           </form>

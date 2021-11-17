@@ -1,0 +1,125 @@
+import React, {Component} from 'react';
+import {IoIosShareAlt} from "react-icons/io";
+import { IoBookmark, IoPlay } from "react-icons/io5"
+
+class DesktopVideoContainer extends Component {
+
+    state = {
+        isBuffering: false,
+        isVideoPlaying: false,
+        videoRef: React.createRef(),
+    }
+
+    constructor(props) {
+        super(props);
+    }
+
+    componentDidMount() {
+        const checkInterval  = 50.0
+        let lastPlayPos    = 0
+        let currentPlayPos = 0
+        let bufferingDetected = false
+        const player = this.state.videoRef.current;
+
+        let that = this;
+        let intervalListener = setInterval(function () {checkBuffering()}, checkInterval);
+
+        function checkBuffering() {
+            currentPlayPos = player.currentTime
+
+            // checking offset should be at most the check interval
+            // but allow for some margin
+            let offset = (checkInterval - 20) / 1000
+
+            // if no buffering is currently detected,
+            // and the position does not seem to increase
+            // and the player isn't manually paused...
+            if (
+                !bufferingDetected
+                && currentPlayPos < (lastPlayPos + offset)
+                && !player.paused
+            ) {
+                console.log("buffering")
+                bufferingDetected = true
+                that.setState({
+                    isBuffering: bufferingDetected
+                });
+            }
+
+            // if we were buffering but the player has advanced,
+            // then there is no buffering
+            if (
+                bufferingDetected
+                && currentPlayPos > (lastPlayPos + offset)
+                && !player.paused
+            ) {
+                if (Math.round(player.buffered.end(0)) / Math.round(player.seekable.end(0)) === 1) {
+                    clearInterval(intervalListener);
+                }
+
+                bufferingDetected = false
+                that.setState({
+                    isBuffering: bufferingDetected
+                });
+            }
+            lastPlayPos = currentPlayPos
+        }
+    }
+
+
+    componentWillUnmount() {
+        if(this.state.videoRef && this.state.videoRef.current){
+            window.FlicObserver.unobserve(this.state.videoRef.current);
+        }
+    }
+
+    playVideo = () => {
+       this.state.videoRef.current.play();
+    }
+
+    pauseVideo = () => {
+        this.state.videoRef.current.pause();
+    }
+
+    toggleVideoState = () => {
+        if(this.state.isVideoPlaying){
+            this.pauseVideo();
+        } else{
+            this.playVideo();
+        }
+    }
+
+    render() {
+        return (
+            <div className={`desktop-video-container ${this.state.isBuffering ? 'loading': ''}`}>
+                <video
+                    className={`flic-video`}
+                    src={this.props.post.video_link}
+                    controls={false}
+                    ref={this.state.videoRef}
+                    poster={this.props.post.thumbnail_url}
+                    onPlay={()=>this.setState({isVideoPlaying: true, isBuffering: false})}
+                    onPause={()=>this.setState({isVideoPlaying: false, isBuffering: false})}
+                    loop={true}
+                />
+                <div className={`interact-buttons`}>
+                    <div className={`item-button-container`}>
+                        <div onClick={(e) => this.props.clickShare(e)} className={`interact-icon`}>
+                            <IoIosShareAlt/>
+                        </div>
+                        <strong>
+                            1.2M
+                        </strong>
+                    </div>
+                </div>
+                <div className='event-delegator'
+                     onClick={()=>this.toggleVideoState()}>
+                </div>
+                <IoPlay className={`play-icon ${this.state.isVideoPlaying ? 'hidden': ''}`}/>
+
+            </div>
+        );
+    }
+}
+
+export default DesktopVideoContainer;

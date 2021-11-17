@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { Component } from "react";
-import ShelterToaster from "../services/ShelterToaster";
+import FlicToaster from "../services/FlicToaster";
 import LoadingPost from "./LoadingPost";
 import Post from "./Post";
+import { FcOk } from "react-icons/fc";
 
 export default class Feed extends Component {
   state = {
@@ -12,6 +13,41 @@ export default class Feed extends Component {
     currentPage: 1,
     seenEverything: false,
   };
+
+  videoIntersectionObserverAutoPlay = () => {
+    const videos = document.getElementsByClassName("flic-video");
+    let hasUserInteracted = this.props.hasUserInteracted;
+
+    [...videos].forEach((video) => {
+      // We can only control playback without intersection if video is mute
+      video.muted = true;
+      video.volume = 0.8;
+      window.FlicObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (
+                  entry.intersectionRatio !== 1 &&
+                  !video.paused
+              ) {
+                video.pause();
+              } else if (entry.intersectionRatio === 1 && video.paused) {
+                video.muted = hasUserInteracted;
+                video.play();
+              }
+            });
+          },
+          { threshold: 1 }
+      );
+      window.FlicObserver.observe(video);
+      // Play is a promise so we need to check we have it
+      // let playPromise = video.play();
+      // if (playPromise !== undefined) {
+      //   playPromise.then((_) => {
+      //
+      //   });
+      // }
+    });
+  }
 
   loadPosts = () => {
     if (this.state.seenEverything) return true;
@@ -26,8 +62,8 @@ export default class Feed extends Component {
             posts: response.data.posts,
             currentPage: this.state.currentPage,
             seenEverything: seenEverything,
-          });
-        } else ShelterToaster.error("Something Went Wrong");
+          }, () => this.videoIntersectionObserverAutoPlay());
+        } else FlicToaster.error("Something Went Wrong");
       })
       .finally(() => {
         this.setState({ isLoadingPosts: false });
@@ -40,17 +76,16 @@ export default class Feed extends Component {
 
   getSeenEverything = () => {
     return (
-      <div className="w-full flex items-center justify-center">
-        <span className="seen-everything">
+      <div className="seen-everything-card">
+          <FcOk/>
           You have caught up with everything.
-        </span>
       </div>
     );
   };
 
   render() {
     return (
-      <div className="m-10 justify-center flex-grow shelter-limit-container-width lg:mr-5">
+      <div className="flic-feed">
         {this.state.posts === null ? (
           <></>
         ) : (

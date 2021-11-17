@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import NavBar from "./components/NavBar";
 import UserHelper from "./services/UserHelper";
-import ShelterToaster from "./services/ShelterToaster";
+import FlicToaster from "./services/FlicToaster";
 import {QRCode} from "react-qrcode-logo";
 
 class Address extends Component {
@@ -12,7 +12,7 @@ class Address extends Component {
 
     copyEthAddress = () => {
         navigator.clipboard.writeText(this.state.eth_address).then(() => {
-            ShelterToaster.success("Address was copied to clipboard")
+            FlicToaster.success("Address was copied to clipboard")
         })
     };
 

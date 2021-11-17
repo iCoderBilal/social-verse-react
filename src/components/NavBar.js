@@ -20,13 +20,7 @@ const navigation = [
     href: "/profile/" + (UserHelper.getUsername() || ""),
     current: false,
     isPrivate: true,
-  },
-  {
-    name: "Create Bid",
-    href: "/post/create",
-    current: false,
-    isPrivate: true,
-  },
+  }
 ];
 
 function classNames(...classes) {
@@ -34,39 +28,23 @@ function classNames(...classes) {
 }
 
 function getFixedByLinkForBigMenu() {
-  return (
-    <a
-      href="https://app.uniswap.org/#/swap?use=V2&inputCurrency=ETH&outputCurrency=0x3636369771653b0741962d4d4806495b068bd14a"
-      target="_blank"
-      className="hover:bg-green-400 text-white px-3 py-2 rounded-md text-sm font-medium"
-    >
-      Buy Shelter Coins
-    </a>
-  );
+  return (<></>);
 }
 
 function getFixedByLinkForMobileMenu() {
-  return (
-    <a
-      href="https://app.uniswap.org/#/swap?use=V2&inputCurrency=ETH&outputCurrency=0x3636369771653b0741962d4d4806495b068bd14a"
-      target="_blank"
-      className="hover:bg-green-400 text-white block px-3 py-2 rounded-md text-base font-medium"
-    >
-      Buy Shelter Coins
-    </a>
-  );
+  return (<></>);
 }
 
 export default function NavBar() {
   return (
-    <Disclosure as="nav" className="bg-green-300 shadow">
+    <Disclosure as="nav" className="bg-red-300 shadow">
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
             <div className="relative flex items-center justify-between h-16">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
-                <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-full text-white hover:bg-green-700 focus:outline-none">
+                <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-full text-white hover:bg-red-700 focus:outline-none">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     <XIcon className="block h-6 w-6" aria-hidden="true" />
@@ -79,13 +57,13 @@ export default function NavBar() {
                 <div className="flex-shrink-0 flex items-center">
                   <img
                     className="block lg:hidden h-8 w-auto"
-                    src="https://shelter-cdn.nyc3.cdn.digitaloceanspaces.com/public/shelter-marketplace-logo-white-round_small.png"
-                    alt="Shelter"
+                    src="https://shelter-cdn.nyc3.cdn.digitaloceanspaces.com/flic/assets/coin_logo-noborder.png"
+                    alt="Flic"
                   />
                   <img
                     className="hidden lg:block h-4 w-auto"
-                    src="https://shelter-cdn.nyc3.cdn.digitaloceanspaces.com/public/shelter-marketplace-logo-white.png"
-                    alt="Shelter"
+                    src="https://shelter-cdn.nyc3.cdn.digitaloceanspaces.com/flic/assets/flic-logo-white.png"
+                    alt="Flic"
                   />
                 </div>
                 <div className="hidden sm:block sm:ml-6">
@@ -98,8 +76,8 @@ export default function NavBar() {
                             to={item.href}
                             className={classNames(
                               item.current
-                                ? "bg-green-500 text-white"
-                                : "text-white hover:bg-green-400 hover:text-white",
+                                ? "bg-red-500 text-white"
+                                : "text-white hover:bg-red-400 hover:text-white",
                               "px-3 py-2 rounded-md text-sm font-medium"
                             )}
                             aria-current={item.current ? "page" : undefined}
@@ -112,7 +90,7 @@ export default function NavBar() {
                           key={item.name}
                           to={item.href}
                           className={classNames(
-                            item.current ? "bg-green-500" : "hover:bg-green-40",
+                            item.current ? "bg-red-500" : "hover:bg-red-40",
                             "text-white px-3 py-2 rounded-md text-sm font-medium"
                           )}
                           aria-current={item.current ? "page" : undefined}
@@ -128,20 +106,20 @@ export default function NavBar() {
               {AuthHelper.isUserLoggedIn() ? (
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   {/* Profile dropdown */}
-                  <span className="bg-white rounded-2xl p-2 max-h-8 flex items-center">
+                  <span className="bg-white rounded-2xl p-2 max-h-8 flex items-center" title={"Your NFT Balance"}>
                     <img
                       className="max-h-4"
-                      src="https://shelter-cdn.nyc3.digitaloceanspaces.com/public/coin_logo%20x64.png"
+                      src="https://shelter-cdn.nyc3.cdn.digitaloceanspaces.com/flic/assets/coin_logo_x64.png"
                     ></img>
-                    <span className="ml-1 text-green-500 font-medium">
-                      <Balance></Balance>
+                    <span className="ml-1 text-red-500 font-medium">
+                      <Balance/>
                     </span>
                   </span>
                   <Menu as="div" className="ml-3 relative">
                     {({ open }) => (
                       <>
                         <div>
-                          <Menu.Button className="bg-green-500 flex text-sm rounded-full outline-none ring-2 ring-offset-2 ring-offset-green-500 ring-white">
+                          <Menu.Button className="bg-red-500 flex text-sm rounded-full outline-none ring-2 ring-offset-2 ring-offset-red-500 ring-white">
                             <span className="sr-only">Open user menu</span>
                             <img
                               className="h-8 w-8 rounded-full"
@@ -162,14 +140,14 @@ export default function NavBar() {
                         >
                           <Menu.Items
                             static
-                            className="origin-top-right z-10 absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-green-500 ring-opacity-5 focus:outline-none"
+                            className="origin-top-right z-10 absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-red-500 ring-opacity-5 focus:outline-none"
                           >
                             <Menu.Item>
                               {({ active }) => (
                                 <Link
                                   to={`/profile/${UserHelper.getUsername()}`}
                                   className={classNames(
-                                    active ? "bg-green-100" : "",
+                                    active ? "bg-red-100" : "",
                                     "block px-4 py-2 text-sm text-gray-700"
                                   )}
                                 >
@@ -182,7 +160,7 @@ export default function NavBar() {
                                 <Link
                                   to={`/profile/${UserHelper.getUsername()}/edit`}
                                   className={classNames(
-                                    active ? "bg-green-100" : "",
+                                    active ? "bg-red-100" : "",
                                     "block px-4 py-2 text-sm text-gray-700"
                                   )}
                                 >
@@ -195,7 +173,7 @@ export default function NavBar() {
                                 <Link
                                   to="/logout"
                                   className={classNames(
-                                    active ? "bg-green-100" : "",
+                                    active ? "bg-red-100" : "",
                                     "block px-4 py-2 text-sm text-gray-700"
                                   )}
                                 >
@@ -211,10 +189,10 @@ export default function NavBar() {
                 </div>
               ) : (
                 <Link
-                  className="bg-green-500 text-white px-3 py-2 rounded-md text-sm font-medium"
+                  className="bg-red-500 text-white px-3 py-2 rounded-md text-sm font-medium"
                   to="/auth"
                 >
-                  Start Sheltering
+                  Login
                 </Link>
               )}
             </div>
@@ -227,7 +205,7 @@ export default function NavBar() {
                   key={item.name}
                   to={item.href}
                   className={classNames(
-                    item.current ? "bg-green-500" : "hover:bg-green-400",
+                    item.current ? "bg-red-500" : "hover:bg-red-400",
                     "text-white block px-3 py-2 rounded-md text-base font-medium"
                   )}
                   aria-current={item.current ? "page" : undefined}

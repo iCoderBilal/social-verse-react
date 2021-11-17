@@ -1,0 +1,191 @@
+import React, {Component, createRef} from 'react';
+import UserHelper from "../services/UserHelper";
+import AuthHelper from "../services/AuthHelper";
+import axios from "axios";
+import FlicToaster from "../services/FlicToaster";
+import UploadProgress from "./UploadProgress";
+import RightArrowIcon from "./RightArrowIcon";
+
+class CreateFlicCard extends Component {
+
+    state = {
+        isUploading: false,
+        uploadProgress: 0,
+        fileInputRef: React.createRef(),
+        captionInputRef: React.createRef(),
+        hash: null,
+        waitingForPostCreation: false,
+        captionText: ''
+    }
+
+    handleDragOver = (e) => {
+        e.preventDefault()
+        e.target.innerText = "Release to upload"
+        e.target.classList.add('hover');
+    }
+
+    handleDrop = (e) => {
+        e.preventDefault();
+        let fileInput = this.state.fileInputRef.current;
+        fileInput.files = e.dataTransfer.files;
+        const dT = new DataTransfer();
+        dT.items.add(e.dataTransfer.files[0]);
+        fileInput.files = dT.files;
+        e.target.innerText = "Upload (Drag or Click)"
+        e.target.classList.remove('hover');
+    }
+
+    handleDragLeave = (e) => {
+        e.preventDefault()
+        e.target.innerText = "Upload (Drag or Click)"
+        e.target.classList.remove('hover');
+    }
+
+    uploadVideo = (e) => {
+
+        this.setState({isUploading: true})
+
+        const config = {
+            onUploadProgress: progressEvent => {
+                let progress  = (progressEvent.loaded / progressEvent.total) * 100;
+                console.log(progress);
+                this.setState({ uploadProgress: Math.max(progress-5, 0) });
+            }
+        }
+
+        let formData = new FormData();
+        formData.append("flic_video", this.state.fileInputRef.current.files[0]);
+        axios.post('/post/upload', formData, config).then(res => {
+            if (res.status === 200) {
+                this.setState({ isUploading: false, uploadProgress: 100, hash: res.data.hash }, () => {
+                    FlicToaster.success("Your video was uploaded!")
+                });
+            }
+        }).catch(err => {
+            FlicToaster.error("Something went wrong!")
+        })
+
+    }
+
+    constructor(props) {
+        super(props);
+    }
+
+    componentWillUnmount() {
+        //Destroy Event Listeners
+    }
+
+    getGuestView = () => {
+        return '';
+    }
+
+    handleFormSubmit = (e) => {
+
+        e.preventDefault();
+
+        this.setState({waitingForPostCreation: true});
+
+        let formData = new FormData();
+        formData.append("hash", this.state.hash);
+        formData.append("title", this.state.captionText);
+
+        axios.post('/post/add', formData).then(res => {
+            if (res.status === 200) {
+                this.setState({
+                    isUploading: false,
+                    uploadProgress: 0,
+                    hash: null,
+                    waitingForPostCreation: false,
+                    captionText: ''}, () => {
+                    FlicToaster.success("Your post was created!")
+                });
+            }
+        }).catch(err => {
+            this.setState({
+                waitingForPostCreation: false
+            }, () => FlicToaster.error("Something went wrong!"))
+
+        })
+    }
+
+    handleDiscard = () => {
+        this.setState({
+            isUploading: false,
+            uploadProgress: 0,
+            hash: null,
+            waitingForPostCreation: false,
+            captionText: ''
+        });
+    }
+
+    getFormButtons = () => {
+
+        const disableSubmitButton = this.state.captionText.length < 10;
+
+       return     <div className={`upload-form-buttons ${this.state.uploadProgress === 100 && this.state.isUploading === false ? '':'hidden'}`}>
+           <button
+               onClick={()=>this.handleDiscard()}
+               type="reset"
+               className={`shadow inline-block rounded-sm font-medium border border-solid text-center transition-colors duration-200 text-base py-3 px-6 text-gray-700 bg-white border-gray-100  w-full ${this.state.waitingForPostCreation ? 'shadow-inner opacity-40 cursor-wait': 'hover:bg-gray-50'}`}
+               disabled={this.state.waitingForPostCreation}
+           >
+               Discard
+           </button>
+           <button
+               type="submit"
+               className={`shadow inline-block rounded-sm font-medium border border-solid text-center transition-colors duration-200 text-base py-3 px-6 text-white bg-red-500 border-red-500 w-full ${disableSubmitButton ? 'shadow-inner opacity-40' : 'hover:bg-red-400 hover:border-red-400'} ${this.state.waitingForPostCreation ? 'animate-pulse opacity-80 cursor-wait hover:bg-red-500 hover:border-red-500': ''}`}
+               disabled={disableSubmitButton || this.state.waitingForPostCreation}
+           >
+               Post Flic <RightArrowIcon />
+           </button>
+       </div>;
+    }
+
+    getLoggedInView = () => {
+        return (
+            <div className='create-flic-card'>
+                <div className='flic-upload'>
+                    <form className='flic-data-input' onSubmit={(e)=>this.handleFormSubmit(e)}>
+                        <div className={'avatar-and-caption'}>
+                            <div className='avatar-container'>
+                                <img className="avatar" src={UserHelper.getProfilePicture()} alt={UserHelper.getUsername()}/>
+                            </div>
+                            <input
+                                onKeyUp={(e)=>this.setState({captionText: e.target.value})}
+                                ref={this.state.captionInputRef}
+                                className='upload-text-input'
+                                readOnly={this.state.waitingForPostCreation}
+                                placeholder={`What's on your mind?`}/>
+                        </div>
+                        <input
+                            ref={this.state.fileInputRef}
+                            id="flic-video"
+                            multiple={false}
+                            className="upload-file-input"
+                            name="flic-video"
+                            type='file'
+                            accept="video/mp4,video/x-m4v,video/*"
+                            onChange={(e)=>this.uploadVideo(e)}
+                        />
+                        <label htmlFor="flic-video"
+                               className={`upload-drag-area ${this.state.isUploading || this.state.uploadProgress !==0 ? 'hidden': ''}`}
+                               onDragOver={(e) => this.handleDragOver(e)}
+                               onDragLeave={(e)=>this.handleDragLeave(e)}
+                               onDrop={(e)=>this.handleDrop(e)}
+                        >
+                            Upload (Drag or Click)
+                        </label>
+                        {this.getFormButtons()}
+                    </form>
+                </div>
+                <UploadProgress isUploading={this.state.isUploading} uploadProgress={this.state.uploadProgress}/>
+            </div>
+        );
+    }
+
+    render() {
+        return AuthHelper.isUserLoggedIn() ? this.getLoggedInView() : this.getGuestView();
+    }
+}
+
+export default CreateFlicCard;
