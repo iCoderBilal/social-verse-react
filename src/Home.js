@@ -1,23 +1,34 @@
 import React, { Component } from "react";
 import Feed from "./components/Feed";
 import NavBar from "./components/NavBar";
-import TopDonor from "./components/TopDonor";
+import CreateFlicCard from "./components/CreateFlicCard";
+import MobileFeed from "./components/mobile/MobileFeed";
 
 export class Home extends Component {
   componentDidMount() {
     document.body.classList.add("grey-bg");
   }
 
+  state = {
+      width: window.innerWidth
+  }
+
+  renderDesktopOrMobile = () =>{
+      if(this.state.width < 768){
+          return <MobileFeed></MobileFeed>
+      }
+
+      return ( <React.Fragment>
+          <NavBar/>
+          <div className="feed-container mx-auto justify-center">
+              <CreateFlicCard/>
+              <Feed hasUserInteracted = {this.props.hasUserInteracted}/>
+          </div>
+      </React.Fragment>);
+  }
+
   render() {
-    return (
-      <React.Fragment>
-        <NavBar/>
-        <div className="mx-auto flex justify-center">
-          <Feed/>
-          <TopDonor/>
-        </div>
-      </React.Fragment>
-    );
+    return this.renderDesktopOrMobile();
   }
 }
 

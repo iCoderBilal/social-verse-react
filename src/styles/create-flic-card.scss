@@ -1,0 +1,182 @@
+@import "card";
+@import "variables";
+
+.create-flic-card  {
+  @extend .card;
+  margin-top:5rem;
+  flex-direction: column;
+
+  .flic-upload{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    .flic-data-input{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+
+      .avatar-and-caption{
+        display: flex;
+        flex-wrap: nowrap;
+        width: 100%;
+
+        .avatar-container{
+          display: grid;
+          place-items: center;
+          flex-basis: 10%;
+
+          .avatar{
+            max-width: 2.5rem;
+            border-radius: 100%;
+          }
+        }
+
+        .upload-text-input {
+          outline: 0;
+          padding:1rem;
+          flex-basis: 90%;
+          display: grid;
+          place-items: center;
+          background-color: #f0f2f5;
+          border-radius: 1rem;
+
+          &:focus {
+            outline: $theme-color;
+          }
+        }
+
+      }
+
+      .upload-file-input {
+        display: none;
+      }
+
+      .upload-drag-area{
+        margin-top: 1rem;
+        padding: 2rem 1rem;
+        border-radius: 1rem;
+        width: 100%;
+        display: grid;
+        place-items: center;
+        background-color: #f0f2f5;
+        &:hover{
+          cursor: pointer;
+          background-color: #f5f0f0;
+        }
+      }
+
+      .upload-drag-area.hidden{
+        display: none;
+      }
+
+      .upload-drag-area.hover{
+        cursor: pointer;
+        background-color: #f5f0f0;
+      }
+
+      .upload-form-buttons{
+        display: flex;
+        width: 100%;
+        margin-top: 1rem;
+
+        button{
+          flex-basis: 45%;
+          margin-left:1rem;
+        }
+
+      }
+
+      .upload-form-buttons.hidden{
+        display: none;
+      }
+
+    }
+
+  }
+
+  .upload-progress{
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    display: flex;
+
+
+    .small-avatar-container {
+      position: relative;
+
+      .flic-dual-ring-spinner {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        position: relative;
+
+        .small-avatar{
+          height:40px;
+          width: 40px;
+          border-radius: 100%;
+          position: absolute;
+          top:50%;
+          left:50%;
+          transform: translate(-50%, -50%);
+        }
+
+        &:after {
+          content: " ";
+          display: block;
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          border: 2px solid;
+          border-color: red transparent red transparent;
+          animation: spinner-rotate 1.2s linear infinite;
+        }
+
+      }
+
+    }
+
+    .progress {
+      border-radius: 1rem;
+      width: 100%;
+      height: 0.5rem;
+      flex-basis: 80%;
+      background-color: #fde8e8;
+
+      .completion{
+        height: 0.5rem;
+        border-radius: 1rem;
+        background-color: $theme-color;
+        width: 0;
+        transition: width ease 1s;
+      }
+
+    }
+
+    .small-flic-icon {
+      img {
+        height:40px;
+        width: 40px;
+        border-radius: 100%;
+      }
+    }
+
+  }
+
+
+
+}
+
+
+@keyframes spinner-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

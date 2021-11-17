@@ -4,7 +4,7 @@ class AuthHelper {
     const user = this.getUser();
     if (user && user.token) {
       return {
-        'Shelter-Token': user.token
+        'Flic-Token': user.token
       };
     } else {
       return {};

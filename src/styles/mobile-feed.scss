@@ -1,0 +1,320 @@
+/*Using BEM Convention for CSS Naming*/
+::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+    -webkit-appearance: none;
+    display: none;
+}
+
+* {
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+    color:#fff;
+    font-family: 'Poppins', sans-serif;
+}
+
+html, body{
+    background: #000;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+html{
+    -ms-scroll-snap-type: mandatory;
+    scroll-snap-type: y mandatory
+}
+
+svg path{
+    stroke-width: 1;
+}
+
+video {
+    pointer-events: none;
+}
+
+.feed{
+    overflow-y: scroll;
+    -ms-scroll-snap-type: mandatory;
+    scroll-snap-type: y mandatory;
+    -webkit-overflow-scrolling: touch;
+    max-height: 100vh;
+}
+
+.feed_video-container{
+    height: calc(100vh - 3rem);
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
+    scroll-snap-align: start;
+}
+
+.feed_video-container__video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+div.feed_video-container:last-of-type {
+    margin-bottom: 3rem
+}
+
+.video__video-post-interaction-buttons{
+    position: absolute;
+    z-index: 1;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    right:0;
+    top: 50%;
+    transform: translateY(-50%);
+    padding:10px;
+    max-width: 5rem;
+}
+
+.video__video-post-interaction-buttons > div{
+    margin-top: 1rem;
+}
+
+.video__post-information{
+    position: absolute;
+    bottom:1%;
+    width: 100vw;
+    height:5rem;
+    display: flex;
+    padding:10px;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.video__post-information__interaction-button-follow{
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.video__post-information__interaction-button-follow__plus{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    background: red;
+    border-radius: 100%;
+    height:1rem;
+    width: 1rem;
+}
+
+.video__post-information__interaction-button-follow__plus{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:1px;
+}
+
+.video__post-information__interaction-button-follow__plus svg path {
+    stroke-width: 3;
+}
+
+.video__post-information__interaction-button-follow > img {
+    max-width:3rem;
+    height:auto;
+    border-radius: 100%;
+}
+
+.video__post-information__interaction-button{
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.video__post-information__text__music{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.video__post-information__text__music__icon{
+    height:1rem;
+    width: 1rem;
+}
+
+.video__post-information__text__username{
+    font-size: 1.2em;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.video__post-information__text__username > img {
+    width: 1.2rem;
+    height: auto;
+    margin-left:5px;
+}
+
+.video__post-information__vinyl > img{
+    width:3rem;
+    height:auto;
+}
+
+
+.video__post-information__vinyl > .spin{
+    animation: vinyl-rotation 2s infinite linear;
+}
+
+@keyframes vinyl-rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
+    }
+}
+
+.bottom-navigation{
+    background: #000;
+    height: 3rem;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    padding:5px 0;
+    position: fixed;
+    width: 100vw;
+    bottom: 0;
+    z-index: 2;
+}
+
+.information-dialog-model {
+    padding:1rem 2rem;
+    border-radius: 2rem;
+    display: none;
+    position: fixed;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    background: #fff;
+    z-index: 4;
+    color:#000;
+    width:90vw;
+    flex-direction: column;
+    align-items: center;
+}
+
+.information-dialog-model > * {
+    color:#000;
+}
+
+    .information-dialog-model--active {
+    display: flex;
+}
+
+.information-dialog-model__waitlist-link{
+    text-decoration: none;
+    padding: 1rem 3rem;
+    background: #fbe7e0;
+    color: #ff5336;
+    display: flex;
+    flex-wrap: nowrap;
+    border-radius: 2rem;
+    margin:10px;
+    justify-content: space-between;
+    align-items: center;
+    width:100%;
+}
+.information-dialog-model__heading{
+    font-weight: lighter;
+}
+
+.information-dialog-model__description{
+    margin:20px 0;
+}
+
+.feed-backdrop{
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.information-dialog-model__waitlist-link__arrow-right{
+    height:2em;
+    color: #ff5336;
+    stroke: #ff5336;
+}
+
+.information-dialog-model__close{
+    background: red;
+    position: absolute;
+    top:0;
+    right:0;
+    height:3rem;
+    width: 3rem;
+    border-radius: 100%;
+    transform: translate(25%,-25%);
+}
+
+.feed_video-container__play{
+    opacity: 0.9;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    z-index: 3;
+    width: 5rem;
+}
+
+.feed_video-container__play--hidden{
+    display: none;
+}
+
+.error-orientation {
+    font-weight: lighter;
+    margin:10px;
+}
+
+.information-dialog-model__number-input{
+    padding:1rem;
+    border-radius: 2rem;
+    outline: none;
+    width: 100%;
+    background: #f7f7f7;
+    border:none;
+}
+
+.information-dialog-model__confetti{
+    width:80%;
+    height:auto;
+}
+
+.feed_video-container:last-child {
+    margin-bottom: 3rem;
+}
+
+.feed_video-container.loading {
+    &:before {
+        content: '';
+        color: #fff;
+        position: absolute;
+        top:50%;
+        left:50%;
+        border-radius: 100%;
+        transform:translate(-50%,-50%);
+        animation: vloader-spin 1s linear;
+        height:40px;
+        width: 40px;
+        z-index: 1;
+        background: #fff url("https://shelter-cdn.nyc3.cdn.digitaloceanspaces.com/flic/assets/spinner.gif") no-repeat center center;
+    }
+}
+
+@-moz-keyframes vloader-spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(359deg); }
+}
+@-webkit-keyframes vloader-spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(359deg); }
+}
+@keyframes vloader-spinspin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(359deg);}
+}

@@ -47,7 +47,7 @@ export default class Comment extends Component {
           <div className="w-11/12 border-t border-grey-50 m-2"></div>
 
           <div className="flex items-center justify-items-center">
-            <span className="rounded-full p-1 px-3 bg-green-100 text-green-500 text-sm flex items-center">
+            <span className="rounded-full p-1 px-3 bg-red-100 text-red-500 text-sm flex items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6 mr-2"

@@ -9,15 +9,16 @@ import AuthHelper from "./services/AuthHelper";
 import Logout from "./Logout";
 import { Toaster } from "react-hot-toast";
 import Verify from "./Verify";
-import CreatePost from "./CreatePost";
 import ProfileEdit from "./ProfileEdit";
 import Post from "./Post";
 import Notifications from "./Notifications";
 import Address from "./Address";
 
 export default class App extends Component {
+
   state = {
     user: AuthHelper.getUser(),
+    hasUserInteracted: false
   };
 
   forceUpdateAppState = () => {
@@ -26,12 +27,23 @@ export default class App extends Component {
     });
   };
 
+   clickListener = () => {
+    this.setState({
+      hasUserInteracted: true
+    },  () => {
+      console.log("User has interacted with the DOM");
+      window.removeEventListener('click', this.clickListener);
+    })
+  }
+
   componentDidMount() {
     console.log("%cStop!", "font-size: 50px; color:red");
     console.log(
-      "%cThis is a browser feature intended for developers. If someone told you to copy-paste something here to enable a Shelter feature or “hack” someone’s account, it is a scam and will give them access to your Shelter account. Learn more: https://en.wikipedia.org/wiki/Self-XSS",
+      "%cThis is a browser feature intended for developers. If someone told you to copy-paste something here to enable a Flic feature or “hack” someone’s account, it is a scam and will give them access to your Flic account. Learn more: https://en.wikipedia.org/wiki/Self-XSS",
       "font-size: 20px;"
     );
+
+    window.addEventListener('click', this.clickListener);
   }
 
   render() {
@@ -39,12 +51,11 @@ export default class App extends Component {
       <>
         <BrowserRouter>
           <Switch>
-            <Route exact path="/" component={Home}/>
-            <PrivateRoute exact path="/post/create" component={CreatePost}/>
+            <Route exact path="/" render={(props) => (<Home hasUserInteracted={this.state.hasUserInteracted}{...props}/>)}/>
             <PrivateRoute exact path="/notifications" component={Notifications}/>
             <PrivateRoute exact path="/address" component={Address}/>
             <Route exact path="/profile/:username" component={Profile}/>
-            <Route exact path="/post/:identifier/:slug" component={Post}/>
+            <Route exact path="/post/:identifier/:slug" render={(props) => (<Post hasUserInteracted={this.state.hasUserInteracted}{...props}/>)}/>
             <Route exact path="/verify" component={Verify}/>
             <Route exact path="/profile/:username/edit" component={ProfileEdit}/>
             <Route exact path="/auth" render={(props) => (<Auth forceUpdateAppState={this.forceUpdateAppState}{...props}/>)}/>
