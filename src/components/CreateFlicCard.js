@@ -50,6 +50,9 @@ class CreateFlicCard extends Component {
                 let progress  = (progressEvent.loaded / progressEvent.total) * 100;
                 console.log(progress);
                 this.setState({ uploadProgress: Math.max(progress-5, 0) });
+            },
+            headers: {
+                'Content-Type': 'multipart/form-data'
             }
         }
 
@@ -164,7 +167,7 @@ class CreateFlicCard extends Component {
                             className="upload-file-input"
                             name="flic-video"
                             type='file'
-                            accept="video/mp4,video/x-m4v,video/*"
+                            accept="video/mp4,video/x-m4v,video/webm"
                             onChange={(e)=>this.uploadVideo(e)}
                         />
                         <label htmlFor="flic-video"

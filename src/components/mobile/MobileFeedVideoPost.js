@@ -96,12 +96,14 @@ class MobileFeedVideoPost extends Component {
                 <video className="feed_video-container__video"
                        ref={this.state.videoRef}
                        poster={this.props.poster}
+                       muted={!(this.props.hasUserInteracted)}
                        src={this.props.url}
                        controls={false}
                        playsInline={true}
                        onPlay={()=>this.setState({isVideoPlaying: true, isBuffering: false})}
                        onPause={()=>this.setState({isVideoPlaying: false, isBuffering: false})}
                        loop={true}
+
                 />
                 <MobilePlayButton isVideoPlaying={this.state.isVideoPlaying}/>
                 <MobileVideoPostInformation
