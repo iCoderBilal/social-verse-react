@@ -87,11 +87,12 @@ class MobileFeed extends Component {
         return (
             <React.Fragment>
                 <MobileInformationDialogModel isDialogVisible={this.state.isDialogVisible} closeDialog={this.closeInformationDialogModal}/>
-                <div className={`feed ${this.state.isDialogVisible ? 'feed-backdrop' : ''}`}>
+                <div className={`feed-mobile feed ${this.state.isDialogVisible ? 'feed-backdrop' : ''}`}>
                     {
                         this.state.posts.map(video => (
                                 <MobileFeedVideoPost
                                     key = {"1"}
+                                    hasUserInteracted = {this.props.hasUserInteracted}
                                     username = {video.username}
                                     musicName = {""}
                                     description = {video.title}

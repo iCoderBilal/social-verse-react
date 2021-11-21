@@ -15,12 +15,12 @@ export class Home extends Component {
 
   renderDesktopOrMobile = () =>{
       if(this.state.width < 768){
-          return <MobileFeed></MobileFeed>
+          return <MobileFeed hasUserInteracted = {this.props.hasUserInteracted}></MobileFeed>
       }
 
       return ( <React.Fragment>
           <NavBar/>
-          <div className="feed-container mx-auto justify-center">
+          <div className="desktop-f-t-b feed-container mx-auto justify-center">
               <CreateFlicCard/>
               <Feed hasUserInteracted = {this.props.hasUserInteracted}/>
           </div>

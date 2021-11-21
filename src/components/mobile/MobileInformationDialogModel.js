@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import {ArrowNarrowRightIcon, XCircleIcon} from "@heroicons/react/outline";
 import Confetti from "../../images/confetti.png";
 import axios from "axios";
+import FlicToaster from "../../services/FlicToaster";
 
 class MobileInformationDialogModel extends Component {
 
@@ -23,8 +24,10 @@ class MobileInformationDialogModel extends Component {
 
         const input = this.state.phoneInputRef.current;
 
-        if(input.checkValidity() === false){
-            input.reportValidity();
+        const value = input.value ?? '';
+
+        if(/^([+][0-9]{11,15})$/.test(value) !== true){
+            FlicToaster.notify("Please enter a valid phone number with country prefix")
             return;
         }
 
@@ -34,7 +37,9 @@ class MobileInformationDialogModel extends Component {
         this.setState({
             isWaitlistVisible: false,
             wasPhoneNumberCollected: true
-        }, () => axios.post('/waitlist/phone/add'))
+        }, () => axios.post('/waitlist/phone/add', formData).then(()=>{
+            FlicToaster.success("Thanks for joining! :D")
+        }))
     }
 
     getDownloadDialogScreen = () => {
@@ -57,7 +62,7 @@ class MobileInformationDialogModel extends Component {
            <React.Fragment>
                <h2 className="information-dialog-model__heading">Uh...Oh! 😮</h2>
                <p className="information-dialog-model__description">Flic is not ready to download yet, but we wanted to get some metrics on how many people were going to click on download link! Enter your phone number below to be added to the waitlist!</p>
-               <input ref={this.state.phoneInputRef} pattern="^(+[0-9]{11,15})" className="information-dialog-model__number-input" placeholder="Enter your number"/>
+               <input ref={this.state.phoneInputRef} className="information-dialog-model__number-input" placeholder="Enter your number"/>
                <a className="information-dialog-model__waitlist-link" onClick={()=>this.moveToThankYouScreen()}>
                    Join the waitlist! <ArrowNarrowRightIcon className="information-dialog-model__waitlist-link__arrow-right"/>
                </a>
