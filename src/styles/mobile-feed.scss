@@ -28,17 +28,16 @@
     }
 }
 
-html, body{
-    background: #000;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-}
-
 html{
     -ms-scroll-snap-type: mandatory;
     scroll-snap-type: y mandatory
 }
 
+
+html, body{
+    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+}
 
 .feed{
     overflow-y: scroll;
