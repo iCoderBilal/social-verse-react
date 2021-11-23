@@ -43,6 +43,13 @@ export class Verify extends Component {
         FlicToaster.error(response.data.message);
       }
     });
+
+
+    gtag('event', 'view', {
+      'event_category' : 'page',
+      'event_label' : 'Verification Page'
+    });
+
   }
 
   getLeftSideBar = () => {

@@ -28,8 +28,14 @@ class Profile extends Component {
     const username = this.props.match.params.username;
     const fetchProfileData = axios.get("/profile/" + username);
     fetchProfileData.then((response) => {
-      this.setState({ user: response.data });
+      this.setState({ user: response.data }, () => {
+        gtag('event', 'view', {
+          'event_category' : 'page',
+          'event_label' : 'Profile'
+        });
+      });
     });
+
   }
 
   componentWillUnmount() {

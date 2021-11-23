@@ -46,6 +46,12 @@ class Post extends Component {
           "Something went wrong while fetching the comments!"
         );
       });
+
+    gtag('event', 'view', {
+      'event_category' : 'page',
+      'event_label' : 'Post Page',
+    });
+
   }
 
   handleCommentKeyUp = (e) => {
