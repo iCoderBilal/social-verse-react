@@ -39,6 +39,12 @@ export class Auth extends Component {
         placeholderURL: placeholderURL,
       });
     });
+
+    gtag('event', 'view', {
+      'event_category' : 'page',
+      'event_label' : 'Auth'
+    });
+
   }
 
   showLogin = () => {
@@ -98,6 +104,11 @@ export class Auth extends Component {
     event.stopPropagation();
     this.setState({ isSubmitButtonLoading: true });
     const formData = new FormData(event.currentTarget);
+
+    gtag('event', 'click', {
+      'event_category' : 'interactions',
+      'event_label' : this.state.formType
+    });
 
     switch (this.state.formType) {
       case "login":

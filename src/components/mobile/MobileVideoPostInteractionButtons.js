@@ -12,12 +12,41 @@ function VideoPostInteractionButtons(props) {
         props.openDialog();
     }
 
+    const handleLikesClick = () => {
+        gtag('event', 'touch', {
+            'event_category' : 'interactions',
+            'event_label' : 'like',
+        });
+    }
+
+    const handleFollowClick = () => {
+        gtag('event', 'touch', {
+            'event_category' : 'interactions',
+            'event_label' : 'follow',
+        });
+    }
+
+    const handleCommentClick = () => {
+        gtag('event', 'touch', {
+            'event_category' : 'interactions',
+            'event_label' : 'comment',
+        });
+    }
+
+    const handleShareClick = () => {
+        gtag('event', 'touch', {
+            'event_category': 'interactions',
+            'event_label': 'share',
+        });
+    }
+
+
     return (
         <div className="video__video-post-interaction-buttons" onClick={(event)=>handleBottomNavigationClick(event)}>
-            <MobileUserFollowButton instagramImage={props.instagramImage}/>
-            <MobileLikeButton likesCount={props.likesCount}/>
-            <MobileCommentButton commentCount={props.commentCount}/>
-            <MobileShareButton shareCount={props.shareCount}/>
+            <MobileUserFollowButton onClick={()=>handleFollowClick()} instagramImage={props.instagramImage}/>
+            <MobileLikeButton onClick={()=>handleLikesClick()} likesCount={props.likesCount}/>
+            <MobileCommentButton onClick={()=>handleCommentClick()} commentCount={props.commentCount}/>
+            <MobileShareButton onClick={()=>handleShareClick()} shareCount={props.shareCount}/>
         </div>
     );
 }

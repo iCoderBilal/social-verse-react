@@ -43,7 +43,12 @@ class CreateFlicCard extends Component {
 
     uploadVideo = (e) => {
 
-        this.setState({isUploading: true})
+        this.setState({isUploading: true}, () => {
+            gtag('event', 'upload', {
+                'event_category' : 'interactions',
+                'event_label' : 'Upload'
+            });
+        })
 
         const config = {
             onUploadProgress: progressEvent => {

@@ -6,6 +6,12 @@ function MobileBottomNavigation(props) {
 
     const handleBottomNavigationClick = () => {
         props.openDialog();
+
+        gtag('event', 'touch', {
+            'event_category' : 'interactions',
+            'event_label' : 'bottom navigation',
+        });
+
     }
 
     return (

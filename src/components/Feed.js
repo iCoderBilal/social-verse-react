@@ -72,6 +72,10 @@ export default class Feed extends Component {
 
   componentDidMount() {
     this.loadPosts();
+    gtag('event', 'view', {
+      'event_category' : 'page',
+      'event_label' : 'Desktop Home'
+    });
   }
 
   getSeenEverything = () => {
