@@ -45,7 +45,7 @@ export class Verify extends Component {
     });
 
 
-    gtag('event', 'view', {
+    window.gtag('event', 'view', {
       'event_category' : 'page',
       'event_label' : 'Verification Page'
     });

@@ -40,7 +40,7 @@ export class Auth extends Component {
       });
     });
 
-    gtag('event', 'view', {
+    window.gtag('event', 'view', {
       'event_category' : 'page',
       'event_label' : 'Auth'
     });
@@ -105,7 +105,7 @@ export class Auth extends Component {
     this.setState({ isSubmitButtonLoading: true });
     const formData = new FormData(event.currentTarget);
 
-    gtag('event', 'click', {
+    window.gtag('event', 'click', {
       'event_category' : 'interactions',
       'event_label' : this.state.formType
     });
