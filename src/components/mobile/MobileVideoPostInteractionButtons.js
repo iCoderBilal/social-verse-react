@@ -13,28 +13,28 @@ function VideoPostInteractionButtons(props) {
     }
 
     const handleLikesClick = () => {
-        gtag('event', 'touch', {
+        window.gtag('event', 'touch', {
             'event_category' : 'interactions',
             'event_label' : 'like',
         });
     }
 
     const handleFollowClick = () => {
-        gtag('event', 'touch', {
+        window.gtag('event', 'touch', {
             'event_category' : 'interactions',
             'event_label' : 'follow',
         });
     }
 
     const handleCommentClick = () => {
-        gtag('event', 'touch', {
+        window.gtag('event', 'touch', {
             'event_category' : 'interactions',
             'event_label' : 'comment',
         });
     }
 
     const handleShareClick = () => {
-        gtag('event', 'touch', {
+        window.gtag('event', 'touch', {
             'event_category': 'interactions',
             'event_label': 'share',
         });

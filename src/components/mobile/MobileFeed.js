@@ -80,7 +80,7 @@ class MobileFeed extends Component {
 
     componentDidMount() {
         this.loadPosts();
-        gtag('event', 'view', {
+        window.gtag('event', 'view', {
             'event_category' : 'page',
             'event_label' : 'Mobile Home'
         });
