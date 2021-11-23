@@ -54,6 +54,11 @@ class DesktopVideoContainer extends Component {
                 && !player.paused
             ) {
                 if (Math.round(player.buffered.end(0)) / Math.round(player.seekable.end(0)) === 1) {
+                    window.gtag('event', 'finish', {
+                        'event_category' : 'video',
+                        'event_label' : 'finish',
+                        'value': parseInt(currentPlayPos)
+                    });
                     clearInterval(intervalListener);
                 }
 
@@ -98,8 +103,20 @@ class DesktopVideoContainer extends Component {
                     controls={false}
                     ref={this.state.videoRef}
                     poster={this.props.post.thumbnail_url}
-                    onPlay={()=>this.setState({isVideoPlaying: true, isBuffering: false})}
-                    onPause={()=>this.setState({isVideoPlaying: false, isBuffering: false})}
+                    onPlay={()=>this.setState({isVideoPlaying: true, isBuffering: false}, () => {
+                        window.gtag('event', 'playing', {
+                            'event_category' : 'video',
+                            'event_label' : 'playing',
+                            'value': parseInt(this.state.videoRef.current.currentTime)
+                        });
+                    })}
+                    onPause={()=>this.setState({isVideoPlaying: false, isBuffering: false}, () => {
+                        window.gtag('event', 'pause', {
+                            'event_category' : 'video',
+                            'event_label' : 'pause',
+                            'value': parseInt(this.state.videoRef.current.currentTime)
+                        });
+                    })}
                     loop={true}
                 />
                 <div className={`interact-buttons`}>
