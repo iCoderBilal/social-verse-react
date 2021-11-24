@@ -7,6 +7,8 @@ import NavBar from "./components/NavBar";
 import AuthHelper from "./services/AuthHelper";
 import Comment from "./components/Comment";
 import ChildPost from "./components/Post";
+import MobileFeed from "./components/mobile/MobileFeed";
+import Skeleton from "react-loading-skeleton";
 
 
 class Post extends Component {
@@ -47,9 +49,10 @@ class Post extends Component {
         );
       });
 
+
     window.gtag('event', 'view', {
       'event_category' : 'page',
-      'event_label' : 'Post Page',
+      'event_label' : window.innerWidth < 768 ? 'Mobile Post' : 'Desktop Post'
     });
 
   }
@@ -145,6 +148,14 @@ class Post extends Component {
   };
 
   render() {
+
+    if(window.innerWidth < 768) {
+      if(this.state.post === null){
+        return <Skeleton height={100} width={100}/>;
+      }
+      return <MobileFeed post={this.state.post} singlePost={true} hasUserInteracted = {this.props.hasUserInteracted}/>
+    }
+
     return (
       <React.Fragment>
         <NavBar/>

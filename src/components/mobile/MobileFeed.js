@@ -79,7 +79,15 @@ class MobileFeed extends Component {
     }
 
     componentDidMount() {
-        this.loadPosts();
+        if(this.props.singlePost !== undefined && this.props.singlePost){
+            console.log(this.state, "Component Load")
+            this.setState({
+                posts: [this.props.post],
+                seenEverything: true,
+            }, () => this.videoIntersectionObserverAutoPlay());
+        } else{
+            this.loadPosts();
+        }
         window.gtag('event', 'view', {
             'event_category' : 'page',
             'event_label' : 'Mobile Home'
@@ -87,6 +95,8 @@ class MobileFeed extends Component {
     }
 
     getModalAndFeed = () => {
+
+        console.log(this.state, "Model Feed")
 
         return (
             <React.Fragment>
