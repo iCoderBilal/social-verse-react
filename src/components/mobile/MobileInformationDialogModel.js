@@ -20,13 +20,20 @@ class MobileInformationDialogModel extends Component {
         })
     }
 
+    handlePhoneInputFocus = () => {
+        const input = this.state.phoneInputRef.current;
+        if(!(input.value.startsWith('+'))){
+            input.value = "+1" + input.value;
+        }
+    }
+
     moveToThankYouScreen = () => {
 
         const input = this.state.phoneInputRef.current;
 
         const value = input.value ?? '';
 
-        if(/^([+][0-9]{11,15})$/.test(value) !== true){
+        if(/^([+][0-9]{9,15})$/.test(value) !== true){
             FlicToaster.notify("Please enter a valid phone number with country prefix")
             return;
         }
@@ -62,7 +69,7 @@ class MobileInformationDialogModel extends Component {
            <React.Fragment>
                <h2 className="information-dialog-model__heading">Uh...Oh! 😮</h2>
                <p className="information-dialog-model__description">Flic is not ready to download yet, but we wanted to get some metrics on how many people were going to click on download link! Enter your phone number below to be added to the waitlist!</p>
-               <input ref={this.state.phoneInputRef} className="information-dialog-model__number-input" placeholder="Enter your number"/>
+               <input maxLength={15} onFocus={() => this.handlePhoneInputFocus()} ref={this.state.phoneInputRef} className="information-dialog-model__number-input" placeholder="Enter your number"/>
                <a className="information-dialog-model__waitlist-link" onClick={()=>this.moveToThankYouScreen()}>
                    Join the waitlist! <ArrowNarrowRightIcon className="information-dialog-model__waitlist-link__arrow-right"/>
                </a>
