@@ -26,7 +26,7 @@ export default class Post extends Component {
   };
 
   clickEmbedCode = (e) => {
-    navigator.clipboard.writeText(`<embed width="500" height="700" style="overflow: hidden" src="${this.state.embedUrl}"/>`).then(()=>{
+    navigator.clipboard.writeText(`<embed width="500" height="800" style="overflow: hidden" src="${this.state.embedUrl}"/>`).then(()=>{
       FlicToaster.success("Copied Embed Code to Clipboard");
     })
   }

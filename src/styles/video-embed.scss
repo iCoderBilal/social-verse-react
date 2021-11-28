@@ -1,5 +1,10 @@
 @import "variables";
 
+.embed-post{
+  overflow: hidden;
+  max-height: 799px;
+}
+
 .video-embed-container{
   width: 100%;
   height: 100%;
