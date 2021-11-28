@@ -9,6 +9,7 @@
 @import "feed";
 @import "desktop-video";
 @import "post-view";
+@import "video-embed";
 
 body.grey-bg {
   background: #f0f2f5 !important;
@@ -27,6 +28,7 @@ body.grey-bg {
 }
 
 #root {
+  height: 100vh;
   nav {
     position: sticky;
     top: 0;
