@@ -5,7 +5,7 @@ export default class LoadingPost extends Component {
   render() {
     return (
       <div
-        className={`my-5 p-5 bg-white rounded-xl shadow overflow-hidden flex-grow ${
+        className={`my-5 p-5 bg-white shadow overflow-hidden flex-grow ${
           this.props.customClass || ""
         }`}
       >
@@ -23,15 +23,7 @@ export default class LoadingPost extends Component {
           </div>
         </div>
         <div className="mt-5">
-          <Skeleton />
-        </div>
-        <div>
-          {" "}
-          <Skeleton />{" "}
-        </div>
-        <div className="w-1/2">
-          {" "}
-          <Skeleton />{" "}
+          <Skeleton height={500}/>
         </div>
       </div>
     );
