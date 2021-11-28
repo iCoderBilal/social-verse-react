@@ -217,13 +217,20 @@ div.feed_video-container:last-of-type {
     width: 100vw;
     bottom: 0;
     z-index: 2;
+    left:0;
 
     svg {
-
         height:100%;
-
         path {
-            stroke: #ffffff;
+            stroke: rgba(255,255,255,0.8);
+        }
+    }
+
+    .active {
+        svg {
+            path {
+                stroke: rgba(255,255,255,1);
+            }
         }
     }
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import {HomeIcon} from "@heroicons/react/solid";
-import {ChatIcon, PlusCircleIcon, SearchIcon, UserIcon} from "@heroicons/react/outline";
+import {ChatIcon, PlusCircleIcon, SearchIcon, UserIcon, HomeIcon} from "@heroicons/react/outline";
+import {Link, NavLink} from "react-router-dom";
 
 function MobileBottomNavigation(props) {
 
@@ -16,9 +16,13 @@ function MobileBottomNavigation(props) {
 
     return (
         <div className="bottom-navigation">
-            <HomeIcon onClick={()=>handleBottomNavigationClick()}/>
+            <NavLink exact to="/" activeClassName={`active`}>
+                <HomeIcon/>
+            </NavLink>
             <SearchIcon onClick={()=>handleBottomNavigationClick()}/>
-            <PlusCircleIcon onClick={()=>handleBottomNavigationClick()}/>
+            <NavLink exact to="/upload" activeClassName={`active`}>
+                <PlusCircleIcon/>
+            </NavLink>
             <ChatIcon onClick={()=>handleBottomNavigationClick()}/>
             <UserIcon onClick={()=>handleBottomNavigationClick()}/>
         </div>
