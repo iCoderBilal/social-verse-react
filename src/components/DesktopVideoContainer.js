@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {IoIosShareAlt} from "react-icons/io";
+import {IoIosShareAlt, IoIosCodeWorking} from "react-icons/io";
 import { IoBookmark, IoPlay } from "react-icons/io5"
 import ReactHlsPlayer from 'react-hls-player';
 
@@ -126,6 +126,14 @@ class DesktopVideoContainer extends Component {
                         </div>
                         <strong>
                             1.2M
+                        </strong>
+                    </div>
+                    <div className={`item-button-container`}>
+                        <div onClick={(e) => this.props.clickEmbedCode(e)} className={`interact-icon`}>
+                            <IoIosCodeWorking/>
+                        </div>
+                        <strong>
+                            Embed
                         </strong>
                     </div>
                 </div>
