@@ -1,9 +1,17 @@
 @import "card";
 @import "variables";
+@import "include-media";
 
 .feed-container {
   max-width: 40%;
+
+  @include media("<=desktop") {
+    max-width: 99%
+  }
+
 }
+
+
 
 .flic-feed{
 

@@ -23,7 +23,6 @@ class Profile extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props);
     window.addEventListener("resize", this.updateDimensions);
     const username = this.props.match.params.username;
     const fetchProfileData = axios.get("/profile/" + username);

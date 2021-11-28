@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {IoIosShareAlt} from "react-icons/io";
 import { IoBookmark, IoPlay } from "react-icons/io5"
+import ReactHlsPlayer from 'react-hls-player';
 
 class DesktopVideoContainer extends Component {
 
@@ -39,7 +40,6 @@ class DesktopVideoContainer extends Component {
                 && currentPlayPos < (lastPlayPos + offset)
                 && !player.paused
             ) {
-                console.log("buffering")
                 bufferingDetected = true
                 that.setState({
                     isBuffering: bufferingDetected
@@ -73,7 +73,7 @@ class DesktopVideoContainer extends Component {
 
 
     componentWillUnmount() {
-        if(this.state.videoRef && this.state.videoRef.current){
+        if(this.state.videoRef && this.state.videoRef.current && window.FlicObserver !== undefined){
             window.FlicObserver.unobserve(this.state.videoRef.current);
         }
     }
@@ -97,11 +97,11 @@ class DesktopVideoContainer extends Component {
     render() {
         return (
             <div className={`desktop-video-container ${this.state.isBuffering ? 'loading': ''}`}>
-                <video
+                <ReactHlsPlayer
                     className={`flic-video`}
                     src={this.props.post.video_link}
                     controls={false}
-                    ref={this.state.videoRef}
+                    playerRef={this.state.videoRef}
                     poster={this.props.post.thumbnail_url}
                     onPlay={()=>this.setState({isVideoPlaying: true, isBuffering: false}, () => {
                         window.gtag('event', 'playing', {

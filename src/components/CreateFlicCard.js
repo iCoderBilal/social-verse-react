@@ -15,7 +15,8 @@ class CreateFlicCard extends Component {
         captionInputRef: React.createRef(),
         hash: null,
         waitingForPostCreation: false,
-        captionText: ''
+        captionText: '',
+        preSigned: null
     }
 
     handleDragOver = (e) => {
@@ -53,31 +54,33 @@ class CreateFlicCard extends Component {
         const config = {
             onUploadProgress: progressEvent => {
                 let progress  = (progressEvent.loaded / progressEvent.total) * 100;
-                console.log(progress);
-                this.setState({ uploadProgress: Math.max(progress-5, 0) });
+                this.setState({ uploadProgress: progress });
             },
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Flic-Token': AuthHelper.getUserToken()
             }
         }
 
-        let formData = new FormData();
-        formData.append("flic_video", this.state.fileInputRef.current.files[0]);
-        axios.post('/post/upload', formData, config).then(res => {
-            if (res.status === 200) {
-                this.setState({ isUploading: false, uploadProgress: 100, hash: res.data.hash }, () => {
-                    FlicToaster.success("Your video was uploaded!")
-                });
-            }
-        }).catch(err => {
-            FlicToaster.error("Something went wrong!")
-        })
+        let that = this;
 
+        axios.get('/post/upload/token').then((response)=>{
+            this.setState({
+                preSigned: response.data.token,
+                hash: response.data.hash
+            } , () => {
+
+                axios.put(this.state.preSigned, this.state.fileInputRef.current.files[0], config).then(res => {
+                    this.setState({ isUploading: false, uploadProgress: 100}, () => {
+                        FlicToaster.success("Your video was uploaded!")
+                    });
+                }).catch(err => {
+                    FlicToaster.error("Try uploading video later")
+                })
+            })
+        });
     }
 
-    constructor(props) {
-        super(props);
-    }
+
 
     componentWillUnmount() {
         //Destroy Event Listeners
@@ -88,11 +91,8 @@ class CreateFlicCard extends Component {
     }
 
     handleFormSubmit = (e) => {
-
         e.preventDefault();
-
         this.setState({waitingForPostCreation: true});
-
         let formData = new FormData();
         formData.append("hash", this.state.hash);
         formData.append("title", this.state.captionText);
