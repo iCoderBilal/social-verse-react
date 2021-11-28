@@ -80,7 +80,7 @@ div.feed_video-container:last-of-type {
 
 .video__video-post-interaction-buttons{
     position: absolute;
-    z-index: 1;
+    z-index: 3;
     max-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -110,6 +110,10 @@ div.feed_video-container:last-of-type {
     position: relative;
     display: flex;
     justify-content: center;
+
+    * {
+        pointer-events: none;
+    }
 }
 
 .video__post-information__interaction-button-follow__plus{
@@ -152,6 +156,11 @@ div.feed_video-container:last-of-type {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    * {
+        pointer-events: none;
+    }
+
 }
 
 .video__post-information__text__music{

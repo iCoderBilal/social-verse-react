@@ -40,7 +40,6 @@ class Post extends Component {
     const fetchCommentData = axios.get("/comments/" + identifier + "/" + slug);
     fetchCommentData
       .then((response) => {
-        console.log(response.data);
         this.setState({ comments: response.data });
       })
       .catch(() => {

@@ -2,10 +2,13 @@ import React, {Component} from 'react';
 import MobileVideoPostInteractionButtons from "./MobileVideoPostInteractionButtons";
 import MobileVideoPostInformation from "./MobileVideoPostInformation";
 import MobilePlayButton from "./MobilePlayButton";
+import FlicToaster from "../../services/FlicToaster";
+import ReactHlsPlayer from 'react-hls-player';
 
 class MobileFeedVideoPost extends Component {
 
     state = {
+        share_url: "https://" + window.location.hostname + "/post/" + this.props.identifier + "/" + this.props.slug,
         isBuffering: false,
         isVideoPlaying: false,
         videoRef: React.createRef(),
@@ -66,7 +69,7 @@ class MobileFeedVideoPost extends Component {
         }
     }
     componentWillUnmount() {
-        if(this.state.videoRef && this.state.videoRef.current !== undefined){
+        if(this.state.videoRef && this.state.videoRef.current !== undefined && window.FlicObserver){
             window.FlicObserver.unobserve(this.state.videoRef.current);
         }
     }
@@ -80,7 +83,13 @@ class MobileFeedVideoPost extends Component {
         this.state.videoRef.current.pause();
     }
 
-    toggleVideoState = () => {
+    toggleVideoState = (e) => {
+
+        if(e.target.classList.contains('video__post-information__interaction-button') || e.target.classList.contains('video__post-information__interaction-button-follow')){
+            console.log("From God",e.target);
+            return;
+        }
+
         if(this.state.isVideoPlaying){
             this.pauseVideo();
         } else{
@@ -91,10 +100,10 @@ class MobileFeedVideoPost extends Component {
     render() {
         return (<div
                     className={`feed_video-container ${this.state.isBuffering ? 'loading': ''}`}
-                    onClick={() => {this.toggleVideoState()}}
+                    onClick={(e) => {this.toggleVideoState(e)}}
             >
-                <video className="feed_video-container__video"
-                       ref={this.state.videoRef}
+                <ReactHlsPlayer className="feed_video-container__video"
+                       playerRef={this.state.videoRef}
                        poster={this.props.poster}
                        muted={!(this.props.hasUserInteracted)}
                        src={this.props.url}
@@ -114,6 +123,7 @@ class MobileFeedVideoPost extends Component {
                     isVerified={this.props.isVerified}
                 />
                 <MobileVideoPostInteractionButtons
+                    shareURL = {this.props.share_url}
                     openDialog={this.props.openDialog}
                     likesCount={this.props.likesCount}
                     commentCount={this.props.commentCount}
