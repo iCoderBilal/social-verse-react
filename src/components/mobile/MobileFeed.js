@@ -80,7 +80,6 @@ class MobileFeed extends Component {
 
     componentDidMount() {
         if(this.props.singlePost !== undefined && this.props.singlePost){
-            console.log(this.state, "Component Load")
             this.setState({
                 posts: [this.props.post],
                 seenEverything: true,
@@ -95,9 +94,6 @@ class MobileFeed extends Component {
     }
 
     getModalAndFeed = () => {
-
-        console.log(this.state, "Model Feed")
-
         return (
             <React.Fragment>
                 <MobileInformationDialogModel isDialogVisible={this.state.isDialogVisible} closeDialog={this.closeInformationDialogModal}/>
@@ -109,6 +105,8 @@ class MobileFeed extends Component {
                                     hasUserInteracted = {this.props.hasUserInteracted}
                                     username = {video.username}
                                     musicName = {""}
+                                    identifier = {video.identifier}
+                                    slug = {video.slug}
                                     description = {video.title}
                                     isVerified = {video.isVerified ?? false}
                                     url = {video.video_link}

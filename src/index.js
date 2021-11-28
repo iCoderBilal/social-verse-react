@@ -6,7 +6,7 @@ import App from "./App";
 import AuthHelper from "./services/AuthHelper";
 
 axios.defaults.baseURL = "https://api.watchflic.com";
-//axios.defaults.baseURL = "http://localhost";
+// axios.defaults.baseURL = "https://127.0.0.1:8003";
 if (AuthHelper.getUserToken())
   axios.defaults.headers.common["Flic-Token"] = AuthHelper.getUserToken();
 

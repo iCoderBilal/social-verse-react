@@ -7,23 +7,23 @@ export default class LoggedInProfile extends Component {
     // called when slim has initialized
     slimInit(data, slim) {
         // slim instance reference
-        console.log(slim);
+        // console.log(slim);
 
         // current slim data object and slim reference
-        console.log(data);
+        // console.log(data);
     }
 
     // called when upload button is pressed or automatically if push is enabled
     slimService(formdata, progress, success, failure, slim) {
         // slim instance reference
-        console.log(slim)
+        // console.log(slim)
 
         // form data to post to server
         // set serviceFormat to "file" to receive an array of files
-        console.log(formdata)
+        // console.log(formdata)
 
         // call these methods to handle upload state
-        console.log(progress, success, failure)
+        // console.log(progress, success, failure)
     }
 
     render() {
