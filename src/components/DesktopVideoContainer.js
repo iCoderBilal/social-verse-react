@@ -94,6 +94,10 @@ class DesktopVideoContainer extends Component {
         }
     }
 
+    onError = (e) => {
+        e.target.setAttribute('poster','https://placehold.co/405x720/0e0e0e/ffffff.png?text=Flic%20is%20processing%20this%20video&font=Montserrat');
+    }
+
     render() {
         return (
             <div className={`desktop-video-container ${this.state.isBuffering ? 'loading': ''}`}>
@@ -103,6 +107,7 @@ class DesktopVideoContainer extends Component {
                     controls={false}
                     playerRef={this.state.videoRef}
                     poster={this.props.post.thumbnail_url}
+                    onError = {(e) => this.onError(e)}
                     onPlay={()=>this.setState({isVideoPlaying: true, isBuffering: false}, () => {
                         window.gtag('event', 'playing', {
                             'event_category' : 'video',
