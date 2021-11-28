@@ -13,6 +13,7 @@ import ProfileEdit from "./ProfileEdit";
 import Post from "./Post";
 import Notifications from "./Notifications";
 import Address from "./Address";
+import Upload from "./Upload";
 
 export default class App extends Component {
 
@@ -53,6 +54,7 @@ export default class App extends Component {
             <Route exact path="/" render={(props) => (<Home hasUserInteracted={this.state.hasUserInteracted}{...props}/>)}/>
             <PrivateRoute exact path="/notifications" component={Notifications}/>
             <PrivateRoute exact path="/address" component={Address}/>
+            <PrivateRoute exact path="/upload" component={Upload}/>
             <Route exact path="/profile/:username" component={Profile}/>
             <Route exact path="/post/:identifier/:slug" render={(props) => (<Post hasUserInteracted={this.state.hasUserInteracted}{...props}/>)}/>
             <Route exact path="/verify" component={Verify}/>
