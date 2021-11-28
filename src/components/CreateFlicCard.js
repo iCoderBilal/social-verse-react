@@ -163,7 +163,7 @@ class CreateFlicCard extends Component {
                                 ref={this.state.captionInputRef}
                                 className='upload-text-input'
                                 readOnly={this.state.waitingForPostCreation}
-                                placeholder={`What's on your mind?`}/>
+                                placeholder={`Give a caption to your video!`}/>
                         </div>
                         <input
                             ref={this.state.fileInputRef}
