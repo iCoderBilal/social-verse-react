@@ -9,6 +9,7 @@ export default class Post extends Component {
 
   state = {
     url: "https://" + window.location.hostname + "/post/" + this.props.post.identifier + "/" + this.props.post.slug,
+    embedUrl: "https://" + window.location.hostname + "/embed/" + this.props.post.identifier + "/" + this.props.post.slug,
     has_upvoted: this.props.post.has_upvoted,
     upvote_count: this.props.post.upvote_count,
     comment_count: this.props.post.comment_count,
@@ -23,6 +24,12 @@ export default class Post extends Component {
       FlicToaster.success("Copied URL to Clipboard");}
     )
   };
+
+  clickEmbedCode = (e) => {
+    navigator.clipboard.writeText(`<embed width="500" height="700" style="overflow: hidden" src="${this.state.embedUrl}"/>`).then(()=>{
+      FlicToaster.success("Copied Embed Code to Clipboard");
+    })
+  }
 
   clickComment = () => {
 
@@ -77,6 +84,7 @@ export default class Post extends Component {
                   clickComment = {this.clickComment}
                   clickUpvote = {this.clickUpvote}
                   clickShare = {this.clickShare}
+                  clickEmbedCode = {this.clickEmbedCode}
                   {...this.props}
               />
 

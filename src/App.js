@@ -14,6 +14,8 @@ import Post from "./Post";
 import Notifications from "./Notifications";
 import Address from "./Address";
 import Upload from "./Upload";
+import EmbedPlayer from "./EmbedPlayer";
+import Embed from "./Embed";
 
 export default class App extends Component {
 
@@ -56,6 +58,8 @@ export default class App extends Component {
             <PrivateRoute exact path="/address" component={Address}/>
             <PrivateRoute exact path="/upload" component={Upload}/>
             <Route exact path="/profile/:username" component={Profile}/>
+            <Route exact path="/embed/:identifier/:slug" render={(props) => (<Embed hasUserInteracted={this.state.hasUserInteracted}{...props}/>)}/>
+            <Route exact path="/embed/play/:identifier/:slug" render={(props) => (<EmbedPlayer hasUserInteracted={this.state.hasUserInteracted}{...props}/>)}/>
             <Route exact path="/post/:identifier/:slug" render={(props) => (<Post hasUserInteracted={this.state.hasUserInteracted}{...props}/>)}/>
             <Route exact path="/verify" component={Verify}/>
             <Route exact path="/profile/:username/edit" component={ProfileEdit}/>
