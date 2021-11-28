@@ -31,7 +31,6 @@ export default class App extends Component {
     this.setState({
       hasUserInteracted: true
     },  () => {
-      console.log("User has interacted with the DOM");
       window.removeEventListener('click', this.clickListener);
     })
   }
