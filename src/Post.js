@@ -9,7 +9,6 @@ import Comment from "./components/Comment";
 import ChildPost from "./components/Post";
 import MobileFeed from "./components/mobile/MobileFeed";
 import Skeleton from "react-loading-skeleton";
-import TwitterHelper, {addTwitterMeta, removedTwitterMeta} from "./services/TwitterHelper";
 import {Helmet} from "react-helmet";
 
 
