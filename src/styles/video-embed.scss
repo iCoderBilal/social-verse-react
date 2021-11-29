@@ -55,6 +55,8 @@
       border-radius: 100%;
       transform:translate(-50%,-50%);
       animation: vloader-spin 1s linear;
+      min-height: 40px;
+      min-width: 40px;
       height:40px;
       width: 40px;
       z-index: 3;

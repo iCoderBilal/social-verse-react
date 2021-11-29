@@ -9,6 +9,8 @@ import Comment from "./components/Comment";
 import ChildPost from "./components/Post";
 import MobileFeed from "./components/mobile/MobileFeed";
 import Skeleton from "react-loading-skeleton";
+import TwitterHelper, {addTwitterMeta, removedTwitterMeta} from "./services/TwitterHelper";
+import {Helmet} from "react-helmet";
 
 
 class Post extends Component {
@@ -30,12 +32,12 @@ class Post extends Component {
     const fetchPostData = axios.get("/posts/" + identifier + "/" + slug);
 
     fetchPostData
-      .then((response) => {
-        this.setState({ post: response.data });
-      })
-      .catch(() => {
-        FlicToaster.error("Something went wrong while loading the post!");
-      });
+    .then((response) => {
+      this.setState({ post: response.data });
+    })
+    .catch(() => {
+      FlicToaster.error("Something went wrong while loading the post!");
+    });
 
     const fetchCommentData = axios.get("/comments/" + identifier + "/" + slug);
     fetchCommentData
@@ -146,7 +148,7 @@ class Post extends Component {
     );
   };
 
-  render() {
+  getPostBody = () => {
 
     if(window.innerWidth < 768) {
       if(this.state.post === null){
@@ -156,17 +158,43 @@ class Post extends Component {
     }
 
     return (
-      <React.Fragment>
-        <NavBar/>
-        <div className="mx-auto flex post-page-container">
-          {this.state.post === null ? (
-            <LoadingPost customClass={`mx-10`}/>
-          ) : (
-            this.postPageComponents()
-          )}
-        </div>
-      </React.Fragment>
+        <React.Fragment>
+          <NavBar/>
+          <div className="mx-auto flex post-page-container">
+            {this.state.post === null ? (
+                <LoadingPost customClass={`mx-10`}/>
+            ) : (
+                this.postPageComponents()
+            )}
+          </div>
+        </React.Fragment>
     );
+  }
+
+  getPostHelmet = () =>{
+    if(this.state.post === null){
+      return <></>
+    }
+
+    return   (<Helmet>
+      <meta name="twitter:card" content="player"/>
+      <meta name="twitter:site" content="@Watchflic"/>
+      <meta name="twitter:creator" content={`@`+this.state.post.username}/>
+      <meta name="twitter:title" content={this.state.post.title}/>
+      <meta name="twitter:description" content={`Watch ${this.state.post.title} on Flic by ${this.state.post.username}`}/>
+      <meta name="twitter:player" content={`https://${window.location.hostname}/embed/play/${this.state.post.identifier}/${this.state.post.slug}`}/>
+      <meta name="twitter:player:height" content="720"/>
+      <meta name="twitter:player:width" content="405"/>
+      <meta name="twitter:image" content={this.state.post.thumbnail_url}/>
+      <title>{`${this.state.post.title} - Flic`}</title>
+    </Helmet>);
+  }
+
+  render() {
+      return <React.Fragment>
+        {this.getPostHelmet()}
+        {this.getPostBody()}
+      </React.Fragment>
   }
 }
 
