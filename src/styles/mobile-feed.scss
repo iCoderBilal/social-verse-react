@@ -162,6 +162,11 @@ div.feed_video-container:last-of-type {
         pointer-events: none;
     }
 
+    svg {
+        height: auto;
+        width: 48px;
+    }
+
 }
 
 .video__post-information__text__music{
@@ -222,6 +227,7 @@ div.feed_video-container:last-of-type {
 
     a {
        display: grid;
+       min-width: 38px;
     }
 
     svg {
