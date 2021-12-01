@@ -219,6 +219,10 @@ div.feed_video-container:last-of-type {
     z-index: 2;
     left:0;
 
+    a {
+       display: grid;
+    }
+
     svg {
         height:100%;
         path {
