@@ -1,10 +1,11 @@
 import React from 'react';
-import {ShareIcon} from "@heroicons/react/solid";
+import {IoIosShareAlt} from "react-icons/io";
+
 
 const MobileShareButton = (props) => {
     return (
         <div onClick={(e)=>props.handleShareClick(e)} className="video__post-information__interaction-button">
-            <ShareIcon/>
+            <IoIosShareAlt/>
             <p>{props.shareCount}</p>
         </div>
     );
