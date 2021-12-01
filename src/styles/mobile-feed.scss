@@ -219,6 +219,10 @@ div.feed_video-container:last-of-type {
     z-index: 2;
     left:0;
 
+    a {
+       display: grid;
+    }
+
     svg {
         height:100%;
         path {
@@ -351,6 +355,8 @@ div.feed_video-container:last-of-type {
         border-radius: 100%;
         transform:translate(-50%,-50%);
         animation: vloader-spin 1s linear;
+        min-height:40px;
+        min-width: 40px;
         height:40px;
         width: 40px;
         z-index: 1;

@@ -3,7 +3,7 @@ import {HeartIcon} from "@heroicons/react/solid";
 
 const MobileLikeButton = (props) => {
     return (
-        <div className="video__post-information__interaction-button">
+        <div onClick={(e)=>props.handleLikesClick(e)} className="video__post-information__interaction-button">
             <HeartIcon/>
             <p>{props.likesCount}</p>
         </div>
