@@ -55,8 +55,8 @@ class MobileInformationDialogModel extends Component {
     getDownloadDialogScreen = () => {
         return (
            <React.Fragment>
-               <h2 className="information-dialog-model__heading">Get the full experience on the app</h2>
-               <p className="information-dialog-model__description">Follow your favorite accounts, explore new trends, and create your own videos!</p>
+               <h2 className="information-dialog-model__heading">Get the full experience on app 💕</h2>
+               <p className="information-dialog-model__description">Watch vertical videos & podcasts, Earn crypto, Connect with creators, and Create your own Flics!</p>
                <a className="information-dialog-model__waitlist-link" onClick={()=>this.moveToWaitListScreen()}>
                    Download Flic <ArrowNarrowRightIcon className="information-dialog-model__waitlist-link__arrow-right"/>
                </a>
