@@ -3,7 +3,7 @@ import {ShareIcon} from "@heroicons/react/solid";
 
 const MobileShareButton = (props) => {
     return (
-        <div className="video__post-information__interaction-button">
+        <div onClick={(e)=>props.handleShareClick(e)} className="video__post-information__interaction-button">
             <ShareIcon/>
             <p>{props.shareCount}</p>
         </div>
