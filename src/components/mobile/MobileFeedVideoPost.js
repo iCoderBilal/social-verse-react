@@ -86,7 +86,6 @@ class MobileFeedVideoPost extends Component {
     toggleVideoState = (e) => {
 
         if(e.target.classList.contains('video__post-information__interaction-button') || e.target.classList.contains('video__post-information__interaction-button-follow')){
-            console.log("From God",e.target);
             return;
         }
 

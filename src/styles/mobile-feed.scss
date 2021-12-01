@@ -1,3 +1,4 @@
+@import "variables";
 /*Using BEM Convention for CSS Naming*/
 ::-webkit-scrollbar {
     width: 0;
@@ -283,6 +284,33 @@ div.feed_video-container:last-of-type {
 
 .information-dialog-model__description{
     margin:20px 0;
+}
+
+.information-dialog-model__community-icons{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+
+    .community-icons__icon-container{
+        display: flex;
+        text-decoration: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        svg {
+            color:$theme-color;
+            width: 2.5em;
+            height: 2.5em;
+        }
+
+        span {
+            text-transform: uppercase;
+            font-size: 0.6em;
+        }
+
+    }
+
 }
 
 .feed-backdrop{
