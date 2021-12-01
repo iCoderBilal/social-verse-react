@@ -40,8 +40,7 @@ function VideoPostInteractionButtons(props) {
     }
 
     const handleShareClick = (e) => {
-        console.log("hello");
-        navigator.clipboard.writeText(props.share_url).then(()=>{
+        navigator.clipboard.writeText(props.share_url ?? '').then(()=>{
             FlicToaster.success("Copied URL to Clipboard");
             window.gtag('event', 'touch', {
                 'event_category': 'interactions',

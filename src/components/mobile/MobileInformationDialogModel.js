@@ -1,8 +1,11 @@
 import React, {Component, Fragment} from 'react';
 import {ArrowNarrowRightIcon, XCircleIcon} from "@heroicons/react/outline";
-import Confetti from "../../images/confetti.png";
 import axios from "axios";
 import FlicToaster from "../../services/FlicToaster";
+import {SiDiscord} from "react-icons/si";
+import {ImMap} from "react-icons/im";
+import {FaTelegramPlane} from "react-icons/fa";
+import {IoRocketSharp} from "react-icons/io5";
 
 class MobileInformationDialogModel extends Component {
 
@@ -67,8 +70,8 @@ class MobileInformationDialogModel extends Component {
     getWaitListCollectionScreen = () => {
         return (
            <React.Fragment>
-               <h2 className="information-dialog-model__heading">Uh...Oh! 😮</h2>
-               <p className="information-dialog-model__description">Flic is not ready to download yet, but we wanted to get some metrics on how many people were going to click on download link! Enter your phone number below to be added to the waitlist!</p>
+               <h2 className="information-dialog-model__heading">You are early! 🚀</h2>
+               <p className="information-dialog-model__description">Flic App is not released on the App Store yet. Enter your phone number for early access, blue tick verification and other bonuses.</p>
                <input maxLength={15} onFocus={() => this.handlePhoneInputFocus()} ref={this.state.phoneInputRef} className="information-dialog-model__number-input" placeholder="Enter your number"/>
                <a className="information-dialog-model__waitlist-link" onClick={()=>this.moveToThankYouScreen()}>
                    Join the waitlist! <ArrowNarrowRightIcon className="information-dialog-model__waitlist-link__arrow-right"/>
@@ -82,12 +85,31 @@ class MobileInformationDialogModel extends Component {
 
     getThankYouScreen = () => {
         return (
-              <React.Fragment>
-                  <img className="information-dialog-model__confetti" src={Confetti} alt={`Thank you`}/>
-                  <span className="information-dialog-model__close" onClick={()=>this.props.closeDialog()}>
+            <React.Fragment>
+                <h2 className="information-dialog-model__heading">Congrats on being early! 🎉</h2>
+                <p className="information-dialog-model__description">Join the community or learn more by clicking the icons below. Discord community is where you can get preapproved for a (blue check icon) and chat with the team. 👇 </p>
+                <p className="information-dialog-model__community-icons">
+                    <a target="_blank" href="https://discord.gg/YTEyXH4drD" className="community-icons__icon-container">
+                        <SiDiscord/>
+                        <span>Discord</span>
+                    </a>
+                    <a target="_blank" href="https://t.me/flicapp" className="community-icons__icon-container">
+                        <FaTelegramPlane/>
+                        <span>Telegram</span>
+                    </a>
+                    <a target="_blank" href="https://watchflic.com/roadmap/" className="community-icons__icon-container">
+                        <ImMap/>
+                        <span>RoadMap</span>
+                    </a>
+                    <a target="_blank" href="https://watchflic.com/investor/" className="community-icons__icon-container">
+                        <IoRocketSharp/>
+                        <span>Investor</span>
+                    </a>
+                </p>
+                <span className="information-dialog-model__close" onClick={()=>this.props.closeDialog()}>
                     <XCircleIcon/>
-                  </span>
-              </React.Fragment>
+                </span>
+            </React.Fragment>
         );
     }
 
