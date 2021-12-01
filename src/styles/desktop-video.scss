@@ -96,18 +96,20 @@
 
 .desktop-video-container.loading {
   &:before {
-    content: '';
-    color: #fff;
-    position: absolute;
-    top:50%;
-    left:50%;
-    border-radius: 100%;
-    transform:translate(-50%,-50%);
-    animation: vloader-spin 1s linear;
+    background: #fff url("https://shelter-cdn.nyc3.cdn.digitaloceanspaces.com/flic/assets/spinner.gif") no-repeat center center;
+    min-height:40px;
+    min-width: 40px;
     height:40px;
     width: 40px;
+    transform:translate(-50%,-50%);
+    top:50%;
+    left:50%;
+    position: absolute;
+    content: '';
+    color: #fff;
+    border-radius: 100%;
+    animation: vloader-spin 1s linear;
     z-index: 3;
-    background: #fff url("https://shelter-cdn.nyc3.cdn.digitaloceanspaces.com/flic/assets/spinner.gif") no-repeat center center;
   }
 }
 

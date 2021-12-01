@@ -23,7 +23,6 @@ function VideoPostInteractionButtons(props) {
     }
 
     const handleFollowClick = (e) => {
-        console.log("hello");
         window.gtag('event', 'touch', {
             'event_category' : 'interactions',
             'event_label' : 'follow',
@@ -54,10 +53,10 @@ function VideoPostInteractionButtons(props) {
 
     return (
         <div className="video__video-post-interaction-buttons" >
-            <MobileUserFollowButton onClick={(e)=>handleFollowClick(e)} instagramImage={props.instagramImage}/>
-            <MobileLikeButton onClick={(e)=>handleLikesClick(e)} likesCount={props.likesCount}/>
-            <MobileCommentButton onClick={(e)=>handleCommentClick(e)} commentCount={props.commentCount}/>
-            <MobileShareButton onClick={(e)=>handleShareClick(e)} shareCount={props.shareCount}/>
+            <MobileUserFollowButton handleFollowClick = {handleFollowClick} instagramImage={props.instagramImage}/>
+            <MobileLikeButton handleLikesClick ={handleLikesClick} likesCount={props.likesCount}/>
+            <MobileCommentButton handleCommentClick={handleCommentClick} commentCount={props.commentCount}/>
+            <MobileShareButton handleShareClick={handleShareClick} shareCount={props.shareCount}/>
         </div>
     );
 }
