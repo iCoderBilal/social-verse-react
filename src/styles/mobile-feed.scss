@@ -165,6 +165,8 @@ div.feed_video-container:last-of-type {
     svg {
         height: auto;
         width: 48px;
+        -webkit-filter: drop-shadow( 1px 1px 1px rgba(0, 0, 0, .3));
+        filter: drop-shadow( 1px 1px 1px rgba(0, 0, 0, .3));
     }
 
 }
@@ -285,7 +287,7 @@ div.feed_video-container:last-of-type {
     width:100%;
 }
 .information-dialog-model__heading{
-    font-weight: lighter;
+    font-weight: 500;
 }
 
 .information-dialog-model__description{
