@@ -27,6 +27,7 @@ class MobileInformationDialogModel extends Component {
         const input = this.state.phoneInputRef.current;
         if(!(input.value.startsWith('+'))){
             input.value = "+1" + input.value;
+            input.setSelectionRange(2,2);
         }
     }
 
