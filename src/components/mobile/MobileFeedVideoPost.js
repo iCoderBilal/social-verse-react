@@ -122,7 +122,7 @@ class MobileFeedVideoPost extends Component {
                     isVerified={this.props.isVerified}
                 />
                 <MobileVideoPostInteractionButtons
-                    shareURL = {this.props.share_url}
+                    shareURL = {this.state.share_url}
                     openDialog={this.props.openDialog}
                     likesCount={this.props.likesCount}
                     commentCount={this.props.commentCount}
