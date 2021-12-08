@@ -118,6 +118,12 @@ class CreateFlicCard extends Component {
             },
             () => {
               FlicToaster.success("Your post was created!");
+              let link = "https://" + window.location.hostname + "/post/" + res.data.identifier + "/" + res.data.slug;
+              FlicToaster.success(
+                <a style={{ color: "blue" }} href={link}>
+                  {link}
+                </a>,
+              );
             },
           );
         }
