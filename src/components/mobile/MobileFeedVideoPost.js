@@ -74,13 +74,16 @@ class MobileFeedVideoPost extends Component {
   pauseVideo = () => {
     this.state.videoRef.current.pause();
   };
-  pip = () => {
+  pip = (event) => {
     const player = this.state.videoRef.current;
     // enabling picture in pictuer mode
     player.requestPictureInPicture().catch((error) => {
       console.log(error);
+      alert("Your browser does not support picture in picture mode");
       console.log("please make sure the video is playing first..");
     });
+    event.preventDefault();
+    event.stopPropagation();
   };
   toggleVideoState = (e) => {
     if (
