@@ -44,7 +44,7 @@ class MobileFeed extends Component {
         [...videos].forEach((video) => {
             // We can only control playback without intersection if video is mute
             video.muted = true;
-            video.volume = 0.8;
+            video.volume = 1;
             window.FlicObserver = new IntersectionObserver(
                 (entries) => {
                     entries.forEach((entry) => {
