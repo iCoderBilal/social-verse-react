@@ -74,7 +74,7 @@ class MobileFeedVideoPost extends Component {
   pauseVideo = () => {
     this.state.videoRef.current.pause();
   };
-  pip = (event) => {
+  handlePictureInPictureClick = (event) => {
     const player = this.state.videoRef.current;
     // enabling picture in pictuer mode
     player.requestPictureInPicture().catch((error) => {
@@ -92,11 +92,34 @@ class MobileFeedVideoPost extends Component {
     ) {
       return;
     }
-
     if (this.state.isVideoPlaying) {
       this.pauseVideo();
     } else {
       this.playVideo();
+    }
+  };
+  handleFullScreenClick = (event) => {
+    const player = this.state.videoRef.current;
+    // all browsers that support fullscreen
+    if (player.requestFullscreen) {
+      player
+        .requestFullscreen()
+        .then(console.log("fullscreen enabled"))
+        .catch((error) => {
+          console.log(error);
+          alert("Your browser does not support full screen mode");
+        });
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    // safari
+    else if (player.webkitRequestFullscreen) {
+      player.webkitRequestFullscreen().catch((error) => {
+        console.log(error);
+        alert("Your browser does not support full screen mode");
+      });
+      event.preventDefault();
+      event.stopPropagation();
     }
   };
 
@@ -121,9 +144,6 @@ class MobileFeedVideoPost extends Component {
           loop={true}
         />
         <MobilePlayButton isVideoPlaying={this.state.isVideoPlaying} />
-        <div className='feed_video-container__pip' style={{ marginRight: "500" }} onClick={this.pip}>
-          <img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAABEUlEQVRoge3YvU7DMBiF4fewI37mZu5YbhSx9xIAiQkhBmZWVlZgRQjfwNehHYKxiBJUO5XOM35y0nPiDG7AzMwsExFdRNxGRIr2UkTcRcSylFWl8MALcL7vBzXSF7CS9N4fHhUWXjG/8ABnwGU+LO1AAo5rJJogSTrpD0oFol6e8ST9yFx6hQ6KC7TmAq25QGsu0JoLtFajwD2w0EhABzwM3bzGYa6T9DHlwt1/k7f+LD/M7b1A/oNj5Xl8Gp0bF2jNBVpzgSERsfjHtd3Qmho7sJ5SYhd+PbTu0D5sfUs67Q9KO/BUKcwUj/mgtANL4Jntt8g5+QQu8oPhrx2Q9AqsgBsg1cn2pwRcUwhvZma2AQ2o16hFvoYXAAAAAElFTkSuQmCC' />{" "}
-        </div>
         <MobileVideoPostInformation
           isVideoPlaying={this.state.isVideoPlaying}
           username={this.props.username}
@@ -138,6 +158,9 @@ class MobileFeedVideoPost extends Component {
           commentCount={this.props.commentCount}
           shareCount={this.props.shareCount}
           instagramImage={this.props.instagramImage}
+          // passing the functions to handle fullScreen and pip clicks to be accessible in the child component
+          handleFullScreenClick={this.handleFullScreenClick}
+          handlePictureInPictureClick={this.handlePictureInPictureClick}
         />
       </div>
     );
