@@ -399,7 +399,9 @@ div.feed_video-container:last-of-type {
     background: #fff url("https://shelter-cdn.nyc3.cdn.digitaloceanspaces.com/flic/assets/spinner.gif") no-repeat center center;
   }
 }
-
+.feed-mobile video {
+  pointer-events: fill;
+}
 @-moz-keyframes vloader-spin {
   from {
     -moz-transform: rotate(0deg);
