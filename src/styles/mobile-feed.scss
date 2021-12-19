@@ -80,7 +80,7 @@ div.feed_video-container:last-of-type {
 
 .video__video-post-interaction-buttons {
   position: absolute;
-  z-index: 3;
+  z-index: 2;
   max-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -341,7 +341,7 @@ div.feed_video-container:last-of-type {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 3;
+  z-index: 2;
   width: 5rem;
 }
 // picture-in-picture component
@@ -399,13 +399,7 @@ div.feed_video-container:last-of-type {
     background: #fff url("https://shelter-cdn.nyc3.cdn.digitaloceanspaces.com/flic/assets/spinner.gif") no-repeat center center;
   }
 }
-:fullscreen {
-  background: red;
-  z-index: 99999999999999;
-}
-.feed-mobile video {
-  pointer-events: fill;
-}
+
 @-moz-keyframes vloader-spin {
   from {
     -moz-transform: rotate(0deg);
