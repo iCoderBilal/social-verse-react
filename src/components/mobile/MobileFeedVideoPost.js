@@ -100,8 +100,16 @@ class MobileFeedVideoPost extends Component {
   };
   handleFullScreenClick = (event) => {
     const player = this.state.videoRef.current;
+    // safari ios fullscreen
+    if (player.webkitEnterFullScreen) {
+      try {
+        player.webkitEnterFullScreen();
+      } catch (error) {
+        alert("Your browser does not support fullscreen mode");
+      }
+    }
     // all browsers that support fullscreen
-    if (player.requestFullscreen) {
+    else if (player.requestFullscreen) {
       player
         .requestFullscreen()
         .then(console.log("fullscreen enabled"))
@@ -112,7 +120,7 @@ class MobileFeedVideoPost extends Component {
       event.preventDefault();
       event.stopPropagation();
     }
-    // safari
+    // safari desktop
     else if (player.webkitRequestFullscreen) {
       player.webkitRequestFullscreen().catch((error) => {
         console.log(error);
