@@ -158,7 +158,7 @@ div.feed_video-container:last-of-type {
     pointer-events: none;
   }
 
-  svg {
+  svg, img {
     height: auto;
     width: 48px;
     -webkit-filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.3));
@@ -228,6 +228,7 @@ div.feed_video-container:last-of-type {
 
   svg {
     height: 100%;
+
     path {
       stroke: rgba(255, 255, 255, 0.8);
     }
@@ -279,6 +280,7 @@ div.feed_video-container:last-of-type {
   align-items: center;
   width: 100%;
 }
+
 .information-dialog-model__heading {
   font-weight: 500;
 }
@@ -344,6 +346,7 @@ div.feed_video-container:last-of-type {
   z-index: 2;
   width: 5rem;
 }
+
 // picture-in-picture component
 .feed_video-container__pip {
   opacity: 0.9;
@@ -354,6 +357,7 @@ div.feed_video-container:last-of-type {
   z-index: 3;
   width: 5rem;
 }
+
 .feed_video-container__play--hidden {
   display: none;
 }
@@ -399,9 +403,11 @@ div.feed_video-container:last-of-type {
     background: #fff url("https://shelter-cdn.nyc3.cdn.digitaloceanspaces.com/flic/assets/spinner.gif") no-repeat center center;
   }
 }
+
 .feed-mobile video {
   pointer-events: fill;
 }
+
 @-moz-keyframes vloader-spin {
   from {
     -moz-transform: rotate(0deg);
@@ -410,6 +416,7 @@ div.feed_video-container:last-of-type {
     -moz-transform: rotate(359deg);
   }
 }
+
 @-webkit-keyframes vloader-spin {
   from {
     -webkit-transform: rotate(0deg);
@@ -418,6 +425,7 @@ div.feed_video-container:last-of-type {
     -webkit-transform: rotate(359deg);
   }
 }
+
 @keyframes vloader-spinspin {
   from {
     transform: rotate(0deg);
