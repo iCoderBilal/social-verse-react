@@ -6,21 +6,22 @@
   max-width: 40%;
 
   @include media("<=desktop") {
-    max-width: 99%
+    max-width: 99%;
   }
-
 }
 
-
-
-.flic-feed{
-
-  .flic-post-card{
+.flic-feed {
+  .flic-post-card {
     @extend .card;
   }
 
-  .seen-everything-card{
+  .seen-everything-card {
     @extend .card;
     margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2em !important;
   }
 }
