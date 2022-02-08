@@ -1,40 +1,40 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@import "variables";
-@import "react-tabs";
-@import "card";
-@import "create-flic-card";
-@import "feed";
-@import "desktop-video";
-@import "post-view";
-@import "video-embed";
-@import "comment-sidebar";
-
-body.grey-bg {
-  background: #f0f2f5 !important;
-}
-
-.slim {
-  max-width: 300px;
-  max-height: 300px;
-}
-
-.donor {
-  height: 90vh;
-}
-
-.filepond--credits {
-  display: none;
-}
-
-#root {
-  height: 100vh;
-
-  nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-}
+//@tailwind base;
+//@tailwind components;
+//@tailwind utilities;
+//
+//@import "variables";
+//@import "react-tabs";
+//@import "card";
+//@import "create-flic-card";
+//@import "feed";
+//@import "desktop-video";
+//@import "post-view";
+//@import "video-embed";
+//@import "comment-sidebar";
+//
+//body.grey-bg {
+//  background: #f0f2f5 !important;
+//}
+//
+//.slim {
+//  max-width: 300px;
+//  max-height: 300px;
+//}
+//
+//.donor {
+//  height: 90vh;
+//}
+//
+//.filepond--credits {
+//  display: none;
+//}
+//
+//#root {
+//  height: 100vh;
+//
+//  nav {
+//    position: sticky;
+//    top: 0;
+//    z-index: 100;
+//  }
+//}

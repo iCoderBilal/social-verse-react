@@ -1,0 +1,48 @@
+@import "include-media";
+@import "animation";
+@import "bottom-navigation";
+@import "feed";
+@import "backdrop";
+@import "dialogs";
+
+*::-webkit-scrollbar {
+  background: transparent;
+  -webkit-appearance: none;
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+}
+
+html,
+body {
+  scrollbar-width: none; /* Firefox */
+  -moz-scrollbar-width: none;
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+html {
+  -ms-scroll-snap-type: mandatory;
+  scroll-snap-type: y mandatory;
+}
+
+body {
+  overscroll-behavior: contain;
+}
+
+a {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+
+p, h1, h2, h3, h4, h5 {
+  margin: 0;
+}
+

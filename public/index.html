@@ -1,51 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
 
     <!-- Primary Meta Tags -->
     <title>Flic - Beta Web App</title>
-    <meta name="title" content="Flic - Beta Web App">
-    <meta name="description" content="Do more with just a flic">
+    <meta content="Flic - Beta Web App" name="title">
+    <meta content="Do more with just a flic" name="description">
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://beta.watchflic.com">
-    <meta property="og:title" content="Flic - Beta Web App">
-    <meta property="og:description" content="Do more with just a flic">
-    <meta property="og:image" content="https://shelter-cdn.nyc3.cdn.digitaloceanspaces.com/flic/assets/flic.png">
+    <meta content="website" property="og:type">
+    <meta content="https://beta.watchflic.com" property="og:url">
+    <meta content="Flic - Beta Web App" property="og:title">
+    <meta content="Do more with just a flic" property="og:description">
+    <meta content="https://shelter-cdn.nyc3.cdn.digitaloceanspaces.com/flic/assets/flic.png" property="og:image">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="https://shelter-cdn.nyc3.cdn.digitaloceanspaces.com/flic/assets/coin_logo.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://shelter-cdn.nyc3.cdn.digitaloceanspaces.com/flic/assets/coin_logo.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="https://shelter-cdn.nyc3.cdn.digitaloceanspaces.com/flic/assets/coin_logo.png">
-    <link rel="manifest" href="manifest.json">
+    <link href="https://shelter-cdn.nyc3.cdn.digitaloceanspaces.com/flic/assets/coin_logo.png" rel="apple-touch-icon"
+          sizes="180x180">
+    <link href="https://shelter-cdn.nyc3.cdn.digitaloceanspaces.com/flic/assets/coin_logo.png" rel="icon" sizes="32x32"
+          type="image/png">
+    <link href="https://shelter-cdn.nyc3.cdn.digitaloceanspaces.com/flic/assets/coin_logo.png" rel="icon" sizes="16x16"
+          type="image/png">
+    <link href="manifest.json" rel="manifest">
 
-    <meta name="apple-mobile-web-app-title" content="Flic">
-    <meta name="application-name" content="Flic">
-    <meta name="msapplication-TileColor" content="#f2334f">
-    <meta name="theme-color" content="#f2334f">
+    <meta content="Flic" name="apple-mobile-web-app-title">
+    <meta content="Flic" name="application-name">
+    <meta content="#f2334f" name="msapplication-TileColor">
+    <meta content="#f2334f" name="theme-color">
 
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link href="https://rsms.me/inter/inter.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
 
 
-
-    <link rel="preload" as="image" href="https://shelter-cdn.nyc3.cdn.digitaloceanspaces.com/flic/assets/spinner.gif">
-    <link rel="prefetch" href="https://shelter-cdn.nyc3.cdn.digitaloceanspaces.com/flic/assets/spinner.gif">
+    <link as="image" href="https://cdn-asset.watchflic.com/images/flic_dialog_logo.svg" rel="preload">
+    <link as="image" href="https://shelter-cdn.nyc3.cdn.digitaloceanspaces.com/flic/assets/spinner.gif" rel="preload">
+    <link href="https://shelter-cdn.nyc3.cdn.digitaloceanspaces.com/flic/assets/spinner.gif" rel="preload">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NP087E5YSX"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
 
-      gtag('config', 'G-NP087E5YSX');
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-NP087E5YSX');
     </script>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-  </body>
+</head>
+<body>
+<noscript>You need to enable JavaScript to run this app.</noscript>
+<div id="root"></div>
+</body>
 
 </html>

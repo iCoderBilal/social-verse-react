@@ -407,30 +407,3 @@ div.feed_video-container:last-of-type {
 .feed-mobile video {
   pointer-events: fill;
 }
-
-@-moz-keyframes vloader-spin {
-  from {
-    -moz-transform: rotate(0deg);
-  }
-  to {
-    -moz-transform: rotate(359deg);
-  }
-}
-
-@-webkit-keyframes vloader-spin {
-  from {
-    -webkit-transform: rotate(0deg);
-  }
-  to {
-    -webkit-transform: rotate(359deg);
-  }
-}
-
-@keyframes vloader-spinspin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(359deg);
-  }
-}

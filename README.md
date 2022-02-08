@@ -1,9 +1,24 @@
-## Change Log v1.1.0
+## Installation
 
-- Removed Metamask integration from the frontend
-- Removed the web3 and provider detector (MetaMask) dependecy from ReactJs
-- Fixed the top donner
+`npm install --legacy-peer-deps`
 
-## Change Log v1.0.0
+## Running Flic
 
-- Created the backend/frontend
+#### CORS:
+
+Flic's backend API has strict CORS origin of `beta.watchflic.com`. You can either:
+
+- Use a browser extension to bypass CORS
+- Run Chrome via CLI with CORS disabled:
+    - Windows: `chrome.exe --disable-site-isolation-trials --disable-web-security --user-data-dir="D:\temp"`
+    - Linux: `google-chrome --disable-site-isolation-trials --disable-web-security --user-data-dir="~/tmp"`
+
+#### NPM:
+
+`npm start`
+
+## Documentation:
+
+Todo.
+
+
