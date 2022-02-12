@@ -30,9 +30,9 @@
 ///  $breakpoints: ('phone': 320px);
 ///
 $breakpoints: (
-  'phone': 420px,
-  'tablet': 768px,
-  'desktop': 1024px
+        'phone': 640px,
+        'tablet': 768px,
+        'desktop': 1024px
 ) !default;
 
 
@@ -48,13 +48,13 @@ $breakpoints: (
 ///  );
 ///
 $media-expressions: (
-  'screen': 'screen',
-  'print': 'print',
-  'handheld': 'handheld',
-  'landscape': '(orientation: landscape)',
-  'portrait': '(orientation: portrait)',
-  'retina2x': '(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx)',
-  'retina3x': '(-webkit-min-device-pixel-ratio: 3), (min-resolution: 350dpi), (min-resolution: 3dppx)'
+        'screen': 'screen',
+        'print': 'print',
+        'handheld': 'handheld',
+        'landscape': '(orientation: landscape)',
+        'portrait': '(orientation: portrait)',
+        'retina2x': '(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx)',
+        'retina3x': '(-webkit-min-device-pixel-ratio: 3), (min-resolution: 350dpi), (min-resolution: 3dppx)'
 ) !default;
 
 
@@ -80,10 +80,10 @@ $media-expressions: (
 ///  @media (min-width: 2.1rem) {}
 ///
 $unit-intervals: (
-  'px': 1,
-  'em': 0.01,
-  'rem': 0.1,
-  '': 0
+        'px': 1,
+        'em': 0.01,
+        'rem': 0.1,
+        '': 0
 ) !default;
 
 ///
@@ -204,7 +204,8 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
 /// @param {String} $message - Message to log
 ///
 @mixin log($message) {
-  @if im-log($message) {}
+  @if im-log($message) {
+  }
 }
 
 
@@ -212,7 +213,8 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
 /// Function with no `@return` called next to `@warn` in Sass 3.3
 /// to trigger a compiling error and stop the process.
 ///
-@function noop() {}
+@function noop() {
+}
 
 ///
 /// Determines whether a list of conditions is intercepted by the static breakpoint.
@@ -225,7 +227,8 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
   $no-media-breakpoint-value: map-get($breakpoints, $im-no-media-breakpoint);
 
   @if not $no-media-breakpoint-value {
-    @if im-log('`#{$im-no-media-breakpoint}` is not a valid breakpoint.') {}
+    @if im-log('`#{$im-no-media-breakpoint}` is not a valid breakpoint.') {
+    }
   }
 
   @each $condition in $conditions {
@@ -557,7 +560,8 @@ $im-no-media-expressions: ('screen', 'portrait', 'landscape') !default;
   } @else if ($im-media-support and length($conditions) > 0) {
     @media #{unquote(parse-expression(nth($conditions, 1)))} {
       // Recursive call
-      @include media(slice($conditions, 2)...) {
+      @include media(slice($conditions, 2)
+      ...) {
         @content;
       }
     }

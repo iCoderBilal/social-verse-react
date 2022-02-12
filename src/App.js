@@ -10,6 +10,10 @@ import HomeScreenShortcutSuggestionDialog from "./components/Mobile/HomeScreenSh
 import LoginDialog from "./components/Mobile/LoginDialog";
 import SwitchToAppSuggestionDialog from "./components/Mobile/SwitchToAppSuggestionDialog";
 import Inbox from "./views/Mobile/Inbox";
+import Auth from "./views/Common/Auth";
+import BackDrop from "./components/Mobile/BackDrop";
+import Verify from "./views/Common/Verify";
+import NotFound from "./views/Common/NotFound";
 
 const App = (props) => {
 
@@ -19,7 +23,7 @@ const App = (props) => {
     const dispatch = useDispatch();
 
     axios.defaults.baseURL = "https://api.watchflic.com";
-    axios.defaults.baseURL = "https://127.0.0.1:8000";
+    // axios.defaults.baseURL = "https://127.0.0.1:8000";
 
     if (isLoggedIn) {
         axios.defaults.headers.common["Flic-Token"] = user.token;
@@ -51,11 +55,15 @@ const App = (props) => {
                 <Routes>
                     <Route exact path="/" element={<Home/>}/>
                     <Route exact path="/inbox" element={<Inbox/>}/>
+                    <Route exact path="/auth" element={<Auth/>}/>
+                    <Route exact path="/verify" element={<Verify/>}/>
+                    <Route path="*" element={<NotFound/>} status={404}/>
                 </Routes>
                 <HomeScreenShortcutSuggestionDialog/>
                 <LoginDialog/>
                 <SwitchToAppSuggestionDialog/>
                 <BottomNavigation/>
+                <BackDrop/>
             </BrowserRouter>
             <Toaster position="top-left"/>
         </>

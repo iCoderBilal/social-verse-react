@@ -13,7 +13,7 @@ function MobileBottomNavigation(props) {
     const {isUserLoggedIn, user} = auth;
 
     const handleHomeNavigationClick = () => {
-        navigate('/home')
+        navigate('/')
     }
 
     const handleSearchNavigationClick = () => {

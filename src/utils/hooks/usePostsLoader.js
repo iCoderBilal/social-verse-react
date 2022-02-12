@@ -15,7 +15,7 @@ export default function usePostsLoader(pageNumber) {
         }
         dispatch(setIsLoading(true));
         axios
-            .get("/posts?page=" + pageNumber)
+            .get("/feed?page=" + pageNumber)
             .then((response) => {
                 dispatch(addPosts(response.data.posts))
                 dispatch(setHasMorePages(response.data.posts.length === response.data.records_per_page))

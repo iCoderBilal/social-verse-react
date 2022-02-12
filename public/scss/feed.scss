@@ -1,4 +1,6 @@
+@use "sass:math";
 @import "variables";
+
 
 .feed {
 
@@ -90,7 +92,7 @@
             text-align: center;
 
             img {
-              width: ($authorAvatarSize / 2);
+              width: math.div($authorAvatarSize, 2);
             }
 
           }
