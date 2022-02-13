@@ -10,7 +10,8 @@ function MobileBottomNavigation(props) {
     let dispatch = useDispatch();
 
     const {auth, ui} = useSelector((state) => state);
-    const {isUserLoggedIn, user} = auth;
+
+    const {isLoggedIn, user} = auth;
 
     const handleHomeNavigationClick = () => {
         navigate('/')
@@ -21,7 +22,7 @@ function MobileBottomNavigation(props) {
     }
 
     const handleUploadNavigationClick = () => {
-        if (isUserLoggedIn) {
+        if (!isLoggedIn) {
             dispatch(setShowLoginDialog(true));
         } else {
             navigate('/upload')
@@ -29,7 +30,8 @@ function MobileBottomNavigation(props) {
     }
 
     const handleInboxNavigationClick = () => {
-        if (isUserLoggedIn) {
+
+        if (!isLoggedIn) {
             dispatch(setShowLoginDialog(true));
         } else {
             navigate('/inbox')
@@ -37,7 +39,7 @@ function MobileBottomNavigation(props) {
     }
 
     const handleProfileNavigationClick = () => {
-        if (isUserLoggedIn) {
+        if (!isLoggedIn) {
             dispatch(setShowLoginDialog(true));
         } else {
             navigate('/@' + user.username)

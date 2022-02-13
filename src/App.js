@@ -14,6 +14,8 @@ import Auth from "./views/Common/Auth";
 import BackDrop from "./components/Mobile/BackDrop";
 import Verify from "./views/Common/Verify";
 import NotFound from "./views/Common/NotFound";
+import Upload from "./views/Mobile/Upload";
+import Profile from "./views/Mobile/Profile";
 
 const App = (props) => {
 
@@ -56,7 +58,9 @@ const App = (props) => {
                     <Route exact path="/" element={<Home/>}/>
                     <Route exact path="/inbox" element={<Inbox/>}/>
                     <Route exact path="/auth" element={<Auth/>}/>
+                    <Route exact path="/upload" element={<Upload/>}/>
                     <Route exact path="/verify" element={<Verify/>}/>
+                    <Route exact path="/@:username" element={<Profile/>}/>
                     <Route path="*" element={<NotFound/>} status={404}/>
                 </Routes>
                 <HomeScreenShortcutSuggestionDialog/>
