@@ -49,11 +49,11 @@ function MobileBottomNavigation(props) {
 
     return (
         <div className="bottom-navigation">
-            <HomeIcon onClick={handleHomeNavigationClick} activeClassName={`active`}/>
-            <SearchIcon onClick={handleSearchNavigationClick} activeClassName={`active`}/>
-            <PlusCircleIcon onClick={handleUploadNavigationClick} activeClassName={`active`}/>
-            <ChatIcon onClick={handleInboxNavigationClick} activeClassName={`active`}/>
-            <UserIcon onClick={handleProfileNavigationClick} activeClassName={`active`}/>
+            <HomeIcon onClick={handleHomeNavigationClick} className={`active`}/>
+            <SearchIcon onClick={handleSearchNavigationClick}/>
+            <PlusCircleIcon onClick={handleUploadNavigationClick}/>
+            <ChatIcon onClick={handleInboxNavigationClick}/>
+            <UserIcon onClick={handleProfileNavigationClick}/>
         </div>
     );
 }

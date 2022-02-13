@@ -26,8 +26,8 @@ PostRightSidebar.propTypes = {
     authorUsername: PropTypes.string.isRequired,
     isFollowingAuthor: PropTypes.bool.isRequired,
     hasLikedPost: PropTypes.bool.isRequired,
-    postLikeCount: PropTypes.bool.isRequired,
-    propsCommentCount: PropTypes.bool.isRequired,
+    postLikeCount: PropTypes.number.isRequired,
+    propsCommentCount: PropTypes.number.isRequired,
     hasBookmarked: PropTypes.bool.isRequired,
     authorAvatarPictureURL: PropTypes.string.isRequired
 };

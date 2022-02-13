@@ -1,5 +1,6 @@
 @use "sass:math";
 @import "variables";
+@import "animation";
 
 
 .feed {
@@ -25,13 +26,39 @@
       pointer-events: fill;
     }
 
+    .video-click-container {
+      position: absolute;
+      z-index: 8;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      display: grid;
+      place-content: center;
+
+      svg {
+        height: $playButtonHeight;
+        width: $playButtonHeight;
+        opacity: 0;
+      }
+    }
+
+    .video-click-container.paused {
+      svg {
+        opacity: 1;
+        @extend .zoomIn
+      }
+    }
+
     .post-right-sidebar {
       position: absolute;
       width: 48px;
       height: 300px;
       right: 10px;
       bottom: 70px;
-      z-index: 1000;
+      z-index: 10;
       display: flex;
       flex-direction: column;
       -webkit-box-align: center;
