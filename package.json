@@ -62,7 +62,6 @@
   "devDependencies": {
     "autoprefixer": "^9.8.6",
     "postcss": "^7.0.36",
-    "prop-types": "^15.8.1",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.6"
+    "prop-types": "^15.8.1"
   }
 }
