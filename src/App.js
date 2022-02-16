@@ -1,75 +1,77 @@
-import React, { Component } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import PrivateRoute from "./components/PrivateRoute";
-import Home from "./Home";
-import Profile from "./Profile";
-import Auth from "./Auth";
-import NotFound from "./NotFound";
-import AuthHelper from "./services/AuthHelper";
-import Logout from "./Logout";
-import { Toaster } from "react-hot-toast";
-import Verify from "./Verify";
-import ProfileEdit from "./ProfileEdit";
-import Post from "./Post";
-import Notifications from "./Notifications";
-import Address from "./Address";
-import Upload from "./Upload";
-import EmbedPlayer from "./EmbedPlayer";
-import Embed from "./Embed";
+import React, {useEffect} from "react";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import axios from "axios";
+import {Toaster} from "react-hot-toast";
+import {useDispatch, useSelector} from "react-redux";
+import {setHasUserInteracted} from "./store/ui";
+import BottomNavigation from "./components/Mobile/BottomNavigation";
+import Home from "./views/Mobile/Home"
+import HomeScreenShortcutSuggestionDialog from "./components/Mobile/HomeScreenShortcutSuggestionDialog";
+import LoginDialog from "./components/Mobile/LoginDialog";
+import SwitchToAppSuggestionDialog from "./components/Mobile/SwitchToAppSuggestionDialog";
+import Inbox from "./views/Mobile/Inbox";
+import Auth from "./views/Common/Auth";
+import BackDrop from "./components/Mobile/BackDrop";
+import Verify from "./views/Common/Verify";
+import NotFound from "./views/Common/NotFound";
+import Upload from "./views/Mobile/Upload";
+import Profile from "./views/Mobile/Profile";
 
-export default class App extends Component {
+const App = (props) => {
 
-  state = {
-    user: AuthHelper.getUser(),
-    hasUserInteracted: false
-  };
+    const {auth, ui} = useSelector((state) => state);
+    const {isLoggedIn, user} = auth;
+    const {hasUserInteracted} = ui;
+    const dispatch = useDispatch();
 
-  forceUpdateAppState = () => {
-    this.setState({
-      user: AuthHelper.getUser(),
-    });
-  };
+    axios.defaults.baseURL = "https://api.watchflic.com";
+    // axios.defaults.baseURL = "https://127.0.0.1:8000";
 
-   clickListener = () => {
-    this.setState({
-      hasUserInteracted: true
-    },  () => {
-      window.removeEventListener('click', this.clickListener);
-    })
-  }
+    if (isLoggedIn) {
+        axios.defaults.headers.common["Flic-Token"] = user.token;
+    }
 
-  componentDidMount() {
-    console.log("%cStop!", "font-size: 50px; color:red");
-    console.log(
-      "%cThis is a browser feature intended for developers. If someone told you to copy-paste something here to enable a Flic feature or “hack” someone’s account, it is a scam and will give them access to your Flic account. Learn more: https://en.wikipedia.org/wiki/Self-XSS",
-      "font-size: 20px;"
-    );
+    const renderConsoleWarning = () => {
+        console.log("%cStop!", "font-size: 50px; color:red");
+        console.log(
+            "%cThis is a browser feature intended for developers. If someone told you to copy-paste something here to enable a Flic feature or “hack” someone’s account, it is a scam and will give them access to your Flic account. Learn more: https://en.wikipedia.org/wiki/Self-XSS",
+            "font-size: 20px;"
+        );
+    };
 
-    window.addEventListener('click', this.clickListener);
-  }
+    const userClickObserver = () => {
+        window.addEventListener(
+            "click",
+            () => dispatch(setHasUserInteracted(true)),
+            {once: true});
+    };
 
-  render() {
+    useEffect(() => {
+        renderConsoleWarning();
+        userClickObserver();
+    }, []);
+
     return (
-      <>
-        <BrowserRouter>
-          <Switch>
-            <Route exact path="/" render={(props) => (<Home hasUserInteracted={this.state.hasUserInteracted}{...props}/>)}/>
-            <PrivateRoute exact path="/notifications" component={Notifications}/>
-            <PrivateRoute exact path="/address" component={Address}/>
-            <PrivateRoute exact path="/upload" component={Upload}/>
-            <Route exact path="/profile/:username" component={Profile}/>
-            <Route exact path="/embed/:identifier/:slug" render={(props) => (<Embed hasUserInteracted={this.state.hasUserInteracted}{...props}/>)}/>
-            <Route exact path="/embed/play/:identifier/:slug" render={(props) => (<EmbedPlayer hasUserInteracted={this.state.hasUserInteracted}{...props}/>)}/>
-            <Route exact path="/post/:identifier/:slug" render={(props) => (<Post hasUserInteracted={this.state.hasUserInteracted}{...props}/>)}/>
-            <Route exact path="/verify" component={Verify}/>
-            <Route exact path="/profile/:username/edit" component={ProfileEdit}/>
-            <Route exact path="/auth" render={(props) => (<Auth forceUpdateAppState={this.forceUpdateAppState}{...props}/>)}/>
-            <Route exact path="/logout" render={(props) => (<Logout forceUpdateAppState={this.forceUpdateAppState}{...props}/>)}/>
-            <Route component={NotFound} />
-          </Switch>
-        </BrowserRouter>
-        <Toaster position="top-left" />
-      </>
+        <>
+            <BrowserRouter>
+                <Routes>
+                    <Route exact path="/" element={<Home/>}/>
+                    <Route exact path="/inbox" element={<Inbox/>}/>
+                    <Route exact path="/auth" element={<Auth/>}/>
+                    <Route exact path="/upload" element={<Upload/>}/>
+                    <Route exact path="/verify" element={<Verify/>}/>
+                    <Route exact path="/@:username" element={<Profile/>}/>
+                    <Route path="*" element={<NotFound/>} status={404}/>
+                </Routes>
+                <HomeScreenShortcutSuggestionDialog/>
+                <LoginDialog/>
+                <SwitchToAppSuggestionDialog/>
+                <BottomNavigation/>
+                <BackDrop/>
+            </BrowserRouter>
+            <Toaster position="top-left"/>
+        </>
     );
-  }
-}
+};
+
+export default App;

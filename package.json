@@ -1,38 +1,32 @@
 {
-  "name": "shelter-frontend",
+  "name": "flic-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.2.0",
-    "@headlessui/react": "^1.4.0",
     "@heroicons/react": "^1.0.3",
+    "@reduxjs/toolkit": "^1.7.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
-    "filepond": "^4.28.2",
-    "filepond-plugin-file-validate-type": "^1.2.6",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-filepond": "^7.1.1",
-    "react-helmet": "^6.1.0",
-    "react-hls-player": "^3.0.7",
     "react-hot-toast": "^2.0.0",
     "react-icons": "^4.3.1",
     "react-loading-skeleton": "^2.2.0",
-    "react-player": "^2.9.0",
-    "react-progressive-image": "^0.6.0",
-    "react-qrcode-logo": "^2.5.0",
-    "react-router-dom": "^5.2.0",
+    "react-redux": "^7.2.6",
+    "react-router": "^6.2.1",
+    "react-router-dom": "^6.2.1",
     "react-scripts": "4.0.3",
     "react-tabs": "^3.2.3",
     "react-timeago": "^6.2.1",
+    "redux": "^4.1.2",
     "sass": "^1.43.4",
-    "swiper": "^7.2.0",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "PORT=8164 craco start",
     "build": "GENERATE_SOURCEMAP=false craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
@@ -58,6 +52,6 @@
   "devDependencies": {
     "autoprefixer": "^9.8.6",
     "postcss": "^7.0.36",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.6"
+    "prop-types": "^15.8.1"
   }
 }

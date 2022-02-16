@@ -1,0 +1,71 @@
+@import "animation";
+
+
+.primary-button {
+  tab-size: 4;
+  -webkit-text-size-adjust: 100%;
+  box-sizing: border-box;
+  font-family: inherit;
+  margin: 0;
+  width: 100%;
+  border: 0 solid;
+  --tw-ring-inset: var(--tw-empty, /*!*/
+    /*!*/
+  );
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgba(59, 130, 246, 0.5);
+  --tw-ring-offset-shadow: 0 0 transparent;
+  --tw-ring-shadow: 0 0 transparent;
+
+  text-transform: none;
+  background-image: none;
+  -webkit-appearance: button;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: .125rem;
+  border-width: 1px;
+  border-style: solid;
+  --tw-border-opacity: 1;
+  border-color: rgba(239, 68, 68, var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgba(239, 68, 68, var(--tw-bg-opacity));
+  padding: .75rem 1.5rem;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 500;
+  --tw-text-opacity: 1;
+  color: rgba(255, 255, 255, var(--tw-text-opacity));
+  --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 transparent), var(--tw-ring-shadow, 0 0 transparent), var(--tw-shadow);
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+  transition-duration: .2s;
+
+  &:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgba(248, 113, 113, var(--tw-bg-opacity));
+    border-color: rgba(248, 113, 113, var(--tw-bg-opacity));;
+  }
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: inline;
+    margin-left: .25rem;
+    vertical-align: middle;
+  }
+}
+
+
+.primary-button-loading {
+  --tw-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  opacity: 0.8;
+  pointer-events: none;
+  @extend .animate-pulse;
+}
+
+.primary-button.loading {
+  @extend .primary-button-loading
+}

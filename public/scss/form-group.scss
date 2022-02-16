@@ -1,0 +1,70 @@
+@import "buttons";
+
+.form-group {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+
+  input, button {
+    tab-size: 4;
+    -webkit-text-size-adjust: 100%;
+    box-sizing: border-box;
+    font-family: inherit;
+    margin: 0;
+    width: 100%;
+  }
+
+  input {
+    font-size: 100%;
+    line-height: inherit;
+    color: inherit;
+    border-radius: .125rem;
+    border: 1px solid rgba(209, 213, 219, 1);
+    padding: .75rem 1rem;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-duration: .15s;
+    transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+
+    &:focus {
+      --tw-border-opacity: 1;
+      border-color: rgba(248, 113, 113, var(--tw-border-opacity));
+    }
+
+  }
+
+  textarea {
+    @extend input;
+    resize: none;
+  }
+
+  button {
+    @extend .primary-button
+  }
+
+  button.loading {
+    @extend .primary-button-loading
+  }
+
+}
+
+.form-group-loading {
+  cursor: wait;
+
+  input {
+    pointer-events: none;
+  }
+}
+
+.form-group.loading {
+  @extend .form-group-loading
+}
+
+form.loading, .form.loading {
+  .form-group {
+    @extend .form-group-loading
+  }
+}

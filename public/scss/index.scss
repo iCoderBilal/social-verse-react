@@ -1,0 +1,83 @@
+@import "include-media";
+@import "animation";
+@import "bottom-navigation";
+@import "feed";
+@import "backdrop";
+@import "dialogs";
+@import "left-pane-image";
+@import "horizontal-logo";
+@import "auth";
+@import "app-page";
+@import "upload";
+
+*::-webkit-scrollbar {
+  background: transparent;
+  -webkit-appearance: none;
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+}
+
+html,
+body {
+  scrollbar-width: none; /* Firefox */
+  -moz-scrollbar-width: none;
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+html {
+  -ms-scroll-snap-type: mandatory;
+  scroll-snap-type: y mandatory;
+  line-height: 1.5;
+}
+
+body {
+  overscroll-behavior: contain;
+}
+
+a {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+p, h1, h2, h3, h4, h5 {
+  margin: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.flex {
+  display: flex;
+}
+
+button, input, optgroup, select, textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+  opacity: 1;
+  color: #9ca3af
+}
+
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+  opacity: 1;
+  color: #9ca3af
+}
+
+input::placeholder, textarea::placeholder {
+  opacity: 1;
+  color: #9ca3af
+}
