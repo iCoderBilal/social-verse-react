@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {BsFillChatSquareDotsFill, BsHeart, BsShareFill} from "react-icons/all";
 
 function PostRightSidebar(props) {
     return (
@@ -17,6 +18,21 @@ function PostRightSidebar(props) {
                     </div>
                 </div>
             </a>
+
+            <div className="sidebar-toolbar">
+                <div className="tool">
+                    <BsHeart/>
+                    <strong>{props.postLikeCount}</strong>
+                </div>
+                <div className="tool">
+                    <BsFillChatSquareDotsFill/>
+                    <strong>{props.postCommentCount}</strong>
+                </div>
+                <div className="tool" onClick={props.sha}>
+                    <BsShareFill/>
+                </div>
+            </div>
+
         </div>
     );
 }
@@ -27,9 +43,13 @@ PostRightSidebar.propTypes = {
     isFollowingAuthor: PropTypes.bool.isRequired,
     hasLikedPost: PropTypes.bool.isRequired,
     postLikeCount: PropTypes.number.isRequired,
-    propsCommentCount: PropTypes.number.isRequired,
+    postCommentCount: PropTypes.number.isRequired,
     hasBookmarked: PropTypes.bool.isRequired,
-    authorAvatarPictureURL: PropTypes.string.isRequired
+    authorAvatarPictureURL: PropTypes.string.isRequired,
+    handleLikeButtonClick: PropTypes.func.isRequired,
+    handleCommentButtonClick: PropTypes.func.isRequired,
+    handleShareButtonClick: PropTypes.func.isRequired,
+    handleBookmarkButtonClick: PropTypes.func.isRequired,
 };
 
 export default PostRightSidebar;

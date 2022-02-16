@@ -47,6 +47,28 @@ export default function Post(props) {
 
     }
 
+    const handleError = () => {
+        const existingPosterURL = videoRef.current.getAttribute('poster');
+        let newPosterURL = existingPosterURL;
+        const trickleDownMap = new Map();
+
+        trickleDownMap.set("0000002.jpg", "0000000.jpg")
+        trickleDownMap.set("0000005.jpg", "0000002.jpg")
+
+        trickleDownMap.forEach((value, key, map) => {
+            console.log("Looping");
+            newPosterURL = newPosterURL.replace(key, value);
+        });
+
+        if (newPosterURL === existingPosterURL) {
+            newPosterURL = "https://via.placeholder.com/720x1280/eb122d/FFFFFF?text=Flic"
+        }
+
+        console.log(newPosterURL);
+
+        videoRef.current.setAttribute('poster', newPosterURL)
+    }
+
     // useEffect(() => {
     //     const checkInterval = 50.0;
     //     let lastPlayPos = 0;
@@ -99,6 +121,7 @@ export default function Post(props) {
             poster={post.thumbnail_url}
             controls={false}
             playsInline={true}
+            onError={handleError}
             onPlay={() => {
                 setIsVideoPlaying(true);
                 setIsBuffering(false)
@@ -119,9 +142,13 @@ export default function Post(props) {
                           isFollowingAuthor={false}
                           hasLikedPost={post.upvoted}
                           postLikeCount={post.upvote_count}
-                          propsCommentCount={post.comment_count}
+                          postCommentCount={post.comment_count}
                           hasBookmarked={post.bookmarked}
                           authorAvatarPictureURL={post.picture_url}
+                          handleLikeButtonClick={handleLikeButtonClick}
+                          handleCommentButtonClick={handleCommentButtonClick}
+                          handleShareButtonClick={handleShareButtonClick}
+                          handleBookmarkButtonClick={handleBookmarkButtonClick}
         />
         <div className={`video-click-container ${!isVideoPlaying && "paused"}`} onClick={toggleVideoState}>
             <BsPlayFill color="white"/>
