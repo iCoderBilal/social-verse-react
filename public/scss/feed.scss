@@ -136,6 +136,35 @@
         -webkit-box-align: center;
         align-items: center;
         margin-top: 20px;
+
+        .tool {
+          position: relative;
+          margin-bottom: $postSideBarToolBarIconGap;
+          text-align: center;
+          display: flex;
+          -webkit-box-align: center;
+          align-items: center;
+          flex-direction: column;
+
+          svg {
+            width: $postSideBarWidth;
+            height: $postSideBarWidth;
+          }
+
+          strong {
+            text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-font-smoothing: antialiased;
+            color: #fff;
+            text-align: center;
+            font-weight: normal;
+            display: block;
+            line-height: 16px;
+            font-size: 13px;
+          }
+
+        }
+
       }
 
     }
