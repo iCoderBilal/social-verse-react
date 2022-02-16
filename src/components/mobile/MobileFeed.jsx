@@ -20,7 +20,7 @@ class MobileFeed extends Component {
         if (this.state.seenEverything) return true;
         this.setState({ isLoadingPosts: true });
         axios
-            .get("/posts?page=" + this.state.currentPage)
+            .get("/feed?page=" + this.state.currentPage)
             .then((response) => {
                 if (response.data.posts !== undefined) {
                     let seenEverything =
