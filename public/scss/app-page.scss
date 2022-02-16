@@ -1,3 +1,5 @@
+@import "variables";
+
 .app-page, .inbox, .profile {
 
   position: relative;
@@ -16,7 +18,7 @@
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    height: 44px;
+    height: $appPageHeaderContainerHeight;
     font-weight: 700;
 
     h1 {
@@ -45,6 +47,11 @@
       transform: scaleY(0.5);
     }
   }
+
+  .content-container {
+    overflow: hidden;
+  }
+
 }
 
 .inbox {
@@ -166,5 +173,107 @@
       }
 
     }
+
+    .post-tabs {
+      position: -webkit-sticky;
+      position: sticky;
+      height: 40px;
+      width: 100%;
+      margin-bottom: 1px;
+      background-color: #fff;
+      z-index: 2;
+      top: -2px;
+      -webkit-transform: translateZ(0);
+
+      .post-tab-icons {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: space-around;
+        -webkit-justify-content: space-around;
+        -ms-flex-pack: space-around;
+        justify-content: space-around;
+        -webkit-align-items: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        height: 38px;
+
+        .icon-container {
+          -webkit-flex: 1;
+          -ms-flex: 1;
+          flex: 1;
+          display: -webkit-box;
+          display: -webkit-flex;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-pack: center;
+          -webkit-justify-content: center;
+          -ms-flex-pack: center;
+          justify-content: center;
+          opacity: 0.34;
+
+          svg {
+            pointer-events: none;
+            height: 24px;
+            width: 24px;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-align-items: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+          }
+
+        }
+
+        .icon-container.active {
+          opacity: 1;
+        }
+
+      }
+
+      .post-tab-underline {
+        width: 48px;
+        height: 2px;
+        background: #161823;
+        position: relative;
+        -webkit-transition: left .3s linear;
+        transition: left .3s linear;
+      }
+
+      &:before, &:after {
+        position: absolute;
+        content: "";
+        height: 1px;
+        left: 0;
+        right: 0;
+        background-color: rgba(22, 24, 35, 0.12);
+        -webkit-transform: scaleY(0.5);
+        -ms-transform: scaleY(0.5);
+        transform: scaleY(0.5);
+      }
+
+      &:before {
+        top: 0;
+      }
+
+      &:after {
+        bottom: 0;
+      }
+
+    }
+
+    .posts-container {
+
+    }
+
   }
 }

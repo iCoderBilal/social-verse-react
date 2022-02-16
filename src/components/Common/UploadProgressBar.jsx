@@ -1,17 +1,17 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
+import PropTypes from "prop-types";
 
-function UploadProgress(props) {
+function UploadProgressBar(props) {
 
-    const { user } = useSelector((state) => state.auth);
+    const {user, isLoggedIn} = useSelector(state => state.auth);
 
-
-    if(props.isUploading !== true || props.uploadProgress === undefined){
+    if (!isLoggedIn) {
         return <></>
     }
 
     return (
-        <div className='upload-progress'>
+        <div className='upload-progress-bar'>
             <div className='small-avatar-container'>
                 <div className="flic-dual-ring-spinner">
                     <img className="small-avatar" src={user.profile_picture_url} alt={user.username}/>
@@ -22,10 +22,15 @@ function UploadProgress(props) {
                 </div>
             </div>
             <div className='small-flic-icon'>
-                <img src="https://shelter-cdn.nyc3.cdn.digitaloceanspaces.com/flic/assets/coin_logo_x64.png" alt={"flic-icon"}/>
+                <img src="https://shelter-cdn.nyc3.cdn.digitaloceanspaces.com/flic/assets/coin_logo_x64.png"
+                     alt={"flic-icon"}/>
             </div>
         </div>
     );
 }
 
-export default UploadProgress;
+UploadProgressBar.propTypes = {
+    uploadProgress: PropTypes.number
+};
+
+export default UploadProgressBar;

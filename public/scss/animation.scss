@@ -78,6 +78,15 @@
   }
 }
 
+@keyframes skeleton-loading {
+  0% {
+    transform: skewX(-10deg) translateX(-100%);
+  }
+  100% {
+    transform: skewX(-10deg) translateX(200%);
+  }
+}
+
 .animate-pulse {
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
@@ -89,3 +98,47 @@
 .zoomOut {
   animation: zoomOut 0.3s;
 }
+
+.skeleton {
+  height: 100%;
+  background: #eee;
+  color: #eee;
+  border-radius: 5px;
+
+  &:before {
+    content: '';
+    position: absolute;
+    background: linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.9),
+                    transparent
+    );
+    width: 50%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    animation: skeleton-loading 0.6s infinite;
+  }
+
+}
+
+.skeleton.w33 {
+  width: 33%;
+}
+
+.skeleton.w50 {
+  width: 50%;
+}
+
+.skeleton.w100 {
+  width: 100%;
+}
+
+.skeleton-circle {
+  @extend .skeleton;
+  border-radius: 100%;
+  width: 100%;
+  height: 100%;
+}
+
