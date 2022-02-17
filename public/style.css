@@ -365,9 +365,14 @@
   align-items: center;
   flex-direction: column;
 }
+.feed .post .post-right-sidebar .sidebar-toolbar .tool * {
+  pointer-events: none;
+}
 .feed .post .post-right-sidebar .sidebar-toolbar .tool svg {
   width: 40px;
   height: 40px;
+  opacity: 0.9;
+  color: #fff;
 }
 .feed .post .post-right-sidebar .sidebar-toolbar .tool strong {
   text-size-adjust: 100%;

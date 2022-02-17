@@ -47,6 +47,14 @@ export default function Post(props) {
 
     }
 
+    const handlePipButtonClick = () => {
+        if(document.pictureInPictureElement){
+            document.exitPictureInPicture();
+        } else {
+            videoRef.current.requestPictureInPicture();
+        }
+    }
+
     const handleError = () => {
         const existingPosterURL = videoRef.current.getAttribute('poster');
         let newPosterURL = existingPosterURL;
@@ -149,6 +157,7 @@ export default function Post(props) {
                           handleCommentButtonClick={handleCommentButtonClick}
                           handleShareButtonClick={handleShareButtonClick}
                           handleBookmarkButtonClick={handleBookmarkButtonClick}
+                          handlePipButtonClick={handlePipButtonClick}
         />
         <div className={`video-click-container ${!isVideoPlaying && "paused"}`} onClick={toggleVideoState}>
             <BsPlayFill color="white"/>

@@ -146,9 +146,15 @@
           align-items: center;
           flex-direction: column;
 
+          * {
+            pointer-events: none;
+          }
+
           svg {
             width: $postSideBarWidth;
             height: $postSideBarWidth;
+            opacity: 0.9;
+            color: #fff;
           }
 
           strong {
