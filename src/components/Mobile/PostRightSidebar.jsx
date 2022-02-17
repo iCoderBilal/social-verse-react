@@ -1,6 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {BsFillChatSquareDotsFill, BsHeart, BsShareFill} from "react-icons/all";
+import {
+    BsFillChatDotsFill,
+    BsFillChatSquareDotsFill, BsFillHeartFill,
+    BsHeart,
+    BsShareFill,
+    IoIosShareAlt,
+    RiPictureInPicture2Fill
+} from "react-icons/all";
 
 function PostRightSidebar(props) {
     return (
@@ -20,17 +27,23 @@ function PostRightSidebar(props) {
             </a>
 
             <div className="sidebar-toolbar">
-                <div className="tool">
-                    <BsHeart/>
+                <div className="tool" onClick={props.handleLikeButtonClick}>
+                    <BsFillHeartFill/>
                     <strong>{props.postLikeCount}</strong>
                 </div>
-                <div className="tool">
-                    <BsFillChatSquareDotsFill/>
+                <div className="tool" onClick={props.handleCommentButtonClick}>
+                    <BsFillChatDotsFill/>
                     <strong>{props.postCommentCount}</strong>
                 </div>
-                <div className="tool" onClick={props.sha}>
-                    <BsShareFill/>
+                <div className="tool" onClick={props.handleShareButtonClick}>
+                    <IoIosShareAlt/>
                 </div>
+                {
+                    document.pictureInPictureEnabled ?  <div className="tool" onClick={props.handlePipButtonClick}>
+                        <RiPictureInPicture2Fill/>
+                    </div>: <></>
+                }
+
             </div>
 
         </div>
@@ -50,6 +63,7 @@ PostRightSidebar.propTypes = {
     handleCommentButtonClick: PropTypes.func.isRequired,
     handleShareButtonClick: PropTypes.func.isRequired,
     handleBookmarkButtonClick: PropTypes.func.isRequired,
+    handlePipButtonClick: PropTypes.func.isRequired
 };
 
 export default PostRightSidebar;
