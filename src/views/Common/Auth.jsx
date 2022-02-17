@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import LeftPaneImage from "../../components/Common/LeftPaneImage";
 import FlicToaster from "../../utils/FlicToaster";
 import {setLocalStorageUser} from "../../utils/UserLocalStorageHelper";
-import RightArrowIcon from "../../components/RightArrowIcon";
+import RightArrowIcon from "../../components/Common/RightArrowIcon";
 import {Navigate} from "react-router-dom";
 
 function Auth(props) {

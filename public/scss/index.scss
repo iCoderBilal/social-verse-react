@@ -9,6 +9,8 @@
 @import "auth";
 @import "app-page";
 @import "upload";
+@import "profile";
+
 
 *::-webkit-scrollbar {
   background: transparent;
@@ -80,4 +82,10 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 input::placeholder, textarea::placeholder {
   opacity: 1;
   color: #9ca3af
+}
+
+ul, li, ol {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
 }
