@@ -2295,13 +2295,15 @@ html {
   -ms-scroll-snap-type: mandatory;
   scroll-snap-type: y mandatory;
   line-height: 1.5;
+  overflow: hidden;
+  width: 100%;
 }
 
 body {
+  height: 100%;
   position: fixed;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain;
 }
 
 a {
