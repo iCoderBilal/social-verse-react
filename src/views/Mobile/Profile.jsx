@@ -1,6 +1,3 @@
-//Todo: Create Backend API To Get Upvoted/Liked Posts Of User.
-//Already wrote code for it here. Just gotta uncomment here.
-
 import React, {useLayoutEffect, useState} from 'react';
 import {IoBookmarkOutline, IoHeartOutline, IoPlayOutline} from "react-icons/all";
 import {useSelector} from "react-redux";
@@ -41,7 +38,6 @@ function Profile(props) {
             const loadPosts = axios.get(`/posts/${username}`);
             const loadBookmarks = (!isProfileOwner) ? ([]) : (axios.get(`/bookmarks`));
 
-
             Promise.all([loadPosts, loadBookmarks]).then((values) => {
             setProfilePosts(values[0].data)
             setBookmarkedPosts(values[1].data)
@@ -59,19 +55,10 @@ function Profile(props) {
 
     }, []);
 
-
-    // const loadUpvotes = () => {
-    //     if(!(isLoggedIn && user.username.toLowerCase() === username)){
-    //         return;
-    //     }
-    //     return axios.get(`/posts/${username}`).then((response) => {
-    //         setUpvotedPosts(response.data);
-    //     })
-    // }
-
     const handleTabClick = (clickEvent) => {
         getActiveTab().classList.remove("active");
         clickEvent.target.classList.add("active");
+        setActiveProfileTab(clickEvent.target.dataset.tab ?? "posts")
         moveUnderlineUnderActiveIcon();
     }
 
@@ -88,13 +75,44 @@ function Profile(props) {
     }
 
     const getPostContainerJsx = () => {
-        if(isPostsLoading || true){
-            return <div className="posts-grid">
-                {Array(9).fill(1).map(() => {
-                    return <li className="post-item"/>
+        if(isPostsLoading){
+            return <div className="posts-grid loading">
+                {Array(9).fill(1).map((val, index) => {
+                    return <li key={index} className="post-item"/>
                 })}
             </div>
         }
+
+        if(activeProfileTab === "posts"){
+
+            if(profilePosts.length === 0) {
+                return <div className="posts-grid empty"/>
+            }
+
+            return <div className="posts-grid">
+                {profilePosts.map((item) => {
+                    return <li key={item.identifier+'/'+item.slug} className="post-item">
+                        <img src={item.thumbnail_url}/>
+                    </li>
+                })}
+            </div>
+        }
+
+        if(activeProfileTab === "bookmarks"){
+
+            if(bookmarkedPosts.length === 0) {
+                return <div className="posts-grid empty"/>
+            }
+
+            return <div className="posts-grid">
+                {bookmarkedPosts.map((item) => {
+                    return <li key={item.identifier+'/'+item.slug} className="post-item">
+                    <img src={item.thumbnail_url}/>
+                    </li>
+                })}
+            </div>
+        }
+
     }
 
     return (
@@ -139,9 +157,6 @@ function Profile(props) {
                                 <IoBookmarkOutline/>
                             </div> : <></>
                         }
-                        {/*<div className="icon-container" onClick={handleTabClick}>*/}
-                        {/*    <IoHeartOutline/>*/}
-                        {/*</div>*/}
                     </div>
                     <div className="post-tab-underline" ref={tabIconUnderlineRef}/>
                 </div>

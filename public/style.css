@@ -87,14 +87,14 @@
   animation: zoomOut 0.3s;
 }
 
-.skeleton, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1, .profile .content-container .posts-container .posts-grid .post-item {
+.skeleton, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1, .profile .content-container .posts-container .posts-grid.loading .post-item {
   background: #eee;
   color: #eee;
   border-radius: 5px;
   overflow: hidden;
   position: relative;
 }
-.skeleton:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before, .profile .content-container .posts-container .posts-grid .post-item:before {
+.skeleton:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before, .profile .content-container .posts-container .posts-grid.loading .post-item:before {
   content: "";
   position: absolute;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
@@ -221,14 +221,14 @@
   animation: zoomOut 0.3s;
 }
 
-.skeleton, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1, .profile .content-container .posts-container .posts-grid .post-item {
+.skeleton, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1, .profile .content-container .posts-container .posts-grid.loading .post-item {
   background: #eee;
   color: #eee;
   border-radius: 5px;
   overflow: hidden;
   position: relative;
 }
-.skeleton:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before, .profile .content-container .posts-container .posts-grid .post-item:before {
+.skeleton:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before, .profile .content-container .posts-container .posts-grid.loading .post-item:before {
   content: "";
   position: absolute;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
@@ -660,14 +660,14 @@
   animation: zoomOut 0.3s;
 }
 
-.skeleton, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1, .profile .content-container .posts-container .posts-grid .post-item {
+.skeleton, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1, .profile .content-container .posts-container .posts-grid.loading .post-item {
   background: #eee;
   color: #eee;
   border-radius: 5px;
   overflow: hidden;
   position: relative;
 }
-.skeleton:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before, .profile .content-container .posts-container .posts-grid .post-item:before {
+.skeleton:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before, .profile .content-container .posts-container .posts-grid.loading .post-item:before {
   content: "";
   position: absolute;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
@@ -790,14 +790,14 @@ img.horizontal-logo {
   animation: zoomOut 0.3s;
 }
 
-.skeleton, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1, .profile .content-container .posts-container .posts-grid .post-item {
+.skeleton, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1, .profile .content-container .posts-container .posts-grid.loading .post-item {
   background: #eee;
   color: #eee;
   border-radius: 5px;
   overflow: hidden;
   position: relative;
 }
-.skeleton:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before, .profile .content-container .posts-container .posts-grid .post-item:before {
+.skeleton:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before, .profile .content-container .posts-container .posts-grid.loading .post-item:before {
   content: "";
   position: absolute;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
@@ -897,14 +897,14 @@ img.horizontal-logo {
   animation: zoomOut 0.3s;
 }
 
-.skeleton, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1, .profile .content-container .posts-container .posts-grid .post-item {
+.skeleton, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1, .profile .content-container .posts-container .posts-grid.loading .post-item {
   background: #eee;
   color: #eee;
   border-radius: 5px;
   overflow: hidden;
   position: relative;
 }
-.skeleton:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before, .profile .content-container .posts-container .posts-grid .post-item:before {
+.skeleton:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before, .profile .content-container .posts-container .posts-grid.loading .post-item:before {
   content: "";
   position: absolute;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
@@ -1360,14 +1360,14 @@ img.horizontal-logo {
   animation: zoomOut 0.3s;
 }
 
-.skeleton, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1, .profile .content-container .posts-container .posts-grid .post-item {
+.skeleton, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1, .profile .content-container .posts-container .posts-grid.loading .post-item {
   background: #eee;
   color: #eee;
   border-radius: 5px;
   overflow: hidden;
   position: relative;
 }
-.skeleton:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before, .profile .content-container .posts-container .posts-grid .post-item:before {
+.skeleton:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before, .profile .content-container .posts-container .posts-grid.loading .post-item:before {
   content: "";
   position: absolute;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
@@ -1467,14 +1467,14 @@ img.horizontal-logo {
   animation: zoomOut 0.3s;
 }
 
-.skeleton, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1, .profile .content-container .posts-container .posts-grid .post-item {
+.skeleton, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1, .profile .content-container .posts-container .posts-grid.loading .post-item {
   background: #eee;
   color: #eee;
   border-radius: 5px;
   overflow: hidden;
   position: relative;
 }
-.skeleton:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before, .profile .content-container .posts-container .posts-grid .post-item:before {
+.skeleton:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before, .profile .content-container .posts-container .posts-grid.loading .post-item:before {
   content: "";
   position: absolute;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
@@ -1634,14 +1634,14 @@ img.horizontal-logo {
   animation: zoomOut 0.3s;
 }
 
-.skeleton, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1, .profile .content-container .posts-container .posts-grid .post-item {
+.skeleton, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1, .profile .content-container .posts-container .posts-grid.loading .post-item {
   background: #eee;
   color: #eee;
   border-radius: 5px;
   overflow: hidden;
   position: relative;
 }
-.skeleton:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before, .profile .content-container .posts-container .posts-grid .post-item:before {
+.skeleton:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before, .profile .content-container .posts-container .posts-grid.loading .post-item:before {
   content: "";
   position: absolute;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
@@ -2070,14 +2070,14 @@ img.horizontal-logo {
   animation: zoomOut 0.3s;
 }
 
-.skeleton, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1, .profile .content-container .posts-container .posts-grid .post-item {
+.skeleton, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1, .profile .content-container .posts-container .posts-grid.loading .post-item {
   background: #eee;
   color: #eee;
   border-radius: 5px;
   overflow: hidden;
   position: relative;
 }
-.skeleton:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before, .profile .content-container .posts-container .posts-grid .post-item:before {
+.skeleton:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before, .profile .content-container .posts-container .posts-grid.loading .post-item:before {
   content: "";
   position: absolute;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
@@ -2249,6 +2249,27 @@ img.horizontal-logo {
   min-height: 58.6666667vw;
   border-radius: 0;
 }
+.profile .content-container .posts-container .posts-grid .post-item img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+.profile .content-container .posts-container .posts-grid.empty {
+  position: relative;
+  display: block;
+  height: 50vh;
+}
+.profile .content-container .posts-container .posts-grid.empty:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  background-size: contain;
+  background-image: url(https://cdn-asset.watchflic.com/images/no-posts.png);
+}
 
 .profile.loading .heading-container h1 {
   max-width: 10em;
@@ -2349,6 +2370,15 @@ ul, li, ol {
   margin: 0px;
   padding: 0px;
   list-style-type: none;
+}
+
+img {
+  user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 
 /*# sourceMappingURL=style.css.map */

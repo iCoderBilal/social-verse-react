@@ -186,7 +186,6 @@
           display: grid;
           grid-template-columns: repeat(3,1fr);
           .post-item {
-            @extend .skeleton;
             border-right: 1px solid rgb(245, 245, 245);
             border-bottom: 1px solid rgb(245, 245, 245);
             background-color: rgba(22, 24, 35, 0.06);
@@ -194,8 +193,42 @@
             min-height: 58.6666667vw;
             //1920/1080 * 33vw
             border-radius: 0;
+
+            img {
+              object-fit: cover;
+              width: 100%;
+              height:100%;
+            }
+
+          }
+
+        }
+
+        .posts-grid.loading{
+          .post-item{
+            @extend .skeleton;
           }
         }
+
+        .posts-grid.empty{
+          position: relative;
+          display: block;
+          height: 50vh;
+
+          &:before {
+            content: "";
+            position: absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+            width: 200px;
+            height:200px;
+            background-size: contain;
+            background-image: url(https://cdn-asset.watchflic.com/images/no-posts.png)
+          }
+
+        }
+
     }
 
   }
