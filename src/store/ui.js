@@ -10,6 +10,7 @@ const uiSlice = createSlice({
             currentSelectedPostIndex: -1,
             showComments: false,
             currentPageNumber: 1,
+            pagesFetched: [],
             hasMorePages: true
         },
         showSwitchToAppSuggestionDialog: true,
@@ -30,11 +31,13 @@ const uiSlice = createSlice({
             state.showSwitchToAppSuggestionDialog = !!(showSwitchToAppSuggestionDialog.payload);
         },
         addPosts: (state, newPosts) => {
-            console.log(newPosts.payload);
             state.feed.posts = [...state.feed.posts, ...newPosts.payload];
         },
         setCurrentPageNumber: (state, newPageNumber) => {
             state.feed.currentPageNumber = newPageNumber.payload
+        },
+        addFetchedPageNumber: (state, fetchedPageNumber) => {
+            state.feed.pagesFetched = [...state.feed.pagesFetched, fetchedPageNumber.payload];
         },
         setHasMorePages: (state, hasMorePages) => {
             state.feed.hasMorePages = !!(hasMorePages.payload)
@@ -59,6 +62,7 @@ export const {
     setShowLoginDialog,
     addPosts,
     setCurrentPageNumber,
+    addFetchedPageNumber,
     setHasMorePages,
     setIsLoading,
     setShowHomeScreenShortcutSuggestionDialog
