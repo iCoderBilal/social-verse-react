@@ -91,9 +91,9 @@ function Profile(props) {
 
             return <div className="posts-grid">
                 {profilePosts.map((item) => {
-                    return <li key={item.identifier+'/'+item.slug} className="post-item">
+                    return <a key={item.identifier+'/'+item.slug} href={`/@${username}/${item.identifier}/${item.slug}`} className="post-item">
                         <img src={item.thumbnail_url}/>
-                    </li>
+                    </a>
                 })}
             </div>
         }
@@ -106,9 +106,9 @@ function Profile(props) {
 
             return <div className="posts-grid">
                 {bookmarkedPosts.map((item) => {
-                    return <li key={item.identifier+'/'+item.slug} className="post-item">
+                    return <a key={item.identifier+'/'+item.slug} href={`/@${username}/${item.identifier}/${item.slug}`} className="post-item">
                     <img src={item.thumbnail_url}/>
-                    </li>
+                    </a>
                 })}
             </div>
         }

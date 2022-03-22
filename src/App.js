@@ -16,6 +16,7 @@ import Verify from "./views/Common/Verify";
 import NotFound from "./views/Common/NotFound";
 import Upload from "./views/Mobile/Upload";
 import Profile from "./views/Mobile/Profile";
+import SinglePost from "./views/Mobile/SinglePost";
 
 const App = (props) => {
 
@@ -71,6 +72,7 @@ const App = (props) => {
                     <Route exact path="/upload" element={<Upload/>}/>
                     <Route exact path="/verify" element={<Verify/>}/>
                     <Route exact path="/@:username" element={<Profile/>}/>
+                    <Route exact path="/@:username/:identifier/:slug" element={<SinglePost/>}/>
                     <Route path="*" element={<NotFound/>} status={404}/>
                 </Routes>
                 <HomeScreenShortcutSuggestionDialog/>

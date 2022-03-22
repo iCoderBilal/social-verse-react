@@ -5,7 +5,6 @@ import Post from "./Post";
 import {setCurrentPageNumber} from "../../store/ui";
 
 export default function Feed(props) {
-    //Temp Removed Global State
     const {hasUserInteracted, feed} = useSelector(({ui}) => ui);
     const currentPageNumber = feed.currentPageNumber
     const {posts, hasMorePages, isLoading} = usePostsLoader(currentPageNumber);

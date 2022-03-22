@@ -1,5 +1,13 @@
 import {createSlice} from "@reduxjs/toolkit";
 
+const getUniquePosts = posts => {
+    let encountered = [];
+    return posts.filter((post) => {
+        const key = post.identifier + post.slug;
+        return encountered[key] ? false : encountered[key] = true;
+    })
+}
+
 const uiSlice = createSlice({
     name: "ui",
     initialState: {
@@ -31,7 +39,10 @@ const uiSlice = createSlice({
             state.showSwitchToAppSuggestionDialog = !!(showSwitchToAppSuggestionDialog.payload);
         },
         addPosts: (state, newPosts) => {
-            state.feed.posts = [...state.feed.posts, ...newPosts.payload];
+            state.feed.posts = getUniquePosts([...state.feed.posts, ...newPosts.payload]);
+        },
+        prependPost: (state, singlePost) => {
+            state.feed.posts = getUniquePosts([singlePost.payload, ...state.feed.posts]);
         },
         setCurrentPageNumber: (state, newPageNumber) => {
             state.feed.currentPageNumber = newPageNumber.payload
@@ -61,6 +72,7 @@ export const {
     setShowSwitchToAppSuggestionDialog,
     setShowLoginDialog,
     addPosts,
+    prependPost,
     setCurrentPageNumber,
     addFetchedPageNumber,
     setHasMorePages,
