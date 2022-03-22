@@ -1,57 +1,62 @@
-import React, {useCallback, useRef, useState} from "react";
-import {useSelector} from "react-redux";
+import React, {useCallback, useEffect, useRef} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import usePostsLoader from "../../utils/hooks/usePostsLoader";
 import Post from "./Post";
+import {setCurrentPageNumber} from "../../store/ui";
 
 export default function Feed(props) {
     //Temp Removed Global State
-    const {hasUserInteracted} = useSelector((state) => state);
-    const [pageNumber, setPageNumber] = useState(1);
-    const [autoplayObservedPostsCount, setAutoplayObservedPostsCount] = useState(0);
-    const {posts, hasMorePages, isLoading} = usePostsLoader(pageNumber);
-
+    const {hasUserInteracted, feed} = useSelector(({ui}) => ui);
+    const currentPageNumber = feed.currentPageNumber
+    const {posts, hasMorePages, isLoading} = usePostsLoader(currentPageNumber);
+    const dispatch = useDispatch();
     const lastPostObserver = useRef();
-    const autoplayObserver = new IntersectionObserver(
+
+    const autoPlayObserver = useRef(new IntersectionObserver(
         (entries) => {
-            //There is no way to stop forEach and we need to break early,
-            // so just use a simple forLoop
             for (let i = 0; i < entries.length; i++) {
                 const entry = entries[i];
                 const video = entry.target;
-                video.muted = !(hasUserInteracted);
-                if (entry.intersectionRatio !== 1 && !video.paused) {
+                if (entry.intersectionRatio !== 1) {
                     video.pause();
-                } else if (entry.intersectionRatio === 1 && video.paused) {
+                } else if (entry.intersectionRatio === 1) {
                     video.play();
                     break;
                 }
             }
         },
         {threshold: 1}
-    );
+    ));
+
+    const elementsObservedByAutoPlayObserverCount = useRef(0);
 
     const lastPostElementRef = useCallback(
         (node) => {
-            if (isLoading) return;
-            if (lastPostObserver.current) lastPostObserver.current.disconnect();
+            if (isLoading || node === lastPostObserver.current){
+                return;
+            }
+            if (lastPostObserver.current){
+                lastPostObserver.current.disconnect();
+            }
             lastPostObserver.current = new IntersectionObserver((entries) => {
                 if (entries[0].isIntersecting && hasMorePages) {
-                    setPageNumber(currentPageNumber => currentPageNumber + 1);
+                    dispatch(setCurrentPageNumber(currentPageNumber + 1));
                 }
             });
             if (node) lastPostObserver.current.observe(node);
-            // const videos = document.getElementsByClassName("video");
-            // console.log(videos);
-            // for (let i = autoplayObservedPostsCount; i < posts.length; i++) {
-            //     autoplayObserver.observe(videos[i]);
-            // }
-            // setAutoplayObservedPostsCount(posts.length);
+            const videos = document.getElementById("feed").getElementsByTagName("video");
+            if(videos.length === posts.length && elementsObservedByAutoPlayObserverCount.current < posts.length){
+                for (let i = elementsObservedByAutoPlayObserverCount.current; i < posts.length; i++) {
+                    autoPlayObserver.current.observe(videos[i]);
+                }
+                elementsObservedByAutoPlayObserverCount.current = posts.length;
+            }
         },
-        [isLoading, hasMorePages]
+        [isLoading, hasMorePages, hasUserInteracted]
     );
 
     return (
-        <div className="feed">
+        <div className="feed" id="feed">
             {posts.map((post, index) => {
                 if (posts.length === index + 1) {
                     return (
