@@ -20,7 +20,7 @@ Flic's backend API has strict CORS origin of `beta.watchflic.com`. You can eithe
 #### SASS:
 Start SASS Watcher.
 
-` sass --watch public/scss/index.scss public/style.css`
+`sass --watch public/scss/index.scss public/style.css`
 
 ## Documentation:
 

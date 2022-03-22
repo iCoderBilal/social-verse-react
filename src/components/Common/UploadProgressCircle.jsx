@@ -19,9 +19,6 @@ function UploadProgressCircle(props) {
         const elapsedTime = currentTimestamp - startTime;
         const expectedEndTimestamp = startTime + ((100 * elapsedTime) / Math.floor(progress + 1));
         const timeLeft = Math.floor((expectedEndTimestamp - currentTimestamp) / 1000);
-
-        // console.log(startTime, currentTimestamp, elapsedTime, progress, expectedEndTimestamp, timeLeft);
-
         if (timeLeft > 60) {
             return <span>{Math.floor(timeLeft / 60)} mins left</span>
         }
