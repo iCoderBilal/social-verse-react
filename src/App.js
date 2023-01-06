@@ -25,7 +25,7 @@ const App = (props) => {
     const {hasUserInteracted} = ui;
     const dispatch = useDispatch();
 
-    axios.defaults.baseURL = "https://api.watchflic.com";
+    axios.defaults.baseURL = "https://api.socialverseapp.com";
     // axios.defaults.baseURL = "https://127.0.0.1:8000";
 
     if (isLoggedIn) {
