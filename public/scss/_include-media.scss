@@ -94,13 +94,13 @@ $unit-intervals: (
 ///  $im-media-support: false;
 ///  @include media('>=tablet') {
 ///    .foo {
-///      color: tomato;
+///      color: #6b0092;
 ///    }
 ///  }
 ///
 ///  /* Generates: */
 ///  .foo {
-///    color: tomato;
+///    color: #6b0092;
 ///  }
 ///
 $im-media-support: true !default;
@@ -114,13 +114,13 @@ $im-media-support: true !default;
 ///  $im-no-media-breakpoint: 'desktop';
 ///  @include media('>=tablet') {
 ///    .foo {
-///      color: tomato;
+///      color: #6b0092;
 ///    }
 ///  }
 ///
 ///  /* Generates: */
 ///  .foo {
-///    color: tomato;
+///    color: #6b0092;
 ///  }
 ///
 /// @example scss - This media query will NOT show because it does not intercept the desktop breakpoint
@@ -128,7 +128,7 @@ $im-media-support: true !default;
 ///  $im-no-media-breakpoint: 'tablet';
 ///  @include media('>=desktop') {
 ///    .foo {
-///      color: tomato;
+///      color: #6b0092;
 ///    }
 ///  }
 ///
@@ -146,13 +146,13 @@ $im-no-media-breakpoint: 'desktop' !default;
 ///  $im-no-media-expressions: ('screen');
 ///  @include media('>=tablet', 'screen') {
 ///    .foo {
-///      color: tomato;
+///      color: #6b0092;
 ///    }
 ///  }
 ///
 ///   /* Generates: */
 ///   .foo {
-///     color: tomato;
+///     color: #6b0092;
 ///   }
 ///
 /// @example scss - This media query will NOT show because it intercepts the static breakpoint but contains a media expression that is not accepted
@@ -161,7 +161,7 @@ $im-no-media-breakpoint: 'desktop' !default;
 ///  $im-no-media-expressions: ('screen');
 ///  @include media('>=tablet', 'retina2x') {
 ///    .foo {
-///      color: tomato;
+///      color: #6b0092;
 ///    }
 ///  }
 ///

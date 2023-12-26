@@ -88,7 +88,7 @@ function Auth(props) {
 
     const getHeadingContainerJsx = () => {
         if (formName === loginFormName) {
-            return <p>New to Flic?
+            return <p>New to Empowerverse?
                 <span onClick={() => setFormName(registerFormName)}>Sign Up</span>
             </p>
         }

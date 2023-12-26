@@ -11,10 +11,12 @@ const authSlice = createSlice({
         setUserLoggedIn: (state, action) => {
             state.isLoggedIn = true;
             state.user = action.payload;
+            console.log(action.payload)
         },
-        setUserLoggedOut: (state) => {
+        setUserLoggedOut: (state, user) => {
             state.isLoggedIn = false;
             state.user = {};
+            UserLocalStorageHelper.clearLocalStorage();
         },
     },
 });

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
+import EmpowerverseLogo from '../../images/empowerverse.png';
 
 function Dialog(props) {
 
@@ -31,8 +32,8 @@ function Dialog(props) {
                 <img
                     width={56}
                     height={56}
-                    src={`https://cdn-asset.watchflic.com/images/flic_dialog_logo.svg`}
-                    alt={`Flic Logo`}/>
+                    src={EmpowerverseLogo}
+                    alt={`Empowerverse's Logo`}/>
             </div>
             <div className={`info`}>
                 <p className={`title`}>{props.title}</p>

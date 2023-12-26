@@ -28,3 +28,8 @@ export const getLocalStorageAuthHeader = () => {
   }
   return {};
 };
+
+export const clearLocalStorage = () => {
+  localStorage.removeItem("loggedInStatus");
+  localStorage.removeItem("user");
+};

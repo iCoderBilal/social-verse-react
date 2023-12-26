@@ -1,10 +1,11 @@
 import React from 'react'
+import logo from '../../images/empowerverse.png'
 
 export default function HorizontalLogo() {
     return (
         <img
-            src="https://shelter-cdn.nyc3.cdn.digitaloceanspaces.com/flic/flic-logo.png"
-            className="horizontal-logo" alt="Flic's Logo"
+            src={logo}
+            className="horizontal-logo" alt="Empowerverse's Logo"
         />
     )
 }

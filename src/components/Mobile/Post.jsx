@@ -1,10 +1,14 @@
-import React, {useState} from "react";
-import {useSelector} from "react-redux";
+import React, {useState, useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import PostBottomSection from "./PostBottomSection";
 import PostRightSidebar from "./PostRightSidebar";
 import {BsPlayFill} from "react-icons/all";
+import EmpowerverseThumbnail from "../../images/thumbnail.png";
+import {setShowLoginDialog, setShowSwitchToAppSuggestionDialog} from "../../store/ui";
 
 export default function Post(props) {
+
+    let dispatch = useDispatch();
 
     const {ui} = useSelector((state) => state);
     const {post} = props;
@@ -32,15 +36,15 @@ export default function Post(props) {
 
 
     const handleLikeButtonClick = () => {
-
+        dispatch(setShowSwitchToAppSuggestionDialog(true))
     }
 
     const handleCommentButtonClick = () => {
-
+        dispatch(setShowSwitchToAppSuggestionDialog(true))
     }
 
     const handleShareButtonClick = () => {
-
+        dispatch(setShowSwitchToAppSuggestionDialog(true))
     }
 
     const handleBookmarkButtonClick = () => {
@@ -69,10 +73,8 @@ export default function Post(props) {
         });
 
         if (newPosterURL === existingPosterURL) {
-            newPosterURL = "https://via.placeholder.com/720x1280/eb122d/FFFFFF?text=Flic"
+            newPosterURL = EmpowerverseThumbnail
         }
-
-        console.log(newPosterURL);
 
         videoRef.current.setAttribute('poster', newPosterURL)
     }
@@ -120,47 +122,51 @@ export default function Post(props) {
     //
     // }, [])
 
-    return <div className="post"
+    return (
+        <div className="post-container">
+            <div className="post"
                 ref={props.lastPostElementRef && props.lastPostElementRef}>
-        <video
-            ref={videoRef}
-            muted={!hasUserInteracted}
-            src={post.video_link}
-            poster={post.thumbnail_url}
-            controls={false}
-            playsInline={true}
-            onError={handleError}
-            onPlay={() => {
-                setIsVideoPlaying(true);
-                setIsBuffering(false)
-            }}
-            onPause={() => {
-                setIsVideoPlaying(false);
-                setIsBuffering(false)
-            }}
-            loop={true}
-        />
-        <PostBottomSection authorUsername={post.username}
-                           isVerified={true}
-                           authorProfilePictureURL={post.picture_url}
-                           postDescription={post.title}
-        />
-        <PostRightSidebar authorName={`${post.first_name} ${post.last_name}`}
-                          authorUsername={post.username}
-                          isFollowingAuthor={false}
-                          hasLikedPost={post.upvoted}
-                          postLikeCount={post.upvote_count}
-                          postCommentCount={post.comment_count}
-                          hasBookmarked={post.bookmarked}
-                          authorAvatarPictureURL={post.picture_url}
-                          handleLikeButtonClick={handleLikeButtonClick}
-                          handleCommentButtonClick={handleCommentButtonClick}
-                          handleShareButtonClick={handleShareButtonClick}
-                          handleBookmarkButtonClick={handleBookmarkButtonClick}
-                          handlePipButtonClick={handlePipButtonClick}
-        />
-        <div className={`video-click-container ${!isVideoPlaying && "paused"}`} onClick={toggleVideoState}>
-            <BsPlayFill color="white"/>
+                <video
+                    ref={videoRef}
+                    muted={!hasUserInteracted}
+                    src={post.video_link}
+                    poster={post.thumbnail_url}
+                    controls={false}
+                    playsInline={true}
+                    onError={handleError}
+                    onPlay={() => {
+                        setIsVideoPlaying(true);
+                        setIsBuffering(false)
+                    }}
+                    onPause={() => {
+                        setIsVideoPlaying(false);
+                        setIsBuffering(false)
+                    }}
+                    loop={true}
+                />
+                <PostBottomSection authorUsername={post.username}
+                                isVerified={true}
+                                authorProfilePictureURL={post.picture_url}
+                                postDescription={post.title}
+                />
+                <PostRightSidebar authorName={`${post.first_name} ${post.last_name}`}
+                                authorUsername={post.username}
+                                isFollowingAuthor={false}
+                                hasLikedPost={post.upvoted}
+                                postLikeCount={post.upvote_count}
+                                postCommentCount={post.comment_count}
+                                hasBookmarked={post.bookmarked}
+                                authorAvatarPictureURL={post.picture_url}
+                                handleLikeButtonClick={handleLikeButtonClick}
+                                handleCommentButtonClick={handleCommentButtonClick}
+                                handleShareButtonClick={handleShareButtonClick}
+                                handleBookmarkButtonClick={handleBookmarkButtonClick}
+                                handlePipButtonClick={handlePipButtonClick}
+                />
+                <div className={`video-click-container ${!isVideoPlaying && "paused"}`} onClick={toggleVideoState}>
+                    <BsPlayFill color="white"/>
+                </div>
+            </div>
         </div>
-    </div>
+    )
 }

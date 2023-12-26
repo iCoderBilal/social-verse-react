@@ -8,6 +8,7 @@ import {
     IoIosShareAlt,
     RiPictureInPicture2Fill
 } from "react-icons/all";
+import FollowPlusIcon from '../../images/followIcon.png';
 
 function PostRightSidebar(props) {
     return (
@@ -21,7 +22,7 @@ function PostRightSidebar(props) {
                 <div className={`icon-container`}>
                     <div className={`follow-plus`}>
                         <img alt={`follow-plus-icon`}
-                             src={`https://cdn-asset.watchflic.com/images/follow-plus-icon.svg`}/>
+                             src={FollowPlusIcon}/>
                     </div>
                 </div>
             </a>

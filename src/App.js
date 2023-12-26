@@ -4,7 +4,7 @@ import axios from "axios";
 import {Toaster} from "react-hot-toast";
 import {useDispatch, useSelector} from "react-redux";
 import {setHasUserInteracted} from "./store/ui";
-import BottomNavigation from "./components/Mobile/BottomNavigation";
+import TopNavigation from "./components/Mobile/TopNavigation";
 import Home from "./views/Mobile/Home"
 import HomeScreenShortcutSuggestionDialog from "./components/Mobile/HomeScreenShortcutSuggestionDialog";
 import LoginDialog from "./components/Mobile/LoginDialog";
@@ -17,6 +17,8 @@ import NotFound from "./views/Common/NotFound";
 import Upload from "./views/Mobile/Upload";
 import Profile from "./views/Mobile/Profile";
 import SinglePost from "./views/Mobile/SinglePost";
+import Search from "./views/Mobile/search";
+import SideNavigation from "./components/Mobile/SideNavigation";
 
 const App = (props) => {
 
@@ -25,8 +27,8 @@ const App = (props) => {
     const {hasUserInteracted} = ui;
     const dispatch = useDispatch();
 
-    axios.defaults.baseURL = "https://api.socialverseapp.com";
-    // axios.defaults.baseURL = "https://127.0.0.1:8000";
+    // axios.defaults.baseURL = "https://api.socialverseapp.com";
+    axios.defaults.baseURL = "http://127.0.0.1:8000";
 
     if (isLoggedIn) {
         axios.defaults.headers.common["Flic-Token"] = user.token;
@@ -70,6 +72,7 @@ const App = (props) => {
                     <Route exact path="/inbox" element={<Inbox/>}/>
                     <Route exact path="/auth" element={<Auth/>}/>
                     <Route exact path="/upload" element={<Upload/>}/>
+                    <Route exact path="/search" element={<Search/>}/>
                     <Route exact path="/verify" element={<Verify/>}/>
                     <Route exact path="/@:username" element={<Profile/>}/>
                     <Route exact path="/@:username/:identifier/:slug" element={<SinglePost/>}/>
@@ -78,7 +81,7 @@ const App = (props) => {
                 <HomeScreenShortcutSuggestionDialog/>
                 <LoginDialog/>
                 <SwitchToAppSuggestionDialog/>
-                <BottomNavigation/>
+                <TopNavigation/>
                 <BackDrop/>
             </BrowserRouter>
             <Toaster position="top-left"/>

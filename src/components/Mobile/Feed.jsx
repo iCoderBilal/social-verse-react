@@ -10,7 +10,7 @@ export default function Feed(props) {
     const {posts, hasMorePages, isLoading} = usePostsLoader(currentPageNumber);
     const dispatch = useDispatch();
     const lastPostObserver = useRef();
-
+    console.log(posts)
     const autoPlayObserver = useRef(new IntersectionObserver(
         (entries) => {
             for (let i = 0; i < entries.length; i++) {
@@ -55,20 +55,22 @@ export default function Feed(props) {
     );
 
     return (
-        <div className="feed" id="feed">
-            {posts.map((post, index) => {
-                if (posts.length === index + 1) {
-                    return (
-                        <Post
-                            key={post.identifier + post.slug}
-                            post={post}
-                            lastPostElementRef={lastPostElementRef}
-                        />
-                    );
-                } else {
-                    return <Post key={post.identifier + post.slug} post={post}/>;
-                }
-            })}
+        <div className="feed-container">
+            <div className="feed" id="feed">
+                {posts.map((post, index) => {
+                    if (posts.length === index + 1) {
+                        return (
+                            <Post
+                                key={post.identifier + post.slug}
+                                post={post}
+                                lastPostElementRef={lastPostElementRef}
+                            />
+                        );
+                    } else {
+                        return <Post key={post.identifier + post.slug} post={post}/>;
+                    }
+                })}
+            </div>
         </div>
     );
 

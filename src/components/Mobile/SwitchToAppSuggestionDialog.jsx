@@ -8,8 +8,9 @@ function SwitchToAppSuggestionDialog(props) {
     const dispatch = useDispatch();
     const {showSwitchToAppSuggestionDialog} = useSelector(({ui}) => ui)
 
-    const downloadFlic = () => {
-        console.log("Clicked Download Flic");
+    const downloadEmpowerverse = () => {
+        window.open('https://socialverse.page.link/empowerverse', '_blank');
+        console.log("Clicked Download Empowerverse");
     }
 
     const closeDialog = () => {
@@ -17,8 +18,8 @@ function SwitchToAppSuggestionDialog(props) {
     }
 
     const primaryButton = {
-        text: "Open Flic",
-        clickCallback: downloadFlic
+        text: "Open Empowerverse",
+        clickCallback: downloadEmpowerverse
     }
 
     const secondaryButton = {

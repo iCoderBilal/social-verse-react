@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import {useEffect} from "react";
 import axios from "axios";
 import {useDispatch, useSelector} from "react-redux";
 import {addPosts, setHasMorePages, setIsLoading, addFetchedPageNumber} from "../../store/ui";
@@ -24,7 +24,7 @@ export default function usePostsLoader(pageNumber) {
                 dispatch(addFetchedPageNumber(pageNumber));
                 dispatch(setIsLoading(false));
             });
-    }, [pageNumber]);
+    }, [dispatch, hasMorePages, isLoading, pageNumber, pagesFetched, posts]);
 
     return {isLoading, hasMorePages, posts};
 }
