@@ -18,7 +18,6 @@ export default function useCategoriesLoader(pageNumber) {
     axios
       .get("/categories?page=" + pageNumber)
       .then((response) => {
-        console.log("Axios Response:", response.data);
         dispatch(addCategories(response.data.categories));
         dispatch(setHasMorePages(response.data.categories.length === response.data.records_per_page));
       })
@@ -29,7 +28,6 @@ export default function useCategoriesLoader(pageNumber) {
         dispatch(addFetchedPageNumber(pageNumber));
         dispatch(setIsLoading(false));
       });
-      console.log("DATA IS HERE", hasMorePages, isLoading, pageNumber, pagesFetched, categories)
   }, [dispatch, hasMorePages, isLoading, pageNumber, pagesFetched, categories]);
   return { isLoading, hasMorePages, categories };
 }

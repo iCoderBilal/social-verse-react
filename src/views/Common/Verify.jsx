@@ -42,7 +42,7 @@ function Verify(props) {
             return "Failed 😔"
         }
         return <>
-            <img src="loader.gif" alt="Flic Loading Spinner"/>
+            <img src="loader.gif" alt="Empowerverse Loading Spinner"/>
             <br/>
             Checking...
         </>
@@ -66,7 +66,7 @@ function Verify(props) {
                             <button type="button" onClick={handleButtonClick}>Let's go back to home?</button>
                         </div>
                         <p className="copyright">
-                            Flic 2022
+                            Empowerverse 2023
                         </p>
                     </div>
                 </form>

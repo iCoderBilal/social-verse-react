@@ -8,7 +8,6 @@ function Search(props) {
     const { feed } = useSelector(({ cat }) => cat);
     const currentPageNumber = feed.currentPageNumber;
     const { isLoading, hasMorePages, categories } = useCategoriesLoader(currentPageNumber);
-    console.log(feed, currentPageNumber)
     const lastCategoryElementObserver = useRef();
     const dispatch = useDispatch();
 
@@ -32,7 +31,6 @@ function Search(props) {
 
     useEffect(() => {
         // When categories change, we might want to load more data
-        console.log("Categories changed:", categories);
     }, [categories]);
 
     return (

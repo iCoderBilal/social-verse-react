@@ -1,8 +1,8 @@
 {
   "name": "Empowerverse",
   "short_name": "Empowerverse",
-  "theme_color": "#f2334f",
-  "background_color": "#f2334f",
+  "theme_color": "#fff",
+  "background_color": "#fff",
   "display": "browser",
   "orientation": "portrait",
   "scope": "/",

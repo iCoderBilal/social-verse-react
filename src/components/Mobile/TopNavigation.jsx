@@ -1,30 +1,49 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
+import {useNavigate} from 'react-router';
 import { setShowLoginDialog } from '../../store/ui';
 import { setUserLoggedOut } from '../../store/auth';
 import EmpowerverseLogo from '../../images/empowerverse.png';
 import MobileSideNavigation from './SideNavigation';
 
 function MobileTopNavigation(props) {
-  let navigate = useNavigate();
   let dispatch = useDispatch();
+  let navigate = useNavigate();
 
   const { auth } = useSelector((state) => state);
   const { isLoggedIn } = auth;
-  const [isActive, setIsActive] = useState('Logout');
+  const [isActive, setIsActive] = useState('Login');
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 768);
   const [isSideNavOpen, setIsSideNavOpen] = useState(false);
 
-  const handleLogoutButtonClick = () => {
-    if (!isLoggedIn) {
-      setIsActive('Login');
-      dispatch(setShowLoginDialog(true));
-    } else {
-      dispatch(setUserLoggedOut());
-      setIsActive('Login');
-      navigate('/auth');
+  const checkLoginStatusAsync = async () => {
+
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve(isLoggedIn);
+      }, 1000);
+    });
+  };
+  const checkLoginStatus = async () => {
+    try {
+      const isLoggedIn = await checkLoginStatusAsync();
+      setIsActive(isLoggedIn ? 'Logout' : 'Login');
+    } catch (error) {
+      console.error('Error checking login status:', error);
     }
+  };
+
+  useEffect(() => {
+    checkLoginStatus();
+    return () => {
+      // Cleanup logic, if any
+    };
+  }, []); 
+
+  const handleLogoutButtonClick = () => {
+      setIsActive('Login');
+      dispatch(setUserLoggedOut());
+      navigate('/auth');
   };
 
   const downloadEmpowerverse = () => {
@@ -60,9 +79,6 @@ function MobileTopNavigation(props) {
             <div className="menu-icon" onClick={handleMenuIconClick}>
               &#9776;
             </div>
-            {/* <div className="logo" onClick={downloadEmpowerverse}>
-                <p className="header-logo">Empowerverse</p>
-            </div> */}
           </div>
         ) : (
           <div className="logo" onClick={downloadEmpowerverse}>

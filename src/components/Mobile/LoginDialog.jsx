@@ -30,8 +30,8 @@ function LoginDialog(props) {
 
     return <Dialog isVisible={showLoginDialog}
                    position={"Middle"}
-                   title={`Login to Flic`}
-                   description={`Login to follow flickers, like posts, comments, inbox and manage your profile`}
+                   title={`Login to Empowerverse`}
+                   description={`Login to follow empowervers users, like posts, comments, inbox and manage your profile`}
                    primaryButton={primaryButton}
                    secondaryButton={secondaryButton}
     />

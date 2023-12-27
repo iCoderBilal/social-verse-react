@@ -37,7 +37,7 @@ const App = (props) => {
     const renderConsoleWarning = () => {
         console.log("%cStop!", "font-size: 50px; color:red");
         console.log(
-            "%cThis is a browser feature intended for developers. If someone told you to copy-paste something here to enable a Flic feature or “hack” someone’s account, it is a scam and will give them access to your Flic account. Learn more: https://en.wikipedia.org/wiki/Self-XSS",
+            "%cThis is a browser feature intended for developers. If someone told you to copy-paste something here to enable a Empowerverse feature or “hack” someone’s account, it is a scam and will give them access to your Empowerverse account. Learn more: https://en.wikipedia.org/wiki/Self-XSS",
             "font-size: 20px;"
         );
     };
