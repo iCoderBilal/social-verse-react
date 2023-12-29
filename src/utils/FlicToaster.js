@@ -16,22 +16,42 @@ class FlicToaster {
 
     notify = (message) => {
         this.playFlicToastSound();
-        toast(message);
+        toast(message, {
+            style: {
+                marginLeft: "200px",
+                marginTop: "50px",
+            }
+        });
     };
 
     success = (message) => {
         this.playFlicToastSound();
-        toast.success(message);
+        toast.success(message, {
+            style: {
+                marginLeft: "200px",
+                marginTop: "50px",
+            }
+        });
     };
 
     error = (message) => {
         this.playFlicToastSound();
-        toast.error(message);
+        toast.error(message, {
+            style: {
+                marginLeft: "200px",
+                marginTop: "50px",
+            }
+        });
     };
 
     customJSX = (jsxContent) => {
         this.playFlicToastSound();
-        toast.custom(jsxContent);
+        toast.custom(jsxContent, {
+            style: {
+                marginLeft: "200px",
+                marginTop: "50px",
+            }
+        });
     };
 }
 

@@ -161,7 +161,10 @@
 .button-logout:focus {
   outline: none;
 }
-
+.side-navigation svg {
+  width: 25px;
+  height: 25px;
+}
 /* .side-navigation .active svg path {
   stroke: #6b0092;
 }
@@ -188,7 +191,6 @@
   margin: 12px 0 0 10px;
   font-size: 20px;
 }
-
 .top-navigation {
   background: white;
   height: 4rem;
@@ -200,6 +202,7 @@
   top: -1rem;
   z-index: 99999;
   left: 0;
+  overflow: hidden;
   /* box-shadow: 0 8px 6px -6px rgba(9, 9, 9, 0.1), 0 0 10px rgba(9, 9, 9, 0.1); */
 }
 
@@ -1369,6 +1372,9 @@ img.horizontal-logo {
     height: 100%; 
     min-height: 100vh;
     margin-bottom: 50px;
+  }
+  .verify-container, .not-found-container{
+    margin-left: 20px;
   }
   .feed-container {
     margin-left: 0px;

@@ -33,9 +33,9 @@ function NotFound(props) {
                         <div className="form-group">
                             <button type="button" onClick={handleButtonClick}>Let's go back to home?</button>
                         </div>
-                        <div className="form-group">
+                        {/* <div className="form-group">
                             <button type="button" onClick={handleLogoutButtonClick}>Logout</button>
-                        </div>
+                        </div> */}
                         <p className="copyright">
                             Empowerverse 2023
                         </p>

@@ -83,8 +83,8 @@ function MobileTopNavigation(props) {
         ) : (
           <div className="logo" onClick={downloadEmpowerverse}>
             <img
-              width={50}
-              height={50}
+              width={80}
+              height={80}
               src={EmpowerverseLogo}
               alt={`Empowerverse's Logo`}
             />
