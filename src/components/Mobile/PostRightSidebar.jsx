@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -11,7 +12,6 @@ import {
 import FollowPlusIcon from '../../images/followIcon.png';
 import {setShowSwitchToAppSuggestionDialog} from "../../store/ui";
 import {useDispatch} from "react-redux";
-import { sassNull } from 'sass';
 
 function PostRightSidebar(props) {
     const dispatch = useDispatch();
@@ -22,7 +22,7 @@ function PostRightSidebar(props) {
     return (
         <div className={`post-right-sidebar`}>
          {/* href={`/@${props.authorUsername}`}  */}
-            <a href={`/`} onClick={handleOnClick} title={`${props.authorName} (${props.authorUsername})`}
+            <a href="#" onClick={handleOnClick} title={`${props.authorName} (${props.authorUsername})`}
                className={`sidebar-avatar-container`}>
                 <span className={`flic-avatar`}>
                     <img alt={`${props.authorName} (${props.authorUsername}) Avatar`}
