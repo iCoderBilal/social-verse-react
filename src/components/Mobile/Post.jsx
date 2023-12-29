@@ -4,7 +4,7 @@ import PostBottomSection from "./PostBottomSection";
 import PostRightSidebar from "./PostRightSidebar";
 import {BsPlayFill} from "react-icons/all";
 import EmpowerverseThumbnail from "../../images/thumbnail.png";
-import {setShowLoginDialog, setShowSwitchToAppSuggestionDialog} from "../../store/ui";
+import {setShowSwitchToAppSuggestionDialog} from "../../store/ui";
 
 export default function Post(props) {
 
@@ -157,6 +157,7 @@ export default function Post(props) {
                                 postCommentCount={post.comment_count}
                                 hasBookmarked={post.bookmarked}
                                 authorAvatarPictureURL={post.picture_url}
+                                // authorAvatarPictureURL={}
                                 handleLikeButtonClick={handleLikeButtonClick}
                                 handleCommentButtonClick={handleCommentButtonClick}
                                 handleShareButtonClick={handleShareButtonClick}
