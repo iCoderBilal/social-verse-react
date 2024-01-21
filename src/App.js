@@ -27,8 +27,8 @@ const App = (props) => {
     const {hasUserInteracted} = ui;
     const dispatch = useDispatch();
 
-    // axios.defaults.baseURL = "https://api.socialverseapp.com";
-    axios.defaults.baseURL = "http://127.0.0.1:8000";
+    axios.defaults.baseURL = "https://api.socialverseapp.com";
+    // axios.defaults.baseURL = "http://127.0.0.1:8000";
 
     if (isLoggedIn) {
         axios.defaults.headers.common["Flic-Token"] = user.token;
