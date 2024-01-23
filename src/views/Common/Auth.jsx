@@ -126,8 +126,6 @@ function Auth(props) {
         return (
             <>
                 <img src="loader.gif" alt="Empowerverse Loading Spinner"/>
-                <br/>
-                Checking...
             </>
         );
     };
