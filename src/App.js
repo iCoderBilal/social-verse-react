@@ -19,6 +19,7 @@ import Profile from "./views/Mobile/Profile";
 import SinglePost from "./views/Mobile/SinglePost";
 import Search from "./views/Mobile/search";
 import SideNavigation from "./components/Mobile/SideNavigation";
+import ChangePassword from "./views/Common/ResetPassword";
 
 const App = (props) => {
 
@@ -27,8 +28,8 @@ const App = (props) => {
     const {hasUserInteracted} = ui;
     const dispatch = useDispatch();
 
-    axios.defaults.baseURL = "https://api.socialverseapp.com";
-    // axios.defaults.baseURL = "http://127.0.0.1:8000";
+    // axios.defaults.baseURL = "https://api.socialverseapp.com";
+    axios.defaults.baseURL = "http://127.0.0.1:8000";
 
     if (isLoggedIn) {
         axios.defaults.headers.common["Flic-Token"] = user.token;
@@ -74,6 +75,7 @@ const App = (props) => {
                     <Route exact path="/upload" element={<Upload/>}/>
                     <Route exact path="/search" element={<Search/>}/>
                     <Route exact path="/verify" element={<Verify/>}/>
+                    <Route exact path="/reset/finish" element={<ChangePassword/>}/>
                     <Route exact path="/@:username" element={<Profile/>}/>
                     <Route exact path="/@:username/:identifier/:slug" element={<SinglePost/>}/>
                     <Route path="*" element={<NotFound/>} status={404}/>

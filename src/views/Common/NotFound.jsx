@@ -37,7 +37,7 @@ function NotFound(props) {
                             <button type="button" onClick={handleLogoutButtonClick}>Logout</button>
                         </div> */}
                         <p className="copyright">
-                            Empowerverse 2023
+                            Empowerverse 2024
                         </p>
                     </div>
                 </form>

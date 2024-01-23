@@ -1239,6 +1239,7 @@ img.horizontal-logo {
 }
 .auth-container .form-container form .interaction-container .forgot-password-container, .verify-container .form-container form .interaction-container .forgot-password-container, .not-found-container .form-container form .interaction-container .forgot-password-container {
   text-align: right;
+  cursor: pointer;
 }
 .auth-container .form-container form .interaction-container .forgot-password-container span, .verify-container .form-container form .interaction-container .forgot-password-container span, .not-found-container .form-container form .interaction-container .forgot-password-container span {
   color: #6b0092;

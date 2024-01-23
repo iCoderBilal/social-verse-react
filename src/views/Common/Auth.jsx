@@ -12,12 +12,15 @@ function Auth(props) {
 
     const loginFormName = 'LOGIN';
     const registerFormName = 'REGISTER';
+    const forgotPasswordFormName = "FORGOT PASSWORD"
 
     const dispatch = useDispatch();
     const {auth} = useSelector(state => state);
 
     const [isSubmitLoading, setIsSubmitLoading] = useState(false);
     const [formName, setFormName] = useState(loginFormName);
+    const [changeStatus, setChangeStatus] = useState(null);
+    const [loader, setLoader] = useState(false);
 
     if (auth.isLoggedIn) {
         return <Navigate to="/"/>
@@ -40,6 +43,28 @@ function Auth(props) {
                 FlicToaster.error("It's not you, it's us. We are sorry, something went wrong on our end.");
             })
             .finally(() => {
+                setLoader(false);
+                setIsSubmitLoading(false);
+            });
+    }
+
+    const handleForgotPasswordFormSubmit = (formData) => {
+        setIsSubmitLoading(true);
+        axios
+            .post("/auth/credentials/reset/start", formData)
+            .then((response) => {
+                if (response.data.status === "success") {
+                    FlicToaster.success("A reset-link is sent to your email address, please check your inbox");
+                    setChangeStatus(true);
+                } else {
+                    FlicToaster.error(response.data.message);
+                }
+            })
+            .catch((response) => {
+                FlicToaster.error("It's not you, it's us. We are sorry, something went wrong on our end.");
+            })
+            .finally(() => {
+                setLoader(false);
                 setIsSubmitLoading(false);
             });
     }
@@ -60,6 +85,7 @@ function Auth(props) {
                 FlicToaster.error("We are sorry. Something went wrong.");
             })
             .finally(() => {
+                setLoader(false);
                 setIsSubmitLoading(false);
             });
     }
@@ -67,6 +93,7 @@ function Auth(props) {
     const handleFormSubmit = (formSubmitEvent) => {
         formSubmitEvent.preventDefault();
         const formData = new FormData(formSubmitEvent.currentTarget);
+        setLoader(true);
         switch (formName) {
             case loginFormName:
                 handleLoginFormSubmit(formData)
@@ -75,15 +102,44 @@ function Auth(props) {
                 handleRegisterFormSubmit(formData)
                 break;
             //Todo: Add Forgot Password
+            case forgotPasswordFormName:
+                handleForgotPasswordFormSubmit(formData)
             default:
         }
     }
+
+    const getPasswordFormFieldsJsx = () => {
+        return <>
+            <div className="form-group">
+                <input type="text" name="mixed" placeholder="Enter your username / email" required/>
+            </div>
+        </>
+    }
+
+    const getStatusResponse = () => {
+        if (changeStatus === true && formName === forgotPasswordFormName) {
+            return "A reset-link is sent to your email address, please check your inbox";
+        }
+        if (changeStatus === false && formName === forgotPasswordFormName) {
+            return "Failed 😔";
+        }
+        return (
+            <>
+                <img src="loader.gif" alt="Empowerverse Loading Spinner"/>
+                <br/>
+                Checking...
+            </>
+        );
+    };
 
     const getFormFieldsJsx = () => {
         if (formName === loginFormName) {
             return getLoginFormFieldsJsx();
         }
-        return getRegisterFormFieldsJsx();
+        if (formName === registerFormName) {
+            return getRegisterFormFieldsJsx();
+        }
+        return getPasswordFormFieldsJsx();
     }
 
     const getHeadingContainerJsx = () => {
@@ -104,6 +160,10 @@ function Auth(props) {
             </div>
             <div className="form-group">
                 <input type="password" name="password" placeholder="Your password" required/>
+            </div>
+
+            <div className="forgot-password-container">
+                <span onClick={() => setFormName(forgotPasswordFormName)}>Forgot your password?</span>
             </div>
         </>
     }
@@ -137,7 +197,8 @@ function Auth(props) {
         <div className="auth-container">
             <LeftPaneImage/>
             <div className="form-container">
-                <form onSubmit={handleFormSubmit}>
+                <form onSubmit={handleFormSubmit}> 
+                    {loader ? getStatusResponse() : ""}
                     <HorizontalLogo/>
                     <div className="heading-container">
                         <h2>{formName.toLowerCase()}</h2>
@@ -146,9 +207,6 @@ function Auth(props) {
                     <div className="interaction-container">
                         {getFormFieldsJsx()}
                         {getFormSubmitButton()}
-                        <div className="forgot-password-container">
-                            <span>Forgot your password?</span>
-                        </div>
                         <p className="legal-links-container">
                             By continuing you accept our{" "}
                             <span>Terms of Use</span>{" "}

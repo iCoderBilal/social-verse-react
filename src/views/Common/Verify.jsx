@@ -66,7 +66,7 @@ function Verify(props) {
                             <button type="button" onClick={handleButtonClick}>Let's go back to home?</button>
                         </div>
                         <p className="copyright">
-                            Empowerverse 2023
+                            Empowerverse {new Date().getFullYear()}
                         </p>
                     </div>
                 </form>
