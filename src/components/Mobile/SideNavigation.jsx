@@ -1,23 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { HomeIcon, SearchIcon, UserIcon } from "@heroicons/react/outline";
-import { useNavigate } from 'react-router';
+import { LuLayoutDashboard } from "react-icons/lu";
+import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { setShowLoginDialog, setShowSwitchToAppSuggestionDialog } from "../../store/ui";
+import { MdOutlineVideoSettings } from "react-icons/md";
+
+import EmpowerverseLogo from "../../images/empowerverse.png";
+import {
+  setShowLoginDialog,
+  setShowSwitchToAppSuggestionDialog,
+} from "../../store/ui";
 import { setUserLoggedOut } from "../../store/auth";
 
 function MobileSideNavigation({ isOpen, onClose }) {
-
   let navigate = useNavigate();
   let dispatch = useDispatch();
 
-  const [active, setActive] = useState('home');
+  const [active, setActive] = useState("home");
   const { auth } = useSelector((state) => state);
   const { isLoggedIn } = auth;
-  const [isActive, setIsActive] = useState('Login');
+  const [isActive, setIsActive] = useState("Login");
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 768);
 
   const checkLoginStatusAsync = async () => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       setTimeout(() => {
         resolve(isLoggedIn);
       }, 1000);
@@ -27,9 +33,9 @@ function MobileSideNavigation({ isOpen, onClose }) {
   const checkLoginStatus = async () => {
     try {
       const isLoggedIn = await checkLoginStatusAsync();
-      setIsActive(isLoggedIn ? 'Logout' : 'Login');
+      setIsActive(isLoggedIn ? "Logout" : "Login");
     } catch (error) {
-      console.error('Error checking login status:', error);
+      console.error("Error checking login status:", error);
     }
   };
 
@@ -39,67 +45,105 @@ function MobileSideNavigation({ isOpen, onClose }) {
       setIsMobileView(window.innerWidth <= 768);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
   const handleHomeNavigationClick = () => {
     setActive("home");
     onClose();
-    navigate('/');
-  }
+    navigate("/");
+  };
 
   const handleSearchNavigationClick = () => {
     setActive("search");
     // if (!isLoggedIn) {
     //   dispatch(setShowLoginDialog(true));
     // } else {
-      onClose();
-      navigate('/search');
+    onClose();
+    navigate("/search");
     // }
-  }
+  };
 
   const handleProfileNavigationClick = () => {
     setActive("profile");
     onClose();
-    dispatch(setShowSwitchToAppSuggestionDialog(true))
+    dispatch(setShowSwitchToAppSuggestionDialog(true));
     // if (!isLoggedIn) {
     //     dispatch(setShowLoginDialog(true));
     // } else {
     //     navigate('/@' + user.username)
     // }
-  }
+  };
+  const handleAdminNavigationClick = () => {
+    setActive("admin");
+    onClose();
+    navigate("/admin/dashboard");
+  };
 
   const handleLogoutButtonClick = () => {
     onClose();
-    setIsActive("Login")
+    setIsActive("Login");
     dispatch(setUserLoggedOut());
-    navigate('/auth');
-  }
+    navigate("/auth");
+  };
+  const downloadEmpowerverse = () => {
+    window.open("https://socialverse.page.link/empowerverse", "_blank");
+    console.log("Clicked Download Empowerverse");
+  };
 
   return (
-    <div className={`side-navigation ${isOpen ? 'open' : ''}`}>
-      <div className={`nav-item ${active === 'home' ? 'active' : ''}`} onClick={handleHomeNavigationClick}>
-        <HomeIcon />
-        <p className="nav-text">Home</p>
-      </div>
-      <div className={`nav-item ${active === 'search' ? 'active' : ''}`} onClick={handleSearchNavigationClick}>
-        <SearchIcon />
-        <p className="nav-text">Search</p>
-      </div>
-      <div className={`nav-item ${active === 'profile' ? 'active' : ''}`} onClick={handleProfileNavigationClick}>
-        <UserIcon />
-        <p className="nav-text">Profile</p>
-      </div>
-      {isMobileView ? (
-        <div className="nav-item logout ">
-          <button type="button" className="button-logout" onClick={handleLogoutButtonClick}>{isActive}</button>
+    <>
+      <div className={`side-navigation ${isOpen ? "open" : ""}`}>
+        <div
+          className={`nav-item ${active === "home" ? "active" : ""}`}
+          onClick={handleHomeNavigationClick}
+        >
+          <HomeIcon />
+          <p className="nav-text">Home</p>
         </div>
-      ) : null}
-    </div>
+        <div
+          className={`nav-item ${active === "search" ? "active" : ""}`}
+          onClick={handleSearchNavigationClick}
+        >
+          <SearchIcon />
+          <p className="nav-text">Search</p>
+        </div>
+        <div
+          className={`nav-item ${active === "profile" ? "active" : ""}`}
+          onClick={handleProfileNavigationClick}
+        >
+          <UserIcon />
+          <p className="nav-text">Profile</p>
+        </div>
+        {auth.user.role === "A" ? (
+          <div
+            className={`nav-item ${active === "admin" ? "active" : ""}`}
+            onClick={handleAdminNavigationClick}
+          >
+            <LuLayoutDashboard />
+            <p className="nav-text">Admin</p>
+          </div>
+        ) : (
+          ""
+        )}
+
+        {isMobileView ? (
+          <div className="nav-item logout ">
+            <button
+              type="button"
+              className="button-logout"
+              onClick={handleLogoutButtonClick}
+            >
+              {isActive}
+            </button>
+          </div>
+        ) : null}
+      </div>
+    </>
   );
 }
 
