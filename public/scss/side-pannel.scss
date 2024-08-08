@@ -1,0 +1,70 @@
+
+
+.side-navigation {
+
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0px 0;
+    position: fixed;
+    width: 200px;
+    max-width: "10%";
+    top: 48px;
+    height: 100%;
+    z-index: 99999;
+    left: 0;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), 4px 0 6px -4px rgba(0, 0, 0, 0.1); */
+  }
+  .nav-item.logout {
+    margin-top: auto;
+  }
+  .side-navigation a {
+    display: grid;
+    min-width: 38px;
+  }
+  
+  .side-navigation svg {
+    margin: 10px 0 0 10px;
+    max-width: 38px;
+  }
+  
+  .side-navigation svg path {
+    stroke: black;
+  }
+  .button-logout {
+    width: 100%;
+    padding: 10px 30px; 
+    border: none;
+    background-color: #6b0092; 
+    color: white;
+    cursor: pointer; 
+    outline: none;
+    border-radius: 10px;
+  }
+  .button-logout button {
+    color: white;
+  }
+  .nav-item.logout {
+    margin-top: auto; 
+    margin-bottom: 50px;
+  }
+  .button-logout:hover {
+    background-color: #940cc5;
+  }
+  
+  .button-logout:focus {
+    outline: none;
+  }
+  .side-navigation svg {
+    width: 25px;
+    height: 25px;
+  }
+  /* .side-navigation .active svg path {
+    stroke: #6b0092;
+  }
+  
+  .side-navigation .active p {
+    stroke: #6b0092;
+  } */
+  

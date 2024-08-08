@@ -3,8 +3,8 @@
 
 .auth-container, .verify-container, .not-found-container {
   display: flex;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
 
   .form-container {
@@ -87,6 +87,7 @@
 
           span {
             color: #6b0092;
+            cursor: pointer;
           }
         }
 

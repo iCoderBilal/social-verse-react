@@ -7,14 +7,19 @@
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 
-  input, button {
+  button {
     tab-size: 4;
     -webkit-text-size-adjust: 100%;
     box-sizing: border-box;
     font-family: inherit;
     margin: 0;
     width: 100%;
+    border-color: #6b0092;
     background-color: #6b0092;
+    &:hover {
+      background-color: #6b0092ce;
+      border-color: #6b0092;
+    }
   }
 
   input {
@@ -68,4 +73,12 @@ form.loading, .form.loading {
   .form-group {
     @extend .form-group-loading
   }
+}
+.form-group input, .form-group textarea, .form-group button {
+  tab-size: 4;
+  -webkit-text-size-adjust: 100%;
+  box-sizing: border-box;
+  font-family: inherit;
+  margin: 0;
+  width: 100%;
 }

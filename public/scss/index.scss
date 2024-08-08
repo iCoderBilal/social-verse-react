@@ -1,7 +1,9 @@
 @import "include-media";
 @import "animation";
-@import "bottom-navigation";
+@import "side-pannel";
+@import "top-nav";
 @import "feed";
+@import "bottom-navigation";
 @import "backdrop";
 @import "dialogs";
 @import "left-pane-image";
@@ -9,8 +11,11 @@
 @import "auth";
 @import "app-page";
 @import "upload";
+@import "search";
 @import "profile";
-
+@import "admin";
+@import "side-pannel";
+@import "custom-media";
 
 *::-webkit-scrollbar {
   background: transparent;
@@ -49,7 +54,35 @@ body {
   -webkit-overflow-scrolling: touch;
   //overscroll-behavior: contain;
 }
+.container{
+  width: 100vw;
+  display: flex;
+  height: 100%;
+  min-height: 100vh;
 
+ .side-bar{
+
+
+  position: relative;
+  width: 200px;
+  height: inherit;
+  min-height: 100vh;
+ }
+ .main-container {
+  width: calc(100% - 200px);
+  height: inherit;
+  min-height: 100vh;
+  overflow-y: auto;
+ }
+
+}
+.overlay{
+  height: 100%;
+  position: absolute;
+  width: 100%;
+   z-index: 9999; 
+  background: rgba(128, 128, 128, 0.397);
+}
 a {
   -webkit-text-decoration: none;
   text-decoration: none;
