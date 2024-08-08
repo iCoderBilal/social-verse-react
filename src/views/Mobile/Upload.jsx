@@ -2,13 +2,13 @@ import React, {useState} from 'react';
 import {useSelector} from "react-redux";
 import {Navigate, useNavigate} from "react-router";
 import UploadProgressCircle from "../../components/Common/UploadProgressCircle";
-import {BsUpload} from "react-icons/all";
+import {BsUpload} from "react-icons/bs";
 import axios from "axios";
 import FlicToaster from "../../utils/FlicToaster";
 
 function Upload(props) {
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const {isLoggedIn, user} = useSelector(state => state.auth);
 
 
