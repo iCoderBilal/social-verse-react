@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import LeftPaneImage from "../../components/Common/LeftPaneImage";
 import HorizontalLogo from "../../components/Common/HorizontalLogo";
 import {useNavigate} from "react-router";
 import {useDispatch} from "react-redux";
 import { setUserLoggedOut } from "../../store/auth";
+import MobileTopNavigation from "../../components/Mobile/TopNavigation";
+import MobileSideNavigation from "../../components/Mobile/SideNavigation";
 
 
 function NotFound(props) {
 
     const navigate = useNavigate();
     let dispatch = useDispatch();
-
+    const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 768);
+    const [isSideNavOpen, setIsSideNavOpen] = useState(false);
     const handleButtonClick = () => {
         navigate("/");
     }
@@ -20,7 +23,33 @@ function NotFound(props) {
         dispatch(setUserLoggedOut());
         navigate('/auth')
     }
+    const handleNavigationClick = () => {
+        setIsSideNavOpen(false);
+      };
     return (
+        <>
+         <MobileTopNavigation
+        isSideNavOpen={isSideNavOpen}
+        setIsSideNavOpen={setIsSideNavOpen}
+      />
+
+<div className="container">
+      <div style={{display : `${isSideNavOpen ? 'block' : 'none'} `}} onClick={()=> setIsSideNavOpen(false)} className="overlay"></div>
+        <aside className="side-bar">
+          {isMobileView ? null : (
+            <MobileSideNavigation
+              isOpen={isSideNavOpen}
+              onClose={handleNavigationClick}
+            />
+          )}
+          {isSideNavOpen && (
+            <MobileSideNavigation
+              isOpen={isSideNavOpen}
+              onClose={handleNavigationClick}
+            />
+          )}
+        </aside>
+        <main className="main-container">
         <div className="not-found-container">
             <LeftPaneImage/>
             <div className="form-container">
@@ -43,6 +72,12 @@ function NotFound(props) {
                 </form>
             </div>
         </div>
+        </main>
+      </div>
+      
+        
+        </>
+   
     );
 }
 
