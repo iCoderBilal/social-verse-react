@@ -1,5 +1,6 @@
 import React, {useLayoutEffect, useState} from 'react';
-import {IoBookmarkOutline, IoHeartOutline, IoPlayOutline} from "react-icons/all";
+import { IoHeartOutline, } from "react-icons/io";
+import {IoBookmarkOutline , IoPlayOutline} from "react-icons/io5"
 import {useSelector} from "react-redux";
 import axios from "axios";
 import {useNavigate, useParams} from "react-router";
