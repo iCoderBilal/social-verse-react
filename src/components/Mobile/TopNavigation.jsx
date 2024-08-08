@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {useNavigate} from 'react-router';
-import { setShowLoginDialog } from '../../store/ui';
 import { setUserLoggedOut } from '../../store/auth';
 import EmpowerverseLogo from '../../images/empowerverse.png';
-import MobileSideNavigation from './SideNavigation';
+import { RxCross1 } from "react-icons/rx";
+import { GiHamburgerMenu } from "react-icons/gi";
 
-function MobileTopNavigation(props) {
+
+function MobileTopNavigation({setIsSideNavOpen , isSideNavOpen}) {
   let dispatch = useDispatch();
   let navigate = useNavigate();
 
@@ -14,8 +15,6 @@ function MobileTopNavigation(props) {
   const { isLoggedIn } = auth;
   const [isActive, setIsActive] = useState('Login');
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 768);
-  const [isSideNavOpen, setIsSideNavOpen] = useState(false);
-
   const checkLoginStatusAsync = async () => {
 
     return new Promise(resolve => {
@@ -52,12 +51,9 @@ function MobileTopNavigation(props) {
   };
 
   const handleMenuIconClick = () => {
-    setIsSideNavOpen(!isSideNavOpen);
+    setIsSideNavOpen(!isSideNavOpen)
   };
 
-  const handleNavigationClick = () => {
-    setIsSideNavOpen(false);
-  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -77,7 +73,7 @@ function MobileTopNavigation(props) {
         {isMobileView ? (
           <div className="logo">
             <div className="menu-icon" onClick={handleMenuIconClick}>
-              &#9776;
+              {isSideNavOpen ? <RxCross1 /> :   <GiHamburgerMenu/>}
             </div>
           </div>
         ) : (
@@ -104,13 +100,6 @@ function MobileTopNavigation(props) {
           </div>
         )}
       </div>
-      {isMobileView ? null : (
-        <MobileSideNavigation
-          isOpen={isSideNavOpen}
-          onClose={handleNavigationClick}
-        />
-        )}
-      {isSideNavOpen && <MobileSideNavigation isOpen={isSideNavOpen} onClose={handleNavigationClick} />}
     </div>
   );
 }
