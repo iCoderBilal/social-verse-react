@@ -6,24 +6,29 @@ import LeftPaneImage from "../../components/Common/LeftPaneImage";
 import FlicToaster from "../../utils/FlicToaster";
 import {setLocalStorageUser} from "../../utils/UserLocalStorageHelper";
 import RightArrowIcon from "../../components/Common/RightArrowIcon";
-import {Navigate} from "react-router-dom";
+import {Navigate, useNavigate} from "react-router-dom";
+import MobileTopNavigation from "../../components/Mobile/TopNavigation";
+import MobileSideNavigation from "../../components/Mobile/SideNavigation";
 
 function Auth(props) {
 
     const loginFormName = 'LOGIN';
     const registerFormName = 'REGISTER';
     const forgotPasswordFormName = "FORGOT PASSWORD"
-
+    let navigate = useNavigate();
+    const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 768);
+    const [isSideNavOpen, setIsSideNavOpen] = useState(false);
+  
     const dispatch = useDispatch();
-    const {auth} = useSelector(state => state);
+    const {user , isLoggedIn} = useSelector(state => state.auth);
 
     const [isSubmitLoading, setIsSubmitLoading] = useState(false);
     const [formName, setFormName] = useState(loginFormName);
     const [changeStatus, setChangeStatus] = useState(null);
     const [loader, setLoader] = useState(false);
 
-    if (auth.isLoggedIn) {
-        return <Navigate to="/"/>
+    if (isLoggedIn) {
+       <Navigate to={'/admin/dashboard'}/>
     }
 
     const handleLoginFormSubmit = (formData) => {
@@ -34,7 +39,7 @@ function Auth(props) {
                 if (response.data.status === "success") {
                     FlicToaster.success("Login success! :D");
                     setLocalStorageUser(response.data);
-                    window.location.replace(window.location.origin);
+                    window.location.replace(window.location.href = "/admin/dashboard");
                 } else {
                     FlicToaster.error(response.data.message);
                 }
@@ -189,9 +194,35 @@ function Auth(props) {
             <button className={isSubmitLoading && "loading"}>Continue <RightArrowIcon/></button>
         </div>
     }
-
-
+  
+    const handleNavigationClick = () => {
+        setIsSideNavOpen(false);
+      };
+    
     return (
+
+        <>
+     <MobileTopNavigation
+        isSideNavOpen={isSideNavOpen}
+        setIsSideNavOpen={setIsSideNavOpen}
+      />
+           <div className="container">
+      <div style={{display : `${isSideNavOpen ? 'block' : 'none'} `}} onClick={()=> setIsSideNavOpen(false)} className="overlay"></div>
+        <aside className="side-bar">
+          {isMobileView ? null : (
+            <MobileSideNavigation
+              isOpen={isSideNavOpen}
+              onClose={handleNavigationClick}
+            />
+          )}
+          {isSideNavOpen && (
+            <MobileSideNavigation
+              isOpen={isSideNavOpen}
+              onClose={handleNavigationClick}
+            />
+          )}
+        </aside>
+        <main className="main-container">
         <div className="auth-container">
             <LeftPaneImage/>
             <div className="form-container">
@@ -216,6 +247,11 @@ function Auth(props) {
                 </form>
             </div>
         </div>
+        </main>
+      </div>
+     
+        </>
+
     );
 }
 
