@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import PostBottomSection from "./PostBottomSection";
 import PostRightSidebar from "./PostRightSidebar";
-import {BsPlayFill} from "react-icons/all";
+import {BsPlayFill} from "react-icons/bs";
 import EmpowerverseThumbnail from "../../images/thumbnail.png";
 import {setShowSwitchToAppSuggestionDialog} from "../../store/ui";
 
