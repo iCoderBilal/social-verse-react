@@ -1,11 +1,11 @@
-import React, {useEffect} from "react";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import axios from "axios";
-import {Toaster} from "react-hot-toast";
-import {useDispatch, useSelector} from "react-redux";
-import {setHasUserInteracted} from "./store/ui";
+import { Toaster } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { setHasUserInteracted } from "./store/ui";
 import TopNavigation from "./components/Mobile/TopNavigation";
-import Home from "./views/Mobile/Home"
+import Home from "./views/Mobile/Home";
 import HomeScreenShortcutSuggestionDialog from "./components/Mobile/HomeScreenShortcutSuggestionDialog";
 import LoginDialog from "./components/Mobile/LoginDialog";
 import SwitchToAppSuggestionDialog from "./components/Mobile/SwitchToAppSuggestionDialog";
@@ -20,75 +20,86 @@ import SinglePost from "./views/Mobile/SinglePost";
 import Search from "./views/Mobile/search";
 import SideNavigation from "./components/Mobile/SideNavigation";
 import ChangePassword from "./views/Common/ResetPassword";
-
+import Dashboard from "./views/Common/admin/Dashboard";
 const App = (props) => {
+  const { auth, ui } = useSelector((state) => state);
+  const { isLoggedIn, user } = auth;
+  const { hasUserInteracted } = ui;
+  const [isAdmin, setAdmin ] = useState(user.role);
+  const dispatch = useDispatch();
 
-    const {auth, ui} = useSelector((state) => state);
-    const {isLoggedIn, user} = auth;
-    const {hasUserInteracted} = ui;
-    const dispatch = useDispatch();
+  axios.defaults.baseURL = "https://api.socialverseapp.com";
+  // axios.defaults.baseURL = "http://127.0.0.1:8000";
 
-    axios.defaults.baseURL = "https://api.socialverseapp.com";
-    // axios.defaults.baseURL = "http://127.0.0.1:8000";
 
-    if (isLoggedIn) {
-        axios.defaults.headers.common["Flic-Token"] = user.token;
-    }
+  if (isLoggedIn) {
+    axios.defaults.headers.common["Flic-Token"] = user.token;
+  }
 
-    const renderConsoleWarning = () => {
-        console.log("%cStop!", "font-size: 50px; color:red");
-        console.log(
-            "%cThis is a browser feature intended for developers. If someone told you to copy-paste something here to enable a Empowerverse feature or “hack” someone’s account, it is a scam and will give them access to your Empowerverse account. Learn more: https://en.wikipedia.org/wiki/Self-XSS",
-            "font-size: 20px;"
-        );
-    };
-
-    const userClickObserver = () => {
-        window.addEventListener(
-            "click",
-            () => dispatch(setHasUserInteracted(true)),
-            {once: true});
-    };
-
-    const startViewportHeightCalculator = () => {
-        const calculateAndSetHeight = () => {
-            const vh = window.innerHeight * 0.01;
-            document.documentElement.style.setProperty('--real-vh', `${vh}px`);
-        }
-        window.addEventListener('resize', calculateAndSetHeight)
-        calculateAndSetHeight();
-    }
-
-    useEffect(() => {
-        startViewportHeightCalculator();
-        renderConsoleWarning();
-        userClickObserver();
-    }, []);
-
-    return (
-        <>
-            <BrowserRouter>
-                <Routes>
-                    <Route exact path="/" element={<Home/>}/>
-                    <Route exact path="/inbox" element={<Inbox/>}/>
-                    <Route exact path="/auth" element={<Auth/>}/>
-                    <Route exact path="/upload" element={<Upload/>}/>
-                    <Route exact path="/search" element={<Search/>}/>
-                    <Route exact path="/verify" element={<Verify/>}/>
-                    <Route exact path="/reset/finish" element={<ChangePassword/>}/>
-                    <Route exact path="/@:username" element={<Profile/>}/>
-                    <Route exact path="/@:username/:identifier/:slug" element={<SinglePost/>}/>
-                    <Route path="*" element={<NotFound/>} status={404}/>
-                </Routes>
-                <HomeScreenShortcutSuggestionDialog/>
-                <LoginDialog/>
-                <SwitchToAppSuggestionDialog/>
-                <TopNavigation/>
-                <BackDrop/>
-            </BrowserRouter>
-            <Toaster position="top-left"/>
-        </>
+  const renderConsoleWarning = () => {
+    console.log("%cStop!", "font-size: 50px; color:red");
+    console.log(
+      "%cThis is a browser feature intended for developers. If someone told you to copy-paste something here to enable a Empowerverse feature or “hack” someone’s account, it is a scam and will give them access to your Empowerverse account. Learn more: https://en.wikipedia.org/wiki/Self-XSS",
+      "font-size: 20px;"
     );
+  };
+
+  const userClickObserver = () => {
+    window.addEventListener(
+      "click",
+      () => dispatch(setHasUserInteracted(true)),
+      { once: true }
+    );
+  };
+
+  const startViewportHeightCalculator = () => {
+    const calculateAndSetHeight = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty("--real-vh", `${vh}px`);
+    };
+    window.addEventListener("resize", calculateAndSetHeight);
+    calculateAndSetHeight();
+  };
+
+  useEffect(() => {
+    startViewportHeightCalculator();
+    renderConsoleWarning();
+    userClickObserver();
+  }, []);
+
+  return (
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/inbox" elRedirectement={<Inbox />} />
+          <Route exact path="/auth" element={<Auth />} />
+          <Route exact path="/upload" element={<Upload />} />
+          <Route exact path="/search" element={<Search />} />
+          <Route exact path="/verify" element={<Verify />} />
+          <Route exact path="/reset/finish" element={<ChangePassword />} />
+          <Route exact path="/@:username" element={<Profile />} />
+          <Route
+            exact
+            path="/@:username/:identifier/:slug"
+            element={<SinglePost />}
+          />
+
+          {/* Admin Routes */}
+          <Route
+          path="/admin/dashboard"
+          element={isAdmin === "A" ? <Dashboard /> : <Navigate to="/" />}
+        />
+          <Route path="*" element={<NotFound />} status={404} />
+        </Routes>
+        <HomeScreenShortcutSuggestionDialog />
+        <LoginDialog />
+        <SwitchToAppSuggestionDialog />
+        <BackDrop />
+      </BrowserRouter>
+      <Toaster position="top-left" />
+    </>
+  );
 };
 
 export default App;

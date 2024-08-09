@@ -5,10 +5,10 @@ import {
     BsFillChatDotsFill,
     BsFillChatSquareDotsFill, BsFillHeartFill,
     BsHeart,
-    BsShareFill,
-    IoIosShareAlt,
-    RiPictureInPicture2Fill
-} from "react-icons/all";
+    BsShareFill
+} from "react-icons/bs";
+import {IoIosShareAlt} from "react-icons/io"
+import { RiPictureInPicture2Fill} from "react-icons/ri"
 import FollowPlusIcon from '../../images/followIcon.png';
 import {setShowSwitchToAppSuggestionDialog} from "../../store/ui";
 import {useDispatch} from "react-redux";
