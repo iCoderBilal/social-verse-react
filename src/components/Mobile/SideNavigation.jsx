@@ -78,11 +78,11 @@ function MobileSideNavigation({ isOpen, onClose }) {
     //     navigate('/@' + user.username)
     // }
   };
-  const handleAdminNavigationClick = () => {
-    setActive("admin");
-    onClose();
-    navigate("/admin/dashboard");
-  };
+  // const handleAdminNavigationClick = () => {
+  //   setActive("admin");
+  //   onClose();
+  //   navigate("/admin/dashboard");
+  // };
 
   const handleLogoutButtonClick = () => {
     onClose();
@@ -119,7 +119,7 @@ function MobileSideNavigation({ isOpen, onClose }) {
           <UserIcon />
           <p className="nav-text">Profile</p>
         </div>
-        {auth.user.role === "A" ? (
+        {/* {auth.user.role === "A" ? (
           <div
             className={`nav-item ${active === "admin" ? "active" : ""}`}
             onClick={handleAdminNavigationClick}
@@ -129,7 +129,7 @@ function MobileSideNavigation({ isOpen, onClose }) {
           </div>
         ) : (
           ""
-        )}
+        )} */}
 
         {isMobileView ? (
           <div className="nav-item logout ">
