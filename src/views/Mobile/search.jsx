@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
-import { SearchIcon } from "@heroicons/react/outline";
+import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import CategoryBox from '../../components/Mobile/CategoryBox';
 import {setShowSwitchToAppSuggestionDialog} from "../../store/ui";
 import MobileTopNavigation from '../../components/Mobile/TopNavigation';
@@ -47,7 +47,7 @@ function Search(props) {
                 <div className="search-bar">
                     <form>
                         <input  onClick={handleSearchClick} type='text' className='form-group' placeholder='Search Empowerverse' />
-                        <SearchIcon className='category-search-icon' />
+                        <MagnifyingGlassIcon className='category-search-icon' />
                     </form>
                 </div>
                 <CategoryBox />
