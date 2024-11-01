@@ -10,7 +10,7 @@ export default function useCategoriesLoader(pageNumber) {
 
   useEffect(() => {
     if (!hasMorePages || pagesFetched.includes(pageNumber)) {
-      return { isLoading, hasMorePages, categories };
+      return;
     }
 
     dispatch(setIsLoading(true));

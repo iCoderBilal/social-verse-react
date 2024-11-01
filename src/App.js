@@ -20,7 +20,7 @@ import SinglePost from "./views/Mobile/SinglePost";
 import Search from "./views/Mobile/search";
 import SideNavigation from "./components/Mobile/SideNavigation";
 import ChangePassword from "./views/Common/ResetPassword";
-// import Dashboard from "./views/Common/admin/Dashboard";
+import Dashboard from "./views/Common/admin/Dashboard";
 const App = (props) => {
   const { auth, ui } = useSelector((state) => state);
   const { isLoggedIn, user } = auth;
@@ -86,10 +86,10 @@ const App = (props) => {
           />
 
           {/* Admin Routes */}
-          {/* <Route
+          <Route
           path="/admin/dashboard"
           element={isAdmin === "A" ? <Dashboard /> : <Navigate to="/" />}
-        /> */}
+        />
           <Route path="*" element={<NotFound />} status={404} />
         </Routes>
         <HomeScreenShortcutSuggestionDialog />

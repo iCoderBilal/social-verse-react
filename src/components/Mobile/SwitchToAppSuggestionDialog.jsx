@@ -10,7 +10,7 @@ function SwitchToAppSuggestionDialog(props) {
 
     const downloadEmpowerverse = () => {
         window.open('https://socialverse.page.link/empowerverse', '_blank');
-        console.log("Clicked Download Empowerverse");
+        // console.log("Clicked Download Empowerverse");
     }
 
     const closeDialog = () => {
