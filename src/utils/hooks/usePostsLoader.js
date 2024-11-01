@@ -11,7 +11,7 @@ export default function usePostsLoader(pageNumber) {
 
     useEffect(() => {
         if (!hasMorePages || pagesFetched.includes(pageNumber)) {
-            return {isLoading, hasMorePages, posts};
+            return;
         }
         dispatch(setIsLoading(true));
         axios
@@ -19,6 +19,9 @@ export default function usePostsLoader(pageNumber) {
             .then((response) => {
                 dispatch(addPosts(response.data.posts))
                 dispatch(setHasMorePages(response.data.posts.length === response.data.records_per_page))
+            })
+            .catch((error) => {
+                console.error("Error fetching posts");
             })
             .finally(() => {
                 dispatch(addFetchedPageNumber(pageNumber));
