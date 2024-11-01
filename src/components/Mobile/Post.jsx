@@ -68,7 +68,7 @@ export default function Post(props) {
         trickleDownMap.set("0000005.jpg", "0000002.jpg")
 
         trickleDownMap.forEach((value, key, map) => {
-            console.log("Looping");
+            // console.log("Looping");
             newPosterURL = newPosterURL.replace(key, value);
         });
 

@@ -10,7 +10,6 @@ export default function Feed(props) {
     const {posts, hasMorePages, isLoading} = usePostsLoader(currentPageNumber);
     const dispatch = useDispatch();
     const lastPostObserver = useRef();
-    console.log(posts)
     const autoPlayObserver = useRef(new IntersectionObserver(
         (entries) => {
             for (let i = 0; i < entries.length; i++) {
