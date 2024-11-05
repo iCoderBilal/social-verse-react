@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from "react";
-import {
-  BarChart,
-  PieChart,
-} from "../../../components/Common/Chart";
 import Loader from "../../../components/Common/Loader";
-import Widgets from "../../../components/Common/Widgest";
 import MobileTopNavigation from "../../../components/Mobile/TopNavigation";
 import MobileSideNavigation from "../../../components/Mobile/SideNavigation";
 import useAdminDataLoader from "../../../utils/hooks/useAdminDataLoader";
+import UserAnalytics from "./UserAnalytics";
+import SubscriptionAnalytics from "./SubscriptionAnalytics";
+import ReportAnalytics from "./ReportAnalytics";
+import NotificationAnalytics from "./NotificationAnalytics";
+import ContentAnalytics from "./ContentAnalytics";
+import WalletAnalytics from "./WalletAnalytics";
 
 function Dashboard() {
   const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 768);
   const [isSideNavOpen, setIsSideNavOpen] = useState(false);
   const { data, isLoading } = useAdminDataLoader();
-
-  const percentageFinder = (last30daysData, totalData) => {
-    return (last30daysData / (totalData - last30daysData)) * 100;
-  }
+  const [selectedComponent, setSelectedComponent] = useState('');
 
   useEffect(() => {
 
@@ -26,6 +24,11 @@ function Dashboard() {
   const handleNavigationClick = () => {
     setIsSideNavOpen(false);
   };
+
+  const handleSelectChange = (event) => {
+    setSelectedComponent(event.target.value);
+  };
+
   return (
     <>
       <MobileTopNavigation
@@ -50,71 +53,30 @@ function Dashboard() {
         </aside>
         <main className="main-container">
           <div className="dashboard-container">
-            {!isLoading ? data.data && (
-              <div className="dashboard">
-                <div className="widget-container">
-                  <Widgets
-                    title={"Users"}
-                    num={data.data.totalUser}
-                    percentage={percentageFinder(data.last30daysData.totalUser, data.data.totalUser)}
-                    trand={data.last30daysData.totalUser}
-                    color={"#6b0092 "}
-                  />
-                  <Widgets
-                    title={"Views"}
-                    num={data.data.totalViews}
-                    percentage={percentageFinder(data.last30daysData.totalViews, data.data.totalViews)}
-                    trand={data.last30daysData.totalViews}
-                    color={"#6b0092 "}
-                  />
-                  <Widgets
-                    title={"Post"}
-                    num={data.data.totalPosts}
-                    percentage={percentageFinder(data.last30daysData.totalPosts, data.data.totalPosts)}
-                    trand={data.last30daysData.totalPosts}
-                    color={"#6b0092 "}
-                  />
-                  <Widgets
-                    title={"Likes"}
-                    num={data.data.totalLikes}
-                    percentage={percentageFinder(data.last30daysData.totalLikes, data.data.totalLikes)}
-                    trand={data.last30daysData.totalLikes}
-                    color={"#6b0092 "}
-                  />
-                </div>
-                <div className="graph-container">
-                  <div className="bar-chart">
-                    <h2 className="bar-title">Posts Overview</h2>
-                    <BarChart
-                      labels={["Comments", "Likes", "Exit Count", "Share"]}
-                      label={"count"}
-                      data={[
-                        data.data.totalComments,
-                        data.data.totalLikes,
-                        data.data.totalPostExitCount,
-                        data.data.totalPostShares
-                      ]}
-                    />
-                  </div>
-                  <div className="pie-chart">
-                    <h2 className="pie-title">Wallets</h2>
-                    {data && (
-                      <PieChart
-                        labels={data.data.totalChains}
-                        color={["#a066c2", "#4b006d", "#6b0092 "]}
-                        data={[
-                          data.data.totalWalletOnSolana,
-                          data.data.totalWalletOnEVM,
-                          data.data.totalWalletOnEVM,
-                        ]}
-                      />
-                    )}
-                  </div>
-                </div>
+            <div>
+              <select onChange={handleSelectChange} value={selectedComponent} className="select">
+                <option value="">Navigate to Section</option>
+                <option value="Users">Users</option>
+                <option value="Content">Content</option>
+                <option value="Subscriptions">Subscriptions & Payments</option>
+                <option value="Notifications">Notifications & Messaging</option>
+                <option value="Reports">Analytics & Reports</option>
+                <option value="Wallets">Wallets</option>
+              </select>
+
+            {!isLoading ? data.data && 
+              <div>
+                {(selectedComponent === '' || selectedComponent === 'Users') && <UserAnalytics data={data} />}
+                {selectedComponent === 'Content' && <ContentAnalytics data={data} />}
+                {selectedComponent === 'Subscriptions' && <SubscriptionAnalytics data={data} />}
+                {selectedComponent === 'Notifications' && <NotificationAnalytics data={data} />}
+                {selectedComponent === 'Reports' && <ReportAnalytics data={data} />}
+                {selectedComponent === 'Wallets' && <WalletAnalytics data={data} />}
               </div>
-            ) : (
-              <Loader />
-            )}
+                : (
+            <Loader />
+          )}
+            </div>
           </div>
         </main>
       </div>
