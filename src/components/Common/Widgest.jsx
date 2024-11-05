@@ -1,46 +1,21 @@
-import { FaCaretDown, FaCaretUp } from "react-icons/fa";
-import { useEffect, useState } from 'react';
+import Trand from "./Trand";
 
-function Widgets({ title, num, percentage, trand, color }) {
-  const [progress, setProgress] = useState(0)
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (progress < percentage) {
-        setProgress(prevProgress => prevProgress + 1);
-      } else {
-        clearInterval(interval);
-      }
-    }, 7);
-
-    return () => clearInterval(interval);
-  }, [progress, percentage]);
+function Widgets({ title, num, trand, Icon, size = '2rem' }) {
+  const formattedCount = new Intl.NumberFormat('en', { notation: "compact" }).format(num);
+  const formattedTrand = new Intl.NumberFormat('en', { notation: "compact" }).format(trand);
 
   return (
     <>
-      <div className="widget-box">
-        <div className="data">
-          <span className='widget-title'>{title}</span>
-          <h5>{num}</h5>
-          <span style={{
-            color: `${trand > 0 ? 'green' : 'red'}`
-          }} className="tranding">
-            {trand > 0 ? <FaCaretUp /> : <FaCaretDown />}{trand > 0 ? `${trand}` : `${trand}`}
-          </span>
-        </div>
-        <div className="widgetCircle data">
-          <div className='circle-div' style={{
-            color: color,
-
-            background: `conic-gradient(${color} ${(progress / 100) * 360}deg, white 0)`
-          }}>
-            <span className="circle-data">
-              {progress}%
-            </span>
-          </div>
+      <div className="grid-item">
+      { Icon && <Icon style={{ width: size, height: size }} /> }
+        <span className='grid-item-title'>{title}</span>
+        <div className="card-footer">
+          <h3 className="total-count">{formattedCount}</h3>
+          { trand !== 0 && <Trand trand={formattedTrand} /> }
         </div>
       </div>
     </>
   )
 }
 
-export default Widgets
+export default Widgets;
