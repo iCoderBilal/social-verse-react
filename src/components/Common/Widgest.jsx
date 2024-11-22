@@ -2,8 +2,7 @@ import Trand from "./Trand";
 
 function Widgets({ title, num, trand, Icon, size = '2rem' }) {
   const formattedCount = new Intl.NumberFormat('en', { notation: "compact" }).format(num);
-  const formattedTrand = new Intl.NumberFormat('en', { notation: "compact" }).format(trand);
-
+  
   return (
     <>
       <div className="grid-item">
@@ -11,7 +10,7 @@ function Widgets({ title, num, trand, Icon, size = '2rem' }) {
         <span className='grid-item-title'>{title}</span>
         <div className="card-footer">
           <h3 className="total-count">{formattedCount}</h3>
-          { trand !== 0 && <Trand trand={formattedTrand} /> }
+          { trand !== 0 && <Trand trand={trand} /> }
         </div>
       </div>
     </>
