@@ -209,18 +209,10 @@ function Auth(props) {
            <div className="container">
       <div style={{display : `${isSideNavOpen ? 'block' : 'none'} `}} onClick={()=> setIsSideNavOpen(false)} className="overlay"></div>
         <aside className="side-bar">
-          {isMobileView ? null : (
             <MobileSideNavigation
               isOpen={isSideNavOpen}
               onClose={handleNavigationClick}
             />
-          )}
-          {isSideNavOpen && (
-            <MobileSideNavigation
-              isOpen={isSideNavOpen}
-              onClose={handleNavigationClick}
-            />
-          )}
         </aside>
         <main className="main-container">
         <div className="auth-container">
