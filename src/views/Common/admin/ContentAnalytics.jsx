@@ -1,6 +1,6 @@
 import React from "react";
 import Widgets from "../../../components/Common/Widgest";
-import { BookmarkIcon, ChatBubbleBottomCenterIcon, DocumentTextIcon, EyeIcon, FireIcon, HeartIcon, ShareIcon, TagIcon } from "@heroicons/react/24/outline";
+import { BookmarkIcon, ChatBubbleBottomCenterIcon, DocumentTextIcon, EyeIcon, FireIcon, HeartIcon, MinusCircleIcon, NoSymbolIcon, ShareIcon, TagIcon } from "@heroicons/react/24/outline";
 
 function ContentAnalytics({ data }) {
     return (
@@ -61,6 +61,22 @@ function ContentAnalytics({ data }) {
                     trand={data.last30daysData?.totalPostShares || 0}
                     color={"#6b0092"}
                     Icon={ShareIcon}
+                />
+
+                <Widgets
+                    title={"Posts Deleted"}
+                    num={data.data?.totalPostDeleted}
+                    trand={data.last30daysData?.totalPostDeleted}
+                    color={"#6b0092"}
+                    Icon={MinusCircleIcon}
+                />
+
+                <Widgets
+                    title={"Posts Blocked"}
+                    num={data.data?.totalPostBlocks}
+                    trand={data.last30daysData?.totalPostBlocks}
+                    color={"#6b0092"}
+                    Icon={NoSymbolIcon}
                 />
             </div>
         </div>
