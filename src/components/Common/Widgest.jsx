@@ -1,6 +1,9 @@
 import Trand from "./Trand";
 
 function Widgets({ title, num, trand, Icon, size = '2rem' }) {
+  if (isNaN(num) || num === 0) return;
+  trand = trand ?? 0;
+
   const formattedCount = new Intl.NumberFormat('en', { notation: "compact" }).format(num);
   
   return (
