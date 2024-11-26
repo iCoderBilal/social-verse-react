@@ -97,52 +97,54 @@ function MobileSideNavigation({ isOpen, onClose }) {
 
   return (
     <>
+      {(isMobileView && !isOpen) ? null : (
       <div className={`side-navigation ${isOpen ? "open" : ""}`}>
-        <div
-          className={`nav-item ${active === "home" ? "active" : ""}`}
-          onClick={handleHomeNavigationClick}
-        >
-          <HomeIcon />
-          <p className="nav-text">Home</p>
-        </div>
-        <div
-          className={`nav-item ${active === "search" ? "active" : ""}`}
-          onClick={handleSearchNavigationClick}
-        >
-          <MagnifyingGlassIcon />
-          <p className="nav-text">Search</p>
-        </div>
-        <div
-          className={`nav-item ${active === "profile" ? "active" : ""}`}
-          onClick={handleProfileNavigationClick}
-        >
-          <UserIcon />
-          <p className="nav-text">Profile</p>
-        </div>
-        {auth.user.role === "A" ? (
           <div
-            className={`nav-item ${active === "admin" ? "active" : ""}`}
-            onClick={handleAdminNavigationClick}
+            className={`nav-item ${active === "home" ? "active" : ""}`}
+            onClick={handleHomeNavigationClick}
           >
-            <LuLayoutDashboard />
-            <p className="nav-text">Admin</p>
+            <HomeIcon />
+            <p className="nav-text">Home</p>
           </div>
+          <div
+            className={`nav-item ${active === "search" ? "active" : ""}`}
+            onClick={handleSearchNavigationClick}
+          >
+            <MagnifyingGlassIcon />
+            <p className="nav-text">Search</p>
+          </div>
+          <div
+            className={`nav-item ${active === "profile" ? "active" : ""}`}
+            onClick={handleProfileNavigationClick}
+          >
+            <UserIcon />
+            <p className="nav-text">Profile</p>
+          </div>
+        {auth.user.role === "A" ? (
+            <div
+              className={`nav-item ${active === "admin" ? "active" : ""}`}
+              onClick={handleAdminNavigationClick}
+            >
+              <LuLayoutDashboard />
+              <p className="nav-text">Admin</p>
+            </div>
         ) : (
           ""
-        )}
+          )}
 
         {isMobileView ? (
           <div className="nav-item logout ">
-            <button
-              type="button"
-              className="button-logout"
-              onClick={handleLogoutButtonClick}
-            >
-              {isActive}
-            </button>
-          </div>
+              <button
+                type="button"
+                className="button-logout"
+                onClick={handleLogoutButtonClick}
+              >
+                {isActive}
+              </button>
+            </div>
         ) : null}
-      </div>
+        </div>
+      )}
     </>
   );
 }

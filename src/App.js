@@ -25,7 +25,7 @@ const App = (props) => {
   const { auth, ui } = useSelector((state) => state);
   const { isLoggedIn, user } = auth;
   const { hasUserInteracted } = ui;
-  const [isAdmin, setAdmin ] = useState(user.role);
+  const [userRole, setUserRole] = useState(user.role);
   const dispatch = useDispatch();
 
   axios.defaults.baseURL = "https://api.socialverseapp.com";
@@ -87,15 +87,20 @@ const App = (props) => {
 
           {/* Admin Routes */}
           <Route
-          path="/admin/dashboard"
-          element={isAdmin === "A" ? <Dashboard /> : <Navigate to="/" />}
-        />
+            path="/admin/dashboard"
+            element={userRole === "A" ? <Dashboard /> : <Navigate to="/" />}
+          />
           <Route path="*" element={<NotFound />} status={404} />
         </Routes>
-        <HomeScreenShortcutSuggestionDialog />
+
         <LoginDialog />
-        <SwitchToAppSuggestionDialog />
-        <BackDrop />
+        {userRole === "U" &&
+          <>
+            <HomeScreenShortcutSuggestionDialog />
+            <SwitchToAppSuggestionDialog />
+            <BackDrop />
+          </>
+        }
       </BrowserRouter>
       <Toaster position="top-left" />
     </>
