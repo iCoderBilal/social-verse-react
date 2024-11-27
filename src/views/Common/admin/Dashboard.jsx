@@ -50,10 +50,10 @@ function Dashboard() {
                 <option value="">Navigate to Section</option>
                 <option value="Users">Users</option>
                 <option value="Content">Content</option>
-                <option value="Subscriptions">Subscriptions & Payments</option>
                 <option value="Notifications">Notifications & Messaging</option>
-                <option value="Reports">Analytics & Reports</option>
                 <option value="Wallets">Wallets</option>
+                <option value="Reports">Analytics & Reports</option>
+                <option value="Subscriptions">Subscriptions & Payments</option>
               </select>
 
             {!isLoading ? data.data && 

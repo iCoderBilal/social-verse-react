@@ -1,8 +1,7 @@
 import React from "react";
 
-import { DoughnutChart } from "../../../components/Common/Chart";
 import Widgets from "../../../components/Common/Widgest";
-import { UserGroupIcon, UserPlusIcon } from "@heroicons/react/24/outline";
+import { AdjustmentsHorizontalIcon, UserGroupIcon, UserPlusIcon } from "@heroicons/react/24/outline";
 
 function UserAnalytics({ data }) {
     return (
@@ -24,20 +23,29 @@ function UserAnalytics({ data }) {
                     Icon={UserPlusIcon}
                 />
 
-                {data.data?.verifiedUsers &&
-                    <div className="grid-item row-2">
-                        <div className="grid-item-title">
-                            User Status
-                        </div>
-                        <div className="doughnut-chart">
-                            <DoughnutChart
-                                labels={['Verified', 'Not Verified']}
-                                color={["#6b23de", "#4b006"]}
-                                data={data.data.verifiedUsers}
-                            />
-                        </div>
-                    </div>
-                }
+                <Widgets
+                    title={"Creators"}
+                    num={data.data?.totalCreators}
+                    trand={data.last30daysData?.totalCreators}
+                    color={"#6b0092"}
+                    Icon={UserGroupIcon}
+                />
+
+                <Widgets
+                    title={"Active Users"}
+                    num={data.data.totalActiveUsers}
+                    trand={data.last30daysData.totalActiveUsers}
+                    color={"#6b0092"}
+                    Icon={UserGroupIcon}
+                />
+
+                <Widgets
+                    title={"User Tokens"}
+                    num={data.data?.totalTokens}
+                    trand={data.last30daysData?.totalTokens}
+                    color={"#6b0092"}
+                    Icon={AdjustmentsHorizontalIcon}
+                />
             </div>
         </div>
     )
