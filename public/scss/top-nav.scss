@@ -43,6 +43,14 @@
     width: 50vw;
     justify-content: flex-start;
     margin-left: 20px;
+    align-items: center;
+  }
+  
+  .logo-section {
+    font-weight: bolder;
+    font-size: 1.3rem;
+    color: #6b0092;
+    // font-family: cursive !important;
   }
   
   .top-navigation .section .header-btn {
@@ -52,7 +60,7 @@
     justify-content: flex-end;
     margin-right: 30px;
   }
-  .login-btn {
+  .login-btn, .actions-btn {
     background-color: #6b0092; 
     color: #ffffff;
     padding: 10px 20px;

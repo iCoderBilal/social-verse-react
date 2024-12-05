@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { HomeIcon, MagnifyingGlassIcon, UserIcon } from "@heroicons/react/20/solid";
-import { LuLayoutDashboard } from "react-icons/lu";
+import { LuLayoutDashboard, LuUsers, LuClipboardList } from "react-icons/lu";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineVideoSettings } from "react-icons/md";
@@ -84,6 +84,12 @@ function MobileSideNavigation({ isOpen, onClose }) {
     navigate("/admin/dashboard");
   };
 
+  const handleLogsNavigationClick = () => {
+    setActive("logs");
+    onClose();
+    navigate("/admin/dashboard/logs");
+  };
+
   const handleLogoutButtonClick = () => {
     onClose();
     setIsActive("Login");
@@ -121,13 +127,23 @@ function MobileSideNavigation({ isOpen, onClose }) {
             <p className="nav-text">Profile</p>
           </div>
         {auth.user.role === "A" ? (
+          <>
             <div
               className={`nav-item ${active === "admin" ? "active" : ""}`}
               onClick={handleAdminNavigationClick}
-            >
+              >
               <LuLayoutDashboard />
-              <p className="nav-text">Admin</p>
+              <p className="nav-text">Dashboard</p>
             </div>
+            
+            <div
+              className={`nav-item ${active === "logs" ? "active" : ""}`}
+              onClick={handleLogsNavigationClick}
+              >
+              <LuClipboardList />
+              <p className="nav-text">Logs</p>
+            </div>
+            </>
         ) : (
           ""
           )}
