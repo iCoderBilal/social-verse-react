@@ -45,7 +45,7 @@ function WalletAnalytics({ data }) {
                     </div>
                     <div className="doughnut-chart">
                         <DoughnutChart
-                            labels={['Solana', 'Etherium', 'Polygon']}
+                            labels={['Solana', 'Ethereum', 'Polygon']}
                             color={["#42d4f5", "#5461a8", '#6b23de']}
                             data={[
                                 data.data.totalWalletOnSolana,
