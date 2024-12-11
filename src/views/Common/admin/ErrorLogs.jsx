@@ -85,7 +85,7 @@ function ErrorLogs({ dataUrl }) {
                                             <p className="header-item">Path</p>
                                             <p className="header-item">Line</p>
                                             <p className="header-item">Created At</p>
-                                            <div className="header-actions"></div>
+                                            {/* <div className="header-actions"></div> */}
                                         </div>
                                     </div>
                                     {
