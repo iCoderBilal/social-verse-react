@@ -188,6 +188,7 @@
 .header-actions {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 1rem;
   }
 
 .data-item {
@@ -320,4 +321,12 @@
       }
     }
   }
-  
+
+.video-error {
+    background-color: black;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}

@@ -139,10 +139,17 @@ img {
   -ms-user-select: none;
 }
 
-.back-btn, .select-btn {
+.back-btn, .select-btn, .delete-btn, .load-more-btn {
   padding: 0.4rem;
   min-width: 4rem;
   background-color: white;
   border-radius: 0.4rem;
   cursor: pointer; 
+  height: 2rem;
+}
+
+.delete-btn {
+  background-color: red;
+  color: white;
+  width: 100%;
 }

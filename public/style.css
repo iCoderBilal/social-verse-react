@@ -87,14 +87,14 @@
   animation: zoomOut 0.3s;
 }
 
-.skeleton, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1, .profile .content-container .posts-container .posts-grid.loading .post-item {
+.skeleton, .posts-container .posts-grid.loading .post-item, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1 {
   background: #eee;
   color: #eee;
   border-radius: 5px;
   overflow: hidden;
   position: relative;
 }
-.skeleton:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before, .profile .content-container .posts-container .posts-grid.loading .post-item:before {
+.skeleton:before, .posts-container .posts-grid.loading .post-item:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before {
   content: "";
   position: absolute;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
@@ -362,14 +362,14 @@ button {
   animation: zoomOut 0.3s;
 }
 
-.skeleton, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1, .profile .content-container .posts-container .posts-grid.loading .post-item {
+.skeleton, .posts-container .posts-grid.loading .post-item, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1 {
   background: #eee;
   color: #eee;
   border-radius: 5px;
   overflow: hidden;
   position: relative;
 }
-.skeleton:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before, .profile .content-container .posts-container .posts-grid.loading .post-item:before {
+.skeleton:before, .posts-container .posts-grid.loading .post-item:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before {
   content: "";
   position: absolute;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
@@ -841,14 +841,14 @@ button {
   animation: zoomOut 0.3s;
 }
 
-.skeleton, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1, .profile .content-container .posts-container .posts-grid.loading .post-item {
+.skeleton, .posts-container .posts-grid.loading .post-item, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1 {
   background: #eee;
   color: #eee;
   border-radius: 5px;
   overflow: hidden;
   position: relative;
 }
-.skeleton:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before, .profile .content-container .posts-container .posts-grid.loading .post-item:before {
+.skeleton:before, .posts-container .posts-grid.loading .post-item:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before {
   content: "";
   position: absolute;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
@@ -971,14 +971,14 @@ img.horizontal-logo {
   animation: zoomOut 0.3s;
 }
 
-.skeleton, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1, .profile .content-container .posts-container .posts-grid.loading .post-item {
+.skeleton, .posts-container .posts-grid.loading .post-item, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1 {
   background: #eee;
   color: #eee;
   border-radius: 5px;
   overflow: hidden;
   position: relative;
 }
-.skeleton:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before, .profile .content-container .posts-container .posts-grid.loading .post-item:before {
+.skeleton:before, .posts-container .posts-grid.loading .post-item:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before {
   content: "";
   position: absolute;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
@@ -1078,14 +1078,14 @@ img.horizontal-logo {
   animation: zoomOut 0.3s;
 }
 
-.skeleton, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1, .profile .content-container .posts-container .posts-grid.loading .post-item {
+.skeleton, .posts-container .posts-grid.loading .post-item, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1 {
   background: #eee;
   color: #eee;
   border-radius: 5px;
   overflow: hidden;
   position: relative;
 }
-.skeleton:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before, .profile .content-container .posts-container .posts-grid.loading .post-item:before {
+.skeleton:before, .posts-container .posts-grid.loading .post-item:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before {
   content: "";
   position: absolute;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
@@ -1557,14 +1557,14 @@ img.horizontal-logo {
   animation: zoomOut 0.3s;
 }
 
-.skeleton, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1, .profile .content-container .posts-container .posts-grid.loading .post-item {
+.skeleton, .posts-container .posts-grid.loading .post-item, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1 {
   background: #eee;
   color: #eee;
   border-radius: 5px;
   overflow: hidden;
   position: relative;
 }
-.skeleton:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before, .profile .content-container .posts-container .posts-grid.loading .post-item:before {
+.skeleton:before, .posts-container .posts-grid.loading .post-item:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before {
   content: "";
   position: absolute;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
@@ -1664,14 +1664,14 @@ img.horizontal-logo {
   animation: zoomOut 0.3s;
 }
 
-.skeleton, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1, .profile .content-container .posts-container .posts-grid.loading .post-item {
+.skeleton, .posts-container .posts-grid.loading .post-item, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1 {
   background: #eee;
   color: #eee;
   border-radius: 5px;
   overflow: hidden;
   position: relative;
 }
-.skeleton:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before, .profile .content-container .posts-container .posts-grid.loading .post-item:before {
+.skeleton:before, .posts-container .posts-grid.loading .post-item:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before {
   content: "";
   position: absolute;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
@@ -1831,14 +1831,14 @@ img.horizontal-logo {
   animation: zoomOut 0.3s;
 }
 
-.skeleton, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1, .profile .content-container .posts-container .posts-grid.loading .post-item {
+.skeleton, .posts-container .posts-grid.loading .post-item, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1 {
   background: #eee;
   color: #eee;
   border-radius: 5px;
   overflow: hidden;
   position: relative;
 }
-.skeleton:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before, .profile .content-container .posts-container .posts-grid.loading .post-item:before {
+.skeleton:before, .posts-container .posts-grid.loading .post-item:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before {
   content: "";
   position: absolute;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
@@ -2563,14 +2563,14 @@ img.horizontal-logo {
   animation: zoomOut 0.3s;
 }
 
-.skeleton, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1, .profile .content-container .posts-container .posts-grid.loading .post-item {
+.skeleton, .posts-container .posts-grid.loading .post-item, .profile.loading .content-container .user-container .counters .counter span.value, .profile.loading .content-container .user-container .username, .profile.loading .content-container .user-container .avatar, .profile.loading .heading-container h1 {
   background: #eee;
   color: #eee;
   border-radius: 5px;
   overflow: hidden;
   position: relative;
 }
-.skeleton:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before, .profile .content-container .posts-container .posts-grid.loading .post-item:before {
+.skeleton:before, .posts-container .posts-grid.loading .post-item:before, .profile.loading .content-container .user-container .counters .counter span.value:before, .profile.loading .content-container .user-container .username:before, .profile.loading .content-container .user-container .avatar:before, .profile.loading .heading-container h1:before {
   content: "";
   position: absolute;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
@@ -2730,39 +2730,6 @@ img.horizontal-logo {
 .profile .content-container .post-tabs:after {
   bottom: 0;
 }
-.profile .content-container .posts-container .posts-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-}
-.profile .content-container .posts-container .posts-grid .post-item {
-  border-right: 1px solid rgb(245, 245, 245);
-  border-bottom: 1px solid rgb(245, 245, 245);
-  background-color: rgba(22, 24, 35, 0.06);
-  vertical-align: bottom;
-  min-height: 58.6666667vw;
-  border-radius: 0;
-}
-.profile .content-container .posts-container .posts-grid .post-item img {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-}
-.profile .content-container .posts-container .posts-grid.empty {
-  position: relative;
-  display: block;
-  height: 50vh;
-}
-.profile .content-container .posts-container .posts-grid.empty:before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 200px;
-  height: 200px;
-  background-size: contain;
-  background-image: url("../../src/images/login-signup.png");
-}
 
 .profile.loading .heading-container h1 {
   max-width: 10em;
@@ -2779,6 +2746,60 @@ img.horizontal-logo {
 .profile.loading .content-container .user-container .counters .counter span.value {
   max-width: 2em;
   min-height: 1.5em;
+}
+
+.posts-container .posts-grid {
+  display: grid;
+}
+@media (min-width: 1200px) {
+  .posts-container .posts-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+@media (min-width: 800px) and (max-width: 1199px) {
+  .posts-container .posts-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 799px) {
+  .posts-container .posts-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+.posts-container .posts-grid .post-item {
+  border-right: 1px solid rgb(245, 245, 245);
+  border-bottom: 1px solid rgb(245, 245, 245);
+  background-color: rgba(22, 24, 35, 0.06);
+  vertical-align: bottom;
+  border-radius: 0;
+  max-width: 18rem;
+  margin-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+}
+.posts-container .posts-grid .post-item img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+.posts-container .posts-grid video {
+  max-width: 18rem;
+}
+.posts-container .posts-grid.empty {
+  position: relative;
+  display: block;
+  height: 50vh;
+}
+.posts-container .posts-grid.empty:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  background-size: contain;
+  background-image: url("../../src/images/login-signup.png");
 }
 
 .dashboard-container {
@@ -2940,6 +2961,7 @@ img.horizontal-logo {
 .header-actions {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 1rem;
 }
 
 .data-item {
@@ -3012,6 +3034,15 @@ img.horizontal-logo {
   .log .log-header {
     border-bottom: none;
   }
+}
+
+.video-error {
+  background-color: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
 .side-navigation {
@@ -3221,12 +3252,19 @@ img {
   -ms-user-select: none;
 }
 
-.back-btn, .select-btn {
+.back-btn, .select-btn, .delete-btn, .load-more-btn {
   padding: 0.4rem;
   min-width: 4rem;
   background-color: white;
   border-radius: 0.4rem;
   cursor: pointer;
+  height: 2rem;
+}
+
+.delete-btn {
+  background-color: red;
+  color: white;
+  width: 100%;
 }
 
 /*# sourceMappingURL=style.css.map */
