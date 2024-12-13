@@ -1,8 +1,11 @@
 import React from "react";
 import Widgets from "../../../components/Common/Widgest";
 import { BookmarkIcon, ChatBubbleBottomCenterIcon, DocumentTextIcon, EyeIcon, FireIcon, HeartIcon, MinusCircleIcon, NoSymbolIcon, ShareIcon, TagIcon } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router";
 
 function ContentAnalytics({ data }) {
+    let navigate = useNavigate();
+
     return (
         <div className="dashboard">
             <div className="grid-container">
@@ -12,6 +15,8 @@ function ContentAnalytics({ data }) {
                     trand={data.last30daysData?.totalPosts || 0}
                     color={"#6b0092"}
                     Icon={DocumentTextIcon}
+                    interactive={true}
+                    onClick={() => navigate('/admin/dashboard/posts')}
                 />
                 <Widgets
                     title={"Posts Exit Count"}
