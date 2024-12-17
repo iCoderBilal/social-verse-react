@@ -32,7 +32,7 @@ function ErrorLogs({ dataUrl }) {
             const response = await axios.get(dataUrl, {
                 params: {
                     page: page,
-                    pageSize: pageSize,
+                    page_size: pageSize,
                 },
             });
             const fetchedData = response.data.logs;
