@@ -24,7 +24,7 @@ function WalletAnalytics({ data }) {
                 />
 
                 <Widgets
-                    title={"Wallets on EVM"}
+                    title={"Wallets on Ethereum"}
                     num={data.data?.totalWalletOnEVM}
                     trand={data.last30daysData?.totalWalletOnEVM}
                     color={"#6b0092"}
