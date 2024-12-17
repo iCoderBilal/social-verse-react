@@ -90,6 +90,12 @@ function MobileSideNavigation({ isOpen, onClose }) {
     navigate("/admin/dashboard/logs");
   };
 
+  const handleFeedbackNavigationClick = () => {
+    setActive("feedback");
+    onClose();
+    navigate("/admin/dashboard/feedback");
+  };
+
   const handleLogoutButtonClick = () => {
     onClose();
     setIsActive("Login");
@@ -142,6 +148,14 @@ function MobileSideNavigation({ isOpen, onClose }) {
               >
               <LuClipboardList />
               <p className="nav-text">Logs</p>
+            </div>
+
+            <div
+              className={`nav-item ${active === "feedback" ? "active" : ""}`}
+              onClick={handleFeedbackNavigationClick}
+              >
+              <LuClipboardList />
+              <p className="nav-text">Feedback</p>
             </div>
             </>
         ) : (
