@@ -24,6 +24,7 @@ import Dashboard from "./views/Common/admin/Dashboard";
 import UserAnalytics from "./views/Common/admin/UserAnalytics";
 import ErrorLogs from "./views/Common/admin/ErrorLogs";
 import Posts from "./views/Common/admin/Posts";
+import Feedback from "./views/Common/admin/Feedback";
 
 const App = (props) => {
   const { auth, ui } = useSelector((state) => state);
@@ -103,6 +104,11 @@ const App = (props) => {
           <Route
             path="/admin/dashboard/posts"
             element={userRole === "A" ? <Posts /> : <Navigate to="/" />}
+          />
+
+          <Route
+            path="/admin/dashboard/feedback"
+            element={userRole === "A" ? <Feedback /> : <Navigate to="/" />}
           />
 
           <Route path="*" element={<NotFound />} status={404} />
