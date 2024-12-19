@@ -123,7 +123,7 @@ const App = (props) => {
           </>
         }
       </BrowserRouter>
-      <Toaster position="top-left" />
+      <Toaster position="top-right" />
     </>
   );
 };
