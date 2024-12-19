@@ -18,7 +18,11 @@ export default function Feed(props) {
                 if (entry.intersectionRatio !== 1) {
                     video.pause();
                 } else if (entry.intersectionRatio === 1) {
-                    video.play();
+                    // Add error handling here
+                    const playPromise = video.play();
+                    if (playPromise !== undefined) {
+                        playPromise.catch(() => {}); // Silently catch play errors
+                    }
                     break;
                 }
             }
