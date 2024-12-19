@@ -17,6 +17,8 @@ function Verify(props) {
         let formData = new FormData();
         formData.append("username", pageURL.searchParams.get("username") || "");
         formData.append("code", pageURL.searchParams.get("code") || "");
+        formData.append("app_name", pageURL.searchParams.get("app_name") || "");
+        
         axios.post("/user/verify", formData).then((response) => {
             if (response.data.status === "success") {
                 FlicToaster.success(response.data.message);
