@@ -59,6 +59,9 @@ function Feedback() {
 
         try {
             setIsLoading(true);
+            if(appName === 'Bloom Scroll') {
+                appName = 'bloom';
+            }
             const response = await axios.get('/feedback', {
                 params: {
                     page: currentPage,
