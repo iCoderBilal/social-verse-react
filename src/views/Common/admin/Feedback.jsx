@@ -60,7 +60,7 @@ function Feedback() {
         try {
             setIsLoading(true);
             if(appName === 'Bloom Scroll') {
-                appName = 'bloom';
+                appName = 'bloomscroll';
             }
             const response = await axios.get('/feedback', {
                 params: {
