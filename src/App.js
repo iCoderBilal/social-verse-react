@@ -98,7 +98,7 @@ const App = (props) => {
 
           <Route
             path="/admin/dashboard/logs"
-            element={userRole === "A" ? <ErrorLogs dataUrl={"/error/logs"} /> : <Navigate to="/" />}
+            element={userRole === "A" ? <ErrorLogs dataUrl={"/logs/error"} /> : <Navigate to="/" />}
           />
 
           <Route
