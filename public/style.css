@@ -2972,7 +2972,7 @@ img.horizontal-logo {
 }
 .log .log-header {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1rem;
   font-weight: bold;
   border-bottom: 2px solid white;
@@ -2988,7 +2988,7 @@ img.horizontal-logo {
 }
 .log .log-data {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   background-color: white;
 }
 .log .log-data .status-code,
@@ -3067,6 +3067,9 @@ img.horizontal-logo {
   width: 2rem;
   border-radius: 2rem;
   margin-right: 0.4rem;
+}
+.feedback-list .feedback-item .feedback-app, .feedback-list .feedback-header .feedback-app {
+  min-width: 10rem;
 }
 .feedback-list .feedback-item .feedback-type, .feedback-list .feedback-header .feedback-type {
   min-width: 10rem;
