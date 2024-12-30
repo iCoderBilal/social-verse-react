@@ -6,7 +6,7 @@ const formatDate = (date) => {
     return new Date(date).toLocaleDateString('en-US', options);
 };
 
-function ErrorLog({ data }) {
+function ErrorLog({ data, showAppName}) {
     const [showPopup, setShowPopup] = useState(false);
     const [popupContent, setPopupContent] = useState(null);
 
@@ -35,6 +35,7 @@ function ErrorLog({ data }) {
                 <p>{data.path}</p>
                 <p onClick={handleFileNameClick} style={{ cursor: 'pointer', color: '#000' }}> {data.line} </p>
                 <p>{formatDate(data.created_at)}</p>
+                {showAppName && <p>{data.app_name}</p>}
             </div>
 
             {showPopup && (
