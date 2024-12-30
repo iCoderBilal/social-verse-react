@@ -6,7 +6,7 @@ import axios from "axios";
 
 function Feedback() {
     const [isSideNavOpen, setIsSideNavOpen] = useState(false);
-    const [selectedAppName, setSelectedAppName] = useState('');
+    const [selectedAppName, setSelectedAppName] = useState('empowerverse');
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [hasMoreData, setHasMoreData] = useState(true);
@@ -19,6 +19,8 @@ function Feedback() {
 
     useEffect(() => {
         getCategories();
+
+        fetchData(1, selectedAppName);
 
     }, [currentPage]);
 
@@ -55,12 +57,11 @@ function Feedback() {
 
     const fetchData = async (page, appName) => {
         if (currentPage === page && appName === selectedAppName && data.length > 0) return;
-        if (appName === '') return;
 
         try {
             setIsLoading(true);
-            if(appName === 'Bloom Scroll') {
-                appName = 'bloomscroll';
+            if(appName === 'bloomscroll') {
+                appName = 'bloom';
             }
             const response = await axios.get('/feedback', {
                 params: {
@@ -69,8 +70,8 @@ function Feedback() {
                     app_name: appName
                 },
             });
-            const fetchedData = response.data.message.feedbacks;
-            console.log(fetchedData);
+            const fetchedData = response.data.feedbacks.feedbacks;
+            // console.log(fetchedData);
 
             if (fetchedData.length < pageSize) {
                 setHasMoreData(false);
@@ -114,7 +115,7 @@ function Feedback() {
                         <div className="header-actions">
                             <button onClick={() => navigate(-1)} className="back-btn">Back</button>
                             <select onChange={handleSelectChange} className="select">
-                                <option key={1} value=''>Select App</option>
+                                <option key={1} value='empowerverse'>Select App</option>
                                 {categories.map(category => (
                                     <option key={category.id} value={category.name}>{category.name}</option>
                                 ))}
@@ -126,6 +127,7 @@ function Feedback() {
                                     <div className="feedback-header">
                                         <p className="sender">User</p>
                                         <p className="feedback-type">Type</p>
+                                        {selectedAppName === 'empowerverse' && <p className="feedback-app">AppName</p>                                        }
                                         <p className="feedback-text">Description</p>
                                     </div>
                                     {
@@ -144,6 +146,7 @@ function Feedback() {
                                                             {isFeedback ? "Feedback" : "Bug"}
                                                         </p>
                                                     </div>
+                                                    {selectedAppName === 'empowerverse' && <p className="feedback-app">{item.app_name}</p>}     
                                                     <p className="feedback-text">{item.feedback}</p>
                                                 </li>
                                             )
