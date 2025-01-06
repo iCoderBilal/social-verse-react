@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import MobileTopNavigation from "../../../components/Mobile/TopNavigation";
 import MobileSideNavigation from "../../../components/Mobile/SideNavigation";
 import { useNavigate } from "react-router-dom";
@@ -12,17 +12,45 @@ function Feedback() {
     const [hasMoreData, setHasMoreData] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const [categories, setCategories] = useState([]);
+    const [expandedFeedbackIndex, setExpandedFeedbackIndex] = useState(null);
 
     const navigate = useNavigate();
 
     const pageSize = 30;
 
+    const fetchData = useCallback(async (page, appName) => {
+        if (currentPage === page && appName === selectedAppName && data.length > 0) return;
+
+        try {
+            setIsLoading(true);
+            if(appName === 'bloomscroll') {
+                appName = 'bloom';
+            }
+            const response = await axios.get('/feedback', {
+                params: {
+                    page: currentPage,
+                    page_size: pageSize,
+                    app_name: appName
+                },
+            });
+            const fetchedData = response.data.feedbacks.feedbacks;
+
+            if (fetchedData.length < pageSize) {
+                setHasMoreData(false);
+            }
+            setData((prevData) => [...prevData, ...fetchedData]);
+
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        } finally {
+            setIsLoading(false);
+        }
+    }, [currentPage, selectedAppName, data.length]);
+
     useEffect(() => {
         getCategories();
-
         fetchData(1, selectedAppName);
-
-    }, [currentPage]);
+    }, [currentPage, selectedAppName, fetchData]);
 
     const handleSelectChange = async (event) => {
         const value = event.target.value;
@@ -55,36 +83,6 @@ function Feedback() {
         setCategories(sortedCategories);
     }
 
-    const fetchData = async (page, appName) => {
-        if (currentPage === page && appName === selectedAppName && data.length > 0) return;
-
-        try {
-            setIsLoading(true);
-            if(appName === 'bloomscroll') {
-                appName = 'bloom';
-            }
-            const response = await axios.get('/feedback', {
-                params: {
-                    page: currentPage,
-                    page_size: pageSize,
-                    app_name: appName
-                },
-            });
-            const fetchedData = response.data.feedbacks.feedbacks;
-            // console.log(fetchedData);
-
-            if (fetchedData.length < pageSize) {
-                setHasMoreData(false);
-            }
-            setData((prevData) => [...prevData, ...fetchedData]);
-
-        } catch (error) {
-            console.error("Error fetching data:", error);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
     const handleScroll = (event) => {
         const { scrollTop, scrollHeight, clientHeight } = event.target;
         if (!isLoading && hasMoreData && scrollTop + clientHeight >= scrollHeight - 10) {
@@ -94,6 +92,10 @@ function Feedback() {
 
     const handleNavigationClick = () => {
         setIsSideNavOpen(false);
+    };
+
+    const toggleDescription = (index) => {
+        setExpandedFeedbackIndex(expandedFeedbackIndex === index ? null : index);
     };
 
     return (
@@ -133,6 +135,7 @@ function Feedback() {
                                     {
                                         data.map((item, index) => {
                                             const isFeedback = item.type === "F";
+                                            const isExpanded = expandedFeedbackIndex === index;
 
                                             return (
                                                 <li key={index} className="feedback-item">
@@ -147,7 +150,21 @@ function Feedback() {
                                                         </p>
                                                     </div>
                                                     {selectedAppName === 'empowerverse' && <p className="feedback-app">{item.app_name}</p>}     
-                                                    <p className="feedback-text">{item.feedback}</p>
+                                                    <p className="feedback-text">
+                                                        {isExpanded ? item.feedback : item.feedback.substring(0, 100) + '...'}
+                                                        <button 
+                                                            onClick={() => toggleDescription(index)} 
+                                                            style={{ 
+                                                                border: 'none', 
+                                                                background: 'none', 
+                                                                color: 'blue', 
+                                                                textDecoration: 'none', 
+                                                                cursor: 'pointer' 
+                                                            }}
+                                                        >
+                                                            {isExpanded ? "View Less" : "View More"}
+                                                        </button>
+                                                    </p>
                                                 </li>
                                             )
                                         })
