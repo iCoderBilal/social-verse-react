@@ -151,19 +151,25 @@ function Feedback() {
                                                     </div>
                                                     {selectedAppName === 'empowerverse' && <p className="feedback-app">{item.app_name}</p>}     
                                                     <p className="feedback-text">
-                                                        {isExpanded ? item.feedback : item.feedback.substring(0, 100) + '...'}
-                                                        <button 
-                                                            onClick={() => toggleDescription(index)} 
-                                                            style={{ 
-                                                                border: 'none', 
-                                                                background: 'none', 
-                                                                color: 'blue', 
-                                                                textDecoration: 'none', 
-                                                                cursor: 'pointer' 
-                                                            }}
-                                                        >
-                                                            {isExpanded ? "View Less" : "View More"}
-                                                        </button>
+                                                        {item.feedback.length > 100 ? (
+                                                            <>
+                                                                {isExpanded ? item.feedback : item.feedback.substring(0, 100) + '...'}
+                                                                <button 
+                                                                    onClick={() => toggleDescription(index)} 
+                                                                    style={{ 
+                                                                        border: 'none', 
+                                                                        background: 'none',
+                                                                        color: 'blue', 
+                                                                        textDecoration: 'none', 
+                                                                        cursor: 'pointer' 
+                                                                    }}
+                                                                >
+                                                                    {isExpanded ? "View Less" : "View More"}
+                                                                </button>
+                                                            </>
+                                                        ) : (
+                                                            item.feedback
+                                                        )}
                                                     </p>
                                                 </li>
                                             )
