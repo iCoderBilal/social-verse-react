@@ -89,15 +89,15 @@
     }
 }
 
-.select {
-    background-color: white;
-    border: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    min-width: 12rem;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    justify-self: flex-start;
-}
+// .select {
+//     background-color: white;
+//     border: none;
+//     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+//     min-width: 12rem;
+//     padding: 1rem;
+//     margin-bottom: 1rem;
+//     justify-self: flex-start;
+// }
 
 .actions {
     display: flex;
@@ -191,6 +191,26 @@
     margin-bottom: 1rem;
   }
 
+.back-btn {
+    padding: 0.4rem;
+    min-width: 4rem;
+    background-color: white;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    height: 2rem;
+}
+
+.select {
+    background-color: white;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    min-width: 0rem;
+    padding: 6px;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    min-width: 150px;
+}
+
 .data-item {
     display: flex;
 }
@@ -256,72 +276,75 @@
         gap: 1rem;
         font-weight: bold;
         border-bottom: 2px solid white;
-      
-      .header-item {
-        text-align: center;
-        color: black;
-        font-size: 1rem;
-        letter-spacing: 0.5px;
-      }
-  
-      .header-actions {
-        text-align: center;
-      }
+
+        .header-item {
+            text-align: center;
+            color: black;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .header-actions {
+            text-align: center;
+        }
     }
-  
+
     .log-data {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      background-color: white;
-  
-      .status-code,
-      p {
-        text-align: center;
-        font-size: 1rem;
-        padding: 0.5rem;
-        border-radius: 0.5;
-      }
-  
-      .status-code {
-        font-weight: bold;
-        color: red;
-      }
-  
-      .user-actions {
-        text-align: center;
-      }
-  
-    //   &:hover {
-    //     background-color: white;
-    //   }
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        background-color: white;
+
+        .status-code,
+        p {
+            text-align: center;
+            font-size: 1rem;
+            padding: 0.5rem;
+            border-radius: 0.5;
+        }
+
+        .status-code {
+            font-weight: bold;
+            color: red;
+        }
+
+        .user-actions {
+            text-align: center;
+        }
+
+        //   &:hover {
+        //     background-color: white;
+        //   }
     }
-  
+
     /* Media Query for Small Devices */
     @media (max-width: 768px) {
-      .log-header, .log-data {
-        display: block; /* Stack items vertically */
-        margin-bottom: 0.5rem;
-      }
-  
-      .log-header .header-item,
-      .log-data p {
-        width: 100%;
-        text-align: left;
-        padding: 0.5rem 0;
-        border-bottom: 1px solid #f0f0f0;
-      }
-  
-      .log-data .status-code,
-      .log-data p {
-        padding-left: 1.25rem;
-        padding-right: 1.25rem;
-      }
-  
-      .log-header {
-        border-bottom: none;
-      }
+
+        .log-header,
+        .log-data {
+            display: block;
+            /* Stack items vertically */
+            margin-bottom: 0.5rem;
+        }
+
+        .log-header .header-item,
+        .log-data p {
+            width: 100%;
+            text-align: left;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .log-data .status-code,
+        .log-data p {
+            padding-left: 1.25rem;
+            padding-right: 1.25rem;
+        }
+
+        .log-header {
+            border-bottom: none;
+        }
     }
-  }
+}
 
 .video-error {
     background-color: black;
@@ -338,7 +361,8 @@
     flex-direction: column;
     gap: 0.6rem;
 
-    .feedback-item, .feedback-header {
+    .feedback-item,
+    .feedback-header {
         border: 1px solid black;
         padding: 0.5rem;
         border-radius: 0.5rem;
@@ -394,7 +418,7 @@
             .sender {
                 margin-left: 0;
             }
-            
+
             .sender-name,
             .feedback-type,
             .feedback-text {
@@ -411,5 +435,186 @@
         // border: none;
         // margin: 1rem;
         font-weight: bold;
+    }
+}
+
+.feedback-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; // Space between cards
+
+    .feedback-card {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        margin: 1rem 0;
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+
+            .sender-image {
+                width: 40px; // Adjust size as needed
+                height: 40px; // Adjust size as needed
+                border-radius: 50%; // Make it circular
+                margin-right: 10px; // Space between image and name
+            }
+
+            .sender-name {
+                font-weight: bold;
+            }
+
+            .feedback-type {
+                font-size: 0.9rem; // Adjust size as needed
+                margin-left: 10px; // Space between type and name
+            }
+        }
+
+        .feedback-description {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 0.5rem; // Space above the description
+            word-wrap: break-word; // Ensure long words wrap
+            overflow-wrap: break-word; // Modern browsers
+        }
+    }
+}
+
+.feedback-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto; // Allow columns to adjust based on content
+
+    th,
+    td {
+        padding: 0.75rem;
+        text-align: left;
+        border: 1px solid #ddd; // Add border for better visibility
+    }
+
+    th {
+        background-color: #f2f2f2; // Light background for headers
+    }
+
+    .sender-image {
+        width: 40px; // Adjust size as needed
+        height: 40px; // Adjust size as needed
+        border-radius: 50%; // Make it circular
+        margin-right: 10px; // Space between image and name
+    }
+
+    .sender-name {
+        font-weight: bold;
+    }
+
+    .feedback-type {
+        font-size: 0.9rem; // Adjust size as needed
+        margin-left: 10px; // Space between type and name
+    }
+
+    // Styles for user info in feedback table
+    .user-info {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .sender-image {
+        width: 40px; // Adjust size as needed
+        height: 40px; // Adjust size as needed
+        border-radius: 50%; // Make it circular
+        margin-right: 10px; // Space between image and name
+    }
+
+    .sender-name {
+        font-weight: bold; // Make the name bold
+        font-size: 1rem; // Adjust font size as needed
+    }
+}
+
+
+// Responsive styles for the feedback table
+@media (max-width: 425px) {
+    .feedback-table {
+        display: none; // Hide the table on mobile
+    }
+
+    .feedback-card {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem; // Space between elements in the card
+
+        .feedback-header {
+            display: flex;
+            align-items: center;
+
+            .sender-image {
+                width: 40px; // Adjust size as needed
+                height: 40px; // Adjust size as needed
+                border-radius: 50%; // Make it circular
+                margin-right: 10px; // Space between image and name
+            }
+
+            .sender-name {
+                font-weight: bold;
+            }
+
+            .feedback-type {
+                font-size: 0.9rem; // Adjust size as needed
+                margin-left: 10px; // Space between type and name
+            }
+        }
+
+        .feedback-description {
+            margin-top: 0.5rem; // Space above the description
+        }
+    }
+
+    // Style for the table data when displayed as cards
+    .feedback-table {
+        display: block; // Show the table as block for mobile
+        width: 100%; // Full width
+
+        tbody {
+            display: block; // Make tbody block to allow stacking
+            width: 100%; // Full width
+        }
+
+
+
+        tr {
+            display: flex; // Use flexbox for rows
+            flex-direction: column; // Stack cells vertically
+            margin-bottom: 1rem; // Space between rows
+            border: 1px solid #ddd; // Optional border for each row
+            border-radius: 8px; // Rounded corners
+            padding: 1rem; // Padding for each row
+            background-color: white; // Background color for rows
+        }
+
+        td {
+            display: flex; // Use flexbox for cells
+            justify-content: space-between; // Space out content
+            border: none; // Remove borders for better appearance
+            padding: 0.5rem; // Adjust padding
+            width: 100%; // Full width for cells
+
+            &:first-child {
+                display: flex; // Flex for user info
+                align-items: center; // Center align
+                gap: 10px; // Space between image and name
+            }
+
+            // Additional styling for the feedback description
+            &:last-child {
+                flex-direction: column; // Stack description vertically
+                align-items: flex-start; // Align to the start
+            }
+        }
     }
 }
