@@ -129,3 +129,6 @@ fabric.properties
 # Some Garbage for unix systems. Not sure why it shows up.
 */tmp/*
 *.map
+
+# scss cache
+.sass-cache
