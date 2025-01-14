@@ -24,6 +24,12 @@ Flic's backend API has strict CORS origin of `beta.watchflic.com`. You can eithe
 `npm start`
 
 #### SASS:
+
+Install the latest version of SASS (`use sudo if have permission issue on linux`)
+```bash
+npm install -g sass
+```
+
 Start SASS Watcher.
 
 ```bash
