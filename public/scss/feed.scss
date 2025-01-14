@@ -128,7 +128,8 @@
               text-align: center;
   
               img {
-                width: math.div($authorAvatarSize, 2);
+                // width: math.div($authorAvatarSize, 2);
+                width: $authorAvatarSize / 2; // Older version does not suport math.div
               }
   
             }

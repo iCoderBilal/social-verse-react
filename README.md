@@ -10,8 +10,14 @@ Flic's backend API has strict CORS origin of `beta.watchflic.com`. You can eithe
 
 - Use a browser extension to bypass CORS
 - Run Chrome via CLI with CORS disabled:
-    - Windows: `chrome.exe --disable-site-isolation-trials --disable-web-security --user-data-dir="D:\temp"`
-    - Linux: `google-chrome --disable-site-isolation-trials --disable-web-security --user-data-dir="~/tmp"`
+    - Windows: 
+    ```bash
+    chrome.exe --disable-site-isolation-trials --disable-web-security --user-data-dir="D:\temp"
+    ```
+    - Linux: 
+    ```bash
+    google-chrome --disable-site-isolation-trials --disable-web-security --user-data-dir="~/tmp"
+    ```
 
 #### NPM:
 
@@ -20,7 +26,9 @@ Flic's backend API has strict CORS origin of `beta.watchflic.com`. You can eithe
 #### SASS:
 Start SASS Watcher.
 
-`sass --watch public/scss/index.scss public/style.css`
+```bash
+sass --watch public/scss/index.scss:public/style.css
+```
 
 ## Documentation:
 
