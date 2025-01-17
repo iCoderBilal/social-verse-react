@@ -1,12 +1,15 @@
-
-
 import React, { useEffect, useState } from "react";
 import Loader from "../../../components/Common/Loader";
 import MobileTopNavigation from "../../../components/Mobile/TopNavigation";
 import MobileSideNavigation from "../../../components/Mobile/SideNavigation";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import ErrorLog from "../../../components/Mobile/ErrorLog";
+
+// Function to format date
+const formatDate = (date) => {
+    const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+    return new Date(date).toLocaleDateString('en-US', options);
+};
 
 function ErrorLogs({ dataUrl }) {
     const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 768);
@@ -16,39 +19,51 @@ function ErrorLogs({ dataUrl }) {
     const [hasMoreData, setHasMoreData] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const [categories, setCategories] = useState([]);
-    const [selectedAppName, setSelectedAppName] = useState('empowerverse');
+    const [projects, setProjects] = useState([]); 
+    const [selectedAppName, setSelectedAppName] = useState('all'); 
 
     const navigate = useNavigate();
 
     useEffect(() => {
         getCategories();
-        
+        getProjectList(); 
         fetchData(currentPage, selectedAppName);
+    }, [currentPage, isSideNavOpen, isMobileView, selectedAppName]); 
 
-    }, [currentPage, isSideNavOpen, isMobileView]);
+    const getCategories = async () => {
+        const response = await axios.get('/categories?page=1&page_size=50');
+        const sortedCategories = response.data.categories.sort((a, b) => a.name.localeCompare(b.name));
+        setCategories(sortedCategories);
+    };
+
+    // New function to fetch project list
+    const getProjectList = async () => {
+        try {
+            const response = await axios.get('/admin/project/list');
+            // let projectList = response.data.projects;
+            setProjects(response.data.projects); // Set the fetched projects
+        } catch (error) {
+            console.error("Error fetching project list:", error);
+        }
+    };
 
     const handleSelectChange = async (event) => {
         const value = event.target.value;
-        const appName = value.split(' ').join('').toLowerCase();
-        let newPage = 1;
-
+        const appName = value.toLowerCase(); // Set appName to empty for "All"
         setSelectedAppName(appName);
         setData([]);
-        setCurrentPage(newPage);
+        setCurrentPage(1);
         setHasMoreData(true);
-
-        fetchData(newPage, appName);
+        fetchData(1, appName); // Fetch data for the selected app or all apps
     };
 
     const pageSize = 50;
 
     const fetchData = async (page, appName) => {
-        if (currentPage === page && data.length > 0 && appName === selectedAppName) return;
+        if (isLoading || (currentPage === page && data.length > 0 && appName === selectedAppName)) return;
 
         try {
             setIsLoading(true);
-            if (appName === "bloomscroll") appName = "bloom";
-
             const response = await axios.get(dataUrl, {
                 params: {
                     page: page,
@@ -70,24 +85,6 @@ function ErrorLogs({ dataUrl }) {
         }
     };
 
-    const getCategories = async () => {
-        const response = await axios.get('/categories?page=1&page_size=50');
-        // console.log(response.data);
-
-        // Sort alphabetically
-        const sortedCategories = response.data.categories.sort((a, b) => {
-            if (a.name < b.name) {
-              return -1;
-            }
-            if (a.name > b.name) {
-              return 1;
-            }
-            return 0;
-          });
-        
-        setCategories(sortedCategories);
-    }
-
     const handleScroll = (event) => {
         const { scrollTop, scrollHeight, clientHeight } = event.target;
         if (!isLoading && hasMoreData && scrollTop + clientHeight >= scrollHeight - 10) {
@@ -97,6 +94,10 @@ function ErrorLogs({ dataUrl }) {
 
     const handleNavigationClick = () => {
         setIsSideNavOpen(false);
+    };
+
+    const handleFileNameClick = (item) => {
+        console.log("File clicked:", item.file_name);
     };
 
     return (
@@ -117,44 +118,64 @@ function ErrorLogs({ dataUrl }) {
                     <div className="dashboard-container">
                         <div className="header-actions">
                             <button onClick={() => navigate(-1)} className="back-btn">Back</button>
-                            <select onChange={handleSelectChange} className="select">
-                                <option key={1} value='empowerverse'>Select App</option>
-                                {categories.map(category => (
-                                    <option key={category.id} value={category.name}>{category.name}</option>
+                            <select onChange={handleSelectChange} className="select" value={selectedAppName}>
+                                <option key={1} value='all'>All</option>
+                                {projects.map(project => (
+                                    <option key={project.toLowerCase()} value={project.toLowerCase()}>{project}</option>
                                 ))}
                             </select>
                         </div>
-                        <ul onScroll={handleScroll} style={{ height: "100vh", overflowY: "auto" }}>
+                        <table className="error-logs-table">
+                            <thead>
+                                <tr>
+                                    <th>Status Code</th>
+                                    <th>Path</th>
+                                    <th>Line</th>
+                                    <th>Created At</th>
+                                    {selectedAppName === 'all' && <th>App Name</th>} {/* Show App Name when 'All' is selected */}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {data && data.length > 0 ? (
+                                    data.map((item, index) => (
+                                        <tr key={index}>
+                                            <td className="status-code" style={{ color: 'red'}}>{item.status_code}</td>
+                                            <td>{item.path}</td>
+                                            <td onClick={() => handleFileNameClick(item)} style={{ cursor: 'pointer', color: '#000' }}>{item.line}</td>
+                                            <td>{formatDate(item.created_at)}</td>
+                                            {selectedAppName === 'all' && <td>{item.app_name}</td>} {/* Show App Name when 'All' is selected */}
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td colSpan={selectedAppName === 'all' ? 5 : 4}>No data available</td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+
+                        <div className="error-logs-card">
                             {data && data.length > 0 ? (
-                                <>
-                                    <div className="log">
+                                data.map((item, index) => (
+                                    <div key={index} className="log">
                                         <div className="log-header">
-                                            <p className="header-item">Status Code</p>
-                                            <p className="header-item">Path</p>
-                                            <p className="header-item">Line</p>
-                                            <p className="header-item">Created At</p>
-                                            {selectedAppName === 'empowerverse' && <p className="header-item">AppName</p>}
-                                            {/* <div className="header-actions"></div> */}
+                                            <p className="header-item" style={{ color: 'red' }}>{item.status_code}</p>
+                                            <p className="header-item">{item.path}</p>
+                                            <p className="header-item">{item.line}</p>
+                                            <p className="header-item">{formatDate(item.created_at)}</p>
+                                            {selectedAppName === 'all' && <p className="header-item">{item.app_name}</p>} {/* Show App Name when 'All' is selected */}
                                         </div>
                                     </div>
-                                    {
-                                        data.map((item, index) => (
-                                            <li key={index} className="data-item">
-                                                <ErrorLog data={item} showAppName={selectedAppName === 'empowerverse'} />
-                                            </li>
-                                        ))
-                                    }
-                                </>
+                                ))
                             ) : (
-                                <li>No data available</li>
+                                <div>No data available</div>
                             )}
-                        </ul>
+                        </div>
                     </div>
                 </main >
             </div >
-
         </>
-    )
+    );
 }
 
 export default ErrorLogs;
