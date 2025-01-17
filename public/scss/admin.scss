@@ -134,15 +134,20 @@
     text-decoration: none;
     align-self: flex-start;
 
-    background: none; /* Remove background */
-    border: none; /* Remove border */
-    padding: 0; /* Remove padding */
+    background: none;
+    /* Remove background */
+    border: none;
+    /* Remove border */
+    padding: 0;
+    /* Remove padding */
     // font-size: 16px; /* Adjust font size */
-    cursor: pointer; /* Add cursor pointer */
-    color: inherit; /* Use parent text color */
+    cursor: pointer;
+    /* Add cursor pointer */
+    color: inherit;
+    /* Use parent text color */
 }
 
-.user{
+.user {
     background-color: white;
     margin: 0.4rem;
     display: flex;
@@ -176,7 +181,7 @@
     .user-actions {
         align-self: flex-end;
         margin: 0.4rem;
-      }
+    }
 
     // @include media("<=phone") {
     //     img{
@@ -189,7 +194,7 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 1rem;
-  }
+}
 
 .back-btn {
     padding: 0.4rem;
@@ -220,7 +225,7 @@
 //   flex-direction: column;
 //   margin: 20px;
 //   background-color: white;
-  
+
 //   .log-header {
 //     display: grid;
 //     grid-template-columns: 1fr 1fr 1fr 1fr 1fr auto; /* Create 5 columns for the content and 1 for the actions */
@@ -275,7 +280,7 @@
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 1rem;
         font-weight: bold;
-        border-bottom: 2px solid white;
+        // border-bottom: 2px solid white;
 
         .header-item {
             text-align: center;
@@ -447,7 +452,6 @@
         display: flex;
         flex-direction: column;
         padding: 1rem;
-        margin: 1rem 0;
         background-color: white;
         border: 1px solid #ddd;
         border-radius: 8px;
@@ -616,5 +620,40 @@
                 align-items: flex-start; // Align to the start
             }
         }
+    }
+}
+
+
+.error-logs-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto; // Allow columns to adjust based on content
+
+    th,
+    td {
+        padding: 0.75rem;
+        text-align: left;
+        border: 1px solid #ddd; // Add border for better visibility
+    }
+
+    th {
+        background-color: #f2f2f2; // Light background for headers
+    }
+
+
+    // Responsive styles for mobile
+    @media (max-width: 768px) {
+        display: none; // Hide the table on mobile
+    }
+}
+
+.error-logs-card {
+    display: none; // Default to hidden
+
+    // Show card view on mobile
+    @media (max-width: 768px) {
+        display: flex; // Use flexbox for card layout
+        flex-direction: column;
+        gap: 1rem; // Space between cards
     }
 }
