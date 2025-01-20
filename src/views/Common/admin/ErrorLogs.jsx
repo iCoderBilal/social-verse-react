@@ -12,55 +12,36 @@ const formatDate = (date) => {
 };
 
 function ErrorLogs({ dataUrl }) {
-    const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 768);
     const [isSideNavOpen, setIsSideNavOpen] = useState(false);
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [hasMoreData, setHasMoreData] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
-    const [categories, setCategories] = useState([]);
-    const [projects, setProjects] = useState([]); 
+    const [projects, setProjects] = useState([]);
     const [selectedAppName, setSelectedAppName] = useState('all'); 
 
     const navigate = useNavigate();
-
-    useEffect(() => {
-        getCategories();
-        getProjectList(); 
-        fetchData(currentPage, selectedAppName);
-    }, [currentPage, isSideNavOpen, isMobileView, selectedAppName]); 
-
-    const getCategories = async () => {
-        const response = await axios.get('/categories?page=1&page_size=50');
-        const sortedCategories = response.data.categories.sort((a, b) => a.name.localeCompare(b.name));
-        setCategories(sortedCategories);
-    };
-
-    // New function to fetch project list
-    const getProjectList = async () => {
-        try {
-            const response = await axios.get('/admin/project/list');
-            // let projectList = response.data.projects;
-            setProjects(response.data.projects); // Set the fetched projects
-        } catch (error) {
-            console.error("Error fetching project list:", error);
-        }
-    };
-
-    const handleSelectChange = async (event) => {
-        const value = event.target.value;
-        const appName = value.toLowerCase(); // Set appName to empty for "All"
-        setSelectedAppName(appName);
-        setData([]);
-        setCurrentPage(1);
-        setHasMoreData(true);
-        fetchData(1, appName); // Fetch data for the selected app or all apps
-    };
-
     const pageSize = 50;
 
+    useEffect(() => {
+        const getProjectList = async () => {
+            try {
+                const response = await axios.get('/admin/project/list');
+                setProjects(response.data.projects);
+            } catch (error) {
+                console.error("Error fetching project list:", error);
+            }
+        };
+
+        getProjectList();
+    }, []);
+
+    useEffect(() => {
+        fetchData(1, selectedAppName);
+    }, [selectedAppName]); 
+
     const fetchData = async (page, appName) => {
-        if (isLoading || (currentPage === page && data.length > 0 && appName === selectedAppName)) return;
+        if (isLoading || (currentPage === page && appName === selectedAppName && data.length > 0)) return;
 
         try {
             setIsLoading(true);
@@ -83,6 +64,15 @@ function ErrorLogs({ dataUrl }) {
         } finally {
             setIsLoading(false);
         }
+    };
+
+    const handleSelectChange = async (event) => {
+        const value = event.target.value;
+        const appName = value === 'all' ? undefined : value.toLowerCase();
+        setSelectedAppName(appName);
+        setData([]);
+        setCurrentPage(1);
+        setHasMoreData(true);
     };
 
     const handleScroll = (event) => {
@@ -118,7 +108,7 @@ function ErrorLogs({ dataUrl }) {
                     <div className="dashboard-container">
                         <div className="header-actions">
                             <button onClick={() => navigate(-1)} className="back-btn">Back</button>
-                            <select onChange={handleSelectChange} className="select" value={selectedAppName}>
+                            <select onChange={handleSelectChange} className="select" value={selectedAppName || 'all'}>
                                 <option key={1} value='all'>All</option>
                                 {projects.map(project => (
                                     <option key={project.toLowerCase()} value={project.toLowerCase()}>{project}</option>
@@ -132,18 +122,18 @@ function ErrorLogs({ dataUrl }) {
                                     <th>Path</th>
                                     <th>Line</th>
                                     <th>Created At</th>
-                                    {selectedAppName === 'all' && <th>App Name</th>} {/* Show App Name when 'All' is selected */}
+                                    {selectedAppName === 'all' && <th>App Name</th>}
                                 </tr>
                             </thead>
                             <tbody>
                                 {data && data.length > 0 ? (
                                     data.map((item, index) => (
                                         <tr key={index}>
-                                            <td className="status-code" style={{ color: 'red'}}>{item.status_code}</td>
+                                            <td className="status-code" style={{ color: 'red' }}>{item.status_code}</td>
                                             <td>{item.path}</td>
                                             <td onClick={() => handleFileNameClick(item)} style={{ cursor: 'pointer', color: '#000' }}>{item.line}</td>
                                             <td>{formatDate(item.created_at)}</td>
-                                            {selectedAppName === 'all' && <td>{item.app_name}</td>} {/* Show App Name when 'All' is selected */}
+                                            {selectedAppName === 'all' && <td>{item.app_name}</td>}
                                         </tr>
                                     ))
                                 ) : (

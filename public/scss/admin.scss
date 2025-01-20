@@ -473,8 +473,10 @@
             }
 
             .feedback-type {
-                font-size: 0.9rem; // Adjust size as needed
-                margin-left: 10px; // Space between type and name
+                color: white;
+                padding: 5px 9px;
+                border: none;
+                border-radius: 6px;
             }
         }
 
@@ -517,8 +519,10 @@
     }
 
     .feedback-type {
-        font-size: 0.9rem; // Adjust size as needed
-        margin-left: 10px; // Space between type and name
+        color: white;
+        padding: 5px 9px;
+        border: none;
+        border-radius: 6px;
     }
 
     // Styles for user info in feedback table
