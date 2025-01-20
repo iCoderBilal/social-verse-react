@@ -13,27 +13,15 @@ const Feedback = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [expandedRowIndex, setExpandedRowIndex] = useState(null);
     const [isMobileView, setIsMobileView] = useState(window.innerWidth < 768);
-    const [categories, setCategories] = useState([]);
     const [projects, setProjects] = useState([]);
 
     const navigate = useNavigate();
     const pageSize = 30;
 
     useEffect(() => {
-        getCategories();
         fetchData(1, selectedAppName);
         getProjectList();
     }, [currentPage, selectedAppName]);
-
-    const getCategories = async () => {
-        try {
-            const response = await axios.get('/categories?page=1&page_size=50');
-            const sortedCategories = response.data.categories.sort((a, b) => a.name.localeCompare(b.name));
-            setCategories(sortedCategories);
-        } catch (error) {
-            console.error("Error fetching categories:", error);
-        }
-    };
 
     const getProjectList = async () => {
         try {
@@ -56,7 +44,7 @@ const Feedback = () => {
                 params: {
                     page: currentPage,
                     page_size: pageSize,
-                    app_name: appName || undefined,
+                    app_name: appName,
                 },
             });
             const fetchedData = response.data.feedbacks.feedbacks;
@@ -73,10 +61,7 @@ const Feedback = () => {
         }
     }, [currentPage, selectedAppName, data.length, isLoading]);
 
-    useEffect(() => {
-        fetchData(1, selectedAppName);
-    }, [currentPage, selectedAppName, fetchData]);
-
+   
     const handleSelectChange = async (event) => {
         const value = event.target.value;
         const appName = value === 'all' ? undefined : value.toLowerCase();
