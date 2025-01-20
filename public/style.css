@@ -2554,8 +2554,10 @@ img.horizontal-logo {
       .feedback-cards .feedback-card .feedback-header .sender-name {
         font-weight: bold; }
       .feedback-cards .feedback-card .feedback-header .feedback-type {
-        font-size: 0.9rem;
-        margin-left: 10px; }
+        color: white;
+        padding: 5px 9px;
+        border: none;
+        border-radius: 6px; }
     .feedback-cards .feedback-card .feedback-description {
       display: flex;
       align-items: center;
@@ -2583,8 +2585,10 @@ img.horizontal-logo {
   .feedback-table .sender-name {
     font-weight: bold; }
   .feedback-table .feedback-type {
-    font-size: 0.9rem;
-    margin-left: 10px; }
+    color: white;
+    padding: 5px 9px;
+    border: none;
+    border-radius: 6px; }
   .feedback-table .user-info {
     display: flex;
     flex-direction: row;
