@@ -19,18 +19,21 @@ const Feedback = () => {
     const pageSize = 30;
 
     useEffect(() => {
-        fetchData(1, selectedAppName);
-        getProjectList();
-    }, [currentPage, selectedAppName]);
+        const getProjectList = async () => {
+            try {
+                const response = await axios.get('/admin/project/list');
+                setProjects(response.data.projects);
+            } catch (error) {
+                console.error("Error fetching project list:", error);
+            }
+        };
 
-    const getProjectList = async () => {
-        try {
-            const response = await axios.get('/admin/project/list');
-            setProjects(response.data.projects);
-        } catch (error) {
-            console.error("Error fetching project list:", error);
-        }
-    };
+        getProjectList();
+    }, []);
+
+    useEffect(() => {
+        fetchData(1, selectedAppName);
+    }, [selectedAppName]);
 
     const fetchData = useCallback(async (page, appName) => {
         if (isLoading || (currentPage === page && appName === selectedAppName && data.length > 0)) return;
@@ -61,7 +64,7 @@ const Feedback = () => {
         }
     }, [currentPage, selectedAppName, data.length, isLoading]);
 
-   
+
     const handleSelectChange = async (event) => {
         const value = event.target.value;
         const appName = value === 'all' ? undefined : value.toLowerCase();
@@ -133,7 +136,7 @@ const Feedback = () => {
                                                     <img className="sender-image" src={item.sender.profile_picture_url} alt="" />
                                                     <span className="sender-name">{item.sender.first_name + ' ' + item.sender.last_name}</span>
                                                 </div>
-                                                <span className="feedback-type" style={{ color: item.type === "F" ? 'green' : 'red' }}>
+                                                <span className="feedback-type" style={{ backgroundColor: item.type === "F" ? 'green' : 'red' }}>
                                                     {item.type === "F" ? "Feature" : "Bug"}
                                                 </span>
                                             </div>
@@ -173,8 +176,10 @@ const Feedback = () => {
                                                         <span className="sender-name">{item.sender.first_name + ' ' + item.sender.last_name}</span>
                                                     </div>
                                                 </td>
-                                                <td style={{ color: item.type === "F" ? 'green' : 'red' }}>
-                                                    {item.type === "F" ? "Feature" : "Bug"}
+                                                <td>
+                                                    <span className="feedback-type" style={{ backgroundColor: item.type === "F" ? 'green' : 'red' }}>
+                                                        {item.type === "F" ? "Feature" : "Bug"}
+                                                    </span>
                                                 </td>
                                                 <td>
                                                     {item.feedback.length > 100 ? (
