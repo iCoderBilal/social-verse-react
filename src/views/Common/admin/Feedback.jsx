@@ -1,8 +1,17 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import MobileTopNavigation from "../../../components/Mobile/TopNavigation";
 import MobileSideNavigation from "../../../components/Mobile/SideNavigation";
 import { useNavigate } from "react-router-dom";
+import TableView from "../../../components/Common/TableView";
 import axios from "axios";
+
+// Header Model
+const headerModel = [
+    { key: 'user', label: 'User', visible: true },
+    { key: 'type', label: 'Type', visible: true },
+    { key: 'feedback', label: 'Description', visible: true },
+    { key: 'app_name', label: 'App Name', visible: true },
+];
 
 const Feedback = () => {
     const [isSideNavOpen, setIsSideNavOpen] = useState(false);
@@ -11,8 +20,6 @@ const Feedback = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [hasMoreData, setHasMoreData] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
-    const [expandedRowIndex, setExpandedRowIndex] = useState(null);
-    const [isMobileView, setIsMobileView] = useState(window.innerWidth < 768);
     const [projects, setProjects] = useState([]);
 
     const navigate = useNavigate();
@@ -35,7 +42,7 @@ const Feedback = () => {
         fetchData(1, selectedAppName);
     }, [selectedAppName]);
 
-    const fetchData = useCallback(async (page, appName) => {
+    const fetchData = async (page, appName) => {
         if (isLoading || (currentPage === page && appName === selectedAppName && data.length > 0)) return;
 
         try {
@@ -47,7 +54,7 @@ const Feedback = () => {
                 params: {
                     page: currentPage,
                     page_size: pageSize,
-                    app_name: appName,
+                    app_name: appName === 'all' ? undefined : appName,
                 },
             });
             const fetchedData = response.data.feedbacks.feedbacks;
@@ -55,33 +62,39 @@ const Feedback = () => {
             if (fetchedData.length < pageSize) {
                 setHasMoreData(false);
             }
-            setData((prevData) => [...prevData, ...fetchedData]);
 
+            // Transform the data to match the table structure
+            const transformedData = fetchedData.map(item => ({
+                user: {
+                    profile_picture_url: item.sender.profile_picture_url,
+                    name: `${item.sender.first_name} ${item.sender.last_name}`
+                },
+                type: item.type === "F" ? "Feature" : "Bug",
+                feedback: item.feedback,
+                app_name: item.app_name,
+                _original: item // Preserve original data for popup
+            }));
+
+            setData(prevData => [...prevData, ...transformedData]);
         } catch (error) {
             console.error("Error fetching data:", error);
         } finally {
             setIsLoading(false);
         }
-    }, [currentPage, selectedAppName, data.length, isLoading]);
-
+    };
 
     const handleSelectChange = async (event) => {
         const value = event.target.value;
-        const appName = value === 'all' ? undefined : value.toLowerCase();
-        let newPage = 1;
-
         setSelectedAppName(value);
         setData([]);
-        setCurrentPage(newPage);
+        setCurrentPage(1);
         setHasMoreData(true);
-
-        fetchData(newPage, appName);
     };
 
     const handleScroll = (event) => {
         const { scrollTop, scrollHeight, clientHeight } = event.target;
         if (!isLoading && hasMoreData && scrollTop + clientHeight >= scrollHeight - 10) {
-            setCurrentPage((prevPage) => prevPage + 1);
+            setCurrentPage(prevPage => prevPage + 1);
         }
     };
 
@@ -89,18 +102,10 @@ const Feedback = () => {
         setIsSideNavOpen(false);
     };
 
-    const toggleRow = (index) => {
-        setExpandedRowIndex(expandedRowIndex === index ? null : index);
-    };
-
-    useEffect(() => {
-        const handleResize = () => {
-            setIsMobileView(window.innerWidth < 768);
-        };
-
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
+    // Filter header based on selected app name
+    const visibleHeaders = headerModel.filter(header => 
+        selectedAppName === 'all' ? true : header.key !== 'app_name'
+    );
 
     return (
         <>
@@ -108,7 +113,8 @@ const Feedback = () => {
                 isSideNavOpen={isSideNavOpen}
                 setIsSideNavOpen={setIsSideNavOpen}
             />
-            <div className="container">
+            <div className="container" onScroll={handleScroll}>
+                <div style={{ display: `${isSideNavOpen ? "block" : "none"} ` }} onClick={() => setIsSideNavOpen(false)} className="overlay"></div>
                 <aside className="side-bar">
                     <MobileSideNavigation
                         isOpen={isSideNavOpen}
@@ -122,84 +128,51 @@ const Feedback = () => {
                             <select onChange={handleSelectChange} className="select" value={selectedAppName || 'all'}>
                                 <option key={1} value='all'>All</option>
                                 {projects.map(project => (
-                                    <option key={project.toLowerCase()} value={project.toLowerCase()}>{project}</option>
+                                    <option key={project.toLowerCase()} value={project.toLowerCase()}>
+                                        {project}
+                                    </option>
                                 ))}
                             </select>
                         </div>
-                        <div className="table-container" onScroll={handleScroll}>
-                            {isMobileView ? (
-                                <div className="feedback-cards">
-                                    {data.map((item, index) => (
-                                        <div key={index} className="feedback-card">
-                                            <div className="feedback-header">
-                                                <div className="user-info" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                                                    <img className="sender-image" src={item.sender.profile_picture_url} alt="" />
-                                                    <span className="sender-name">{item.sender.first_name + ' ' + item.sender.last_name}</span>
-                                                </div>
-                                                <span className="feedback-type" style={{ backgroundColor: item.type === "F" ? 'green' : 'red' }}>
-                                                    {item.type === "F" ? "Feature" : "Bug"}
-                                                </span>
-                                            </div>
-                                            <div className="feedback-description" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                                                <span style={{ flex: 1, marginRight: '10px' }}>
-                                                    {item.feedback.length > 100 ? (
-                                                        <>
-                                                            {expandedRowIndex === index ? item.feedback : item.feedback.substring(0, 100) + '...'}
-                                                            <span onClick={() => toggleRow(index)} style={{ cursor: 'pointer', marginLeft: '10px' }}>
-                                                                {expandedRowIndex === index ? '↑' : '↓'}
-                                                            </span>
-                                                        </>
-                                                    ) : (
-                                                        item.feedback
-                                                    )}
-                                                </span>
-                                            </div>
+                        <TableView 
+                            header={visibleHeaders}
+                            data={data}
+                            renderCustomCell={(key, value) => {
+                                if (key === 'user') {
+                                    return (
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                            <img 
+                                                src={value.profile_picture_url} 
+                                                alt="" 
+                                                style={{ 
+                                                    width: '30px', 
+                                                    height: '30px', 
+                                                    borderRadius: '50%' 
+                                                }} 
+                                            />
+                                            <span>{value.name}</span>
                                         </div>
-                                    ))}
-                                </div>
-                            ) : (
-                                <table className="feedback-table">
-                                    <thead>
-                                        <tr>
-                                            <th>User</th>
-                                            <th>Type</th>
-                                            <th>Description</th>
-                                            {selectedAppName === 'all' && <th>App Name</th>}
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {data.map((item, index) => (
-                                            <tr key={index}>
-                                                <td className="feedback-user-info">
-                                                    <div className="user-info" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                                                        <img className="sender-image" src={item.sender.profile_picture_url} alt="" />
-                                                        <span className="sender-name">{item.sender.first_name + ' ' + item.sender.last_name}</span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <span className="feedback-type" style={{ backgroundColor: item.type === "F" ? 'green' : 'red' }}>
-                                                        {item.type === "F" ? "Feature" : "Bug"}
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    {item.feedback.length > 100 ? (
-                                                        <>
-                                                            {expandedRowIndex === index ? item.feedback : item.feedback.substring(0, 100) + '...'}
-                                                            <span onClick={() => toggleRow(index)} style={{ cursor: 'pointer' }}>
-                                                                {expandedRowIndex === index ? '↑' : '↓'}
-                                                            </span>
-                                                        </>
-                                                    ) : (
-                                                        item.feedback
-                                                    )}
-                                                </td>
-                                                {selectedAppName === 'all' && <td>{item.app_name}</td>}
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            )}
-                        </div>
+                                    );
+                                }
+                                if (key === 'type') {
+                                    return (
+                                        <span style={{ 
+                                            backgroundColor: value === "Feature" ? 'green' : 'red',
+                                            color: 'white',
+                                            padding: '4px 8px',
+                                            borderRadius: '4px',
+                                            fontSize: '12px'
+                                        }}>
+                                            {value}
+                                        </span>
+                                    );
+                                }
+                                if (key === 'feedback') {
+                                    return value && value.length > 20 ? value.substring(0, 20) + "..." : value;
+                                }
+                                return value;
+                            }}
+                        />
                     </div>
                 </main>
             </div>

@@ -1,24 +1,32 @@
-import React, { useEffect, useState } from "react";
-import Loader from "../../../components/Common/Loader";
+import React, { useEffect, useState, useCallback } from "react";
 import MobileTopNavigation from "../../../components/Mobile/TopNavigation";
 import MobileSideNavigation from "../../../components/Mobile/SideNavigation";
 import { useNavigate } from "react-router-dom";
+import TableView from "../../../components/Common/TableView";
 import axios from "axios";
 
-// Function to format date
-const formatDate = (date) => {
-    const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-    return new Date(date).toLocaleDateString('en-US', options);
-};
+// Header Model (Ensure these keys match your data structure)
+const headerModel = [
+    { key: 'level', label: 'Level', visible: true },
+    { key: 'path', label: 'Path', visible: true },
+    { key: 'status_code', label: 'Status Code', visible: true },
+    { key: 'line', label: 'Line No.', visible: true },
+    { key: 'error_code', label: 'Error Code', visible: false },
+    { key: 'file_name', label: 'File Name', visible: false },
+    { key: 'message', label: 'Message', visible: false },
+    { key: 'payload', label: 'Payload', visible: false },
+    { key: 'created_at', label: 'Created At', visible: true },
+    { key: 'app_name', label: 'App Name', visible: true },
+];
 
 function ErrorLogs({ dataUrl }) {
     const [isSideNavOpen, setIsSideNavOpen] = useState(false);
-    const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [hasMoreData, setHasMoreData] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const [projects, setProjects] = useState([]);
-    const [selectedAppName, setSelectedAppName] = useState('all'); 
+    const [selectedAppName, setSelectedAppName] = useState("all");
+    const [logs, setLogs] = useState([]);
 
     const navigate = useNavigate();
     const pageSize = 50;
@@ -26,7 +34,7 @@ function ErrorLogs({ dataUrl }) {
     useEffect(() => {
         const getProjectList = async () => {
             try {
-                const response = await axios.get('/admin/project/list');
+                const response = await axios.get("/admin/project/list");
                 setProjects(response.data.projects);
             } catch (error) {
                 console.error("Error fetching project list:", error);
@@ -38,10 +46,10 @@ function ErrorLogs({ dataUrl }) {
 
     useEffect(() => {
         fetchData(1, selectedAppName);
-    }, [selectedAppName]); 
+    }, [selectedAppName]);
 
     const fetchData = async (page, appName) => {
-        if (isLoading || (currentPage === page && appName === selectedAppName && data.length > 0)) return;
+        if (isLoading || !hasMoreData) return;
 
         try {
             setIsLoading(true);
@@ -49,7 +57,7 @@ function ErrorLogs({ dataUrl }) {
                 params: {
                     page: page,
                     page_size: pageSize,
-                    app_name: appName
+                    app_name: appName === "all" ? undefined : appName,
                 },
             });
             const fetchedData = response.data.logs;
@@ -57,8 +65,12 @@ function ErrorLogs({ dataUrl }) {
             if (fetchedData.length < pageSize) {
                 setHasMoreData(false);
             }
-            setData((prevData) => [...prevData, ...fetchedData]);
-
+            
+            if (page === 1) {
+                setLogs(fetchedData);
+            } else {
+                setLogs(prevLogs => [...prevLogs, ...fetchedData]);
+            }
         } catch (error) {
             console.error("Error fetching data:", error);
         } finally {
@@ -68,11 +80,31 @@ function ErrorLogs({ dataUrl }) {
 
     const handleSelectChange = async (event) => {
         const value = event.target.value;
-        const appName = value === 'all' ? undefined : value.toLowerCase();
-        setSelectedAppName(appName);
-        setData([]);
+        setSelectedAppName(value);
+        setLogs([]);
         setCurrentPage(1);
         setHasMoreData(true);
+        
+        try {
+            setIsLoading(true);
+            const response = await axios.get(dataUrl, {
+                params: {
+                    page: currentPage,
+                    page_size: pageSize,
+                    app_name: value === "all" ? undefined : value.toLowerCase(),
+                },
+            });
+            const fetchedData = response.data.logs;
+            
+            if (fetchedData.length < pageSize) {
+                setHasMoreData(false);
+            }
+            setLogs(fetchedData);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const handleScroll = (event) => {
@@ -86,9 +118,21 @@ function ErrorLogs({ dataUrl }) {
         setIsSideNavOpen(false);
     };
 
-    const handleFileNameClick = (item) => {
-        console.log("File clicked:", item.file_name);
-    };
+    // Modify the header generation to include both key and label
+    const header = headerModel.filter(item => item.visible);
+
+    // Modify the logs filtering to preserve original data
+    const filteredLogs = logs.map((log) => {
+        const filteredData = {};
+        headerModel.forEach((item) => {
+            if (item.visible && log.hasOwnProperty(item.key)) {
+                filteredData[item.key] = log[item.key];
+            }
+        });
+        // Add the original unfiltered data
+        filteredData._original = log;
+        return filteredData;
+    });
 
     return (
         <>
@@ -97,7 +141,7 @@ function ErrorLogs({ dataUrl }) {
                 setIsSideNavOpen={setIsSideNavOpen}
             />
             <div className="container" onScroll={handleScroll}>
-                <div style={{ display: `${isSideNavOpen ? 'block' : 'none'} ` }} onClick={() => setIsSideNavOpen(false)} className="overlay"></div>
+                <div style={{ display: `${isSideNavOpen ? "block" : "none"} ` }} onClick={() => setIsSideNavOpen(false)} className="overlay"></div>
                 <aside className="side-bar">
                     <MobileSideNavigation
                         isOpen={isSideNavOpen}
@@ -108,62 +152,20 @@ function ErrorLogs({ dataUrl }) {
                     <div className="dashboard-container">
                         <div className="header-actions">
                             <button onClick={() => navigate(-1)} className="back-btn">Back</button>
-                            <select onChange={handleSelectChange} className="select" value={selectedAppName || 'all'}>
-                                <option key={1} value='all'>All</option>
-                                {projects.map(project => (
-                                    <option key={project.toLowerCase()} value={project.toLowerCase()}>{project}</option>
+                            <select onChange={handleSelectChange} className="select" value={selectedAppName || "all"}>
+                                <option key={1} value="all">All</option>
+                                {projects.map((project) => (
+                                    <option key={project.toLowerCase()} value={project.toLowerCase()}>
+                                        {project}
+                                    </option>
                                 ))}
                             </select>
                         </div>
-                        <table className="error-logs-table">
-                            <thead>
-                                <tr>
-                                    <th>Status Code</th>
-                                    <th>Path</th>
-                                    <th>Line</th>
-                                    <th>Created At</th>
-                                    {selectedAppName === 'all' && <th>App Name</th>}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {data && data.length > 0 ? (
-                                    data.map((item, index) => (
-                                        <tr key={index}>
-                                            <td className="status-code" style={{ color: 'red' }}>{item.status_code}</td>
-                                            <td>{item.path}</td>
-                                            <td onClick={() => handleFileNameClick(item)} style={{ cursor: 'pointer', color: '#000' }}>{item.line}</td>
-                                            <td>{formatDate(item.created_at)}</td>
-                                            {selectedAppName === 'all' && <td>{item.app_name}</td>}
-                                        </tr>
-                                    ))
-                                ) : (
-                                    <tr>
-                                        <td colSpan={selectedAppName === 'all' ? 5 : 4}>No data available</td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </table>
-
-                        <div className="error-logs-card">
-                            {data && data.length > 0 ? (
-                                data.map((item, index) => (
-                                    <div key={index} className="log">
-                                        <div className="log-header">
-                                            <p className="header-item" style={{ color: 'red' }}>{item.status_code}</p>
-                                            <p className="header-item">{item.path}</p>
-                                            <p className="header-item">{item.line}</p>
-                                            <p className="header-item">{formatDate(item.created_at)}</p>
-                                            {selectedAppName === 'all' && <p className="header-item">{item.app_name}</p>} {/* Show App Name when 'All' is selected */}
-                                        </div>
-                                    </div>
-                                ))
-                            ) : (
-                                <div>No data available</div>
-                            )}
-                        </div>
+                        {/* Pass the dynamically generated header and filtered logs data to the TableView component */}
+                        <TableView header={header} data={filteredLogs} />
                     </div>
-                </main >
-            </div >
+                </main>
+            </div>
         </>
     );
 }
