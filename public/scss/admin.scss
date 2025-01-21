@@ -263,94 +263,6 @@
 //   }
 // }
 
-
-.log {
-    display: flex;
-    flex-direction: column;
-    border-radius: 0.4rem;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    background-color: white;
-    padding: 0.5rem;
-    width: 100%;
-    margin-bottom: 1rem;
-    border: 1px solid black;
-
-    .log-header {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1rem;
-        font-weight: bold;
-        // border-bottom: 2px solid white;
-
-        .header-item {
-            text-align: center;
-            color: black;
-            font-size: 1rem;
-            letter-spacing: 0.5px;
-        }
-
-        .header-actions {
-            text-align: center;
-        }
-    }
-
-    .log-data {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        background-color: white;
-
-        .status-code,
-        p {
-            text-align: center;
-            font-size: 1rem;
-            padding: 0.5rem;
-            border-radius: 0.5;
-        }
-
-        .status-code {
-            font-weight: bold;
-            color: red;
-        }
-
-        .user-actions {
-            text-align: center;
-        }
-
-        //   &:hover {
-        //     background-color: white;
-        //   }
-    }
-
-    /* Media Query for Small Devices */
-    @media (max-width: 768px) {
-
-        .log-header,
-        .log-data {
-            display: block;
-            /* Stack items vertically */
-            margin-bottom: 0.5rem;
-        }
-
-        .log-header .header-item,
-        .log-data p {
-            width: 100%;
-            text-align: left;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .log-data .status-code,
-        .log-data p {
-            padding-left: 1.25rem;
-            padding-right: 1.25rem;
-        }
-
-        .log-header {
-            border-bottom: none;
-        }
-    }
-}
-
 .video-error {
     background-color: black;
     color: white;
@@ -631,33 +543,89 @@
 .error-logs-table {
     width: 100%;
     border-collapse: collapse;
-    table-layout: auto; // Allow columns to adjust based on content
-
-    th,
-    td {
-        padding: 0.75rem;
-        text-align: left;
-        border: 1px solid #ddd; // Add border for better visibility
-    }
+    table-layout: auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 
     th {
-        background-color: #f2f2f2; // Light background for headers
+        background-color: #f8f9fa;
+        color: #333;
+        text-align: left;
+        padding: 1rem;
+        border-bottom: 2px solid #eaeaea;
+        font-size: 1rem;
     }
 
+    td {
+        padding: 0.75rem;
+        border-bottom: 1px solid #eaeaea;
+        font-size: 0.9rem;
+        color: #555;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .status-code {
+        font-weight: bold;
+        color: red;
+    }
 
     // Responsive styles for mobile
-    @media (max-width: 768px) {
+    @media (max-width: 425px) {
         display: none; // Hide the table on mobile
     }
 }
 
+// Error Logs Cards
 .error-logs-card {
-    display: none; // Default to hidden
+    display: none;
 
-    // Show card view on mobile
-    @media (max-width: 768px) {
-        display: flex; // Use flexbox for card layout
+    @media (max-width: 425px) {
+        display: flex;
         flex-direction: column;
-        gap: 1rem; // Space between cards
+        gap: 1rem;
+
+        .log {
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(to bottom right, #ffffff, #f9f9f9);
+            border-radius: 0.8rem;
+            padding: 1.5rem;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+            &:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            }
+
+            .log-header {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1rem;
+                font-weight: bold;
+                margin-bottom: 1rem;
+
+                .header-item {
+                    text-align: left;
+                    color: #333;
+                    font-size: 1rem;
+                }
+            }
+
+            .log-data {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1rem;
+
+                .status-code {
+                    color: #d9534f;
+                    font-weight: bold;
+                }
+            }
+        }
     }
 }
