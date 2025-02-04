@@ -629,3 +629,169 @@
         }
     }
 }
+
+// Upload Container Styles
+.upload-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.input-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+
+    label {
+        font-weight: 500;
+        color: #333;
+        font-size: 18px;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 18px;
+
+        &:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        &::placeholder {
+            color: #999;
+        }
+    }
+
+    small {
+        color: #666;
+        font-size: 12px;
+    }
+}
+
+.link-list-section {
+    margin-top: 24px;
+
+    label {
+        font-weight: 500;
+        color: #333;
+        font-size: 14px;
+        display: block;
+        margin-bottom: 12px;
+    }
+}
+
+.link-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.link-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+
+    span {
+        color: #333;
+        font-size: 14px;
+        word-break: break-all;
+        margin-right: 12px;
+        flex: 1;
+    }
+
+    .remove-button {
+        background: none;
+        border: none;
+        color: #666;
+        cursor: pointer;
+        padding: 4px 8px;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 32px;
+        transition: color 0.3s ease;
+
+        &:hover {
+            color: #dc3545;
+        }
+
+        svg {
+            width: 14px;
+            height: 14px;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .upload-container {
+        padding: 16px;
+    }
+
+    .link-item {
+        padding: 10px;
+        
+        span {
+            font-size: 13px;
+        }
+    }
+}
+
+.input-with-button {
+    display: flex;
+    gap: 8px;
+
+    input {
+        flex: 1;
+    }
+}
+
+.upload-button {
+    margin-top: 16px;
+    padding: 12px 24px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #0056b3;
+    }
+}
+
+.date-picker-section {
+    margin-top: 1rem;
+
+    label {
+        font-weight: 500;
+        color: #333;
+        font-size: 14px;
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    input[type="date"] {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+
+        &:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+    }
+}

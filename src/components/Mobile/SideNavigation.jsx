@@ -96,6 +96,12 @@ function MobileSideNavigation({ isOpen, onClose }) {
     navigate("/admin/dashboard/feedback");
   };
 
+  const handleUploadsNavigationClick = () => {
+    setActive("uploads");
+    onClose();
+    navigate("/admin/dashboard/uploads");
+  };
+
   const handleLogoutButtonClick = () => {
     onClose();
     setIsActive("Login");
@@ -156,6 +162,13 @@ function MobileSideNavigation({ isOpen, onClose }) {
               >
               <LuClipboardList />
               <p className="nav-text">Feedback</p>
+            </div>
+            <div
+              className={`nav-item ${active === "uploads" ? "active" : ""}`}
+              onClick={handleUploadsNavigationClick}
+              >
+              <LuClipboardList />
+              <p className="nav-text">Uploads</p>
             </div>
             </>
         ) : (
