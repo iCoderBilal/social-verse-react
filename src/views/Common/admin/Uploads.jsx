@@ -103,7 +103,6 @@ const Uploads = () => {
             return;
         }
 
-        const token = "flic-Token";
 
         try {
             const response = await axios.post('https://texttovideo.empowerverse.org/api/v1/upload/social-media', {
@@ -111,7 +110,7 @@ const Uploads = () => {
                 urls: linkList.join(','),
             }, {
                 headers: {
-                    'flic-Token': token,
+                    'Flic-Token': "flic_ea7c78247d2ac6cfa2ff6cf328e75772343f953b1cbe5795e9da2040918d4b51",
                     'Content-Type': 'application/json',
                 },
             });
