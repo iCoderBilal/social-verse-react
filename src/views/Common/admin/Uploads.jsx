@@ -105,12 +105,15 @@ const Uploads = () => {
 
 
         try {
+            console.log("***************************")
+            console.log(linkList)
+            console.log("***************************")
             const response = await axios.post('https://texttovideo.empowerverse.org/api/v1/upload/social-media', {
                 date: selectedDate,
                 urls: linkList.join(','),
             }, {
                 headers: {
-                    'Flic-Token': "flic_ea7c78247d2ac6cfa2ff6cf328e75772343f953b1cbe5795e9da2040918d4b51",
+                    'Flic-Token': "flic_60e33b36cd6894257097de76e935115abb228bdacf1e8016b6fd6141522c8723",
                     'Content-Type': 'application/json',
                 },
             });
