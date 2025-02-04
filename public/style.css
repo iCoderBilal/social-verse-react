@@ -2660,6 +2660,127 @@ img.horizontal-logo {
             color: #d9534f;
             font-weight: bold; } }
 
+.upload-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px; }
+
+.input-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px; }
+  .input-section label {
+    font-weight: 500;
+    color: #333;
+    font-size: 18px; }
+  .input-section input, .input-section .form-group textarea, .form-group .input-section textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 18px; }
+    .input-section input:focus, .input-section .form-group textarea:focus, .form-group .input-section textarea:focus {
+      outline: none;
+      border-color: #007bff; }
+    .input-section input::placeholder, .input-section .form-group textarea::placeholder, .form-group .input-section textarea::placeholder {
+      color: #999; }
+  .input-section small {
+    color: #666;
+    font-size: 12px; }
+
+.link-list-section {
+  margin-top: 24px; }
+  .link-list-section label {
+    font-weight: 500;
+    color: #333;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 12px; }
+
+.link-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; }
+
+.link-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px; }
+  .link-item span {
+    color: #333;
+    font-size: 14px;
+    word-break: break-all;
+    margin-right: 12px;
+    flex: 1; }
+  .link-item .remove-button {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 4px 8px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    transition: color 0.3s ease; }
+    .link-item .remove-button:hover {
+      color: #dc3545; }
+    .link-item .remove-button svg {
+      width: 14px;
+      height: 14px; }
+
+@media (max-width: 768px) {
+  .upload-container {
+    padding: 16px; }
+
+  .link-item {
+    padding: 10px; }
+    .link-item span {
+      font-size: 13px; } }
+.input-with-button {
+  display: flex;
+  gap: 8px; }
+  .input-with-button input, .input-with-button .form-group textarea, .form-group .input-with-button textarea {
+    flex: 1; }
+
+.upload-button {
+  margin-top: 16px;
+  padding: 12px 24px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.3s ease; }
+  .upload-button:hover {
+    background-color: #0056b3; }
+
+.date-picker-section {
+  margin-top: 1rem; }
+  .date-picker-section label {
+    font-weight: 500;
+    color: #333;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 8px; }
+  .date-picker-section input[type="date"], .date-picker-section .form-group textarea[type="date"], .form-group .date-picker-section textarea[type="date"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px; }
+    .date-picker-section input[type="date"]:focus, .date-picker-section .form-group textarea[type="date"]:focus, .form-group .date-picker-section textarea[type="date"]:focus {
+      outline: none;
+      border-color: #007bff; }
+
 .side-navigation {
   background: white;
   padding: 20rem;
