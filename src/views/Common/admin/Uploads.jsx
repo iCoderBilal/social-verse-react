@@ -129,6 +129,7 @@ const Uploads = () => {
                             console.log("Failed links: ");
                         }
                     });
+                    setUploadFailed(true);
                     setStartTimer(true);
                 } else {
                     setUploadInProgress(true); // Set uploadInProgress to true
