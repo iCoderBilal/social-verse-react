@@ -2669,7 +2669,7 @@ img.horizontal-logo {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-bottom: 24px; }
+  margin-bottom: 0px; }
   .input-section label {
     font-weight: 500;
     color: #333;
@@ -2694,7 +2694,7 @@ img.horizontal-logo {
   .link-list-section label {
     font-weight: 500;
     color: #333;
-    font-size: 14px;
+    font-size: 18px;
     display: block;
     margin-bottom: 12px; }
 
@@ -2713,7 +2713,7 @@ img.horizontal-logo {
   border-radius: 4px; }
   .link-item span {
     color: #333;
-    font-size: 14px;
+    font-size: 17px;
     word-break: break-all;
     margin-right: 12px;
     flex: 1; }
@@ -2732,8 +2732,8 @@ img.horizontal-logo {
     .link-item .remove-button:hover {
       color: #dc3545; }
     .link-item .remove-button svg {
-      width: 14px;
-      height: 14px; }
+      width: 17px;
+      height: 17px; }
 
 @media (max-width: 768px) {
   .upload-container {
@@ -2762,6 +2762,20 @@ img.horizontal-logo {
   transition: background-color 0.3s ease; }
   .upload-button:hover {
     background-color: #0056b3; }
+
+.clear-button {
+  margin-top: 16px;
+  padding: 12px 24px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.3s ease; }
+  .clear-button:hover {
+    background-color: #c82333; }
 
 .date-picker-section {
   margin-top: 1rem; }
