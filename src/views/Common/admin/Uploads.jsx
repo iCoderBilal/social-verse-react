@@ -4,8 +4,6 @@ import MobileSideNavigation from "../../../components/Mobile/SideNavigation";
 import { useNavigate } from "react-router-dom";
 import { FaTrash } from 'react-icons/fa';
 import axios from "axios";
-import { use } from "react";
-// import Loader from "../../../components/Common/Loader";
 
 const Uploads = () => {
     const navigate = useNavigate();
@@ -21,6 +19,30 @@ const Uploads = () => {
     const [completedLinks, setCompletedLinks] = useState(new Set()); // Track completed links
     const [failedLinks, setFailedLinks] = useState(new Set()); // Track failed links
     const [failedLinksCount, setFailedLinksCount] = useState(0); // Track failed links count
+    const [timer, setTimer] = useState(5); // Timer to clear screen after 5 seconds
+    const [startTimer, setStartTimer] = useState(false); // Timer to clear screen after 5 seconds
+
+    //use effect to handle timer count down 
+    useEffect(() => {
+        if (!startTimer) {
+            return;
+        }
+        const interval = setInterval(() => {
+            setTimer((prev) => {
+                if (prev === 0) {
+                    clearInterval(interval);
+                    handleClearData();
+                    //reload the page after 5 seconds
+                    window.location.reload();
+                    return 5;
+                }
+                return prev - 1;
+            }
+            );
+        }, 1000);
+        return () => clearInterval(interval);
+    }, [startTimer]);
+
 
     // Get today's date in the required format
     const getTodayDate = () => {
@@ -72,11 +94,7 @@ const Uploads = () => {
             if (response.data && response.data.urls) {
                 setProgressData(response.data.urls);
 
-                console.log("***********************************************************************************************")
-                console.log(response.data.overall_progress)
-                console.log(response.data)
-                console.log("***********************************************************************************************")
-
+               
                 const urls = response.data.urls;
                 // Create new sets for failed and completed links
                 const newFailedLinks = new Set();
@@ -95,7 +113,7 @@ const Uploads = () => {
                 // Update the state with the new sets
                 setFailedLinks(newFailedLinks);
                 setCompletedLinks(newCompletedLinks);
-                if (response.data.overall_progress === 100) {
+                if (response.data.overall_progress === 100 || (response.data.status === "error" && response.data.overall_progress === 0)) {
                     setTaskId(null); // Clear taskId to stop further polling
                     setUploadInProgress(false); // Set uploadInProgress to false
                     if (failedLinksCount >= 1 || newFailedLinks.size >= 1) {
@@ -111,6 +129,7 @@ const Uploads = () => {
                             console.log("Failed links: ");
                         }
                     });
+                    setStartTimer(true);
                 } else {
                     setUploadInProgress(true); // Set uploadInProgress to true
                 }
@@ -199,6 +218,11 @@ const Uploads = () => {
         setLinkList(prevList => {
             const updatedList = prevList.filter(link => link !== linkToRemove);
             setShowUploadButton(updatedList.length > 0); // Show button if links are left
+            //hide when links are empty then no need to show upload button and clear button
+            if (updatedList.length === 0) {
+                setShowUploadButton(false);
+                setUploadFailed(false);
+            }
             return updatedList;
         });
     };
@@ -382,7 +406,7 @@ const Uploads = () => {
                             )}
                             {uploadFailed && !uploadInProgress && (
                                 <button onClick={handleClearData} className="clear-button">
-                                    Clear All Data
+                                    Clearing screen in {timer} 
                                 </button>
                             )}
                         </div>
