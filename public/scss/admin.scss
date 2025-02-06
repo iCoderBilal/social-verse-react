@@ -641,7 +641,7 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    margin-bottom: 24px;
+    margin-bottom: 0px;
 
     label {
         font-weight: 500;
@@ -678,7 +678,7 @@
     label {
         font-weight: 500;
         color: #333;
-        font-size: 14px;
+        font-size: 18px;
         display: block;
         margin-bottom: 12px;
     }
@@ -701,7 +701,7 @@
 
     span {
         color: #333;
-        font-size: 14px;
+        font-size: 17px;
         word-break: break-all;
         margin-right: 12px;
         flex: 1;
@@ -725,8 +725,8 @@
         }
 
         svg {
-            width: 14px;
-            height: 14px;
+            width: 17px;
+            height: 17px;
         }
     }
 }
@@ -757,7 +757,7 @@
 .upload-button {
     margin-top: 16px;
     padding: 12px 24px;
-    background-color: #007bff;
+    background-color: #6b0092;
     color: white;
     border: none;
     border-radius: 4px;
@@ -767,7 +767,24 @@
     transition: background-color 0.3s ease;
 
     &:hover {
-        background-color: #0056b3;
+        background-color: #5c027c;
+    }
+}
+
+.clear-button {
+    margin-top: 16px; 
+    padding: 12px 24px; 
+    background-color: #6b0092; 
+    color: white;
+    border: none;
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-size: 14px; 
+    font-weight: 500; 
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #5c027c; 
     }
 }
 
