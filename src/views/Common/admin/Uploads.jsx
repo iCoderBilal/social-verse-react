@@ -319,9 +319,9 @@ const Uploads = () => {
                 </aside>
                 <main className="main-container">
                     <div className="dashboard-container">
-                        {/* <div className="header-actions">
-                            <button onClick={() => navigate(-1)} className="back-btn">Back</button>
-                        </div> */}
+                        <div className="header-actions">
+                            <button onClick={() => navigate("/admin/dashboard/daily-feed")} className="feed-btn">Daily Feed</button>
+                        </div>
 
                         <div className="upload-container">
                             <div className="input-section">
