@@ -106,6 +106,15 @@ const DailyFeed = () => {
           border-radius: 5px;
           border: 1px solid #ccc;
           font-size: 14px;
+          /* Default width on larger screens */
+          width: 250px; 
+        }
+
+        /* Make date picker full-width on screens smaller than 768px */
+        @media (max-width: 768px) {
+          .date-picker {
+            width: 100%;
+          }
         }
 
         .video-scroll-container {
