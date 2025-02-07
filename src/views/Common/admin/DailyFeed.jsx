@@ -6,12 +6,18 @@ import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { format, addDays } from "date-fns";
+import { FaTrash } from "react-icons/fa";
 
 const DailyFeed = () => {
   const [isSideNavOpen, setIsSideNavOpen] = useState(false);
+
   // 1. Default to today's date
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [posts, setPosts] = useState([]);
+
+  // States to handle hover/selection for delete button
+  const [hoveredPostId, setHoveredPostId] = useState(null);
+  const [selectedPostId, setSelectedPostId] = useState(null);
 
   const navigate = useNavigate();
 
@@ -35,8 +41,30 @@ const DailyFeed = () => {
       setPosts(response.data.dailyFeed || []);
     } catch (error) {
       console.error("Error fetching posts:", error.message);
-      // In case of error, you could optionally show a different message or keep an empty array
       setPosts([]);
+    }
+  };
+
+  // 2. Handle delete
+  const handleDelete = async (postId) => {
+    // Optional confirmation
+    const confirmDelete = window.confirm("Are you sure you want to delete this post?");
+    if (!confirmDelete) return;
+
+    try {
+      await axios.delete("/delete/daily-feed", {
+        // For a DELETE request, `axios` typically puts data in the request body via `data` property
+        data: {
+          app_name: "bloom",
+          served_on: format(selectedDate, "yyyy-MM-dd"),
+          post_id: postId,
+        },
+      });
+
+      // Remove the deleted post from local state
+      setPosts((prevPosts) => prevPosts.filter((p) => p.id !== postId));
+    } catch (error) {
+      console.error("Error deleting post:", error.message);
     }
   };
 
@@ -49,7 +77,7 @@ const DailyFeed = () => {
 
       <div className="container">
         <div
-          style={{ display: `${isSideNavOpen ? "block" : "none"}` }}
+          style={{ display: isSideNavOpen ? "block" : "none" }}
           onClick={() => setIsSideNavOpen(false)}
           className="overlay"
         ></div>
@@ -68,7 +96,7 @@ const DailyFeed = () => {
                 Back
               </button>
 
-              {/* 2. DatePicker to select older/future dates */}
+              {/* DatePicker to select older/future dates */}
               <DatePicker
                 selected={selectedDate}
                 onChange={(date) => setSelectedDate(date)}
@@ -81,15 +109,48 @@ const DailyFeed = () => {
               />
             </div>
 
-            {/* 3. Show data if available, otherwise display "No data available" */}
+            {/* Show data if available, otherwise display "No data available" */}
             <div className="video-scroll-container">
               {posts && posts.length > 0 ? (
                 <div className="video-list">
-                  {posts.map((post) => (
-                    <div className="video-card" key={post.id}>
-                      <video src={post.video_link} controls />
-                    </div>
-                  ))}
+                  {posts.map((post) => {
+                    // Condition to highlight the card visually
+                    const isHoveredAndSelected =
+                      hoveredPostId === post.id && selectedPostId === post.id;
+
+                    return (
+                      <div
+                        className={
+                          isHoveredAndSelected
+                            ? "video-card hovered-selected"
+                            : "video-card"
+                        }
+                        key={post.id}
+                        // Handle hover events
+                        onMouseEnter={() => setHoveredPostId(post.id)}
+                        onMouseLeave={() => setHoveredPostId(null)}
+                        // Handle click (select) event
+                        onClick={() => setSelectedPostId(post.id)}
+                      >
+                        <video src={post.video_link} controls />
+
+                        {/* Show delete button only if hovered AND selected */}
+                        {isHoveredAndSelected && (
+                          <button
+                            className="delete-button"
+                            onClick={(e) => {
+                              // Prevent the card click from re-triggering
+                              e.stopPropagation();
+                              handleDelete(post.id);
+                            }}
+                          >
+                            {/* Replace 'trash-icon.png' with your own image path */}
+                            <FaTrash />
+                          </button>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               ) : (
                 <p className="no-data">No data available</p>
@@ -107,7 +168,7 @@ const DailyFeed = () => {
           border: 1px solid #ccc;
           font-size: 14px;
           /* Default width on larger screens */
-          width: 250px; 
+          width: 250px;
         }
 
         /* Make date picker full-width on screens smaller than 768px */
@@ -131,6 +192,7 @@ const DailyFeed = () => {
         }
 
         .video-card {
+          position: relative;
           width: 220px;
           height: 400px;
           background-color: #f0f0f0;
@@ -141,12 +203,40 @@ const DailyFeed = () => {
           justify-content: center;
           box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
           flex-shrink: 0;
+          cursor: pointer;
+          transition: border 0.2s;
+        }
+
+        /* Visually highlight when hovered + selected */
+        .video-card.hovered-selected {
+          border: 3px solid #007bff; /* or any color/style you prefer */
         }
 
         .video-card video {
           width: 100%;
           height: 100%;
           object-fit: cover;
+        }
+
+        /* The delete button that appears in center on hover+select */
+        .delete-button {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background-color: #fff;
+          color: #000;
+          border: none;
+          border-radius: 50%;
+          padding: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+        }
+
+        .delete-button:hover {
+          background-color: #e60000;
         }
 
         .no-data {
