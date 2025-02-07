@@ -26,6 +26,7 @@ import ErrorLogs from "./views/Common/admin/ErrorLogs";
 import Posts from "./views/Common/admin/Posts";
 import Feedback from "./views/Common/admin/Feedback";
 import Uploads from "./views/Common/admin/Uploads";
+import DailyFeed from "./views/Common/admin/DailyFeed";
 
 const App = (props) => {
   const { auth, ui } = useSelector((state) => state);
@@ -45,7 +46,7 @@ const App = (props) => {
   const renderConsoleWarning = () => {
     console.log("%cStop!", "font-size: 50px; color:red");
     console.log(
-      "%cThis is a browser feature intended for developers. If someone told you to copy-paste something here to enable a Empowerverse feature or “hack” someone’s account, it is a scam and will give them access to your Empowerverse account. Learn more: https://en.wikipedia.org/wiki/Self-XSS",
+      "%cThis is a browser feature intended for developers. If someone told you to copy-paste something here to enable a Empowerverse feature or 'hack' someone's account, it is a scam and will give them access to your Empowerverse account. Learn more: https://en.wikipedia.org/wiki/Self-XSS",
       "font-size: 20px;"
     );
   };
@@ -114,6 +115,11 @@ const App = (props) => {
           <Route
             path="/admin/dashboard/uploads"
             element={userRole === "A" ? <Uploads /> : <Navigate to="/" />}
+          />
+
+          <Route
+            path="/admin/dashboard/daily-feed"
+            element={userRole === "A" ? <DailyFeed /> : <Navigate to="/" />}
           />
 
           <Route path="*" element={<NotFound />} status={404} />
