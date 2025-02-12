@@ -27,6 +27,7 @@ import Posts from "./views/Common/admin/Posts";
 import Feedback from "./views/Common/admin/Feedback";
 import Uploads from "./views/Common/admin/Uploads";
 import DailyFeed from "./views/Common/admin/DailyFeed";
+import Referral from "./views/Common/admin/Referral";
 
 const App = (props) => {
   const { auth, ui } = useSelector((state) => state);
@@ -120,6 +121,11 @@ const App = (props) => {
           <Route
             path="/admin/dashboard/daily-feed"
             element={userRole === "A" ? <DailyFeed /> : <Navigate to="/" />}
+          />
+
+          <Route
+            path="/admin/dashboard/referral"
+            element={userRole === "A" ? <Referral /> : <Navigate to="/" />}
           />
 
           <Route path="*" element={<NotFound />} status={404} />
