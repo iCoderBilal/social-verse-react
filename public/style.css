@@ -1049,6 +1049,27 @@ img.horizontal-logo {
       width: 24px;
       height: 24px;
       margin-right: 1rem; }
+  .social-login-container .apple-signin-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    background-color: #000;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background-color 0.2s ease; }
+    .social-login-container .apple-signin-button:hover {
+      background-color: #333; }
+    .social-login-container .apple-signin-button img {
+      width: 24px;
+      height: 24px;
+      margin-right: 1rem;
+      filter: invert(1); }
 
 .separator {
   display: flex;
