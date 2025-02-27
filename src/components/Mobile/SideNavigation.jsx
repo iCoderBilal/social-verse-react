@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { HomeIcon, MagnifyingGlassIcon, UserIcon } from "@heroicons/react/20/solid";
 import { LuLayoutDashboard, LuUsers, LuClipboardList } from "react-icons/lu";
+// import { UsersIcon } from "@heroicons/react/24/outline"; //icon for referral
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineVideoSettings } from "react-icons/md";
@@ -102,6 +103,12 @@ function MobileSideNavigation({ isOpen, onClose }) {
     navigate("/admin/dashboard/uploads");
   };
 
+  // const handleReferralNavigationClick = () => {
+  //   setActive("referral");
+  //   onClose();
+  //   navigate("/admin/dashboard/referral");
+  // };
+
   const handleLogoutButtonClick = () => {
     onClose();
     setIsActive("Login");
@@ -116,7 +123,7 @@ function MobileSideNavigation({ isOpen, onClose }) {
   return (
     <>
       {(isMobileView && !isOpen) ? null : (
-      <div className={`side-navigation ${isOpen ? "open" : ""}`}>
+        <div className={`side-navigation ${isOpen ? "open" : ""}`}>
           <div
             className={`nav-item ${active === "home" ? "active" : ""}`}
             onClick={handleHomeNavigationClick}
@@ -138,45 +145,52 @@ function MobileSideNavigation({ isOpen, onClose }) {
             <UserIcon />
             <p className="nav-text">Profile</p>
           </div>
-        {auth.user.role === "A" ? (
-          <>
-            <div
-              className={`nav-item ${active === "admin" ? "active" : ""}`}
-              onClick={handleAdminNavigationClick}
+          {auth.user.role === "A" ? (
+            <>
+              <div
+                className={`nav-item ${active === "admin" ? "active" : ""}`}
+                onClick={handleAdminNavigationClick}
               >
-              <LuLayoutDashboard />
-              <p className="nav-text">Dashboard</p>
-            </div>
-            
-            <div
-              className={`nav-item ${active === "logs" ? "active" : ""}`}
-              onClick={handleLogsNavigationClick}
-              >
-              <LuClipboardList />
-              <p className="nav-text">Logs</p>
-            </div>
+                <LuLayoutDashboard />
+                <p className="nav-text">Dashboard</p>
+              </div>
 
-            <div
-              className={`nav-item ${active === "feedback" ? "active" : ""}`}
-              onClick={handleFeedbackNavigationClick}
+              <div
+                className={`nav-item ${active === "logs" ? "active" : ""}`}
+                onClick={handleLogsNavigationClick}
               >
-              <LuClipboardList />
-              <p className="nav-text">Feedback</p>
-            </div>
-            <div
-              className={`nav-item ${active === "uploads" ? "active" : ""}`}
-              onClick={handleUploadsNavigationClick}
+                <LuClipboardList />
+                <p className="nav-text">Logs</p>
+              </div>
+
+              <div
+                className={`nav-item ${active === "feedback" ? "active" : ""}`}
+                onClick={handleFeedbackNavigationClick}
               >
-              <LuClipboardList />
-              <p className="nav-text">Uploads</p>
-            </div>
+                <LuClipboardList />
+                <p className="nav-text">Feedback</p>
+              </div>
+              <div
+                className={`nav-item ${active === "uploads" ? "active" : ""}`}
+                onClick={handleUploadsNavigationClick}
+              >
+                <LuClipboardList />
+                <p className="nav-text">Uploads</p>
+              </div>
+              {/* <div
+                className={`nav-item ${active === "referral" ? "active" : ""}`}
+                onClick={handleReferralNavigationClick}
+              >
+                <UsersIcon />
+                <p className="nav-text">Referral</p>
+              </div> */}
             </>
-        ) : (
-          ""
+          ) : (
+            ""
           )}
 
-        {isMobileView ? (
-          <div className="nav-item logout ">
+          {isMobileView ? (
+            <div className="nav-item logout ">
               <button
                 type="button"
                 className="button-logout"
@@ -185,7 +199,7 @@ function MobileSideNavigation({ isOpen, onClose }) {
                 {isActive}
               </button>
             </div>
-        ) : null}
+          ) : null}
         </div>
       )}
     </>

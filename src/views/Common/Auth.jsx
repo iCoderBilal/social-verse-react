@@ -9,6 +9,8 @@ import RightArrowIcon from "../../components/Common/RightArrowIcon";
 import {Navigate, useNavigate} from "react-router-dom";
 import MobileTopNavigation from "../../components/Mobile/TopNavigation";
 import MobileSideNavigation from "../../components/Mobile/SideNavigation";
+import { signInWithPopup, GoogleAuthProvider, OAuthProvider } from 'firebase/auth';
+import { auth } from '../../config/firebase';
 
 function Auth(props) {
 
@@ -199,6 +201,62 @@ function Auth(props) {
         setIsSideNavOpen(false);
       };
     
+    const handleGoogleSignIn = async () => {
+        try {
+            const provider = new GoogleAuthProvider();
+            const result = await signInWithPopup(auth, provider);
+            const idToken = await result.user.getIdToken();
+            
+            // Call your API with the Firebase token
+            const response = await axios.post('/auth/firebase', {
+                token: idToken,
+                app_name: 'empowerverse'
+            });
+
+            if (response.data.status === 'success') {
+                FlicToaster.success("Login success! :D");
+                setLocalStorageUser(response.data);
+                window.location.replace('/admin/dashboard');
+            } else {
+                FlicToaster.error(response.data.message);
+            }
+        } catch (error) {
+            console.error('Error during Google sign-in:', error);
+            FlicToaster.error("Authentication failed. Please try again.");
+        }
+    };
+
+    const handleAppleSignIn = async () => {
+        try {
+            // Initialize Apple Sign-in
+            const provider = new OAuthProvider('apple.com');
+            // provider.addScope('email');
+            // provider.addScope('name');
+            
+            const result = await signInWithPopup(auth, provider);
+            console.log("result");
+            console.log(result);
+            const idToken = await result.user.getIdToken();
+            
+            // Call your API with the Firebase token
+            const response = await axios.post('/auth/firebase', {
+                token: idToken,
+                app_name: 'empowerverse'
+            });
+
+            if (response.data.status === 'success') {
+                FlicToaster.success("Login success! :D");
+                setLocalStorageUser(response.data);
+                window.location.replace('/admin/dashboard');
+            } else {
+                FlicToaster.error(response.data.message);
+            }
+        } catch (error) {
+            console.error('Error during Apple sign-in:', error);
+            FlicToaster.error("Authentication failed. Please try again.");
+        }
+    };
+
     return (
 
         <>
@@ -228,6 +286,16 @@ function Auth(props) {
                     <div className="interaction-container">
                         {getFormFieldsJsx()}
                         {getFormSubmitButton()}
+                        <div className="social-login-container">
+                            <button type="button" className="google-signin-button" onClick={handleGoogleSignIn}>
+                                <img src="google-icon.svg" alt="Google" />
+                                Continue with Google
+                            </button>
+                            {/* <button type="button" className="apple-signin-button" onClick={handleAppleSignIn}>
+                                <img src="apple-icon.svg" alt="Apple" />
+                                Continue with Apple
+                            </button> */}
+                        </div>
                         <p className="legal-links-container">
                             By continuing you accept our{" "}
                             <span>Terms of Use</span>{" "}
