@@ -1,12 +1,12 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import HorizontalLogo from "../../components/Common/HorizontalLogo";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LeftPaneImage from "../../components/Common/LeftPaneImage";
 import FlicToaster from "../../utils/FlicToaster";
-import {setLocalStorageUser} from "../../utils/UserLocalStorageHelper";
+import { setLocalStorageUser } from "../../utils/UserLocalStorageHelper";
 import RightArrowIcon from "../../components/Common/RightArrowIcon";
-import {Navigate, useNavigate} from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import MobileTopNavigation from "../../components/Mobile/TopNavigation";
 import MobileSideNavigation from "../../components/Mobile/SideNavigation";
 import { signInWithPopup, GoogleAuthProvider, OAuthProvider } from 'firebase/auth';
@@ -20,9 +20,9 @@ function Auth(props) {
     let navigate = useNavigate();
     const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 768);
     const [isSideNavOpen, setIsSideNavOpen] = useState(false);
-  
+
     const dispatch = useDispatch();
-    const {user , isLoggedIn} = useSelector(state => state.auth);
+    const { user, isLoggedIn } = useSelector(state => state.auth);
 
     const [isSubmitLoading, setIsSubmitLoading] = useState(false);
     const [formName, setFormName] = useState(loginFormName);
@@ -30,7 +30,7 @@ function Auth(props) {
     const [loader, setLoader] = useState(false);
 
     if (isLoggedIn) {
-       <Navigate to={'/admin/dashboard'}/>
+        <Navigate to={'/admin/dashboard'} />
     }
 
     const handleLoginFormSubmit = (formData) => {
@@ -118,7 +118,7 @@ function Auth(props) {
     const getPasswordFormFieldsJsx = () => {
         return <>
             <div className="form-group">
-                <input type="text" name="mixed" placeholder="Enter your username / email" required/>
+                <input type="text" name="mixed" placeholder="Enter your username / email" required />
             </div>
         </>
     }
@@ -132,7 +132,7 @@ function Auth(props) {
         }
         return (
             <>
-                <img src="loader.gif" alt="Empowerverse Loading Spinner"/>
+                <img src="loader.gif" alt="Empowerverse Loading Spinner" />
             </>
         );
     };
@@ -161,10 +161,10 @@ function Auth(props) {
     const getLoginFormFieldsJsx = () => {
         return <>
             <div className="form-group">
-                <input type="text" name="mixed" placeholder="Your email or username" required/>
+                <input type="text" name="mixed" placeholder="Your email or username" required />
             </div>
             <div className="form-group">
-                <input type="password" name="password" placeholder="Your password" required/>
+                <input type="password" name="password" placeholder="Your password" required />
             </div>
 
             <div className="forgot-password-container">
@@ -176,37 +176,37 @@ function Auth(props) {
     const getRegisterFormFieldsJsx = () => {
         return <>
             <div className="form-group many">
-                <input type="text" name="first_name" placeholder="First name"/>
-                <input type="text" name="last_name" placeholder="Last name"/>
+                <input type="text" name="first_name" placeholder="First name" />
+                <input type="text" name="last_name" placeholder="Last name" />
             </div>
             <div className="form-group">
-                <input type="text" name="username" placeholder="Choose username"/>
+                <input type="text" name="username" placeholder="Choose username" />
             </div>
             <div className="form-group">
-                <input type="email" name="email" placeholder="Email"/>
+                <input type="email" name="email" placeholder="Email" />
             </div>
             <div className="form-group">
-                <input type="password" name="password" placeholder="Password"/>
+                <input type="password" name="password" placeholder="Password" />
             </div>
         </>
     }
 
     const getFormSubmitButton = () => {
         return <div className={`form-group ${isSubmitLoading && "loading"}`}>
-            <button className={isSubmitLoading && "loading"}>Continue <RightArrowIcon/></button>
+            <button className={isSubmitLoading && "loading"}>Continue <RightArrowIcon /></button>
         </div>
     }
-  
+
     const handleNavigationClick = () => {
         setIsSideNavOpen(false);
-      };
-    
+    };
+
     const handleGoogleSignIn = async () => {
         try {
             const provider = new GoogleAuthProvider();
             const result = await signInWithPopup(auth, provider);
             const idToken = await result.user.getIdToken();
-            
+
             // Call your API with the Firebase token
             const response = await axios.post('/auth/firebase', {
                 token: idToken,
@@ -232,12 +232,10 @@ function Auth(props) {
             const provider = new OAuthProvider('apple.com');
             // provider.addScope('email');
             // provider.addScope('name');
-            
+
             const result = await signInWithPopup(auth, provider);
-            console.log("result");
-            console.log(result);
             const idToken = await result.user.getIdToken();
-            
+
             // Call your API with the Firebase token
             const response = await axios.post('/auth/firebase', {
                 token: idToken,
@@ -260,56 +258,59 @@ function Auth(props) {
     return (
 
         <>
-     <MobileTopNavigation
-        isSideNavOpen={isSideNavOpen}
-        setIsSideNavOpen={setIsSideNavOpen}
-      />
-           <div className="container">
-      <div style={{display : `${isSideNavOpen ? 'block' : 'none'} `}} onClick={()=> setIsSideNavOpen(false)} className="overlay"></div>
-        <aside className="side-bar">
-            <MobileSideNavigation
-              isOpen={isSideNavOpen}
-              onClose={handleNavigationClick}
+            <MobileTopNavigation
+                isSideNavOpen={isSideNavOpen}
+                setIsSideNavOpen={setIsSideNavOpen}
             />
-        </aside>
-        <main className="main-container">
-        <div className="auth-container">
-            <LeftPaneImage/>
-            <div className="form-container">
-                <form onSubmit={handleFormSubmit}> 
-                    {loader ? getStatusResponse() : ""}
-                    <HorizontalLogo/>
-                    <div className="heading-container">
-                        <h2>{formName.toLowerCase()}</h2>
-                        {getHeadingContainerJsx()}
-                    </div>
-                    <div className="interaction-container">
-                        {getFormFieldsJsx()}
-                        {getFormSubmitButton()}
-                        <div className="social-login-container">
-                            <button type="button" className="google-signin-button" onClick={handleGoogleSignIn}>
-                                <img src="google-icon.svg" alt="Google" />
-                                Continue with Google
-                            </button>
-                            {/* <button type="button" className="apple-signin-button" onClick={handleAppleSignIn}>
-                                <img src="apple-icon.svg" alt="Apple" />
-                                Continue with Apple
-                            </button> */}
+            <div className="container">
+                <div style={{ display: `${isSideNavOpen ? 'block' : 'none'} ` }} onClick={() => setIsSideNavOpen(false)} className="overlay"></div>
+                <aside className="side-bar">
+                    <MobileSideNavigation
+                        isOpen={isSideNavOpen}
+                        onClose={handleNavigationClick}
+                    />
+                </aside>
+                <main className="main-container">
+                    <div className="auth-container">
+                        <LeftPaneImage />
+                        <div className="form-container">
+                            <form onSubmit={handleFormSubmit}>
+                                {loader ? getStatusResponse() : ""}
+                                <HorizontalLogo />
+                                <div className="heading-container">
+                                    <h2>{formName.toLowerCase()}</h2>
+                                    {getHeadingContainerJsx()}
+                                </div>
+                                <div className="interaction-container">
+                                    {getFormFieldsJsx()}
+                                    {getFormSubmitButton()}
+                                    <div className="separator">
+                                        <span>or</span>
+                                    </div>
+                                    <div className="social-login-container">
+                                        <button type="button" className="google-signin-button" onClick={handleGoogleSignIn}>
+                                            <img src="google-icon.svg" alt="Google" />
+                                            Continue with Google
+                                        </button>
+                                        <button type="button" className="apple-signin-button" onClick={handleAppleSignIn}>
+                                            <img src="apple-icon.svg" alt="Apple" />
+                                            Continue with Apple
+                                        </button>
+                                    </div>
+                                    <p className="legal-links-container">
+                                        By continuing you accept our{" "}
+                                        <span>Terms of Use</span>{" "}
+                                        and{" "}
+                                        <span>Privacy Policy</span>
+                                        .
+                                    </p>
+                                </div>
+                            </form>
                         </div>
-                        <p className="legal-links-container">
-                            By continuing you accept our{" "}
-                            <span>Terms of Use</span>{" "}
-                            and{" "}
-                            <span>Privacy Policy</span>
-                            .
-                        </p>
                     </div>
-                </form>
+                </main>
             </div>
-        </div>
-        </main>
-      </div>
-     
+
         </>
 
     );
