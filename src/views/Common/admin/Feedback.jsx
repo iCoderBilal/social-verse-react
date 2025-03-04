@@ -55,27 +55,33 @@ const Feedback = () => {
                     page: currentPage,
                     page_size: pageSize,
                     app_name: appName === 'all' ? undefined : appName,
+                    is_as_admin: 1 // Flag to fetch feedbacks as admin
                 },
             });
-            const fetchedData = response.data.feedbacks.feedbacks;
 
-            if (fetchedData.length < pageSize) {
-                setHasMoreData(false);
+            if (response.data.status === 'success') {
+                const fetchedData = response.data.feedbacks;
+
+                if (fetchedData.length < pageSize) {
+                    setHasMoreData(false);
+                }
+
+                // Transform the data to match the table structure
+                const transformedData = fetchedData.map(item => ({
+                    user: {
+                        profile_picture_url: item.sender.profile_picture_url,
+                        name: `${item.sender.first_name} ${item.sender.last_name}`
+                    },
+                    type: item.type === "F" ? "Feature" : "Bug",
+                    feedback: item.feedback,
+                    app_name: item.app_name,
+                    _original: item // Preserve original data for popup
+                }));
+
+                setData(prevData => [...prevData, ...transformedData]);
+            } else {
+                console.error("Error fetching data:", response.data.message);
             }
-
-            // Transform the data to match the table structure
-            const transformedData = fetchedData.map(item => ({
-                user: {
-                    profile_picture_url: item.sender.profile_picture_url,
-                    name: `${item.sender.first_name} ${item.sender.last_name}`
-                },
-                type: item.type === "F" ? "Feature" : "Bug",
-                feedback: item.feedback,
-                app_name: item.app_name,
-                _original: item // Preserve original data for popup
-            }));
-
-            setData(prevData => [...prevData, ...transformedData]);
         } catch (error) {
             console.error("Error fetching data:", error);
         } finally {
