@@ -93,27 +93,11 @@ function Posts() {
     const categories = [
         { "id": 0, "name": "All Categories" },
         { "id": 2, "name": "Vible" },
-        { "id": 3, "name": "The Igloo" },
-        { "id": 4, "name": "E/ACC" },
-        { "id": 5, "name": "Gratitube" },
         { "id": 6, "name": "InstaRama" },
-        { "id": 7, "name": "Energy Feed" },
-        { "id": 8, "name": "Bloom Scroll" },
-        { "id": 9, "name": "Top Vibes" },
-        { "id": 10, "name": "Digital Coffee" },
-        { "id": 11, "name": "Stop Scrolling" },
-        { "id": 12, "name": "Social Caffeine" },
+        { "id": 8, "name": "Bloom" },
         { "id": 13, "name": "Flic" },
-        { "id": 14, "name": "Prime Program" },
-        { "id": 15, "name": "Love" },
-        { "id": 17, "name": "ExitVerse" },
-        { "id": 18, "name": "Startup College" },
-        { "id": 20, "name": "OvaDrive" },
         { "id": 21, "name": "Pumptok" },
         { "id": 22, "name": "SolTok" },
-        { "id": 23, "name": "PepTok" },
-        { "id": 25, "name": "Super Feed" },
-        { "id": 26, "name": "Bot" }
     ];
 
     return (

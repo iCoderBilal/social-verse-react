@@ -4,7 +4,7 @@ import { LuLayoutDashboard, LuUsers, LuClipboardList } from "react-icons/lu";
 // import { UsersIcon } from "@heroicons/react/24/outline"; //icon for referral
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { MdOutlineVideoSettings } from "react-icons/md";
+import { MdOutlineAppRegistration } from "react-icons/md";
 
 import EmpowerverseLogo from "../../images/empowerverse.png";
 import {
@@ -72,12 +72,11 @@ function MobileSideNavigation({ isOpen, onClose }) {
   const handleProfileNavigationClick = () => {
     setActive("profile");
     onClose();
-    dispatch(setShowSwitchToAppSuggestionDialog(true));
-    // if (!isLoggedIn) {
-    //     dispatch(setShowLoginDialog(true));
-    // } else {
-    //     navigate('/@' + user.username)
-    // }
+    if (!isLoggedIn) {
+      dispatch(setShowLoginDialog(true));
+    } else {
+      navigate('/profile');
+    }
   };
   const handleAdminNavigationClick = () => {
     setActive("admin");
@@ -108,6 +107,12 @@ function MobileSideNavigation({ isOpen, onClose }) {
   //   onClose();
   //   navigate("/admin/dashboard/referral");
   // };
+
+  const handleOnboardingNavigationClick = () => {
+    setActive("onboarding");
+    onClose();
+    navigate("/admin/dashboard/onboarding");
+  };
 
   const handleLogoutButtonClick = () => {
     onClose();
@@ -184,6 +189,13 @@ function MobileSideNavigation({ isOpen, onClose }) {
                 <UsersIcon />
                 <p className="nav-text">Referral</p>
               </div> */}
+            <div
+              className={`nav-item ${active === "onboarding" ? "active" : ""}`}
+              onClick={handleOnboardingNavigationClick}
+            >
+              <MdOutlineAppRegistration />
+              <p className="nav-text">Onboarding</p>
+            </div>
             </>
           ) : (
             ""

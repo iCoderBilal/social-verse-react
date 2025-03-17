@@ -41,7 +41,7 @@ function Auth(props) {
                 if (response.data.status === "success") {
                     FlicToaster.success("Login success! :D");
                     setLocalStorageUser(response.data);
-                    window.location.replace(window.location.href = "/admin/dashboard");
+                    window.location.replace("/profile");
                 } else {
                     FlicToaster.error(response.data.message);
                 }
@@ -216,7 +216,7 @@ function Auth(props) {
             if (response.data.status === 'success') {
                 FlicToaster.success("Login success! :D");
                 setLocalStorageUser(response.data);
-                window.location.replace('/admin/dashboard');
+                window.location.replace('/profile');
             } else {
                 FlicToaster.error(response.data.message);
             }
@@ -228,11 +228,7 @@ function Auth(props) {
 
     const handleAppleSignIn = async () => {
         try {
-            // Initialize Apple Sign-in
             const provider = new OAuthProvider('apple.com');
-            // provider.addScope('email');
-            // provider.addScope('name');
-
             const result = await signInWithPopup(auth, provider);
             const idToken = await result.user.getIdToken();
 
@@ -245,7 +241,7 @@ function Auth(props) {
             if (response.data.status === 'success') {
                 FlicToaster.success("Login success! :D");
                 setLocalStorageUser(response.data);
-                window.location.replace('/admin/dashboard');
+                window.location.replace('/profile');
             } else {
                 FlicToaster.error(response.data.message);
             }
