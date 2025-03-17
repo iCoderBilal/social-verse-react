@@ -75,8 +75,8 @@ const OnboardingForm = () => {
     const selectedCountry = countries.find(country => country.code === selectedCountryCode);
     
     setFormData(prev => ({
-        ...prev,
-        country: selectedCountry ? selectedCountry.name : '' // Store the full country name
+      ...prev,
+      country: selectedCountry ? selectedCountry.name : ''
     }));
   };
 
@@ -143,7 +143,7 @@ const OnboardingForm = () => {
 
       FlicToaster.success('Project created successfully!');
       resetForm();
-      navigate('/admin/dashboard/project-list');
+      navigate('/profile');
 
     } catch (error) {
       console.error('Error response:', error.response);
@@ -296,7 +296,7 @@ const OnboardingForm = () => {
                   <label>Select Country *</label>
                   <select
                     name="country"
-                    value={formData.country}
+                    value={countries.find(c => c.name === formData.country)?.code || ''}
                     onChange={handleCountryChange}
                     required
                     className="country-select"
