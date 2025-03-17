@@ -24,7 +24,7 @@ function Dashboard() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await axios.get('/projects/user/get');
+        const response = await axios.get('/projects');
         if (response.data.status === 'success') {
           setProjects(response.data.projects);
         }
@@ -78,7 +78,7 @@ function Dashboard() {
                 <option value="Subscriptions">Subscriptions & Payments</option>
               </select>
 
-              {selectedComponent === 'Projects' && (
+              {selectedComponent === 'Projects' && projects.length > 0 && (
                 <div className="toggle-container">
                   <div className="view-toggle">
                     {view === 'grid' ? (
