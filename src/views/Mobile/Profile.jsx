@@ -1,171 +1,163 @@
-import React, {useLayoutEffect, useState} from 'react';
-import { IoHeartOutline, } from "react-icons/io";
-import {IoBookmarkOutline , IoPlayOutline} from "react-icons/io5"
-import {useSelector} from "react-redux";
+import React, { useLayoutEffect, useState, useRef } from 'react';
+import { IoBookmarkOutline, IoPlayOutline } from "react-icons/io5";
+import { useSelector } from "react-redux";
 import axios from "axios";
-import {useNavigate, useParams} from "react-router";
+import { useNavigate } from "react-router";
+import { LuClipboardList } from "react-icons/lu";
+import MobileTopNavigation from '../../components/Mobile/TopNavigation';
+import MobileSideNavigation from '../../components/Mobile/SideNavigation';
 
-function Profile(props) {
-
+function Profile() {
     const navigate = useNavigate();
-    const {username} = useParams();
-
-    const {isLoggedIn, user} = useSelector(state => state.auth);
+    const { isLoggedIn, user } = useSelector(state => state.auth);
 
     const [isProfileUserDataLoading, setIsProfileUserDataLoading] = useState(true);
     const [profileUserData, setProfileUserData] = useState(null);
-
-    const [isPostsLoading, setIsPostsLoading] = useState(true);
-    const [upvotedPosts, setUpvotedPosts] = useState([]);
-    const [bookmarkedPosts, setBookmarkedPosts] = useState([]);
     const [profilePosts, setProfilePosts] = useState([]);
-    const isProfileOwner = isLoggedIn && user.username.toLowerCase() === username.toLowerCase();
-
-    const tabIconUnderlineRef = React.createRef();
-
-    const profileTabs = ["posts", "bookmarks"];
-    const [activeProfileTab, setActiveProfileTab] = useState(profileTabs[0]);
+    const [projects, setProjects] = useState([]);
+    const [activeTab, setActiveTab] = useState('posts');
+    const [isSideNavOpen, setIsSideNavOpen] = useState(false);
+    const tabIconUnderlineRef = useRef(null);
 
     useLayoutEffect(() => {
-        if (tabIconUnderlineRef.current) {
-            moveUnderlineUnderActiveIcon();
+        if (!isLoggedIn) {
+            navigate('/auth');
+            return;
         }
 
-        axios.get(`/profile/${username}`).then((response) => {
+        // Fetch user profile data
+        axios.get(`/profile/${user.username}`).then((response) => {
             setProfileUserData(response.data);
             setIsProfileUserDataLoading(false);
-        }).then(() => {
-
-            const loadPosts = axios.get(`/posts/${username}`);
-            const loadBookmarks = (!isProfileOwner) ? ([]) : (axios.get(`/bookmarks`));
-
-            Promise.all([loadPosts, loadBookmarks]).then((values) => {
-            setProfilePosts(values[0].data)
-            setBookmarkedPosts(values[1].data)
-            setIsPostsLoading(false);
-        })
-
-        }).catch(() => {
-            navigate('/404');
+        }).catch(error => {
+            console.error("Error fetching profile data:", error);
+            setIsProfileUserDataLoading(false);
         });
 
-        window.gtag('event', 'view', {
-            'event_category': 'page',
-            'event_label': 'Profile'
+        // Fetch user posts
+        axios.get(`/users/${user.username}/posts`, { params: { page: 1 } }).then((response) => {
+            setProfilePosts(Array.isArray(response.data.posts) ? response.data.posts : []);
+        }).catch(error => {
+            console.error("Error fetching posts:", error);
         });
 
-    }, []);
+        // Fetch user projects from the new API endpoint
+        axios.get(`/projects/user/get`).then((response) => {
+            if (response.data.status === 'success' && Array.isArray(response.data.projects)) {
+                setProjects(response.data.projects);
+            } else {
+                console.error("Error fetching user projects:", response.data.message);
+                setProjects([]);
+            }
+        }).catch(error => {
+            console.error("Error fetching projects:", error);
+            setProjects([]);
+        });
 
-    const handleTabClick = (clickEvent) => {
-        getActiveTab().classList.remove("active");
-        clickEvent.target.classList.add("active");
-        setActiveProfileTab(clickEvent.target.dataset.tab ?? "posts")
+    }, [isLoggedIn]);
+
+    const handleTabClick = (tab) => {
+        setActiveTab(tab);
         moveUnderlineUnderActiveIcon();
-    }
-
-
-    const getActiveTab = () => {
-        return document.getElementsByClassName("icon-container active")[0];
-    }
+    };
 
     const moveUnderlineUnderActiveIcon = () => {
-        const underline = tabIconUnderlineRef.current;
-        const underLineXLength = underline.getBoundingClientRect().right - underline.getBoundingClientRect().left;
-        const activeTab = getActiveTab();
-        tabIconUnderlineRef.current.style.left = (activeTab.getBoundingClientRect().left + activeTab.getBoundingClientRect().right) / 2 - (underLineXLength / 2) + "px";
-    }
-
-    const getPostContainerJsx = () => {
-        if(isPostsLoading){
-            return <div className="posts-grid loading">
-                {Array(9).fill(1).map((val, index) => {
-                    return <li key={index} className="post-item"/>
-                })}
-            </div>
-        }
-
-        if(activeProfileTab === "posts"){
-
-            if(profilePosts.length === 0) {
-                return <div className="posts-grid empty"/>
+        if (tabIconUnderlineRef.current) {
+            const underline = tabIconUnderlineRef.current;
+            const underLineXLength = underline.getBoundingClientRect().right - underline.getBoundingClientRect().left;
+            const activeTab = document.getElementsByClassName("icon-container active")[0];
+            if (activeTab) {
+                underline.style.left = (activeTab.getBoundingClientRect().left + activeTab.getBoundingClientRect().right) / 2 - (underLineXLength / 2) + "px";
             }
+        }
+    };
 
-            return <div className="posts-grid">
-                {profilePosts.map((item) => {
-                    return <a key={item.identifier+'/'+item.slug} href={`/@${username}/${item.identifier}/${item.slug}`} className="post-item">
-                        <img src={item.thumbnail_url}/>
-                    </a>
-                })}
-            </div>
+    const renderContent = () => {
+        if (activeTab === 'posts') {
+            return (
+                <div className="posts-container">
+                    <div className="posts-grid">
+                        {Array.isArray(profilePosts) && profilePosts.length > 0 ? (
+                            profilePosts.map(post => (
+                                <div className="post-item" key={post.id}>
+                                    <video src={post.video_link} className="post-video" controls />
+                                </div>
+                            ))
+                        ) : (
+                            <li>No posts available</li>
+                        )}
+                    </div>
+                </div>
+            );
         }
 
-        if(activeProfileTab === "bookmarks"){
-
-            if(bookmarkedPosts.length === 0) {
-                return <div className="posts-grid empty"/>
-            }
-
-            return <div className="posts-grid">
-                {bookmarkedPosts.map((item) => {
-                    return <a key={item.identifier+'/'+item.slug} href={`/@${username}/${item.identifier}/${item.slug}`} className="post-item">
-                    <img src={item.thumbnail_url}/>
-                    </a>
-                })}
-            </div>
+        if (activeTab === 'projects') {
+            return (
+                <div className="projects-container">
+                    <div className="projects-grid">
+                        {projects.length > 0 ? (
+                            projects.map(project => (
+                                <div key={project.id} className="project-card">
+                                    <img
+                                        src={project.logo_url}
+                                        alt={project.name}
+                                        className="project-logo"
+                                    />
+                                    <h3 className="project-name">{project.name}</h3>
+                                </div>
+                            ))
+                        ) : (
+                            <li>No projects available</li>
+                        )}
+                    </div>
+                </div>
+            );
         }
 
-    }
+        return null; // Handle other tabs as needed
+    };
 
     return (
-        <div className={`profile ${isProfileUserDataLoading && "loading"}`}>
-            <div className="heading-container">
-                <h1>
-                    {profileUserData && profileUserData.name}
-                </h1>
+        <>
+            <MobileTopNavigation
+                isSideNavOpen={isSideNavOpen}
+                setIsSideNavOpen={setIsSideNavOpen}
+            />
+            <div className="container">
+                <div style={{ display: `${isSideNavOpen ? 'block' : 'none'}` }} onClick={() => setIsSideNavOpen(false)} className="overlay"></div>
+                <aside className="side-bar">
+                    <MobileSideNavigation
+                        isOpen={isSideNavOpen}
+                        onClose={() => setIsSideNavOpen(false)}
+                    />
+                </aside>
+                <main className="main-container">
+                    <div className={`profile ${isProfileUserDataLoading && "loading"}`}>
+                        <div className="profile-header">
+                            <div className="background-image"></div>
+                            <div className="profile-info">
+                                <img src={profileUserData?.profile_picture_url} alt="Profile" className="profile-picture" />
+                                <h1>{profileUserData?.name}</h1>
+                                <div className="profile-stats">
+                                    <span>{profileUserData?.post_count} Posts</span>
+                                    <span>{profileUserData?.follower_count} Followers</span>
+                                    <span>{profileUserData?.following_count} Following</span>
+                                    <span>{profileUserData?.total_inspired_user_count} Inspired</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="tabs">
+                            <button onClick={() => handleTabClick('posts')} className={activeTab === 'posts' ? 'active' : ''}>Posts</button>
+                            <button onClick={() => handleTabClick('projects')} className={activeTab === 'projects' ? 'active' : ''}>Projects</button>
+                            <button onClick={() => handleTabClick('about')} className={activeTab === 'about' ? 'active' : ''}>About Me</button>
+                        </div>
+                        <div className="content-section">
+                            {renderContent()}
+                        </div>
+                    </div>
+                </main>
             </div>
-            <div className="content-container">
-                <div className="user-container">
-                    <div className="avatar">
-                        {isProfileUserDataLoading ? <></>:  <img
-                            src={profileUserData.profile_picture_url}
-                            alt="User Profile Picture"/>}
-                    </div>
-                    <h2 className="username">
-                        {profileUserData && '@' + profileUserData.username}
-                    </h2>
-                    <div className="counters">
-                        <div className="counter">
-                            <span className="value">{profileUserData && profileUserData.post_count}</span>
-                            <span className="key">Posts</span>
-                        </div>
-                        <div className="counter">
-                            <span className="value">{profileUserData && profileUserData.follower_count}</span>
-                            <span className="key">Followers</span>
-                        </div>
-                        <div className="counter">
-                            <span className="value">{profileUserData && profileUserData.following_count}</span>
-                            <span className="key">Following</span>
-                        </div>
-                    </div>
-                </div>
-                <div className="post-tabs">
-                    <div className="post-tab-icons">
-                        <div className="icon-container active" data-tab="posts" onClick={handleTabClick}>
-                            <IoPlayOutline/>
-                        </div>
-                        {
-                            isProfileOwner ? <div className="icon-container" data-tab="bookmarks" onClick={handleTabClick}>
-                                <IoBookmarkOutline/>
-                            </div> : <></>
-                        }
-                    </div>
-                    <div className="post-tab-underline" ref={tabIconUnderlineRef}/>
-                </div>
-                <div className="posts-container">
-                    {getPostContainerJsx()}
-                </div>
-            </div>
-        </div>
+        </>
     );
 }
 

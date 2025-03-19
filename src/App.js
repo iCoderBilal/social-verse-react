@@ -28,6 +28,8 @@ import Feedback from "./views/Common/admin/Feedback";
 import Uploads from "./views/Common/admin/Uploads";
 import DailyFeed from "./views/Common/admin/DailyFeed";
 import Referral from "./views/Common/admin/Referral";
+import Onboarding from "./views/Common/admin/Onboarding";
+import ProjectList from "./views/Common/admin/ProjectList";
 
 const App = (props) => {
   const { auth, ui } = useSelector((state) => state);
@@ -127,6 +129,18 @@ const App = (props) => {
             path="/admin/dashboard/referral"
             element={userRole === "A" ? <Referral /> : <Navigate to="/" />}
           />
+
+          <Route
+            path="/admin/dashboard/onboarding"
+            element={userRole === "A" ? <Onboarding /> : <Navigate to="/" />}
+          />
+
+          <Route
+            path="/admin/dashboard/project-list"
+            element={userRole === "A" ? <ProjectList /> : <Navigate to="/" />}
+          />
+
+          <Route path="/profile" element={<Profile />} />
 
           <Route path="*" element={<NotFound />} status={404} />
         </Routes>
