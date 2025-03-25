@@ -19,12 +19,20 @@ function Profile() {
     const [isSideNavOpen, setIsSideNavOpen] = useState(false);
     const tabIconUnderlineRef = useRef(null);
     const [currentPage, setCurrentPage] = useState(1);
-    const observerRef = useRef(null);
+    const [hasMorePosts, setHasMorePosts] = useState(true);
 
     // Fetch user posts with pagination
     const fetchPosts = (page) => {
-        axios.get(`/users/${user.username}/posts`, { params: { page } }).then((response) => {
-            setProfilePosts(prevPosts => [...prevPosts, ...response.data.posts]);
+        axios.get(`/users/${user.username}/posts`, { params: { page, limit: 12 } }).then((response) => {
+            const newPosts = response.data.posts;
+            setProfilePosts(prevPosts => {
+                const postIds = new Set(prevPosts.map(post => post.id));
+                const uniqueNewPosts = newPosts.filter(post => !postIds.has(post.id));
+                return [...prevPosts, ...uniqueNewPosts];
+            });
+            if (newPosts.length < 12) {
+                setHasMorePosts(false);
+            }
         }).catch(error => {
             console.error("Error fetching posts:", error);
         });
@@ -45,10 +53,10 @@ function Profile() {
             setIsProfileUserDataLoading(false);
         });
 
-        // Fetch posts for the current page
+        // Fetch initial posts
         fetchPosts(currentPage);
 
-        // Fetch user projects from the new API endpoint
+        // Fetch user projects
         axios.get(`/projects/user/get`).then((response) => {
             if (response.data.status === 'success' && Array.isArray(response.data.projects)) {
                 setProjects(response.data.projects);
@@ -60,23 +68,6 @@ function Profile() {
             console.error("Error fetching projects:", error);
             setProjects([]);
         });
-
-        // Set up the Intersection Observer
-        const observer = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
-                setCurrentPage(prevPage => prevPage + 1);
-            }
-        }, { threshold: 1.0 });
-
-        if (observerRef.current) {
-            observer.observe(observerRef.current);
-        }
-
-        return () => {
-            if (observerRef.current) {
-                observer.unobserve(observerRef.current);
-            }
-        };
     }, [isLoggedIn, currentPage]);
 
     const handleTabClick = (tab) => {
@@ -95,15 +86,30 @@ function Profile() {
         }
     };
 
-    const handleNextPage = () => {
+    const handleShowMore = () => {
         setCurrentPage(prevPage => prevPage + 1);
     };
 
-    const handlePreviousPage = () => {
-        setCurrentPage(prevPage => Math.max(prevPage - 1, 1));
+    const renderAboutMeContent = () => {
+        // Placeholder for about me data
+        const aboutMeData = ""; // Replace with actual data source
+
+        return (
+            <div className="about-me-container">
+                {aboutMeData ? (
+                    <p>{aboutMeData}</p>
+                ) : (
+                    <p>No content available</p>
+                )}
+            </div>
+        );
     };
 
     const renderContent = () => {
+        if (isProfileUserDataLoading) {
+            return <div className="loading-spinner">Loading...</div>;
+        }
+
         if (activeTab === 'posts') {
             return (
                 <div className="posts-container">
@@ -115,9 +121,14 @@ function Profile() {
                                 </div>
                             ))
                         ) : (
-                            <li>No posts available</li>
+                            <li className="no-posts-message">No posts available</li>
                         )}
                     </div>
+                    {hasMorePosts && (
+                        <button className="load-more-button" onClick={handleShowMore}>
+                            Show More
+                        </button>
+                    )}
                 </div>
             );
         }
@@ -138,11 +149,15 @@ function Profile() {
                                 </div>
                             ))
                         ) : (
-                            <li>No projects available</li>
+                            <li className="no-projects-message">No projects available</li>
                         )}
                     </div>
                 </div>
             );
+        }
+
+        if (activeTab === 'about') {
+            return renderAboutMeContent();
         }
 
         return null; // Handle other tabs as needed
@@ -184,7 +199,6 @@ function Profile() {
                         </div>
                         <div className="content-section">
                             {renderContent()}
-                            <div ref={observerRef} className="loading-spinner">Loading more posts...</div>
                         </div>
                     </div>
                 </main>
