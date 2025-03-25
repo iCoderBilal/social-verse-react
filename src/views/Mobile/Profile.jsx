@@ -18,6 +18,17 @@ function Profile() {
     const [activeTab, setActiveTab] = useState('posts');
     const [isSideNavOpen, setIsSideNavOpen] = useState(false);
     const tabIconUnderlineRef = useRef(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const observerRef = useRef(null);
+
+    // Fetch user posts with pagination
+    const fetchPosts = (page) => {
+        axios.get(`/users/${user.username}/posts`, { params: { page } }).then((response) => {
+            setProfilePosts(prevPosts => [...prevPosts, ...response.data.posts]);
+        }).catch(error => {
+            console.error("Error fetching posts:", error);
+        });
+    };
 
     useLayoutEffect(() => {
         if (!isLoggedIn) {
@@ -34,12 +45,8 @@ function Profile() {
             setIsProfileUserDataLoading(false);
         });
 
-        // Fetch user posts
-        axios.get(`/users/${user.username}/posts`, { params: { page: 1 } }).then((response) => {
-            setProfilePosts(Array.isArray(response.data.posts) ? response.data.posts : []);
-        }).catch(error => {
-            console.error("Error fetching posts:", error);
-        });
+        // Fetch posts for the current page
+        fetchPosts(currentPage);
 
         // Fetch user projects from the new API endpoint
         axios.get(`/projects/user/get`).then((response) => {
@@ -54,7 +61,23 @@ function Profile() {
             setProjects([]);
         });
 
-    }, [isLoggedIn]);
+        // Set up the Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                setCurrentPage(prevPage => prevPage + 1);
+            }
+        }, { threshold: 1.0 });
+
+        if (observerRef.current) {
+            observer.observe(observerRef.current);
+        }
+
+        return () => {
+            if (observerRef.current) {
+                observer.unobserve(observerRef.current);
+            }
+        };
+    }, [isLoggedIn, currentPage]);
 
     const handleTabClick = (tab) => {
         setActiveTab(tab);
@@ -70,6 +93,14 @@ function Profile() {
                 underline.style.left = (activeTab.getBoundingClientRect().left + activeTab.getBoundingClientRect().right) / 2 - (underLineXLength / 2) + "px";
             }
         }
+    };
+
+    const handleNextPage = () => {
+        setCurrentPage(prevPage => prevPage + 1);
+    };
+
+    const handlePreviousPage = () => {
+        setCurrentPage(prevPage => Math.max(prevPage - 1, 1));
     };
 
     const renderContent = () => {
@@ -153,6 +184,7 @@ function Profile() {
                         </div>
                         <div className="content-section">
                             {renderContent()}
+                            <div ref={observerRef} className="loading-spinner">Loading more posts...</div>
                         </div>
                     </div>
                 </main>

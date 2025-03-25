@@ -132,7 +132,7 @@ function Posts() {
                                         {posts.map((post, index) => (
                                             <div className="post-item" key={post.id}>
                                                 {loadError[post.id] ? (
-                                                    <div className="video-error"> Video not available </div>
+                                                    <div className="video-error">Video not available</div>
                                                 ) : (
                                                     <video
                                                         src={post.video_link}
@@ -141,7 +141,12 @@ function Posts() {
                                                         onError={() => handleVideoError(post.id)}
                                                     />
                                                 )}
-                                                <button onClick={() => handlePostDelete(post.id, post.first_name + ' ' + post.last_name)} className="delete-btn">Delete</button>
+                                                <button
+                                                    onClick={() => handlePostDelete(post.id, post.first_name + ' ' + post.last_name)}
+                                                    className="delete-btn"
+                                                >
+                                                    Delete
+                                                </button>
                                             </div>
                                         ))}
                                     </div>
