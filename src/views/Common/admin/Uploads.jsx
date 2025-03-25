@@ -371,6 +371,22 @@ const Uploads = () => {
                                                         transition: "background 0.5s ease",
                                                     }}
                                                 >
+                                                    <div style={{
+                                                        position: "absolute",
+                                                        left: "-30px",
+                                                        width: "20px",
+                                                        height: "20px",
+                                                        backgroundColor: "#6b0092",
+                                                        color: "white",
+                                                        borderRadius: "50%",
+                                                        display: "flex",
+                                                        alignItems: "center",
+                                                        justifyContent: "center",
+                                                        fontSize: "12px",
+                                                        fontWeight: "bold",
+                                                    }}>
+                                                        {index + 1}
+                                                    </div>
                                                     <span>{link}</span>
                                                     <button
                                                         className="remove-button"
