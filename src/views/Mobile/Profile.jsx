@@ -18,6 +18,25 @@ function Profile() {
     const [activeTab, setActiveTab] = useState('posts');
     const [isSideNavOpen, setIsSideNavOpen] = useState(false);
     const tabIconUnderlineRef = useRef(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [hasMorePosts, setHasMorePosts] = useState(true);
+
+    // Fetch user posts with pagination
+    const fetchPosts = (page) => {
+        axios.get(`/users/${user.username}/posts`, { params: { page, limit: 12 } }).then((response) => {
+            const newPosts = response.data.posts;
+            setProfilePosts(prevPosts => {
+                const postIds = new Set(prevPosts.map(post => post.id));
+                const uniqueNewPosts = newPosts.filter(post => !postIds.has(post.id));
+                return [...prevPosts, ...uniqueNewPosts];
+            });
+            if (newPosts.length < 12) {
+                setHasMorePosts(false);
+            }
+        }).catch(error => {
+            console.error("Error fetching posts:", error);
+        });
+    };
 
     useLayoutEffect(() => {
         if (!isLoggedIn) {
@@ -34,14 +53,10 @@ function Profile() {
             setIsProfileUserDataLoading(false);
         });
 
-        // Fetch user posts
-        axios.get(`/users/${user.username}/posts`, { params: { page: 1 } }).then((response) => {
-            setProfilePosts(Array.isArray(response.data.posts) ? response.data.posts : []);
-        }).catch(error => {
-            console.error("Error fetching posts:", error);
-        });
+        // Fetch initial posts
+        fetchPosts(currentPage);
 
-        // Fetch user projects from the new API endpoint
+        // Fetch user projects
         axios.get(`/projects/user/get`).then((response) => {
             if (response.data.status === 'success' && Array.isArray(response.data.projects)) {
                 setProjects(response.data.projects);
@@ -53,8 +68,7 @@ function Profile() {
             console.error("Error fetching projects:", error);
             setProjects([]);
         });
-
-    }, [isLoggedIn]);
+    }, [isLoggedIn, currentPage]);
 
     const handleTabClick = (tab) => {
         setActiveTab(tab);
@@ -72,7 +86,30 @@ function Profile() {
         }
     };
 
+    const handleShowMore = () => {
+        setCurrentPage(prevPage => prevPage + 1);
+    };
+
+    const renderAboutMeContent = () => {
+        // Placeholder for about me data
+        const aboutMeData = ""; // Replace with actual data source
+
+        return (
+            <div className="about-me-container">
+                {aboutMeData ? (
+                    <p>{aboutMeData}</p>
+                ) : (
+                    <p>No content available</p>
+                )}
+            </div>
+        );
+    };
+
     const renderContent = () => {
+        if (isProfileUserDataLoading) {
+            return <div className="loading-spinner">Loading...</div>;
+        }
+
         if (activeTab === 'posts') {
             return (
                 <div className="posts-container">
@@ -84,9 +121,14 @@ function Profile() {
                                 </div>
                             ))
                         ) : (
-                            <li>No posts available</li>
+                            <li className="no-posts-message">No posts available</li>
                         )}
                     </div>
+                    {hasMorePosts && (
+                        <button className="load-more-button" onClick={handleShowMore}>
+                            Show More
+                        </button>
+                    )}
                 </div>
             );
         }
@@ -107,11 +149,15 @@ function Profile() {
                                 </div>
                             ))
                         ) : (
-                            <li>No projects available</li>
+                            <li className="no-projects-message">No projects available</li>
                         )}
                     </div>
                 </div>
             );
+        }
+
+        if (activeTab === 'about') {
+            return renderAboutMeContent();
         }
 
         return null; // Handle other tabs as needed
