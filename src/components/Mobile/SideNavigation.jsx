@@ -78,6 +78,13 @@ function MobileSideNavigation({ isOpen, onClose }) {
       navigate('/profile');
     }
   };
+
+  const handleImageGenarationNavigationClick = () => {
+    setActive("image-generator");
+    onClose();
+    navigate("/image-generator");
+  };
+
   const handleAdminNavigationClick = () => {
     setActive("admin");
     onClose();
@@ -150,6 +157,14 @@ function MobileSideNavigation({ isOpen, onClose }) {
             <UserIcon />
             <p className="nav-text">Profile</p>
           </div>
+          {/* Image Generator always visible */}
+          <div
+            className={`nav-item ${active === "image-generator" ? "active" : ""}`}
+            onClick={handleImageGenarationNavigationClick}
+          >
+            <LuClipboardList />
+            <p className="nav-text">Image Generator</p>
+          </div>
           {auth.user.role === "A" ? (
             <>
               <div
@@ -182,6 +197,15 @@ function MobileSideNavigation({ isOpen, onClose }) {
                 <LuClipboardList />
                 <p className="nav-text">Uploads</p>
               </div>
+              {/* Image Generator just like profile */}
+              <div
+                className={`nav-item ${active === "image-generator" ? "active" : ""}`}
+                onClick={handleImageGenarationNavigationClick}
+              >
+                <LuClipboardList />
+                <p className="nav-text">Image Generator</p>
+              </div>
+              
               {/* <div
                 className={`nav-item ${active === "referral" ? "active" : ""}`}
                 onClick={handleReferralNavigationClick}
