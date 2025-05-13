@@ -30,6 +30,7 @@ import DailyFeed from "./views/Common/admin/DailyFeed";
 import Referral from "./views/Common/admin/Referral";
 import Onboarding from "./views/Common/admin/Onboarding";
 import ProjectList from "./views/Common/admin/ProjectList";
+import ImageGenerator from "./views/Mobile/ImageGenerator";
 
 const App = (props) => {
   const { auth, ui } = useSelector((state) => state);
@@ -138,6 +139,11 @@ const App = (props) => {
           <Route
             path="/admin/dashboard/project-list"
             element={userRole === "A" ? <ProjectList /> : <Navigate to="/" />}
+          />
+
+          <Route
+            path="/image-generator"
+            element={<ImageGenerator />}
           />
 
           <Route path="/profile" element={<Profile />} />
