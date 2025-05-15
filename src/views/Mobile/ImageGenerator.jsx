@@ -43,7 +43,7 @@ const ImageGenerator = () => {
             const response = await axios.post(
                 "https://vidgencraft.com/api/upload_and_generate/",
                 {
-                    image_url: imageUrl,
+                    file_url: imageUrl,
                     prompt: videoPrompt
                 }
             );
