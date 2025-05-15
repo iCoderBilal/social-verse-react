@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import MobileTopNavigation from "../../components/Mobile/TopNavigation";
 import MobileSideNavigation from "../../components/Mobile/SideNavigation";
 import axios from "axios";
+import form_data from "form-data";
 
 const ImageGenerator = () => {
     const [isSideNavOpen, setIsSideNavOpen] = useState(false);
@@ -16,6 +17,7 @@ const ImageGenerator = () => {
     const [isVideoLoading, setIsVideoLoading] = useState(false);
     const [videoUrl, setVideoUrl] = useState("");
     const [videoError, setVideoError] = useState("");
+    
 
     const handleGenerate = async () => {
         if (!prompt.trim()) return;
@@ -40,11 +42,16 @@ const ImageGenerator = () => {
         setVideoError("");
         setVideoUrl("");
         try {
+            const form = new FormData();
+            form.append('prompt', videoPrompt);
+            form.append('file_url', imageUrl);
             const response = await axios.post(
-                "https://vidgencraft.com/api/upload_and_generate/",
+                'https://vidgencraft.com/api/generate-single-image-video/',
+                form,
                 {
-                    file_url: imageUrl,
-                    prompt: videoPrompt
+                  headers: {
+                    Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjb2Rld2l0aGFpc2hhQGdtYWlsLmNvbSIsInVzZXJfaWQiOiI4MiIsInR5cGUiOiJhY2Nlc3MiLCJleHAiOjE3NDk5MDExMDJ9.BIXV6A6tGHX3Axq9ZRepZGGCN5RU76UENtEuFNx_8ag'
+                  }
                 }
             );
             // Assuming the API returns { video_url: "..." }
