@@ -165,47 +165,46 @@ const ImageGenerator = () => {
                                 </div>
                             )}
                         </div>
-                        {/* Right Column: Video Generation */}
+                        {/* Right Column: Video Generation - Only show when showVideoPrompt is true */}
+                        {showVideoPrompt && (
                         <div className="dashboard-container" style={{ maxWidth: 600, flex: 1, padding: 32, marginBottom: 24 }}>
                             <h2 style={{ fontSize: 32, fontWeight: 700, color: '#000', marginBottom: 4 }}>Create Video</h2>
-                            {showVideoPrompt && (
-                                <div style={{ marginBottom: 20, width: '100%' }}>
-                                    <label htmlFor="video-prompt-textarea" style={{ display: 'block', marginBottom: 6, color: '#000', fontWeight: 500, fontSize: 15 }}>
-                                        Prompt for Video Generation*
-                                    </label>
-                                    <textarea
-                                        id="video-prompt-textarea"
-                                        value={videoPrompt}
-                                        onChange={e => setVideoPrompt(e.target.value)}
-                                        placeholder="e.g., subtle zoom in, character smiles, background clouds moving slowly..."
-                                        rows={5}
-                                        style={{
-                                            width: '100%',
-                                            padding: '12px',
-                                            fontSize: 16,
-                                            borderRadius: 8,
-                                            border: '1px solid #333',
-                                            background: '#fff',
-                                            color: '#000',
-                                            outline: 'none',
-                                            marginBottom: 10,
-                                            boxSizing: 'border-box',
-                                            resize: 'vertical',
-                                        }}
-                                    />
-                                    <button
-                                        onClick={handleGenerateVideo}
-                                        style={{ padding: '12px 24px', fontSize: 17, background: 'linear-gradient(90deg, #5f5fff 0%, #a259ff 100%)', color: '#fff', border: 'none', borderRadius: 8, fontWeight: 600, marginBottom: 12, cursor: 'pointer' }}
-                                        disabled={isVideoLoading}
-                                    >
-                                        {isVideoLoading ? 'Generating Video...' : 'Generate Video'}
-                                    </button>
-                                    {videoError && <div style={{ color: 'red', marginTop: 8 }}>{videoError}</div>}
-                                </div>
-                            )}
+                            <div style={{ marginBottom: 20, width: '100%' }}>
+                                <label htmlFor="video-prompt-textarea" style={{ display: 'block', marginBottom: 6, color: '#000', fontWeight: 500, fontSize: 15 }}>
+                                    Prompt for Video Generation*
+                                </label>
+                                <textarea
+                                    id="video-prompt-textarea"
+                                    value={videoPrompt}
+                                    onChange={e => setVideoPrompt(e.target.value)}
+                                    placeholder="e.g., subtle zoom in, character smiles, background clouds moving slowly..."
+                                    rows={5}
+                                    style={{
+                                        width: '100%',
+                                        padding: '12px',
+                                        fontSize: 16,
+                                        borderRadius: 8,
+                                        border: '1px solid #333',
+                                        background: '#fff',
+                                        color: '#000',
+                                        outline: 'none',
+                                        marginBottom: 10,
+                                        boxSizing: 'border-box',
+                                        resize: 'vertical',
+                                    }}
+                                />
+                                <button
+                                    onClick={handleGenerateVideo}
+                                    style={{ padding: '12px 24px', fontSize: 17, background: 'linear-gradient(90deg, #5f5fff 0%, #a259ff 100%)', color: '#fff', border: 'none', borderRadius: 8, fontWeight: 600, marginBottom: 12, cursor: 'pointer' }}
+                                    disabled={isVideoLoading}
+                                >
+                                    {isVideoLoading ? 'Generating Video...' : 'Generate Video'}
+                                </button>
+                                {videoError && <div style={{ color: 'red', marginTop: 8 }}>{videoError}</div>}
+                            </div>
                             <label style={{ color: '#000', fontWeight: 500, fontSize: 16, marginBottom: 10, display: 'block' }}>Generated Video*</label>
                             <div style={{ border: '1.5px solid #222', borderRadius: 16, background: '#fff', padding: 32, minHeight: 340, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                                {showVideoPrompt && videoUrl ? (
+                                {videoUrl ? (
                                     <div style={{ marginTop: 0, width: '100%' }}>
                                         <video controls style={{ width: '100%', borderRadius: 8, boxShadow: '0 2px 8px rgba(255, 255, 255, 0.1)' }}>
                                             <source src={videoUrl} type="video/mp4" />
@@ -222,6 +221,7 @@ const ImageGenerator = () => {
                                 )}
                             </div>
                         </div>
+                        )}
                     </div>
                 </main>
             </div>
