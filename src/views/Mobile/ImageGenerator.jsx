@@ -82,91 +82,146 @@ const ImageGenerator = () => {
                     />
                 </aside>
                 <main className="main-container">
-                    <div className="dashboard-container">
-                        <h2>Image Generator</h2>
-                        <div style={{ marginBottom: 20, display: 'flex', alignItems: 'center', gap: 10 }}>
-                            <input
-                                type="text"
-                                value={prompt}
-                                onChange={e => setPrompt(e.target.value)}
-                                placeholder="Enter your prompt..."
-                                style={{ width: '40%', padding: 8, fontSize: 16 }}
-                            />
-                            <input
-                                type="number"
-                                value={width}
-                                min={1}
-                                onChange={e => setWidth(e.target.value)}
-                                placeholder="Width"
-                                style={{ width: 80, padding: 8, fontSize: 16 }}
-                            />
-                            <input
-                                type="number"
-                                value={height}
-                                min={1}
-                                onChange={e => setHeight(e.target.value)}
-                                placeholder="Height"
-                                style={{ width: 80, padding: 8, fontSize: 16 }}
-                            />
-                            <button
-                                onClick={handleGenerate}
-                                style={{ padding: '8px 16px', fontSize: 16 }}
-                                disabled={isLoading}
-                            >
-                                {isLoading ? 'Generating...' : 'Generate Image'}
-                            </button>
-                        </div>
-                        {error && <div style={{ color: 'red', marginBottom: 10 }}>{error}</div>}
-                        {imageUrl && (
-                            <div style={{ marginTop: 20 }}>
-                                <img 
-                                    src={imageUrl} 
-                                    alt="Generated" 
-                                    style={{ 
-                                        width: width + 'px', 
-                                        height: height + 'px', 
-                                        maxWidth: '100%', 
-                                        borderRadius: 8, 
-                                        boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
-                                    }} 
+                    <div style={{ display: 'flex', gap: 32, padding: 20, flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'center', minHeight: '100vh' }}>
+                        {/* Left Column: Image Generation */}
+                        <div className="dashboard-container" style={{ maxWidth: 600, flex: 1, padding: 32, marginBottom: 24 }}>
+                            <h2 style={{ fontSize: 32, fontWeight: 700, color: '#000', marginBottom: 4 }}>Create Image</h2>
+                            <div style={{ marginBottom: 20, width: '100%' }}>
+                                <label htmlFor="prompt-textarea" style={{ display: 'block', marginBottom: 6, color: '#000', fontWeight: 500, fontSize: 15 }}>
+                                    Prompt for Image Generation*
+                                </label>
+                                <textarea
+                                    id="prompt-textarea"
+                                    value={prompt}
+                                    onChange={e => setPrompt(e.target.value)}
+                                    placeholder="e.g., subtle zoom in, character smiles, background clouds moving slowly..."
+                                    rows={5}
+                                    style={{
+                                        width: '100%',
+                                        padding: '12px',
+                                        fontSize: 16,
+                                        borderRadius: 8,
+                                        border: '1px solid #333',
+                                        background: '#fff',
+                                        color: '#000',
+                                        outline: 'none',
+                                        marginBottom: 10,
+                                        boxSizing: 'border-box',
+                                        resize: 'vertical',
+                                    }}
                                 />
+                            </div>
+                            <div style={{ marginBottom: 20, display: 'flex', alignItems: 'center', gap: 10 }}>
+                                <input
+                                    type="number"
+                                    value={width}
+                                    min={1}
+                                    onChange={e => setWidth(e.target.value)}
+                                    placeholder="Width"
+                                    style={{ width: 80, padding: 8, fontSize: 16, borderRadius: 8, border: '1px solid #333', background: '#fff', color: '#000', outline: 'none' }}
+                                />
+                                <input
+                                    type="number"
+                                    value={height}
+                                    min={1}
+                                    onChange={e => setHeight(e.target.value)}
+                                    placeholder="Height"
+                                    style={{ width: 80, padding: 8, fontSize: 16, borderRadius: 8, border: '1px solid #333', background: '#fff', color: '#000', outline: 'none' }}
+                                />
+                                <button
+                                    onClick={handleGenerate}
+                                    style={{ padding: '12px 24px', fontSize: 17, background: 'linear-gradient(90deg, #5f5fff 0%, #a259ff 100%)', color: '#fff', border: 'none', borderRadius: 8, fontWeight: 600, cursor: 'pointer' }}
+                                    disabled={isLoading}
+                                >
+                                    {isLoading ? 'Generating...' : 'Generate Image'}
+                                </button>
+                            </div>
+                            <label style={{ color: '#000', fontWeight: 500, fontSize: 16, marginBottom: 10, display: 'block' }}>Generated Image*</label>
+                            <div style={{ border: '1.5px dashed #333', borderRadius: 16, padding: 24, background: 'rgba(255, 255, 255, 0.7)', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 340, minWidth: 340 }}>
+                                {imageUrl ? (
+                                    <img 
+                                        src={imageUrl} 
+                                        alt="Generated" 
+                                        style={{ 
+                                            width: '100%', 
+                                            maxWidth: 400, 
+                                            borderRadius: 12, 
+                                            boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+                                        }} 
+                                    />
+                                ) : (
+                                    <div style={{ color: '#888', fontSize: 16 }}>No image generated yet.</div>
+                                )}
+                            </div>
+                            {error && <div style={{ color: 'red', marginBottom: 10 }}>{error}</div>}
+                            {imageUrl && (
                                 <div style={{ marginTop: 16 }}>
                                     <button 
-                                        onClick={() => setShowVideoPrompt(v => !v)}
-                                        style={{ padding: '8px 16px', fontSize: 16 }}
+                                        onClick={() => setShowVideoPrompt(true)}
+                                        style={{ padding: '12px 24px', fontSize: 17, background: 'linear-gradient(90deg, #5f5fff 0%, #a259ff 100%)', color: '#fff', border: 'none', borderRadius: 8, fontWeight: 600, marginBottom: 12, cursor: 'pointer' }}
                                     >
                                         Use Image for Generate Video
                                     </button>
                                 </div>
-                                {showVideoPrompt && (
-                                    <div style={{ marginTop: 16 }}>
-                                        <textarea
-                                            value={videoPrompt}
-                                            onChange={e => setVideoPrompt(e.target.value)}
-                                            placeholder="Enter your prompt for video generation..."
-                                            rows={3}
-                                            style={{ width: '100%', padding: 8, fontSize: 16, marginBottom: 8 }}
-                                        />
-                                        <button
-                                            onClick={handleGenerateVideo}
-                                            style={{ padding: '8px 16px', fontSize: 16 }}
-                                            disabled={isVideoLoading}
-                                        >
-                                            {isVideoLoading ? 'Generating Video...' : 'Generate Video'}
-                                        </button>
-                                        {videoError && <div style={{ color: 'red', marginTop: 8 }}>{videoError}</div>}
-                                    </div>
-                                )}
-                                {videoUrl && (
-                                    <div style={{ marginTop: 20 }}>
-                                        <video controls style={{ maxWidth: '100%', borderRadius: 8, boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+                            )}
+                        </div>
+                        {/* Right Column: Video Generation */}
+                        <div className="dashboard-container" style={{ maxWidth: 600, flex: 1, padding: 32, marginBottom: 24 }}>
+                            <h2 style={{ fontSize: 32, fontWeight: 700, color: '#000', marginBottom: 4 }}>Create Video</h2>
+                            {showVideoPrompt && (
+                                <div style={{ marginBottom: 20, width: '100%' }}>
+                                    <label htmlFor="video-prompt-textarea" style={{ display: 'block', marginBottom: 6, color: '#000', fontWeight: 500, fontSize: 15 }}>
+                                        Prompt for Video Generation*
+                                    </label>
+                                    <textarea
+                                        id="video-prompt-textarea"
+                                        value={videoPrompt}
+                                        onChange={e => setVideoPrompt(e.target.value)}
+                                        placeholder="e.g., subtle zoom in, character smiles, background clouds moving slowly..."
+                                        rows={5}
+                                        style={{
+                                            width: '100%',
+                                            padding: '12px',
+                                            fontSize: 16,
+                                            borderRadius: 8,
+                                            border: '1px solid #333',
+                                            background: '#fff',
+                                            color: '#000',
+                                            outline: 'none',
+                                            marginBottom: 10,
+                                            boxSizing: 'border-box',
+                                            resize: 'vertical',
+                                        }}
+                                    />
+                                    <button
+                                        onClick={handleGenerateVideo}
+                                        style={{ padding: '12px 24px', fontSize: 17, background: 'linear-gradient(90deg, #5f5fff 0%, #a259ff 100%)', color: '#fff', border: 'none', borderRadius: 8, fontWeight: 600, marginBottom: 12, cursor: 'pointer' }}
+                                        disabled={isVideoLoading}
+                                    >
+                                        {isVideoLoading ? 'Generating Video...' : 'Generate Video'}
+                                    </button>
+                                    {videoError && <div style={{ color: 'red', marginTop: 8 }}>{videoError}</div>}
+                                </div>
+                            )}
+                            <label style={{ color: '#000', fontWeight: 500, fontSize: 16, marginBottom: 10, display: 'block' }}>Generated Video*</label>
+                            <div style={{ border: '1.5px solid #222', borderRadius: 16, background: '#fff', padding: 32, minHeight: 340, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                                {showVideoPrompt && videoUrl ? (
+                                    <div style={{ marginTop: 0, width: '100%' }}>
+                                        <video controls style={{ width: '100%', borderRadius: 8, boxShadow: '0 2px 8px rgba(255, 255, 255, 0.1)' }}>
                                             <source src={videoUrl} type="video/mp4" />
                                             Your browser does not support the video tag.
                                         </video>
                                     </div>
+                                ) : (
+                                    <div style={{ color: '#888', textAlign: 'center', width: '100%' }}>
+                                        <div style={{ fontSize: 48, marginBottom: 12 }}>
+                                            <svg width="48" height="48" fill="none" stroke="#444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3V9z"/></svg>
+                                        </div>
+                                        Generated video will appear here.
+                                    </div>
                                 )}
                             </div>
-                        )}
+                        </div>
                     </div>
                 </main>
             </div>
