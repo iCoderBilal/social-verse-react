@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { HomeIcon, MagnifyingGlassIcon, UserIcon } from "@heroicons/react/20/solid";
-import { LuLayoutDashboard, LuUsers, LuClipboardList } from "react-icons/lu";
+import { LuLayoutDashboard, LuUsers, LuClipboardList, LuImage } from "react-icons/lu";
 // import { UsersIcon } from "@heroicons/react/24/outline"; //icon for referral
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
@@ -78,6 +78,13 @@ function MobileSideNavigation({ isOpen, onClose }) {
       navigate('/profile');
     }
   };
+
+  const handleImageGenarationNavigationClick = () => {
+    setActive("image-generator");
+    onClose();
+    navigate("/image-generator");
+  };
+
   const handleAdminNavigationClick = () => {
     setActive("admin");
     onClose();
@@ -150,6 +157,14 @@ function MobileSideNavigation({ isOpen, onClose }) {
             <UserIcon />
             <p className="nav-text">Profile</p>
           </div>
+          {/* Image Generator always visible */}
+          <div
+            className={`nav-item ${active === "image-generator" ? "active" : ""}`}
+            onClick={handleImageGenarationNavigationClick}
+          >
+            <LuImage />
+            <p className="nav-text">I/V Generator</p>
+          </div>
           {auth.user.role === "A" ? (
             <>
               <div
@@ -182,6 +197,7 @@ function MobileSideNavigation({ isOpen, onClose }) {
                 <LuClipboardList />
                 <p className="nav-text">Uploads</p>
               </div>
+              
               {/* <div
                 className={`nav-item ${active === "referral" ? "active" : ""}`}
                 onClick={handleReferralNavigationClick}
