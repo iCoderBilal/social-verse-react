@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { HomeIcon, MagnifyingGlassIcon, UserIcon } from "@heroicons/react/20/solid";
-import { LuLayoutDashboard, LuUsers, LuClipboardList } from "react-icons/lu";
+import { LuLayoutDashboard, LuUsers, LuClipboardList, LuImage } from "react-icons/lu";
 // import { UsersIcon } from "@heroicons/react/24/outline"; //icon for referral
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
@@ -162,8 +162,8 @@ function MobileSideNavigation({ isOpen, onClose }) {
             className={`nav-item ${active === "image-generator" ? "active" : ""}`}
             onClick={handleImageGenarationNavigationClick}
           >
-            <LuClipboardList />
-            <p className="nav-text">Image Generator</p>
+            <LuImage />
+            <p className="nav-text">I/V Generator</p>
           </div>
           {auth.user.role === "A" ? (
             <>
