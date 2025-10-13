@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../../images/empowerverse.png'
+import logo from '../../images/social-verse-logo.svg'
 
 export default function HorizontalLogo() {
     return (

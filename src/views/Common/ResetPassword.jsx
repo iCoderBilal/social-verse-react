@@ -6,7 +6,7 @@ import FlicToaster from "../../utils/FlicToaster";
 import RightArrowIcon from "../../components/Common/RightArrowIcon";
 
 function ChangePassword(props) {
-    const forgotPasswordFormName = "FORGOT PASSWORD"
+    const forgotPasswordFormName = "Welcome Back!"
 
     const [changeStatus, setChangeStatus] = useState(null);
     const [loader, setLoader] = useState(false);
@@ -56,7 +56,7 @@ function ChangePassword(props) {
         }
         return (
             <>
-                <img src="loader.gif" alt="Empowerverse Loading Spinner"/>
+                <img className="hidden" src="loader.gif" alt="Empowerverse Loading Spinner"/>
                 <br/>
                 Checking...
             </>
@@ -76,41 +76,35 @@ function ChangePassword(props) {
                 <input type="text" name="token" value={token} hidden required/>
             </div>
             <div className="form-group">
-                <input type="password" name="password" placeholder="Enter new password" required/>
+                <input type="password" name="password" placeholder="Enter your new password" required/>
             </div>
             <div className="form-group">
-                <input type="text" name="password-confirm" placeholder="Confirm new password" required/>
+                <input type="text" name="password-confirm" placeholder="Re-enter your new password" required/>
             </div>
         </>
     }
 
     const getFormSubmitButton = () => {
         return <div className={`form-group ${isSubmitLoading && "loading"}`}>
-            <button className={isSubmitLoading && "loading"}>Continue <RightArrowIcon/></button>
+            <button style={{backgroundColor:"#8223F8 !important", borderColor:"#8223F8 !important", borderRadius:"10px !important"}} className={`reset-password-button ${isSubmitLoading && "loading"}`}>Update Password</button>
         </div>
     }
 
 
     return (
-        <div className="auth-container">
+        <div className="auth-container reset-password">
             <LeftPaneImage/>
             <div className="form-container">
                 <form onSubmit={handleFormSubmit}>
                     {loader ? getStatusResponse() : ""} 
                     <HorizontalLogo/>
                     <div className="heading-container">
-                        {forgotPasswordFormName}
+                        <h2>{forgotPasswordFormName}</h2>
+                        <h4 style={{marginTop:"1.3rem", fontSize:"1.3rem", fontWeight:"400"}}>Set a new password</h4>
                     </div>
                     <div className="interaction-container">
                         {getPasswordFormFieldsJsx()}
                         {getFormSubmitButton()}
-                        <p className="legal-links-container">
-                            By continuing you accept our{" "}
-                            <span>Terms of Use</span>{" "}
-                            and{" "}
-                            <span>Privacy Policy</span>
-                            .
-                        </p>
                     </div>
                 </form>
             </div>

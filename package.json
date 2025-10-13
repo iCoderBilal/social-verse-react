@@ -37,7 +37,7 @@
     "webpack": "^5.95.0"
   },
   "scripts": {
-    "start": "PORT=8164 craco start",
+    "start": "craco start",
     "build": "GENERATE_SOURCEMAP=false craco build",
     "test": "craco test",
     "eject": "react-scripts eject"

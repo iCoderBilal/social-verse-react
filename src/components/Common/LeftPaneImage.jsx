@@ -1,21 +1,16 @@
 import React from 'react';
-import useLeftPaneImage from "../../utils/hooks/useLeftPaneImage";
+import SocialVerseImage from '../../images/login-left-main.png';
+import SocialVerseVectorImage from '../../images/login-left-vector.svg';
 
-function LeftPaneImage(props) {
+function LeftPaneImage() {
 
-    const {leftPaneImageURL} = useLeftPaneImage();
+    return (
+    <div className="login-left">
+        <img alt="SocialVerse Vector Image" className="login-left-vector-img" src={SocialVerseVectorImage}/>
+        <img alt="SocialVerse Image" className="login-left-main-img" src={SocialVerseImage}/>
+    </div>
 
-    
-    const getContainerContent = () => {
-        if (leftPaneImageURL === null) {
-            return <div className={`loading`}/>
-        }
-        return <img src={leftPaneImageURL}/>
-    }
-
-    return (<div className="left-pane-image-container">
-        {getContainerContent()}
-    </div>)
+    )
 }
 
 export default LeftPaneImage;
