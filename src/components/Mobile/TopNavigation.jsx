@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {useNavigate} from 'react-router';
 import { setUserLoggedOut } from '../../store/auth';
-import EmpowerverseLogo from '../../images/empowerverse.png';
+import EmpowerverseLogo from '../../images/social-verse-logo.svg';
 import { RxCross1 } from "react-icons/rx";
 import { GiHamburgerMenu } from "react-icons/gi";
 
@@ -79,8 +79,7 @@ function MobileTopNavigation({setIsSideNavOpen , isSideNavOpen}) {
         ) : (
           <div className="logo" onClick={downloadEmpowerverse}>
             <img
-              width={80}
-              height={80}
+              width={215}
               src={EmpowerverseLogo}
               alt={`Empowerverse's Logo`}
             />

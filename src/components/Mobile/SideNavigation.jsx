@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { HomeIcon, MagnifyingGlassIcon, UserIcon } from "@heroicons/react/20/solid";
 import { LuLayoutDashboard, LuUsers, LuClipboardList, LuImage } from "react-icons/lu";
 // import { UsersIcon } from "@heroicons/react/24/outline"; //icon for referral
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineAppRegistration } from "react-icons/md";
+import homeIcon from "../../images/homeIcon.svg";
+import subversesIcon from "../../images/subverses-icon.svg";
 
 import EmpowerverseLogo from "../../images/empowerverse.png";
 import {
@@ -16,6 +18,7 @@ import { setUserLoggedOut } from "../../store/auth";
 function MobileSideNavigation({ isOpen, onClose }) {
   let navigate = useNavigate();
   let dispatch = useDispatch();
+  let location = useLocation();
 
   const [active, setActive] = useState("home");
   const { auth } = useSelector((state) => state);
@@ -53,6 +56,32 @@ function MobileSideNavigation({ isOpen, onClose }) {
     };
   }, []);
 
+  // Update active state based on current route
+  useEffect(() => {
+    const path = location.pathname;
+    if (path === "/" || path === "/home") {
+      setActive("home");
+    } else if (path === "/search") {
+      setActive("search");
+    } else if (path === "/subverses") {
+      setActive("subverses");
+    } else if (path === "/profile") {
+      setActive("profile");
+    } else if (path === "/image-generator") {
+      setActive("image-generator");
+    } else if (path === "/admin/dashboard") {
+      setActive("admin");
+    } else if (path === "/admin/dashboard/logs") {
+      setActive("logs");
+    } else if (path === "/admin/dashboard/feedback") {
+      setActive("feedback");
+    } else if (path === "/admin/dashboard/uploads") {
+      setActive("uploads");
+    } else if (path === "/admin/dashboard/onboarding") {
+      setActive("onboarding");
+    }
+  }, [location.pathname]);
+
   const handleHomeNavigationClick = () => {
     setActive("home");
     onClose();
@@ -67,6 +96,12 @@ function MobileSideNavigation({ isOpen, onClose }) {
     onClose();
     navigate("/search");
     // }
+  };
+
+  const handleSubversesNavigationClick = () => {
+    setActive("subverses");
+    onClose();
+    navigate("/subverses");
   };
 
   const handleProfileNavigationClick = () => {
@@ -140,9 +175,19 @@ function MobileSideNavigation({ isOpen, onClose }) {
             className={`nav-item ${active === "home" ? "active" : ""}`}
             onClick={handleHomeNavigationClick}
           >
-            <HomeIcon />
+            <img src={homeIcon} alt="home" />
             <p className="nav-text">Home</p>
           </div>
+
+          <div
+            className={`nav-item ${active === "subverses" ? "active" : ""}`}
+            onClick={handleSubversesNavigationClick}
+          >
+            <img src={subversesIcon} alt="subverses" />
+            <p className="nav-text">Subverses</p>
+          </div>
+
+          
           <div
             className={`nav-item ${active === "search" ? "active" : ""}`}
             onClick={handleSearchNavigationClick}
@@ -150,6 +195,7 @@ function MobileSideNavigation({ isOpen, onClose }) {
             <MagnifyingGlassIcon />
             <p className="nav-text">Search</p>
           </div>
+   
           <div
             className={`nav-item ${active === "profile" ? "active" : ""}`}
             onClick={handleProfileNavigationClick}
