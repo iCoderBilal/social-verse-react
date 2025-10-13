@@ -1,5 +1,17 @@
 export const getLocalStorageUser = () => {
-  return JSON.parse(localStorage.getItem("user"));
+  try {
+    const userString = localStorage.getItem("user");
+    // Handle null, undefined string, or empty values
+    if (!userString || userString === "undefined" || userString === "null") {
+      return null;
+    }
+    return JSON.parse(userString);
+  } catch (error) {
+    console.error("Error parsing user from localStorage:", error);
+    // Clear corrupted data
+    localStorage.removeItem("user");
+    return null;
+  }
 };
 
 export const setLocalStorageUser = (userData) => {
@@ -11,7 +23,8 @@ export const deleteLocalStorageUser = () => {
 };
 
 export const getLocalStorageUserToken = () => {
-  return getLocalStorageUser().token ?? null;
+  const user = getLocalStorageUser();
+  return user?.token ?? null;
 };
 
 export const isLocalStorageUserLoggedIn = () => {

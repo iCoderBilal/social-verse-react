@@ -169,6 +169,7 @@ function Profile() {
                 isSideNavOpen={isSideNavOpen}
                 setIsSideNavOpen={setIsSideNavOpen}
             />
+        
             <div className="container">
                 <div style={{ display: `${isSideNavOpen ? 'block' : 'none'}` }} onClick={() => setIsSideNavOpen(false)} className="overlay"></div>
                 <aside className="side-bar">
@@ -198,6 +199,7 @@ function Profile() {
                             <button onClick={() => handleTabClick('about')} className={activeTab === 'about' ? 'active' : ''}>About Me</button>
                         </div>
                         <div className="content-section">
+                    
                             {renderContent()}
                         </div>
                     </div>

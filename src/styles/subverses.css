@@ -1,0 +1,417 @@
+/* Subverses Page Styles */
+.subverses-container {
+    padding: 20px;
+    max-width: 100%;
+    margin: 0 auto;
+    background: white;
+}
+
+.subverses-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.subverses-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.subverses-subtitle {
+    font-size: 1rem;
+    color: #666;
+    margin: 5px 0 0 0;
+    font-weight: 400;
+}
+
+.create-button {
+    background: linear-gradient(135deg, #8B5CF6 0%, #EF4444 100%);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.2s ease;
+}
+
+.create-button:hover {
+    transform: translateY(-2px);
+}
+
+.create-button-icon {
+    width: 16px;
+    height: 16px;
+}
+
+/* Navigation Tabs */
+.subverses-tabs {
+    display: flex;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 20px;
+}
+
+.tab {
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+    border: none;
+    background: none;
+    position: relative;
+    transition: color 0.2s ease;
+}
+
+.tab.active {
+    color: #8B5CF6;
+}
+
+.tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #8B5CF6;
+}
+
+/* Topic Tags */
+.topic-tags-container {
+    margin-bottom: 30px;
+}
+
+.topic-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.topic-tag {
+    background: #f3f4f6;
+    color: #374151;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.topic-tag:hover {
+    background: #e5e7eb;
+}
+
+.topic-tag.selected {
+    background: #ede9fe;
+    color: #8B5CF6;
+    border-color: #8B5CF6;
+}
+
+.selection-info {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.enter-button {
+    background: #8B5CF6;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    width: 100%;
+    max-width: 200px;
+}
+
+.enter-button:disabled {
+    background: #d1d5db;
+    cursor: not-allowed;
+}
+
+.enter-button:not(:disabled):hover {
+    background: #7c3aed;
+}
+
+/* Phase 2 - Suggested Subverses */
+.suggested-subverses {
+    margin-top: 30px;
+}
+
+.suggested-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.suggested-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.suggested-arrow {
+    width: 20px;
+    height: 20px;
+    color: #8B5CF6;
+}
+
+/* Featured Subverse Card */
+.featured-subverse {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+}
+
+.featured-subverse-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.featured-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.featured-info h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.featured-info p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.featured-join-button {
+    background: none;
+    border: 2px solid #8B5CF6;
+    color: #8B5CF6;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.featured-join-button:hover {
+    background: #8B5CF6;
+    color: white;
+}
+
+.featured-arrow {
+    width: 14px;
+    height: 14px;
+}
+
+/* Video Thumbnails */
+.video-thumbnails {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.video-thumbnail {
+    min-width: 120px;
+    height: 160px;
+    border-radius: 8px;
+    background: #f3f4f6;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.video-thumbnail:hover {
+    transform: scale(1.02);
+}
+
+.video-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-thumbnail::after {
+    content: '▶';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 1.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Simple Subverse Cards Grid */
+.subverses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.subverse-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+    text-align: center;
+}
+
+.subverse-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 auto 15px auto;
+}
+
+.subverse-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 8px 0;
+}
+
+.subverse-tagline {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0 0 15px 0;
+}
+
+.subverse-join-button {
+    background: none;
+    border: 2px solid #8B5CF6;
+    color: #8B5CF6;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 100%;
+}
+
+.subverse-join-button:hover {
+    background: #8B5CF6;
+    color: white;
+}
+
+.subverse-arrow {
+    width: 14px;
+    height: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .subverses-container {
+        padding: 15px;
+    }
+    
+    .subverses-title {
+        font-size: 2rem;
+    }
+    
+    .subverses-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .create-button {
+        align-self: flex-end;
+        width: fit-content;
+    }
+    
+    .topic-tags {
+        justify-content: center;
+    }
+    
+    .subverses-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .video-thumbnails {
+        justify-content: flex-start;
+    }
+    
+    .video-thumbnail {
+        min-width: 100px;
+        height: 140px;
+    }
+}
+
+@media (max-width: 480px) {
+    .subverses-title {
+        font-size: 1.75rem;
+    }
+    
+    .topic-tag {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .featured-subverse-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .video-thumbnail {
+        min-width: 80px;
+        height: 120px;
+    }
+}

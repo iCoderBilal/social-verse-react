@@ -18,6 +18,7 @@ import Upload from "./views/Mobile/Upload";
 import Profile from "./views/Mobile/Profile";
 import SinglePost from "./views/Mobile/SinglePost";
 import Search from "./views/Mobile/search";
+import Subverses from "./views/Mobile/Subverses";
 import SideNavigation from "./components/Mobile/SideNavigation";
 import ChangePassword from "./views/Common/ResetPassword";
 import Dashboard from "./views/Common/admin/Dashboard";
@@ -87,6 +88,7 @@ const App = (props) => {
           <Route exact path="/auth" element={<Auth />} />
           <Route exact path="/upload" element={<Upload />} />
           <Route exact path="/search" element={<Search />} />
+          <Route exact path="/subverses" element={<Subverses />} />
           <Route exact path="/verify" element={<Verify />} />
           <Route exact path="/reset/finish" element={<ChangePassword />} />
           <Route exact path="/@:username" element={<Profile />} />
