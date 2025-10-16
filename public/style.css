@@ -3195,7 +3195,9 @@ body {
     height: inherit;
     min-height: 100vh;
     overflow-y: auto;
+
     background-color: #f5f5f5; }
+  
 
 .overlay {
   height: 100%;
@@ -3296,9 +3298,60 @@ img {
 
 
 
+
+/* -----------------------main-container----------------------- */
+
+@media (min-width: 1024px) {
+.main-container{
+    padding-left: 60px;
+  }
+}
+
+
+
 /* _____________________________Top-Navigation_____________________________ */
 .top-navigation{
   height: 6rem;
+}
+
+.top-navigation .login-btn{
+  background-color: #8223F8;
+  border-color: #8223F8;
+  border-radius: 10px;
+}
+
+.top-navigation .login-btn:hover{
+  background-color: #5600c0;
+  border-color: #5600c0;
+  border-radius: 10px;
+}
+
+
+
+@media screen and (max-width: 768px){
+  .top-navigation{
+    justify-content: start;
+    flex-wrap: wrap;
+    height: auto;
+    padding: 20px 0 4px 0;
+  }
+
+  .top-navigation .section .logo{
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .top-navigation .logo img{
+    width: 200px;
+  }
+  .top-navigation .logo-section{
+    width: 100vw !important;
+    padding-right: 20px;
+  }
+  .top-navigation .button-section{
+    width: 0% !important;
+   
+  }
 }
 
 /* _______________________Mian Bilal Login Page____________________ */
@@ -3330,7 +3383,7 @@ img {
     width: 100%;
     height: auto;
     position: relative;
-    margin-top: 40px;
+    margin-top: 60px;
 
   }
 
@@ -3541,7 +3594,7 @@ font-weight: 600;
 
 .side-navigation .nav-item{
   padding: 10px 20px;
-  margin: 0px 20px 10px 20px;
+  margin: 0px 10px 10px 10px;
   border-radius: 12px;
 }
 
@@ -3551,8 +3604,217 @@ font-weight: 600;
   font-family: 'Poppins', sans-serif;
 }
 
+.side-navigation .nav-item img{
+  width: 30px;
+}
+
 .side-navigation .nav-item.active{
   background-color: #f6f0f8;
 
+}
+
+
+/* -------------------------------Profile Page--------------------------- */
+
+.gradient-bg{
+  width: 100%;
+  height: 250px;
+  background: linear-gradient(to right, #560FB7, #CB0339);
+  z-index: -1;
+}
+
+
+.main-container .profile-page .profile-header{
+  width:80% ;
+  margin: 0 auto;
+  border-radius: 20px;
+  margin-top: -100px;
+  overflow: hidden;
+  z-index: 1;
+  background-color: white;
+  box-shadow: 0px 4px 6px -4px #0000001A;
+
+box-shadow: 0px 10px 15px -3px #0000000F;
+
+}
+
+.main-container .profile-page .profile-header .profile-info{
+  margin-top: 0px;
+}
+
+.profile-page .profile-header .profile-info h1{
+  color: black;
+  font-family: 'Poppins', sans-serif;
+}
+
+.profile-header .profile-info .profile-stats span{
+  color: black;
+  font-family: 'Poppins', sans-serif;
+}
+
+.profile-page .tabs{
+  box-shadow: none;
+  margin-top: 15px;
+}
+
+@media screen and (max-width: 1023px){
+  .main-container .profile-page .profile-header{
+    width: 95%;
+    margin-top: -120px;
+  }
+}
+
+
+/* -------------------------------Search Page--------------------------- */ 
+
+.search-container .search{
+  margin-top: 100px;
+}
+
+
+/* -------------------------------Verify Page--------------------------- */
+
+.verify-container img.horizontal-logo{
+  width: 400px;
+  margin: 0 auto;
+  height: auto;
+  padding-right: 50px;
+}
+
+
+.verify-container .form-container{
+  margin-left: 50vw;
+  width: 45vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.verify-container .form-container form{
+  width: 100%;
+  text-align: center;
+}
+
+
+
+.verify-container .form-container form .big-message-container{
+  font-size: 2rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  color: #8223F8;
+  margin-top: 2rem;
+
+}
+
+
+.verify-container .form-container .interaction-container .form-group button{
+  background-color: #8223F8;
+  border-color: #8223F8;
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.verify-container .form-container .interaction-container .form-group button:hover{
+  background-color: #5600c0;
+  border-color: #5600c0;
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.verify-container .form-container .interaction-container .copyright{
+  font-family: 'Poppins', sans-serif;
+}
+
+
+
+@media (max-width: 1023px) {
+  .verify-container .form-container{
+    margin-left: 0;
+    width: 99vw;
+    padding: 0 20px;
+  }
+
+  .verify-container .form-container form .big-message-container{
+    margin-top: 1rem;
+  }
+
+  .verify-container .form-container form .interaction-container{
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .verify-container{
+    margin-left: 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .verify-container{
+    margin-left: 0 !important;
+  }
+  .verify-container img.horizontal-logo{
+    width: 300px;
+  }
+
+  .verify-container .form-container .interaction-container{
+    margin: 0 auto;
+    margin-top: 1.5rem;
+  }
+
+  .verify-container .form-container form .big-message-container{
+    flex-direction: column;
+    font-size: 1.4rem;
+    margin-top: 1.5rem;
+  }
+}
+
+
+/* --------------------------------dialog-popup------------------------------ */
+
+.dialog-middle{
+  width: 350px;
+}
+
+.dialog .info .title{
+  font-family: 'Poppins', sans-serif;
+}
+
+
+.dialog .info .description{
+  font-family: 'Poppins', sans-serif;
+}
+
+.dialog .buttons button.primary{
+  background-color: #8223F8;
+  border-color: #8223F8;
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.dialog .buttons button.primary:hover{
+  background-color: #5600c0;
+  border-color: #5600c0;
+}
+
+.dialog .buttons button.secondary{
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-family: 'Poppins', sans-serif;
+  color: #514F4F;
+  margin-top: .5rem;
+}
+
+
+
+
+@media (max-width: 480px) {
+  .dialog-middle{
+    width: 300px;
+  }
 }
 
