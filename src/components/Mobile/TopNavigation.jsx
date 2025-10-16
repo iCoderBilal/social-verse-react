@@ -69,12 +69,18 @@ function MobileTopNavigation({setIsSideNavOpen , isSideNavOpen}) {
 
   return (
     <div className="top-navigation">
-      <div className="section">
+      <div className="section logo-section">
         {isMobileView ? (
-          <div className="logo">
+          <div className="logo top-navigation-logo">
+             <img
+              
+              src={EmpowerverseLogo}
+              alt={`Empowerverse's Logo`}
+            />
             <div className="menu-icon" onClick={handleMenuIconClick}>
               {isSideNavOpen ? <RxCross1 /> :   <GiHamburgerMenu/>}
             </div>
+          
           </div>
         ) : (
           <div className="logo" onClick={downloadEmpowerverse}>
@@ -86,7 +92,7 @@ function MobileTopNavigation({setIsSideNavOpen , isSideNavOpen}) {
           </div>
         )}
       </div>
-      <div className="section">
+      <div className="section button-section">
         {isMobileView ? null : (
           <div className="header-btn">
             <button
