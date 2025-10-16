@@ -44,8 +44,6 @@ function Verify(props) {
             return "Failed 😔"
         }
         return <>
-            <img src="loader.gif" alt="Empowerverse Loading Spinner"/>
-            <br/>
             Checking...
         </>
     }
@@ -68,7 +66,7 @@ function Verify(props) {
                             <button type="button" onClick={handleButtonClick}>Let's go back to home?</button>
                         </div>
                         <p className="copyright">
-                            Empowerverse {new Date().getFullYear()}
+                            SocialVerse © {new Date().getFullYear()}
                         </p>
                     </div>
                 </form>
