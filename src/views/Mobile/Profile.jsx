@@ -179,7 +179,11 @@ function Profile() {
                     />
                 </aside>
                 <main className="main-container">
-                    <div className={`profile ${isProfileUserDataLoading && "loading"}`}>
+
+
+              
+                    <div className={`profile profile-page ${isProfileUserDataLoading && "loading"}`}>
+                    <div className="gradient-bg"/>
                         <div className="profile-header">
                             <div className="background-image"></div>
                             <div className="profile-info">

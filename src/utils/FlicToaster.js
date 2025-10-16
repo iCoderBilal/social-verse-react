@@ -19,7 +19,7 @@ class FlicToaster {
         toast(message, {
             style: {
                 marginLeft: "200px",
-                marginTop: "50px",
+                marginTop: "4rem",
             }
         });
     };
@@ -28,7 +28,7 @@ class FlicToaster {
         this.playFlicToastSound();
         toast.success(message, {
             style: {
-                marginTop: "2.5rem"
+                marginTop: "4rem"
             }
         });
     };
@@ -37,7 +37,7 @@ class FlicToaster {
         this.playFlicToastSound();
         toast.error(message, {
             style: {
-                marginTop: "2.5rem"
+                marginTop: "4rem"
             }
         });
     };
@@ -46,7 +46,7 @@ class FlicToaster {
         this.playFlicToastSound();
         toast.custom(jsxContent, {
             style: {
-                marginTop: "2.5rem"
+                marginTop: "4rem"
             }
         });
     };
