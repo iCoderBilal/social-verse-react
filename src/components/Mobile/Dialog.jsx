@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import EmpowerverseLogo from '../../images/empowerverse.png';
+import EmpowerverseLogo from '../../images/socialverse-icon.png';
 
 function Dialog(props) {
 
@@ -27,6 +27,8 @@ function Dialog(props) {
     }
 
     return (
+
+        <div className="dialog-overlay">
         <div className={getClassName()}>
             <div className={`img-container`}>
                 <img
@@ -42,6 +44,7 @@ function Dialog(props) {
             <div className={`buttons`}>
                 {getButtons()}
             </div>
+        </div>
         </div>
     );
 }

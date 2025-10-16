@@ -18,7 +18,7 @@ function SwitchToAppSuggestionDialog(props) {
     }
 
     const primaryButton = {
-        text: "Open Empowerverse",
+        text: "Open Socialverse",
         clickCallback: downloadEmpowerverse
     }
 
