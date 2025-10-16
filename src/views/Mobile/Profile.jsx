@@ -6,13 +6,13 @@ import { useNavigate } from "react-router";
 import { LuClipboardList } from "react-icons/lu";
 import MobileTopNavigation from '../../components/Mobile/TopNavigation';
 import MobileSideNavigation from '../../components/Mobile/SideNavigation';
+import { useProfile } from '../../utils/hooks/useProfile';
 
 function Profile() {
     const navigate = useNavigate();
     const { isLoggedIn, user } = useSelector(state => state.auth);
+    const { profileData, isLoading: isProfileLoading, fetchProfile } = useProfile();
 
-    const [isProfileUserDataLoading, setIsProfileUserDataLoading] = useState(true);
-    const [profileUserData, setProfileUserData] = useState(null);
     const [profilePosts, setProfilePosts] = useState([]);
     const [projects, setProjects] = useState([]);
     const [activeTab, setActiveTab] = useState('posts');
@@ -24,6 +24,8 @@ function Profile() {
     // Fetch user posts with pagination
     const fetchPosts = (page) => {
         axios.get(`/users/${user.username}/posts`, { params: { page, limit: 12 } }).then((response) => {
+            
+            
             const newPosts = response.data.posts;
             setProfilePosts(prevPosts => {
                 const postIds = new Set(prevPosts.map(post => post.id));
@@ -44,14 +46,8 @@ function Profile() {
             return;
         }
 
-        // Fetch user profile data
-        axios.get(`/profile/${user.username}`).then((response) => {
-            setProfileUserData(response.data);
-            setIsProfileUserDataLoading(false);
-        }).catch(error => {
-            console.error("Error fetching profile data:", error);
-            setIsProfileUserDataLoading(false);
-        });
+        // Fetch user profile data using Redux
+        fetchProfile(user.username);
 
         // Fetch initial posts
         fetchPosts(currentPage);
@@ -68,7 +64,7 @@ function Profile() {
             console.error("Error fetching projects:", error);
             setProjects([]);
         });
-    }, [isLoggedIn, currentPage]);
+    }, [isLoggedIn, currentPage, user.username, fetchProfile]);
 
     const handleTabClick = (tab) => {
         setActiveTab(tab);
@@ -106,7 +102,7 @@ function Profile() {
     };
 
     const renderContent = () => {
-        if (isProfileUserDataLoading) {
+        if (isProfileLoading) {
             return <div className="loading-spinner">Loading...</div>;
         }
 
@@ -182,19 +178,25 @@ function Profile() {
 
 
               
-                    <div className={`profile profile-page ${isProfileUserDataLoading && "loading"}`}>
+                    <div className={`profile profile-page ${isProfileLoading && "loading"}`}>
                     <div className="gradient-bg"/>
                         <div className="profile-header">
                             <div className="background-image"></div>
                             <div className="profile-info">
-                                <img src={profileUserData?.profile_picture_url} alt="Profile" className="profile-picture" />
-                                <h1>{profileUserData?.name}</h1>
-                                <div className="profile-stats">
-                                    <span>{profileUserData?.post_count} Posts</span>
-                                    <span>{profileUserData?.follower_count} Followers</span>
-                                    <span>{profileUserData?.following_count} Following</span>
-                                    <span>{profileUserData?.total_inspired_user_count} Inspired</span>
-                                </div>
+                                {isProfileLoading ? (
+                                    <div className="profile-loading">Loading profile...</div>
+                                ) : (
+                                    <>
+                                        <img src={profileData?.profile_picture_url} alt="Profile" className="profile-picture" />
+                                        <h1>{profileData?.name}</h1>
+                                        <div className="profile-stats">
+                                            <span>{profileData?.post_count} Posts</span>
+                                            <span>{profileData?.follower_count} Followers</span>
+                                            <span>{profileData?.following_count} Following</span>
+                                            <span>{profileData?.total_inspired_user_count} Inspired</span>
+                                        </div>
+                                    </>
+                                )}
                             </div>
                         </div>
                         <div className="tabs">

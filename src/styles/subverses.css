@@ -73,11 +73,17 @@
     text-align: left;
 }
 
-.pick-interests-button:hover {
+.pick-interests-button:hover:not(:disabled) {
     background: #f8f9fa;
     border-color: #d0d0d0;
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.pick-interests-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
 }
 
 .pick-interests-arrow {
@@ -300,6 +306,16 @@
     background: #6b1fd1;
 }
 
+.mobile-join-button.joined {
+    background: #dc3545;
+    border-color: #dc3545;
+}
+
+.mobile-join-button.joined:hover {
+    background: #c82333;
+    border-color: #bd2130;
+}
+
 .subverses-title {
     font-size: 2.5rem;
     font-weight: 600;
@@ -448,6 +464,192 @@
 
 
 
+/* Phase 2 - Recommended Subverses */
+.recommended-subverses {
+    margin-top: 30px;
+}
+
+.recommended-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.recommended-header img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.recommended-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    font-family: Poppins;
+}
+
+/* Joined Subverses */
+.joined-subverses {
+    margin-top: 30px;
+}
+
+.joined-subverses-header {
+    margin-bottom: 24px;
+}
+
+.joined-subverses-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 8px 0;
+    font-family: Poppins;
+}
+
+.joined-subverses-subtitle {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+    font-family: Poppins;
+}
+
+.joined-subverses-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.joined-subverse-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #f0f0f0;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.joined-subverse-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+
+.joined-subverse-avatar {
+    flex-shrink: 0;
+}
+
+.joined-avatar-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #f0f0f0;
+}
+
+.joined-subverse-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.joined-subverse-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 4px 0;
+    font-family: Poppins;
+}
+
+.joined-subverse-description {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+    font-family: Poppins;
+    line-height: 1.4;
+}
+
+.joined-subverse-arrow-button {
+    background: transparent;
+    border: 1px solid #8B5CF6;
+    color: #8B5CF6;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.joined-subverse-arrow-button:hover {
+    background: #8B5CF6;
+    color: white;
+    transform: scale(1.05);
+}
+
+.joined-subverse-arrow-button svg {
+    width: 16px;
+    height: 16px;
+    transform: rotate(45deg);
+}
+
+/* No joined subverses state */
+.no-joined-subverses {
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #f0f0f0;
+}
+
+.no-joined-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 20px;
+    color: #ccc;
+}
+
+.no-joined-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.no-joined-subverses h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 8px 0;
+    font-family: Poppins;
+}
+
+.no-joined-subverses p {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0 0 24px 0;
+    font-family: Poppins;
+}
+
+.explore-subverses-button {
+    background: #8B5CF6;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-family: Poppins;
+}
+
+.explore-subverses-button:hover {
+    background: #7c3aed;
+}
+
 /* Phase 2 - Suggested Subverses */
 .suggested-subverses {
     margin-top: 30px;
@@ -542,6 +744,17 @@
     color: white;
 }
 
+.featured-join-button.joined {
+    background: #dc3545;
+    border-color: #dc3545;
+    color: white;
+}
+
+.featured-join-button.joined:hover {
+    background: #c82333;
+    border-color: #bd2130;
+}
+
 .featured-arrow {
     width: 14px;
     height: 14px;
@@ -588,6 +801,8 @@
     margin-bottom: 20px;
     overflow-x: auto;
     padding-bottom: 10px;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
 }
 
 .video-thumbnail {
@@ -599,10 +814,66 @@
     overflow: hidden;
     cursor: pointer;
     transition: transform 0.2s ease;
+    flex-shrink: 0;
 }
 
 .video-thumbnail:hover {
     transform: scale(1.02);
+}
+
+/* Mobile Video Slider */
+.mobile-video-slider {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.mobile-video-slider-container {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 0 10px;
+}
+
+.mobile-video-slider-container::-webkit-scrollbar {
+    display: none;
+}
+
+.mobile-video-slide {
+    min-width: 120px;
+    height: 160px;
+    border-radius: 8px;
+    background: #f3f4f6;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+}
+
+
+/* Desktop: 5 videos per row */
+.desktop-video-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.desktop-video-item {
+    border-radius: 10px;
+    background: #f3f4f6;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.desktop-video-item:hover {
+    transform: scale(1);
 }
 
 .video-thumbnail img {
@@ -628,8 +899,8 @@
 .post-video {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    border-radius: 8px;
+    border-radius: 10px;
+    aspect-ratio: 9/16;
 }
 
 /* Removed play button overlay since we now have actual videos with controls */
@@ -712,6 +983,17 @@
     color: white;
 }
 
+.subverse-join-button.joined {
+    background: #dc3545;
+    border-color: #dc3545;
+    color: white;
+}
+
+.subverse-join-button.joined:hover {
+    background: #c82333;
+    border-color: #bd2130;
+}
+
 .subverse-arrow-button {
     background: transparent;
     border: 1px solid #8B5CF6;
@@ -760,6 +1042,11 @@
     
     .featured-subverse,
     .subverses-grid {
+        display: none;
+    }
+    
+    .recommended-subverses .featured-subverse,
+    .recommended-subverses .subverses-grid {
         display: none;
     }
 }
@@ -870,6 +1157,19 @@
         min-width: 100px;
         height: 140px;
     }
+    
+    .desktop-video-grid {
+        display: none;
+    }
+    
+    .mobile-video-slider {
+        display: block;
+    }
+    
+    .mobile-video-slide {
+        min-width: 100px;
+        height: 140px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -898,12 +1198,14 @@
         justify-content: center;
     }
     
-    .suggested-header {
+    .suggested-header,
+    .recommended-header {
         gap: 8px;
         margin-bottom: 20px;
     }
     
-    .suggested-title {
+    .suggested-title,
+    .recommended-title {
         font-size: 1rem;
     }
     
@@ -940,5 +1242,17 @@
         padding-left: 30px;
         padding-right: 31px;
         padding-bottom: 40px;
+    }
+    
+    .desktop-video-grid {
+        display: grid;
+    }
+    
+    .mobile-video-slider {
+        display: none;
+    }
+    
+    .video-thumbnails {
+        display: none;
     }
 }
