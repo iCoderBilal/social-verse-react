@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { HomeIcon, MagnifyingGlassIcon, UserIcon } from "@heroicons/react/20/solid";
+import { UserIcon } from "@heroicons/react/20/solid";
 import { LuLayoutDashboard, LuUsers, LuClipboardList, LuImage } from "react-icons/lu";
 // import { UsersIcon } from "@heroicons/react/24/outline"; //icon for referral
 import { useNavigate, useLocation } from "react-router";
@@ -7,8 +7,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { MdOutlineAppRegistration } from "react-icons/md";
 import homeIcon from "../../images/homeIcon.svg";
 import subversesIcon from "../../images/subverses-icon.svg";
+import searchIcon from "../../images/search.png";
+import profileIcon from "../../images/profile.png";
+import imageGeneratorIcon from "../../images/image.png";
 
-import EmpowerverseLogo from "../../images/empowerverse.png";
 import {
   setShowLoginDialog,
   setShowSwitchToAppSuggestionDialog,
@@ -101,7 +103,11 @@ function MobileSideNavigation({ isOpen, onClose }) {
   const handleSubversesNavigationClick = () => {
     setActive("subverses");
     onClose();
-    navigate("/subverses");
+    if (!isLoggedIn) {
+      dispatch(setShowLoginDialog(true));
+    } else {
+      navigate("/subverses");
+    }
   };
 
   const handleProfileNavigationClick = () => {
@@ -192,7 +198,7 @@ function MobileSideNavigation({ isOpen, onClose }) {
             className={`nav-item ${active === "search" ? "active" : ""}`}
             onClick={handleSearchNavigationClick}
           >
-            <MagnifyingGlassIcon />
+            <img src={searchIcon} alt="search" />
             <p className="nav-text">Search</p>
           </div>
    
@@ -200,7 +206,7 @@ function MobileSideNavigation({ isOpen, onClose }) {
             className={`nav-item ${active === "profile" ? "active" : ""}`}
             onClick={handleProfileNavigationClick}
           >
-            <UserIcon />
+            <img src={profileIcon} alt="profile" />
             <p className="nav-text">Profile</p>
           </div>
           {/* Image Generator always visible */}
@@ -208,7 +214,7 @@ function MobileSideNavigation({ isOpen, onClose }) {
             className={`nav-item ${active === "image-generator" ? "active" : ""}`}
             onClick={handleImageGenarationNavigationClick}
           >
-            <LuImage />
+            <img src={imageGeneratorIcon} alt="image-generator" />
             <p className="nav-text">I/V Generator</p>
           </div>
           {auth.user.role === "A" ? (
